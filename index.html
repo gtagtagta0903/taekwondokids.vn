@@ -3,532 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taekwondo Kids Việt Nam - Khơi dậy tiềm năng</title>
-    <!-- Fonts -->
+    <title>Trung tâm Taekwondo Kids Việt Nam</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        tkdBlue: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#004aad', // Primary Blue
-                        },
-                        tkdYellow: {
-                            400: '#facc15',
-                            500: '#ffcb05', // Primary Yellow
-                            600: '#eab308',
-                        }
-                    },
-                    animation: {
-                        'marquee': 'marquee 25s linear infinite',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        }
+                        sans: ['Nunito', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* Custom Styles for Tabs and Smooth Scrolling */
-        html { scroll-behavior: smooth; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
-        .tab-btn.active { border-bottom: 4px solid #ffcb05; color: #004aad; font-weight: bold; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        /* Marquee wrapper */
-        .marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; width: 100%; display: flex; }
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
-<body class="font-sans text-gray-800 antialiased bg-white">
+<body class="font-sans text-gray-800 bg-gray-50">
 
-    <!-- SECTION 1: Navigation Bar (Sticky) -->
-    <nav class="sticky top-0 z-50 bg-white shadow-md w-full transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer">
-                    <!-- Placeholder Logo: Replace with actual image -->
-                    <div class="w-12 h-12 bg-tkdBlue-900 text-tkdYellow-500 rounded-full flex justify-center items-center font-bold text-xl mr-2">
-                        <i class="fa-solid fa-user-ninja"></i>
-                    </div>
-                    <span class="font-black text-xl text-tkdBlue-900 uppercase tracking-tight hidden sm:block">Taekwondo<br><span class="text-tkdYellow-500">Kids</span></span>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-tkdBlue-900 font-semibold transition">Về chúng tôi</a>
-                    <a href="#features" class="text-gray-600 hover:text-tkdBlue-900 font-semibold transition">Tính năng hệ thống</a>
-                    <a href="#locations" class="text-gray-600 hover:text-tkdBlue-900 font-semibold transition">Hệ thống cơ sở</a>
-                    <a href="#knowledge" class="text-gray-600 hover:text-tkdBlue-900 font-semibold transition">Góc kiến thức</a>
-                </div>
-
-                <!-- Hotline & CTA -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <div class="flex items-center text-tkdBlue-900 font-bold">
-                        <i class="fa-solid fa-phone mr-2"></i> Hotline 097 893 1747
-                    </div>
-                    <a href="#register" class="bg-tkdYellow-500 hover:bg-tkdYellow-600 text-tkdBlue-900 font-bold py-2.5 px-6 rounded-full shadow-lg transition transform hover:scale-105">
-                        ĐĂNG KÝ HỌC THỬ
-                    </a>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="lg:hidden flex items-center">
-                    <button class="text-tkdBlue-900 hover:text-tkdBlue-700 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-blue-700 text-white rounded-full flex items-center justify-center font-bold text-xs">LOGO</div>
+                <span class="font-bold text-blue-800 hidden md:block">TAEKWONDO KIDS VN</span>
+            </div>
+            <div class="hidden md:flex gap-6 font-medium text-sm text-blue-900">
+                <a href="#about" class="hover:text-yellow-500 transition">Về chúng tôi</a>
+                <a href="#locations" class="hover:text-yellow-500 transition">Hệ thống cơ sở</a>
+                <a href="#pricing" class="hover:text-yellow-500 transition">Chương trình ưu đãi</a>
+                <a href="#portal" class="hover:text-yellow-500 transition">Tra cứu nội bộ</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="hidden lg:block font-bold text-blue-700">097 893 1747</span>
+                <a href="#register" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-2 px-4 rounded-full transition shadow-md">
+                    Đăng ký học thử
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- SECTION 2: Hero Section -->
-    <header class="relative bg-tkdBlue-50 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center py-16 lg:py-24">
-            <!-- Text Content -->
-            <div class="w-full lg:w-1/2 z-10 text-center lg:text-left pr-0 lg:pr-8">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-tkdBlue-900 leading-tight mb-6">
-                    Khơi dậy tiềm năng - <br>
-                    <span class="text-tkdYellow-500">Rèn luyện thể chất & Ý chí</span> <br>
-                    cùng Taekwondo Kids
-                </h1>
-                <p class="text-lg text-gray-600 mb-8 font-medium">
-                    Hệ thống quản lý thông minh và toàn diện, đồng hành cùng sự phát triển của võ sinh mỗi ngày.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="#register" class="bg-tkdBlue-900 hover:bg-tkdBlue-800 text-white text-lg font-bold py-4 px-8 rounded-full shadow-xl transition transform hover:-translate-y-1 text-center">
-                        ĐĂNG KÝ HỌC THỬ NGAY
-                    </a>
-                </div>
-            </div>
-            <!-- Image Content -->
-            <div class="w-full lg:w-1/2 mt-12 lg:mt-0 relative">
-                <!-- Placeholder for Hero Image [CẦN BỔ SUNG] -->
-                <div class="aspect-w-4 aspect-h-3 bg-gray-200 rounded-2xl shadow-2xl overflow-hidden relative">
-                    <div class="absolute inset-0 flex items-center justify-center text-gray-400 bg-gray-100 flex-col">
-                        <i class="fa-regular fa-image text-5xl mb-2"></i>
-                        <span class="font-semibold">[CẦN BỔ SUNG ẢNH/VIDEO HERO CHÍNH]</span>
-                    </div>
-                </div>
-                <!-- Floating Badge -->
-                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg border-l-4 border-tkdYellow-500 hidden md:block">
-                    <p class="font-bold text-tkdBlue-900">1000+ Võ sinh</p>
-                    <p class="text-sm text-gray-500">Đang theo học</p>
-                </div>
-            </div>
+    <header class="relative pt-24 pb-16 md:pt-32 md:pb-24 flex items-center justify-center text-center bg-blue-800 text-white min-h-[80vh]">
+        <div class="absolute inset-0 bg-blue-900 opacity-60 z-0"></div>
+        <img src="https://via.placeholder.com/1920x1080/1e3a8a/ffffff?text=Video/Anh+Nen+Vo+Sinh+Tap+Luyen" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 z-0" />
+        
+        <div class="relative z-10 container mx-auto px-4 max-w-4xl">
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-white drop-shadow-lg">
+                Trung tâm Taekwondo Kids Việt Nam <br>
+                <span class="text-xl md:text-2xl font-normal block mt-2">Chuyên đào tạo võ thuật cho võ sinh từ 3.5 tuổi trở lên</span> <br>
+                <span class="text-yellow-400">Khơi dậy tiềm năng</span> <br>
+                Rèn luyện Thể chất - Ý chí
+            </h1>
+            
+            <a href="#register" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 text-lg md:text-xl font-bold py-4 px-8 rounded-full shadow-xl transform hover:-translate-y-1 transition-all">
+                ĐĂNG KÝ HỌC THỬ MIỄN PHÍ
+            </a>
         </div>
     </header>
 
-    <!-- SECTION 3: Social Proof (Marquee) -->
-    <section class="py-8 bg-tkdBlue-900 border-t border-b border-tkdBlue-800 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="text-center text-tkdYellow-500 font-semibold mb-4 text-sm tracking-widest uppercase">ĐỐI TÁC PHÁT TRIỂN & THÀNH TÍCH [CẦN BỔ SUNG]</p>
-            <div class="marquee-wrapper">
-                <div class="animate-marquee flex items-center space-x-16 px-8 text-white font-bold opacity-80 text-xl">
-                    <span><i class="fa-solid fa-trophy text-tkdYellow-500"></i> 10+ Năm Hoạt Động</span>
-                    <span><i class="fa-solid fa-users text-tkdYellow-500"></i> 5 Cơ Sở Hà Nội</span>
-                    <span><i class="fa-solid fa-medal text-tkdYellow-500"></i> Giải Thường Uy Tín</span>
-                    <span><i class="fa-solid fa-handshake text-tkdYellow-500"></i> Đối Tác Quốc Tế</span>
-                    <!-- Repeat for smooth scroll -->
-                    <span><i class="fa-solid fa-trophy text-tkdYellow-500"></i> 10+ Năm Hoạt Động</span>
-                    <span><i class="fa-solid fa-users text-tkdYellow-500"></i> 5 Cơ Sở Hà Nội</span>
-                    <span><i class="fa-solid fa-medal text-tkdYellow-500"></i> Giải Thường Uy Tín</span>
+    <section class="py-8 bg-blue-50 border-b border-blue-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                <div class="text-center">
+                    <h3 class="text-3xl font-bold text-blue-800">5+</h3>
+                    <p class="text-sm font-medium text-gray-600 uppercase">Cơ sở toàn Hà Nội</p>
                 </div>
-                <!-- Duplicate for seamless loop -->
-                <div class="animate-marquee flex items-center space-x-16 px-8 text-white font-bold opacity-80 text-xl absolute top-0 left-full">
-                     <span><i class="fa-solid fa-trophy text-tkdYellow-500"></i> 10+ Năm Hoạt Động</span>
-                    <span><i class="fa-solid fa-users text-tkdYellow-500"></i> 5 Cơ Sở Hà Nội</span>
-                    <span><i class="fa-solid fa-medal text-tkdYellow-500"></i> Giải Thường Uy Tín</span>
-                    <span><i class="fa-solid fa-handshake text-tkdYellow-500"></i> Đối Tác Quốc Tế</span>
+                <div class="text-center">
+                    <h3 class="text-3xl font-bold text-blue-800">2000+</h3>
+                    <p class="text-sm font-medium text-gray-600 uppercase">Võ sinh đang theo học</p>
+                </div>
+                <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://via.placeholder.com/120x40/cccccc/666666?text=Doi+Tac+1" alt="Partner 1" class="h-10 object-contain" />
+                    <img src="https://via.placeholder.com/120x40/cccccc/666666?text=Doi+Tac+2" alt="Partner 2" class="h-10 object-contain" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4: About & Benefits -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-tkdBlue-900 mb-4">Đồng hành cùng sự phát triển toàn diện của trẻ</h2>
-                <p class="text-gray-600">[CẦN BỔ SUNG] Đoạn text ngắn giới thiệu Lịch sử hình thành, Thành tích nổi bật và Chương trình ưu đãi hiện hành của trung tâm.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Benefit 1 -->
-                <div class="bg-tkdBlue-50 rounded-2xl p-8 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-tkdYellow-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl text-tkdBlue-900 shadow-md">
-                        <i class="fa-solid fa-child-reaching"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-tkdBlue-900 mb-3">Phát triển thể chất & Tự vệ</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Nâng cao sức khỏe, sự dẻo dai và trang bị kỹ năng phòng vệ thiết yếu cho tuổi học đường.</p>
-                </div>
-                <!-- Benefit 2 -->
-                <div class="bg-tkdBlue-50 rounded-2xl p-8 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-tkdYellow-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl text-tkdBlue-900 shadow-md">
-                        <i class="fa-solid fa-apple-whole"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-tkdBlue-900 mb-3">Dinh dưỡng khoa học</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Cung cấp kiến thức chăm sóc dinh dưỡng chuẩn y khoa giúp trẻ phát triển chiều cao và trí lực.</p>
-                </div>
-                <!-- Benefit 3 -->
-                <div class="bg-tkdBlue-50 rounded-2xl p-8 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-tkdYellow-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl text-tkdBlue-900 shadow-md">
-                        <i class="fa-solid fa-photo-film"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-tkdBlue-900 mb-3">Thư viện trực quan</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Lưu giữ hình ảnh, video tập luyện, giải đấu và vinh danh thành tích tại các kỳ thi lên đai.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 5: System Features (Tabs) -->
-    <section id="features" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-tkdBlue-900 mb-4">Nền tảng quản lý hiện đại - Tối ưu vận hành</h2>
-                <p class="text-gray-600">Ứng dụng công nghệ vào giáo dục võ thuật, gắn kết Trung tâm - Phụ huynh - Võ sinh.</p>
-            </div>
-
-            <!-- Tabs Navigation -->
-            <div class="flex justify-center mb-10 border-b border-gray-200">
-                <button onclick="openTab('tab1')" id="btn-tab1" class="tab-btn active px-6 py-3 text-lg font-semibold text-gray-500 hover:text-tkdBlue-900 transition mx-2">
-                    <i class="fa-solid fa-users-line mr-2"></i>Phụ huynh & Võ sinh
-                </button>
-                <button onclick="openTab('tab2')" id="btn-tab2" class="tab-btn px-6 py-3 text-lg font-semibold text-gray-500 hover:text-tkdBlue-900 transition mx-2">
-                    <i class="fa-solid fa-clipboard-user mr-2"></i>Huấn luyện viên
-                </button>
-            </div>
-
-            <!-- Tabs Content -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <!-- Tab 1: Phụ huynh -->
-                <div id="tab1" class="tab-content active p-8 lg:p-12">
-                    <div class="flex flex-col lg:flex-row items-center gap-10">
-                        <div class="w-full lg:w-1/2">
-                            <h3 class="text-2xl font-bold text-tkdBlue-900 mb-6">Đồng hành cùng con mỗi ngày</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Quản lý hồ sơ:</strong> <span class="text-gray-600">Xem cấp đai, trường lớp, tình trạng tập luyện và tiến bộ định kỳ.</span></div>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Tài chính minh bạch:</strong> <span class="text-gray-600">Theo dõi học phí, thông báo nhắc nhở đóng tiền.</span></div>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Thao tác dễ dàng:</strong> <span class="text-gray-600">Xin nghỉ, đăng ký học bù trực tuyến chỉ với vài thao tác.</span></div>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Sổ liên lạc 24/7:</strong> <span class="text-gray-600">Trao đổi thông tin, gửi feedback trực tiếp. Đăng nhập tiện lợi bằng Số điện thoại.</span></div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-full lg:w-1/2">
-                            <div class="bg-gray-100 rounded-xl aspect-w-16 aspect-h-9 flex items-center justify-center border-2 border-dashed border-gray-300">
-                                <p class="text-gray-500 text-center font-medium">[CẦN BỔ SUNG]<br>Ảnh chụp màn hình App/Web của Phụ Huynh</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tab 2: HLV -->
-                <div id="tab2" class="tab-content p-8 lg:p-12">
-                     <div class="flex flex-col lg:flex-row items-center gap-10">
-                        <div class="w-full lg:w-1/2 lg:order-2">
-                            <h3 class="text-2xl font-bold text-tkdBlue-900 mb-6">Tối ưu hóa công tác huấn luyện</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-mobile-screen text-tkdBlue-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Điểm danh điện tử:</strong> <span class="text-gray-600">Thực hiện ngay trên điện thoại/tablet, bỏ hoàn toàn sổ sách giấy tờ.</span></div>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-folder-tree text-tkdBlue-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Hồ sơ số hóa:</strong> <span class="text-gray-600">Lưu trữ thông tin phụ huynh, võ sinh, lịch sử các kỳ thi lên đai.</span></div>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa-solid fa-calendar-days text-tkdBlue-500 mt-1 mr-3"></i>
-                                    <div><strong class="text-gray-800">Nghiệp vụ nội bộ:</strong> <span class="text-gray-600">Đăng ký lịch dạy, quản lý chấm công, bảng lương và xin nghỉ phép dễ dàng.</span></div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-full lg:w-1/2 lg:order-1">
-                            <div class="bg-gray-100 rounded-xl aspect-w-16 aspect-h-9 flex items-center justify-center border-2 border-dashed border-gray-300">
-                                <p class="text-gray-500 text-center font-medium">[CẦN BỔ SUNG]<br>Ảnh chụp màn hình App/Web của HLV</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6: Testimonials -->
-    <section class="py-20 bg-tkdBlue-900 text-white relative">
-        <!-- Abstract background pattern -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffcb05 2px, transparent 2px); background-size: 30px 30px;"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-tkdYellow-500 mb-12">Phụ huynh nói gì về chúng tôi?</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 Placeholder -->
-                <div class="bg-white text-gray-800 rounded-2xl p-8 shadow-xl">
-                    <div class="flex text-tkdYellow-500 text-sm mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="italic text-gray-600 mb-6">"[CẦN BỔ SUNG] Nội dung feedback thực tế của phụ huynh về sự tiến bộ của con sau khi học tại trung tâm."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-bold text-tkdBlue-900">Tên Phụ Huynh 1</h4>
-                            <p class="text-xs text-gray-500">Phụ huynh bé [Tên Võ Sinh]</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 Placeholder -->
-                <div class="bg-white text-gray-800 rounded-2xl p-8 shadow-xl">
-                    <div class="flex text-tkdYellow-500 text-sm mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="italic text-gray-600 mb-6">"[CẦN BỔ SUNG] Feedback về cơ sở vật chất, sự nhiệt tình của các thầy cô HLV và phần mềm quản lý tiện lợi."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-bold text-tkdBlue-900">Tên Phụ Huynh 2</h4>
-                            <p class="text-xs text-gray-500">Phụ huynh bé [Tên Võ Sinh]</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 Placeholder -->
-                <div class="bg-white text-gray-800 rounded-2xl p-8 shadow-xl">
-                    <div class="flex text-tkdYellow-500 text-sm mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="italic text-gray-600 mb-6">"[CẦN BỔ SUNG] Đánh giá về sự thay đổi tính cách, trẻ tự tin và kỷ luật hơn."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-bold text-tkdBlue-900">Tên Phụ Huynh 3</h4>
-                            <p class="text-xs text-gray-500">Phụ huynh bé [Tên Võ Sinh]</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 7: Pricing -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-tkdBlue-900 mb-4">Thông tin khóa học</h2>
-                <p class="text-gray-600">Đầu tư vào sức khỏe và kỹ năng của trẻ ngay hôm nay</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Lợi ích cốt lõi & Đội ngũ</h2>
+                <div class="w-24 h-1 bg-yellow-400 mx-auto"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
-                <!-- Basic Plan -->
-                <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm text-center">
-                    <h3 class="text-xl font-bold text-gray-700 mb-2">[CẦN BỔ SUNG GÓI]</h3>
-                    <div class="text-4xl font-black text-tkdBlue-900 mb-6">[Giá tiền]<span class="text-lg text-gray-500 font-normal">/khóa</span></div>
-                    <ul class="space-y-3 mb-8 text-left">
-                        <li class="text-gray-600"><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng/Quyền lợi 1</li>
-                        <li class="text-gray-600"><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng/Quyền lợi 2</li>
-                        <li class="text-gray-400"><i class="fa-solid fa-xmark mr-2"></i>Tính năng/Quyền lợi 3</li>
-                    </ul>
-                    <a href="#register" class="block w-full py-3 rounded-lg border-2 border-tkdBlue-900 text-tkdBlue-900 font-bold hover:bg-tkdBlue-50 transition">Đăng Ký Gói Này</a>
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+Lich+Su+Phat+Trien" alt="Lịch sử hình thành" class="rounded-xl shadow-lg w-full" />
                 </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Hành trình phát triển</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Sứ mệnh của chúng tôi là tạo ra môi trường rèn luyện an toàn, kỷ luật và tràn đầy cảm hứng cho trẻ em. Qua nhiều năm phát triển, Taekwondo Kids tự hào là đơn vị tiên phong áp dụng công nghệ vào giảng dạy võ thuật.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center gap-2"><span class="text-yellow-500 font-bold">✓</span> Nâng cao sức khỏe thể chất toàn diện</li>
+                        <li class="flex items-center gap-2"><span class="text-yellow-500 font-bold">✓</span> Rèn luyện tính kỷ luật & tự giác cho trẻ</li>
+                        <li class="flex items-center gap-2"><span class="text-yellow-500 font-bold">✓</span> Trang bị kỹ năng phòng vệ học đường thực chiến</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-center text-blue-800 mb-8">Đội ngũ Huấn luyện viên tâm huyết</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full p-1 border-4 border-blue-600 mb-4 shadow-md">
+                        <img src="https://via.placeholder.com/150/eeeeee/999999?text=HLV" alt="HLV 1" class="w-full h-full object-cover rounded-full" />
+                    </div>
+                    <h4 class="font-bold text-lg text-blue-900">Nguyễn Văn A</h4>
+                    <p class="text-sm text-gray-500">Đai đen - 3 Đẳng</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full p-1 border-4 border-blue-600 mb-4 shadow-md">
+                        <img src="https://via.placeholder.com/150/eeeeee/999999?text=HLV" alt="HLV 2" class="w-full h-full object-cover rounded-full" />
+                    </div>
+                    <h4 class="font-bold text-lg text-blue-900">Trần Thị B</h4>
+                    <p class="text-sm text-gray-500">Đai đen - 2 Đẳng</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full p-1 border-4 border-blue-600 mb-4 shadow-md">
+                        <img src="https://via.placeholder.com/150/eeeeee/999999?text=HLV" alt="HLV 3" class="w-full h-full object-cover rounded-full" />
+                    </div>
+                    <h4 class="font-bold text-lg text-blue-900">Lê Văn C</h4>
+                    <p class="text-sm text-gray-500">Đai đen - 4 Đẳng</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full p-1 border-4 border-blue-600 mb-4 shadow-md">
+                        <img src="https://via.placeholder.com/150/eeeeee/999999?text=HLV" alt="HLV 4" class="w-full h-full object-cover rounded-full" />
+                    </div>
+                    <h4 class="font-bold text-lg text-blue-900">Phạm Văn D</h4>
+                    <p class="text-sm text-gray-500">Đai đen - 3 Đẳng</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portal" class="py-16 md:py-24 bg-blue-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4">Hệ Thống Tra Cứu Thông Tin</h2>
+                <p class="text-gray-600">Quản lý thông minh, minh bạch và tiện lợi cho tất cả mọi người.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <button id="btn-phuhuynh" onclick="switchTab('phuhuynh')" class="flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer">
+                    Phụ huynh & Võ sinh
+                </button>
+                <button id="btn-hlv" onclick="switchTab('hlv')" class="flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer">
+                    Huấn luyện viên & Nhân viên
+                </button>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-yellow-400 min-h-[250px]">
                 
-                <!-- Popular Plan (Highlighted) -->
-                <div class="bg-tkdBlue-900 rounded-2xl border border-tkdBlue-800 p-8 shadow-2xl transform scale-100 md:scale-105 text-center relative z-10">
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-tkdYellow-500 text-tkdBlue-900 font-bold px-4 py-1 rounded-full text-sm">PHỔ BIẾN NHẤT</div>
-                    <h3 class="text-xl font-bold text-tkdYellow-500 mb-2">[CẦN BỔ SUNG GÓI]</h3>
-                    <div class="text-4xl font-black text-white mb-6">[Giá tiền]<span class="text-lg text-gray-400 font-normal">/khóa</span></div>
-                    <ul class="space-y-3 mb-8 text-left text-white">
-                        <li><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng/Quyền lợi 1 nổi bật</li>
-                        <li><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng/Quyền lợi 2</li>
-                        <li><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tặng kèm võ phục (Ví dụ)</li>
+                <div id="tab-phuhuynh" class="block">
+                    <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2">Khu vực dành cho Phụ huynh</h3>
+                    <ul class="space-y-4 mb-6 text-gray-700">
+                        <li><strong>Quản lý hồ sơ:</strong> Xem trường lớp, cấp đai, tiến độ tập luyện.</li>
+                        <li><strong>Học phí & Khóa học:</strong> Nhắc nhở, báo xin nghỉ, đăng ký học bù.</li>
+                        <li><strong>Sổ liên lạc 24/7:</strong> Xem ảnh độc quyền, gửi feedback trực tiếp.</li>
                     </ul>
-                    <a href="#register" class="block w-full py-3 rounded-lg bg-tkdYellow-500 text-tkdBlue-900 font-bold hover:bg-tkdYellow-400 transition shadow-lg">Đăng Ký Gói Này</a>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow cursor-pointer">
+                        Đăng nhập bằng SĐT
+                    </button>
                 </div>
 
-                <!-- Premium Plan -->
-                <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm text-center">
-                    <h3 class="text-xl font-bold text-gray-700 mb-2">[CẦN BỔ SUNG GÓI]</h3>
-                    <div class="text-4xl font-black text-tkdBlue-900 mb-6">[Giá tiền]<span class="text-lg text-gray-500 font-normal">/khóa</span></div>
-                    <ul class="space-y-3 mb-8 text-left">
-                        <li class="text-gray-600"><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng/Quyền lợi 1</li>
-                        <li class="text-gray-600"><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng/Quyền lợi 2</li>
-                        <li class="text-gray-600"><i class="fa-solid fa-check text-tkdYellow-500 mr-2"></i>Tính năng VIP/Bảo lưu</li>
+                <div id="tab-hlv" class="hidden">
+                    <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2">Khu vực Vận hành nội bộ</h3>
+                    <ul class="space-y-4 mb-6 text-gray-700">
+                        <li><strong>Hồ sơ số hóa:</strong> Lưu thông tin võ sinh, lịch sử thi thăng đai.</li>
+                        <li><strong>Nghiệp vụ:</strong> Đăng ký lịch dạy, chấm công, bảng lương.</li>
+                        <li><strong>Điểm danh điện tử:</strong> Thao tác nhanh chóng qua Tablet/Phone thay thế sổ sách.</li>
                     </ul>
-                    <a href="#register" class="block w-full py-3 rounded-lg border-2 border-tkdBlue-900 text-tkdBlue-900 font-bold hover:bg-tkdBlue-50 transition">Đăng Ký Gói Này</a>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow cursor-pointer">
+                        Đăng nhập Hệ thống
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 8: CTA Form -->
-    <section id="register" class="py-24 bg-tkdBlue-900 relative">
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
-                <!-- Visual Side -->
-                <div class="bg-tkdBlue-800 md:w-5/12 p-10 text-white flex flex-col justify-center relative overflow-hidden">
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-extrabold mb-4 text-tkdYellow-500 leading-tight">Hãy để trẻ tự tin tỏa sáng!</h2>
-                        <p class="text-blue-100 mb-6">Đăng ký ngay hôm nay để nhận tư vấn lộ trình học phù hợp nhất cho con.</p>
-                        <ul class="space-y-2 text-sm text-blue-200">
-                            <li><i class="fa-solid fa-shield-halved mr-2 text-tkdYellow-500"></i> Môi trường an toàn</li>
-                            <li><i class="fa-solid fa-user-tie mr-2 text-tkdYellow-500"></i> HLV chuyên nghiệp</li>
-                            <li><i class="fa-solid fa-mobile-screen mr-2 text-tkdYellow-500"></i> Quản lý qua App 24/7</li>
-                        </ul>
+    <section id="locations" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">Hệ thống 5 Cơ sở tại Hà Nội</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/400x250/eeeeee/999999?text=Co+So+Hapulico" alt="Cơ sở Hapulico" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ HAPULICO</h3>
+                        <p class="text-gray-600 text-sm">Tầng B1, toà 21T1 - Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</p>
                     </div>
                 </div>
-                <!-- Form Side -->
-                <div class="p-10 md:w-7/12">
-                    <form action="#" method="POST" class="space-y-6">
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/400x250/eeeeee/999999?text=Co+So+Greenstars" alt="Cơ sở Greenstars" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ GREENSTARS</h3>
+                        <p class="text-gray-600 text-sm">Tầng 1, tòa 21B5 - Chung cư Green Star, 234 Phạm Văn Đồng, Bắc Từ Liêm</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/400x250/eeeeee/999999?text=Co+So+Nghia+Do" alt="Cơ sở Nghĩa Đô" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ NGHĨA ĐÔ</h3>
+                        <p class="text-gray-600 text-sm">Tầng 1, toà CT3 - Khu đô thị mới Nghĩa Đô, Bắc Từ Liêm</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/400x250/eeeeee/999999?text=Co+So+Ha+Dong" alt="Cơ sở Hà Đông" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ HÀ ĐÔNG</h3>
+                        <p class="text-gray-600 text-sm">Tầng 1, tòa T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/400x250/eeeeee/999999?text=Co+So+Long+Bien" alt="Cơ sở Long Biên" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ LONG BIÊN</h3>
+                        <p class="text-gray-600 text-sm">Tầng 1, tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="py-16 md:py-24 bg-yellow-400 relative overflow-hidden">
+        <div class="absolute inset-0 bg-blue-900 w-1/2 hidden lg:block transform -skew-x-12 -ml-20"></div>
+        <div class="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 text-white text-center lg:text-left">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-blue-900 lg:text-white">
+                    Hãy để trẻ tự tin tỏa sáng cùng Taekwondo Kids Việt Nam!
+                </h2>
+                <p class="text-lg text-blue-800 lg:text-blue-100 mb-8 font-medium">
+                    Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí.
+                </p>
+            </div>
+            
+            <div class="lg:w-1/2 w-full max-w-md mx-auto lg:mx-0">
+                <form class="bg-white p-8 rounded-2xl shadow-2xl">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6 text-center">ĐĂNG KÝ HỌC THỬ</h3>
+                    <div class="space-y-4">
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2" for="parent_name">Họ và tên phụ huynh *</label>
-                            <input type="text" id="parent_name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tkdBlue-500 focus:border-transparent transition" placeholder="Nhập tên phụ huynh">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Họ và tên Phụ huynh *</label>
+                            <input type="text" placeholder="Nhập họ tên phụ huynh..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2" for="child_name">Họ và tên võ sinh *</label>
-                            <input type="text" id="child_name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tkdBlue-500 focus:border-transparent transition" placeholder="Nhập tên võ sinh">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Họ và tên Võ sinh *</label>
+                            <input type="text" placeholder="Nhập họ tên bé..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2" for="phone">Số điện thoại tư vấn *</label>
-                            <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tkdBlue-500 focus:border-transparent transition" placeholder="Nhập số điện thoại (Zalo/Call)">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Số điện thoại *</label>
+                            <input type="tel" placeholder="Nhập số điện thoại liên hệ..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
                         </div>
-                        <button type="submit" class="w-full bg-tkdYellow-500 hover:bg-tkdYellow-600 text-tkdBlue-900 font-extrabold text-lg py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1">
-                            GỬI ĐĂNG KÝ HỌC THỬ
+                        <button type="button" class="w-full mt-4 bg-blue-700 hover:bg-blue-800 text-yellow-400 font-extrabold py-4 px-6 rounded-lg text-lg transition-colors shadow-lg cursor-pointer">
+                            ĐĂNG KÝ NGAY
                         </button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 10: Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-16 border-t-4 border-tkdYellow-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <!-- Col 1: Brand -->
+    <footer class="bg-blue-900 text-blue-100 py-12">
+        <div class="container mx-auto px-4 grid md:grid-cols-3 gap-8">
             <div>
-                <div class="flex items-center mb-4 text-white">
-                    <div class="w-10 h-10 bg-white text-tkdBlue-900 rounded-full flex justify-center items-center font-bold text-lg mr-2">
-                        <i class="fa-solid fa-user-ninja"></i>
-                    </div>
-                    <span class="font-bold text-lg leading-tight uppercase">Taekwondo<br><span class="text-tkdYellow-500">Kids</span></span>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-white text-blue-900 rounded-full flex items-center justify-center font-bold text-[10px]">LOGO</div>
+                    <span class="font-bold text-white text-lg">TAEKWONDO KIDS VN</span>
                 </div>
-                <p class="text-sm text-gray-400 leading-relaxed mb-4">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam.<br>Đồng hành cùng sự phát triển toàn diện của trẻ.</p>
-                <div class="flex space-x-4">
-                    <a href="https://fb.com/taekwondokids.vietnam" target="_blank" class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center hover:bg-blue-600 text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://tiktok.com/@taekwondokidsvn" target="_blank" class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center hover:bg-black text-white transition"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
+                <p class="text-sm font-medium text-blue-200">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</p>
             </div>
-
-            <!-- Col 2: Locations 1 -->
-            <div id="locations">
-                <h4 class="text-white font-bold text-lg mb-4 border-b border-gray-700 pb-2">Cơ sở Hà Nội (1)</h4>
-                <ul class="space-y-4 text-sm">
-                    <li>
-                        <strong class="text-tkdYellow-500 block">Cơ Sở Hapulico</strong>
-                        Tầng B1, toà 21T1 - 83 Vũ Trọng Phụng, Thanh Xuân
-                    </li>
-                    <li>
-                        <strong class="text-tkdYellow-500 block">Cơ Sở Greenstars</strong>
-                        Tầng 1, tòa 21B5 - 234 Phạm Văn Đồng, Bắc Từ Liêm
-                    </li>
-                    <li>
-                        <strong class="text-tkdYellow-500 block">Cơ Sở Nghĩa Đô</strong>
-                        Tầng 1, toà CT3 - KĐT Nghĩa Đô, Bắc Từ Liêm
-                    </li>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase">Liên hệ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li>Hotline: <strong class="text-yellow-400">097 893 1747</strong></li>
+                    <li>Email: taekwondokids.vn@gmail.com</li>
                 </ul>
             </div>
-
-            <!-- Col 3: Locations 2 -->
             <div>
-                <h4 class="text-white font-bold text-lg mb-4 border-b border-gray-700 pb-2">Cơ sở Hà Nội (2)</h4>
-                <ul class="space-y-4 text-sm">
-                    <li>
-                        <strong class="text-tkdYellow-500 block">Cơ Sở Hà Đông</strong>
-                        Tầng 1, tòa T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Hà Đông
-                    </li>
-                    <li>
-                        <strong class="text-tkdYellow-500 block">Cơ Sở Long Biên</strong>
-                        Tầng 1, tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Col 4: Contact -->
-            <div>
-                <h4 class="text-white font-bold text-lg mb-4 border-b border-gray-700 pb-2">Liên Hệ</h4>
-                <ul class="space-y-4 text-sm">
-                    <li class="flex items-center">
-                        <i class="fa-solid fa-phone text-tkdYellow-500 mr-3 w-4"></i>
-                        <span>Hotline: <strong class="text-white">097 893 1747</strong></span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fa-solid fa-envelope text-tkdYellow-500 mr-3 w-4"></i>
-                        <span>taekwondokids.vn@gmail.com</span>
-                    </li>
+                <h4 class="text-white font-bold mb-4 uppercase">Kết nối mạng xã hội</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://fb.com/taekwondokids.vietnam" target="_blank" class="hover:text-yellow-400 transition">Fanpage Facebook</a></li>
+                    <li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank" class="hover:text-yellow-400 transition">TikTok Channel</a></li>
                 </ul>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
-            &copy; 2026 Taekwondo Kids Vietnam. All rights reserved.
+        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-blue-800 text-center text-sm text-blue-300">
+            © 2026 Taekwondo Kids Việt Nam. All rights reserved.
         </div>
     </footer>
 
-    <!-- SECTION 9: Floating Action Buttons (FAB) -->
     <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
-        <!-- Phone -->
-        <a href="tel:0978931747" class="w-14 h-14 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition animate-bounce">
-            <i class="fa-solid fa-phone text-2xl"></i>
-        </a>
-        <!-- Zalo Placeholder -->
-        <a href="#" class="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition">
-            <span class="font-bold text-xl">Z</span>
-        </a>
-        <!-- Messenger -->
-        <a href="https://m.me/taekwondokids.vietnam" target="_blank" class="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition">
-            <i class="fa-brands fa-facebook-messenger text-2xl"></i>
-        </a>
+        <button class="w-12 h-12 bg-blue-500 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform font-bold text-xs border-2 border-white cursor-pointer">
+            Zalo
+        </button>
+        <button class="w-12 h-12 bg-blue-600 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform font-bold text-xs border-2 border-white cursor-pointer">
+            Mess
+        </button>
     </div>
 
-    <!-- Scripts -->
     <script>
-        // Simple Tab Logic
-        function openTab(tabId) {
-            // Hide all contents
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            // Remove active style from all buttons
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        function switchTab(tabId) {
+            // 1. Ẩn tất cả nội dung Tab
+            document.getElementById('tab-phuhuynh').classList.add('hidden');
+            document.getElementById('tab-phuhuynh').classList.remove('block');
+            document.getElementById('tab-hlv').classList.add('hidden');
+            document.getElementById('tab-hlv').classList.remove('block');
             
-            // Show selected content and style button
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.add('active');
+            // 2. Reset style của tất cả các nút
+            const btnPhuhuynh = document.getElementById('btn-phuhuynh');
+            const btnHlv = document.getElementById('btn-hlv');
+            
+            btnPhuhuynh.className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
+            btnHlv.className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
+            
+            // 3. Hiển thị nội dung Tab được chọn
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.add('block');
+            
+            // 4. Áp dụng style Active cho nút được chọn
+            document.getElementById('btn-' + tabId).className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer';
         }
     </script>
 </body>
