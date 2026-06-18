@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
         tailwind.config = {
@@ -246,11 +247,11 @@
             </div>
         </div>
 
-        <div id="editModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
-            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+        <div id="editModal" onclick="closeEditModal()" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
+            <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
                 <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-blue-800 text-white rounded-t-2xl">
                     <h3 class="text-xl font-bold">Cập nhật tài khoản</h3>
-                    <button onclick="closeEditModal()" class="text-blue-200 hover:text-white font-bold text-2xl cursor-pointer">&times;</button>
+                    <button type="button" onclick="closeEditModal()" class="text-blue-200 hover:text-white font-bold text-3xl leading-none cursor-pointer transition">&times;</button>
                 </div>
                 
                 <div class="p-6 md:p-8">
@@ -284,9 +285,6 @@
     </section>
 
     <script>
-        // -------------------------------------------------------------
-        // BẠN DÁN LINK URL CỦA APPS SCRIPT (TRONG PHẦN 1) VÀO DƯỚI ĐÂY:
-        // -------------------------------------------------------------
         const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxXqVUDCLG6K1iOjF3M1dRC_8tdcM7yF8dT1MinBQ-BoEW0_uNsYWX_8aVI4NXLwN73dQ/exec';
         
         let currentUser = null; 
@@ -365,6 +363,7 @@
             document.getElementById('editPos').value = currentUser.position;
             document.getElementById('editEmail').value = currentUser.email;
         }
+        
         function closeEditModal() { 
             document.getElementById('editModal').classList.add('hidden'); 
             document.getElementById('updatePassForm').reset();
@@ -412,7 +411,6 @@
             const newPass = document.getElementById('newPass').value;
             const confirmPass = document.getElementById('confirmPass').value;
 
-            // Xử lý Check Mật Khẩu Mới (Min 6 ký tự, 1 IN HOA, chữ và số, không ký tự đặc biệt)
             const passwordRegex = /^(?=.*[A-Z])[A-Za-z0-9]{6,}$/;
             
             if(newPass !== confirmPass) {
@@ -533,7 +531,7 @@
                 </form>
 
                 <script>
-                    // 1. DÁN LINK GOOGLE APPS SCRIPT MỚI VÀO BÊN DƯỚI
+                    // 1. DÁN LINK GOOGLE APPS SCRIPT ĐĂNG KÝ HỌC THỬ VÀO BÊN DƯỚI
                     const scriptURL = 'https://script.google.com/macros/s/AKfycbyrUKEFb3DgwNlDSBdQOze2lSafwkXnkw3mnBPvDYjPsSEazVVQ2kKI_bI-5cptHxUX/exec';
                     
                     const form = document.getElementById('registerForm');
@@ -610,24 +608,5 @@
         </button>
     </div>
 
-    <script>
-        function switchTab(tabId) {
-            document.getElementById('tab-phuhuynh').classList.add('hidden');
-            document.getElementById('tab-phuhuynh').classList.remove('block');
-            document.getElementById('tab-hlv').classList.add('hidden');
-            document.getElementById('tab-hlv').classList.remove('block');
-            
-            const btnPhuhuynh = document.getElementById('btn-phuhuynh');
-            const btnHlv = document.getElementById('btn-hlv');
-            
-            btnPhuhuynh.className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
-            btnHlv.className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
-            
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('block');
-            
-            document.getElementById('btn-' + tabId).className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer';
-        }
-    </script>
 </body>
 </html>
