@@ -147,11 +147,11 @@
         </div>
     </section>
 
-    <section id="portal" class="py-16 md:py-24 bg-blue-50">
-        <div class="container mx-auto px-4 max-w-4xl">
+    <section id="portal" class="py-16 md:py-24 bg-blue-50 relative">
+        <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-blue-800 mb-4">Hệ Thống Tra Cứu Thông Tin</h2>
-                <p class="text-gray-600">Quản lý thông minh, minh bạch và tiện lợi cho tất cả mọi người.</p>
+                <p class="text-gray-600">Hệ thống quản lý thông tin thông minh, tiện lợi của Taekwondo Kids</p>
             </div>
 
             <div class="flex flex-col md:flex-row bg-white rounded-xl shadow-md overflow-hidden mb-8">
@@ -177,20 +177,276 @@
                     </button>
                 </div>
 
-                <div id="tab-hlv" class="hidden">
-                    <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2">Khu vực Vận hành nội bộ</h3>
-                    <ul class="space-y-4 mb-6 text-gray-700">
-                        <li><strong>Hồ sơ số hóa:</strong> Lưu thông tin võ sinh, lịch sử thi thăng đai.</li>
-                        <li><strong>Nghiệp vụ:</strong> Đăng ký lịch dạy, chấm công, bảng lương.</li>
-                        <li><strong>Điểm danh điện tử:</strong> Thao tác nhanh chóng qua Tablet/Phone thay thế sổ sách.</li>
-                    </ul>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow cursor-pointer">
-                        Đăng nhập Hệ thống
+                <div id="tab-hlv" class="hidden relative">
+                    <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2">Chỉ dành cho Huấn luyện viên và nhân viên công tác tại Trung tâm Taekwondo Kids Việt Nam</h3>
+                    
+                    <form id="internalLoginForm" class="max-w-sm mt-4 space-y-4">
+                        <input type="text" id="loginPhone" required placeholder="Số điện thoại đăng nhập" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="password" id="loginPass" required placeholder="Mật khẩu" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                        <button type="submit" id="internalLoginBtn" class="w-full bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-4 rounded-lg shadow cursor-pointer transition">
+                            ĐĂNG NHẬP HỆ THỐNG
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="internalDashboard" class="hidden fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
+            <div class="bg-blue-900 text-white px-6 py-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
+                <div class="font-bold text-xl flex items-center gap-2">
+                    <span class="text-yellow-400"><i class="fa-solid fa-user-shield"></i> TKD</span> Portal
+                </div>
+                <button onclick="logoutInternal()" class="text-sm bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-bold cursor-pointer transition">Đăng xuất</button>
+            </div>
+            
+            <div class="container mx-auto px-4 py-8 max-w-5xl">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 flex flex-col md:flex-row">
+                    <div class="bg-blue-800 text-white p-8 md:w-1/3 flex flex-col items-center text-center justify-center">
+                        <div class="w-24 h-32 bg-gray-200 rounded mb-4 border-2 border-yellow-400 flex items-center justify-center overflow-hidden">
+                            <img src="https://via.placeholder.com/150/cccccc/666666?text=Ảnh+3x4" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <h2 id="dbName" class="text-2xl font-bold text-yellow-400 mb-1">Họ Tên</h2>
+                        <p id="dbPosition" class="text-sm opacity-80 mb-3">Vị trí công tác</p>
+                        <div class="inline-block bg-blue-700 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-600 shadow-inner">
+                            Cấp đai: <span id="dbBelt" class="text-yellow-300"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8 md:w-2/3 relative">
+                        <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-6">Thông tin cá nhân</h3>
+                        <div class="grid grid-cols-2 gap-6 text-sm text-gray-700 mb-8">
+                            <div><strong class="block text-gray-500 mb-1">Số điện thoại</strong><span id="dbPhone" class="font-semibold text-base"></span></div>
+                            <div><strong class="block text-gray-500 mb-1">Ngày sinh</strong><span id="dbDob" class="font-semibold text-base"></span></div>
+                            <div class="col-span-2"><strong class="block text-gray-500 mb-1">Email</strong><span id="dbEmail" class="font-semibold text-base"></span></div>
+                        </div>
+                        <button onclick="openEditModal()" class="bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold py-2.5 px-6 rounded-lg shadow-sm transition border border-blue-200 cursor-pointer">
+                            <i class="fa-solid fa-pen-to-square mr-2"></i> Sửa đổi thông tin & Mật khẩu
+                        </button>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-blue-900 mb-4 px-2">Menu Nghiệp vụ</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
+                        <span class="text-4xl mb-3">📅</span> Đăng ký lịch dạy
+                    </button>
+                    <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
+                        <span class="text-4xl mb-3">📝</span> Đăng ký nghỉ phép
+                    </button>
+                    <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
+                        <span class="text-4xl mb-3">⏱️</span> Chấm công
+                    </button>
+                    <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
+                        <span class="text-4xl mb-3">💵</span> Bảng lương
+                    </button>
+                    <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
+                        <span class="text-4xl mb-3">⭐</span> Điểm đánh giá (Phụ huynh)
                     </button>
                 </div>
             </div>
         </div>
+
+        <div id="editModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-blue-800 text-white rounded-t-2xl">
+                    <h3 class="text-xl font-bold">Cập nhật tài khoản</h3>
+                    <button onclick="closeEditModal()" class="text-blue-200 hover:text-white font-bold text-2xl cursor-pointer">&times;</button>
+                </div>
+                
+                <div class="p-6 md:p-8">
+                    <form id="updateInfoForm" class="mb-10">
+                        <h4 class="font-bold text-blue-800 mb-4 uppercase text-sm border-l-4 border-yellow-400 pl-2">Sửa thông tin cá nhân</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Họ và tên</label><input type="text" id="editName" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Số điện thoại</label><input type="text" id="editPhone" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Ngày sinh</label><input type="text" id="editDob" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Vị trí công tác</label><input type="text" id="editPos" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div class="md:col-span-2"><label class="text-sm font-semibold text-gray-600 block mb-1">Email</label><input type="email" id="editEmail" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                        </div>
+                        <button type="submit" id="btnUpdateInfo" class="bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg shadow hover:bg-blue-800 transition cursor-pointer">Lưu Thay Đổi Thông Tin</button>
+                    </form>
+
+                    <hr class="border-gray-200 mb-8">
+                    <form id="updatePassForm">
+                        <h4 class="font-bold text-blue-800 mb-2 uppercase text-sm border-l-4 border-yellow-400 pl-2">Đổi mật khẩu</h4>
+                        <p class="text-sm text-red-500 mb-5 bg-red-50 p-3 rounded-md border border-red-100">
+                            <strong>Lưu ý:</strong> Mật khẩu mới phải có tối thiểu 6 ký tự (chỉ bao gồm chữ và số), có ít nhất 1 chữ IN HOA và không chứa ký tự đặc biệt.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Mật khẩu mới</label><input type="password" id="newPass" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Nhập lại mật khẩu</label><input type="password" id="confirmPass" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
+                        </div>
+                        <button type="submit" id="btnUpdatePass" class="bg-yellow-400 text-blue-900 font-bold px-6 py-2.5 rounded-lg shadow hover:bg-yellow-500 transition cursor-pointer">Đổi Mật Khẩu Này</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <script>
+        // -------------------------------------------------------------
+        // BẠN DÁN LINK URL CỦA APPS SCRIPT (TRONG PHẦN 1) VÀO DƯỚI ĐÂY:
+        // -------------------------------------------------------------
+        const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxXqVUDCLG6K1iOjF3M1dRC_8tdcM7yF8dT1MinBQ-BoEW0_uNsYWX_8aVI4NXLwN73dQ/exec';
+        
+        let currentUser = null; 
+
+        function switchTab(tabId) {
+            document.getElementById('tab-phuhuynh').classList.add('hidden');
+            document.getElementById('tab-phuhuynh').classList.remove('block');
+            document.getElementById('tab-hlv').classList.add('hidden');
+            document.getElementById('tab-hlv').classList.remove('block');
+            
+            document.getElementById('btn-phuhuynh').className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
+            document.getElementById('btn-hlv').className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
+            
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.add('block');
+            document.getElementById('btn-' + tabId).className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer';
+        }
+
+        // ============================
+        // 1. LOGIC ĐĂNG NHẬP
+        // ============================
+        document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('internalLoginBtn');
+            btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
+
+            const phone = document.getElementById('loginPhone').value;
+            const pass = document.getElementById('loginPass').value;
+
+            const data = new URLSearchParams();
+            data.append('action', 'login');
+            data.append('phone', phone);
+            data.append('password', pass);
+
+            fetch(INTERNAL_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    currentUser = resData.user;
+                    loadDashboardData();
+                } else {
+                    alert(resData.message || 'Tài khoản hoặc mật khẩu không đúng!');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại!');
+            })
+            .finally(() => { btn.innerHTML = "ĐĂNG NHẬP HỆ THỐNG"; btn.disabled = false; });
+        });
+
+        function loadDashboardData() {
+            document.getElementById('internalDashboard').classList.remove('hidden');
+            document.getElementById('dbName').innerText = currentUser.name;
+            document.getElementById('dbPosition').innerText = currentUser.position;
+            document.getElementById('dbBelt').innerText = currentUser.belt;
+            document.getElementById('dbPhone').innerText = currentUser.phone;
+            document.getElementById('dbDob').innerText = currentUser.dob;
+            document.getElementById('dbEmail').innerText = currentUser.email;
+        }
+
+        function logoutInternal() {
+            currentUser = null;
+            document.getElementById('internalDashboard').classList.add('hidden');
+            document.getElementById('internalLoginForm').reset();
+        }
+
+        // ============================
+        // 2. LOGIC MODAL ĐỔI THÔNG TIN
+        // ============================
+        function openEditModal() {
+            document.getElementById('editModal').classList.remove('hidden');
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editPhone').value = currentUser.phone;
+            document.getElementById('editDob').value = currentUser.dob;
+            document.getElementById('editPos').value = currentUser.position;
+            document.getElementById('editEmail').value = currentUser.email;
+        }
+        function closeEditModal() { 
+            document.getElementById('editModal').classList.add('hidden'); 
+            document.getElementById('updatePassForm').reset();
+        }
+
+        // ============================
+        // 3. LOGIC LƯU THAY ĐỔI INFO
+        // ============================
+        document.getElementById('updateInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnUpdateInfo');
+            btn.innerHTML = "Đang lưu..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'updateInfo');
+            data.append('row', currentUser.row);
+            data.append('name', document.getElementById('editName').value);
+            data.append('phone', document.getElementById('editPhone').value);
+            data.append('dob', document.getElementById('editDob').value);
+            data.append('position', document.getElementById('editPos').value);
+            data.append('email', document.getElementById('editEmail').value);
+
+            fetch(INTERNAL_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    alert('Cập nhật thông tin cá nhân thành công!');
+                    currentUser.name = document.getElementById('editName').value;
+                    currentUser.phone = document.getElementById('editPhone').value;
+                    currentUser.dob = document.getElementById('editDob').value;
+                    currentUser.position = document.getElementById('editPos').value;
+                    currentUser.email = document.getElementById('editEmail').value;
+                    loadDashboardData();
+                }
+            })
+            .catch(err => alert("Có lỗi xảy ra khi lưu!"))
+            .finally(() => { btn.innerHTML = "Lưu Thay Đổi Thông Tin"; btn.disabled = false; });
+        });
+
+        // ============================
+        // 4. LOGIC ĐỔI MẬT KHẨU BẰNG REGEX
+        // ============================
+        document.getElementById('updatePassForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPass = document.getElementById('newPass').value;
+            const confirmPass = document.getElementById('confirmPass').value;
+
+            // Xử lý Check Mật Khẩu Mới (Min 6 ký tự, 1 IN HOA, chữ và số, không ký tự đặc biệt)
+            const passwordRegex = /^(?=.*[A-Z])[A-Za-z0-9]{6,}$/;
+            
+            if(newPass !== confirmPass) {
+                return alert("Mật khẩu nhập lại không khớp!");
+            }
+            if(!passwordRegex.test(newPass)) {
+                return alert("LỖI BẢO MẬT: Mật khẩu mới chưa hợp lệ.\n(Hãy đảm bảo: Tối thiểu 6 ký tự, có chứa số, có chữ viết hoa và KHÔNG CÓ ký tự đặc biệt như @, #, !, v.v..)");
+            }
+
+            const btn = document.getElementById('btnUpdatePass');
+            btn.innerHTML = "Đang đổi..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'updatePassword');
+            data.append('row', currentUser.row);
+            data.append('phone', currentUser.phone);
+            data.append('name', currentUser.name);
+            data.append('email', currentUser.email);
+            data.append('dob', currentUser.dob);
+            data.append('position', currentUser.position);
+            data.append('newPassword', newPass);
+
+            fetch(INTERNAL_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    alert('Thành công! Mật khẩu mới đã được cập nhật vào lịch sử hệ thống.');
+                    document.getElementById('updatePassForm').reset();
+                }
+            })
+            .catch(err => alert("Có lỗi xảy ra khi đổi mật khẩu!"))
+            .finally(() => { btn.innerHTML = "Đổi Mật Khẩu Này"; btn.disabled = false; });
+        });
+    </script>
 
    <section id="locations" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4">
