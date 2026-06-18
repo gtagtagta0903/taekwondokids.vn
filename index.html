@@ -288,7 +288,7 @@
         btn.disabled = true;
         btn.classList.add('opacity-70');
 
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
             .then(response => {
                 alert('🎉 Cảm ơn bạn! Thông tin đăng ký đã được gửi thành công.');
                 form.reset(); // Xóa trắng form sau khi gửi
