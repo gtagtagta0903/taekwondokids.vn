@@ -59,17 +59,20 @@
                 </a>
             </div>
             <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 mr-1 border-r-2 border-gray-200 pr-3">
-                    <button id="btn-lang-vi" onclick="setLang('vi')" class="font-bold text-blue-800 hover:text-yellow-500 transition cursor-pointer">VN</button>
-                    <span class="text-gray-300">|</span>
-                    <button id="btn-lang-en" onclick="setLang('en')" class="font-bold text-gray-400 hover:text-blue-800 transition cursor-pointer">EN</button>
-                </div>
-                
                 <span class="hidden lg:block font-bold text-blue-700">097 893 1747</span>
                 <a href="#register" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-2 px-4 rounded-full transition shadow-md">
                     <span class="lang-vi">Đăng ký học thử</span>
                     <span class="lang-en hidden">Free Trial</span>
                 </a>
+                
+                <div class="flex items-center gap-2 ml-2 border-l-2 border-gray-200 pl-3">
+                    <button id="btn-lang-vi" onclick="setLang('vi')" class="opacity-100 hover:opacity-80 transition cursor-pointer scale-110" title="Tiếng Việt">
+                        <img src="https://flagcdn.com/w40/vn.png" alt="VN" class="w-7 h-5 object-cover rounded-sm shadow-sm border border-gray-200">
+                    </button>
+                    <button id="btn-lang-en" onclick="setLang('en')" class="opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition cursor-pointer" title="English">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-7 h-5 object-cover rounded-sm shadow-sm border border-gray-200">
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -105,31 +108,6 @@
         </div>
     </header>
 
-    <section class="py-8 bg-blue-50 border-b border-blue-100">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
-                <div class="text-center">
-                    <h3 class="text-3xl font-bold text-blue-800">5+</h3>
-                    <p class="text-sm font-medium text-gray-600 uppercase">
-                        <span class="lang-vi">Cơ sở toàn Hà Nội</span>
-                        <span class="lang-en hidden">Branches in Hanoi</span>
-                    </p>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-3xl font-bold text-blue-800">2000+</h3>
-                    <p class="text-sm font-medium text-gray-600 uppercase">
-                        <span class="lang-vi">Võ sinh đang theo học</span>
-                        <span class="lang-en hidden">Active Students</span>
-                    </p>
-                </div>
-                <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://via.placeholder.com/120x40/cccccc/666666?text=Doi+Tac+1" alt="Partner 1" class="h-10 object-contain" />
-                    <img src="https://via.placeholder.com/120x40/cccccc/666666?text=Doi+Tac+2" alt="Partner 2" class="h-10 object-contain" />
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="about" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-16">
@@ -147,15 +125,15 @@
                         <span class="lang-vi">Năm 2015</span><span class="lang-en hidden">2015</span>
                     </h3>
                     <p class="mb-2 text-lg font-bold text-gray-800">
-                        <span class="lang-vi">Thành lập Trụ sở chính & Cơ sở đầu tiên</span>
-                        <span class="lang-en hidden">Established Headquarters & First Branch</span>
+                        <span class="lang-vi">Thành lập Cơ sở đầu tiên</span>
+                        <span class="lang-en hidden">Established Headquarters</span>
                     </p>
                     <p class="text-gray-600 mt-2">
-                        <span class="lang-vi">Trụ sở chính Hapulico và cũng là cơ sở Taekwondo Kids đầu tiên được thành lập.</span>
-                        <span class="lang-en hidden">Hapulico Headquarters and the first Taekwondo Kids branch were established.</span> <br>
+                        <span class="lang-vi">Trụ sở chính Hapulico và cũng là cơ sở Taekwondo Kids đầu tiên được thành lập</span>
+                        <span class="lang-en hidden">Hapulico Headquarters and the first Taekwondo Kids branch were established</span> <br>
                         <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
-                        <span class="lang-vi">83 Vũ Trọng Phụng - Thanh Xuân - Hà Nội.</span>
-                        <span class="lang-en hidden">83 Vu Trong Phung, Thanh Xuan, Hanoi.</span>
+                        <span class="lang-vi">83 Vũ Trọng Phụng - Thanh Xuân - Hà Nội</span>
+                        <span class="lang-en hidden">83 Vu Trong Phung, Thanh Xuan, Hanoi</span>
                     </p>
                 </div>
 
@@ -183,15 +161,15 @@
                         <span class="lang-vi">Năm 2019</span><span class="lang-en hidden">2019</span>
                     </h3>
                     <p class="mb-2 text-lg font-bold text-gray-800">
-                        <span class="lang-vi">Thành lập Cơ sở 3 (Mở rộng khu vực phía Nam)</span>
-                        <span class="lang-en hidden">Established 3rd Branch (Southern Expansion)</span>
+                        <span class="lang-vi">Thành lập Cơ sở 3</span>
+                        <span class="lang-en hidden">Established 3rd Branch</span>
                     </p>
                     <p class="text-gray-600 mt-2">
-                        <span class="lang-vi">Chi nhánh Gia Hòa - Cơ sở đầu tiên tại Thành phố Hồ Chí Minh của Trung tâm Taekwondo Kids.</span>
-                        <span class="lang-en hidden">Gia Hoa branch - the very first Taekwondo Kids center in Ho Chi Minh City.</span> <br>
+                        <span class="lang-vi">Chi nhánh Gia Hòa - Cơ sở đầu tiên tại Thành phố Hồ Chí Minh của Trung tâm Taekwondo Kids</span>
+                        <span class="lang-en hidden">Gia Hoa branch - the very first Taekwondo Kids center in Ho Chi Minh City</span> <br>
                         <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
-                        <span class="lang-vi">523A Đỗ Xuân Hợp - Quận 9 - TP. Hồ Chí Minh.</span>
-                        <span class="lang-en hidden">523A Do Xuan Hop, District 9, HCMC.</span>
+                        <span class="lang-vi">523A Đỗ Xuân Hợp - Quận 9 - TP. Hồ Chí Minh</span>
+                        <span class="lang-en hidden">523A Do Xuan Hop, District 9, HCMC</span>
                     </p>
                 </div>
 
@@ -208,8 +186,8 @@
                         <span class="lang-vi">Chi nhánh Nghĩa Đô được thành lập.</span>
                         <span class="lang-en hidden">Nghia Do branch was founded.</span> <br>
                         <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
-                        <span class="lang-vi">Tầng 1 - Chung cư CT3 - KĐT mới Nghĩa Đô.</span>
-                        <span class="lang-en hidden">1st Floor, CT3 Apartment, Nghia Do Urban Area.</span>
+                        <span class="lang-vi">Tầng 1 - Chung cư CT3 - KĐT mới Nghĩa Đô</span>
+                        <span class="lang-en hidden">1st Floor, CT3 Apartment, Nghia Do Urban Area</span>
                     </p>
                 </div>
 
@@ -224,10 +202,10 @@
                     </p>
                     <p class="text-gray-600 mt-2">
                         <span class="lang-vi">Chi nhánh Hạ Long được thành lập.</span>
-                        <span class="lang-en hidden">Ha Long branch was founded.</span> <br>
+                        <span class="lang-en hidden">Ha Long branch was founded</span> <br>
                         <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
-                        <span class="lang-vi">Tầng 3, Lô 1-2 - Tòa nhà Trần Hưng Đạo Plaza, đường Trần Hưng Đạo, Quảng Ninh.</span>
-                        <span class="lang-en hidden">3rd Floor, Lot 1-2, Tran Hung Dao Plaza, Quang Ninh.</span>
+                        <span class="lang-vi">Tầng 3, Lô 1-2 - Tòa nhà Trần Hưng Đạo Plaza, đường Trần Hưng Đạo, Quảng Ninh</span>
+                        <span class="lang-en hidden">3rd Floor, Lot 1-2, Tran Hung Dao Plaza, Quang Ninh</span>
                     </p>
                 </div>
 
@@ -237,8 +215,8 @@
                         <span class="lang-vi">Năm 2025</span><span class="lang-en hidden">2025</span>
                     </h3>
                     <p class="mb-2 text-lg font-bold text-gray-800">
-                        <span class="lang-vi">Mở rộng mạnh mẽ (Thành lập Cơ sở 8 & 9)</span>
-                        <span class="lang-en hidden">Massive Expansion (8th & 9th Branches)</span>
+                        <span class="lang-vi">Thành lập Cơ sở 8 & 9</span>
+                        <span class="lang-en hidden">Established 8th & 9th Branches</span>
                     </p>
                     <div class="text-gray-600 space-y-3 mt-2">
                         <p><strong><span class="lang-vi">Cơ sở 8 - Chi nhánh Hà Đông:</span><span class="lang-en hidden">Branch 8 - Ha Dong:</span></strong> <br> <i class="fa-solid fa-location-dot text-yellow-500 mr-2"></i> <span class="lang-vi">T2A - tòa TSQ EuroLand, 25 P. Nguyễn Văn Lộc, P. Mộ Lao.</span><span class="lang-en hidden">T2A - TSQ EuroLand, 25 Nguyen Van Loc St.</span></p>
@@ -250,8 +228,8 @@
             <div class="mt-24">
                 <div class="text-center mb-10">
                     <h3 class="text-2xl md:text-3xl font-bold text-blue-800 uppercase">
-                        <span class="lang-vi">Những hình ảnh đầu tiên của Trung tâm</span>
-                        <span class="lang-en hidden">The Early Days of the Center</span>
+                        <span class="lang-vi">TRUNG TÂM TAEKWONDO KIDS VIỆT NAMT</span>
+                        <span class="lang-en hidden">TTAEKWONDO KIDS CENTER</span>
                     </h3>
                     <p class="text-gray-500 mt-2">
                         <span class="lang-vi">Nhìn lại chặng đường gắn bó và phát triển cùng các võ sinh</span>
@@ -701,15 +679,21 @@
         let currentParent = null;
 
         // ==========================================
-        // LOGIC DỊCH NGÔN NGỮ (I18N)
+        // LOGIC DỊCH NGÔN NGỮ (I18N) - Gắn cờ
         // ==========================================
         function setLang(lang) {
             if (lang === 'en') {
                 document.querySelectorAll('.lang-vi').forEach(el => el.classList.add('hidden'));
                 document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('hidden'));
                 
-                document.getElementById('btn-lang-vi').classList.replace('text-blue-800', 'text-gray-400');
-                document.getElementById('btn-lang-en').classList.replace('text-gray-400', 'text-blue-800');
+                // Mờ cờ VN, hiện cờ EN
+                document.getElementById('btn-lang-vi').classList.replace('opacity-100', 'opacity-50');
+                document.getElementById('btn-lang-vi').classList.add('grayscale');
+                document.getElementById('btn-lang-vi').classList.remove('scale-110');
+                
+                document.getElementById('btn-lang-en').classList.replace('opacity-50', 'opacity-100');
+                document.getElementById('btn-lang-en').classList.remove('grayscale');
+                document.getElementById('btn-lang-en').classList.add('scale-110');
 
                 // Thay đổi placeholders
                 document.querySelectorAll('[data-en-placeholder]').forEach(el => {
@@ -720,8 +704,14 @@
                 document.querySelectorAll('.lang-en').forEach(el => el.classList.add('hidden'));
                 document.querySelectorAll('.lang-vi').forEach(el => el.classList.remove('hidden'));
                 
-                document.getElementById('btn-lang-en').classList.replace('text-blue-800', 'text-gray-400');
-                document.getElementById('btn-lang-vi').classList.replace('text-gray-400', 'text-blue-800');
+                // Mờ cờ EN, hiện cờ VN
+                document.getElementById('btn-lang-en').classList.replace('opacity-100', 'opacity-50');
+                document.getElementById('btn-lang-en').classList.add('grayscale');
+                document.getElementById('btn-lang-en').classList.remove('scale-110');
+
+                document.getElementById('btn-lang-vi').classList.replace('opacity-50', 'opacity-100');
+                document.getElementById('btn-lang-vi').classList.remove('grayscale');
+                document.getElementById('btn-lang-vi').classList.add('scale-110');
 
                 // Khôi phục placeholders
                 document.querySelectorAll('[data-vi-placeholder]').forEach(el => {
