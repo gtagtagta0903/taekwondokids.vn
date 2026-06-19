@@ -35,18 +35,40 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <img src="LOGO.png" alt="Logo Taekwondo Kids" class="h-10 w-auto object-contain">
-                <span class="font-bold text-blue-800 hidden md:block">TRUNG TÂM TAEKWONDO KIDS VIỆT NAM</span>
+                <span class="font-bold text-blue-800 hidden md:block">
+                    <span class="lang-vi">TRUNG TÂM TAEKWONDO KIDS VIỆT NAM</span>
+                    <span class="lang-en hidden">TAEKWONDO KIDS VIETNAM CENTER</span>
+                </span>
             </div>
             <div class="hidden md:flex gap-6 font-medium text-sm text-blue-900">
-                <a href="#about" class="hover:text-yellow-500 transition">Về chúng tôi</a>
-                <a href="#locations" class="hover:text-yellow-500 transition">Hệ thống cơ sở</a>
-                <a href="#pricing" class="hover:text-yellow-500 transition">Chương trình ưu đãi</a>
-                <a href="#portal" class="hover:text-yellow-500 transition">Tra cứu nội bộ</a>
+                <a href="#about" class="hover:text-yellow-500 transition">
+                    <span class="lang-vi">Về chúng tôi</span>
+                    <span class="lang-en hidden">About Us</span>
+                </a>
+                <a href="#locations" class="hover:text-yellow-500 transition">
+                    <span class="lang-vi">Hệ thống cơ sở</span>
+                    <span class="lang-en hidden">Our Branches</span>
+                </a>
+                <a href="#pricing" class="hover:text-yellow-500 transition">
+                    <span class="lang-vi">Chương trình ưu đãi</span>
+                    <span class="lang-en hidden">Promotions</span>
+                </a>
+                <a href="#portal" class="hover:text-yellow-500 transition">
+                    <span class="lang-vi">Tra cứu nội bộ</span>
+                    <span class="lang-en hidden">Portal</span>
+                </a>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 mr-1 border-r-2 border-gray-200 pr-3">
+                    <button id="btn-lang-vi" onclick="setLang('vi')" class="font-bold text-blue-800 hover:text-yellow-500 transition cursor-pointer">VN</button>
+                    <span class="text-gray-300">|</span>
+                    <button id="btn-lang-en" onclick="setLang('en')" class="font-bold text-gray-400 hover:text-blue-800 transition cursor-pointer">EN</button>
+                </div>
+                
                 <span class="hidden lg:block font-bold text-blue-700">097 893 1747</span>
                 <a href="#register" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-2 px-4 rounded-full transition shadow-md">
-                    Đăng ký học thử
+                    <span class="lang-vi">Đăng ký học thử</span>
+                    <span class="lang-en hidden">Free Trial</span>
                 </a>
             </div>
         </div>
@@ -58,90 +80,159 @@
         
         <div class="relative z-10 container mx-auto px-4 max-w-4xl">
             <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-white drop-shadow-lg">
-                Trung tâm Taekwondo Kids Việt Nam <br>
-                <span class="text-xl md:text-2xl font-normal block mt-2 mb-6">Chuyên đào tạo võ thuật cho võ sinh từ 3.5 tuổi trở lên</span>
-                <span class="text-yellow-400 block mb-4">Khơi dậy tiềm năng</span>
-                <span class="block mt-2">Rèn luyện Thể chất - Ý chí</span>
+                <span class="lang-vi">Trung tâm Taekwondo Kids Việt Nam</span>
+                <span class="lang-en hidden">Taekwondo Kids Vietnam Center</span> <br>
+                
+                <span class="text-xl md:text-2xl font-normal block mt-2 mb-6">
+                    <span class="lang-vi">Chuyên đào tạo võ thuật cho võ sinh từ 3.5 tuổi trở lên</span>
+                    <span class="lang-en hidden">Professional martial arts training for kids from 3.5 years old</span>
+                </span>
+                
+                <span class="text-yellow-400 block mb-4">
+                    <span class="lang-vi">Khơi dậy tiềm năng</span>
+                    <span class="lang-en hidden">Awaken Potential</span>
+                </span>
+                <span class="block mt-2">
+                    <span class="lang-vi">Rèn luyện Thể chất - Ý chí</span>
+                    <span class="lang-en hidden">Build Physical Strength & Mental Toughness</span>
+                </span>
             </h1>
             
             <a href="#register" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-blue-900 text-lg md:text-xl font-bold py-4 px-8 rounded-full shadow-xl transform hover:-translate-y-1 transition-all">
-                ĐĂNG KÝ HỌC THỬ MIỄN PHÍ
+                <span class="lang-vi">ĐĂNG KÝ HỌC THỬ MIỄN PHÍ</span>
+                <span class="lang-en hidden">REGISTER FOR A FREE TRIAL</span>
             </a>
         </div>
     </header>
-<div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4 uppercase">Lịch sử hình thành và phát triển</h2>
-                <div class="w-24 h-1.5 bg-yellow-400 mx-auto rounded"></div>
-            </div>
+
+
     <section id="about" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
-            <div class="relative border-l-4 border-yellow-400 ml-4 md:ml-8 mb-16 mt-8">
-                
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4 uppercase">
+                    <span class="lang-vi">LỊCH SỬ HÌNH THÀNH VÀ PHÁT TRIỂN</span>
+                    <span class="lang-en hidden">History and Development</span>
+                </h2>
+                <div class="w-24 h-1.5 bg-yellow-400 mx-auto rounded"></div>
+            </div>
+
+            <div class="relative border-l-4 border-yellow-400 ml-4 md:ml-8 mb-16">
                 <div class="mb-10 ml-8 relative">
                     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-800 rounded-full -left-11 ring-4 ring-white mt-1"></span>
-                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">Năm 2015</h3>
-                    <p class="mb-2 text-lg font-bold text-gray-800">Thành lập Trụ sở chính & Cơ sở đầu tiên</p>
-                    <p class="text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm inline-block w-full">
-                        Trụ sở chính Hapulico và cũng là cơ sở Taekwondo Kids đầu tiên được thành lập. <br>
-                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 83 Vũ Trọng Phụng - Thanh Xuân - Hà Nội.
+                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">
+                        <span class="lang-vi">Năm 2015</span><span class="lang-en hidden">2015</span>
+                    </h3>
+                    <p class="mb-2 text-lg font-bold text-gray-800">
+                        <span class="lang-vi">Thành lập Trụ sở chính & Cơ sở đầu tiên</span>
+                        <span class="lang-en hidden">Established Headquarters & First Branch</span>
+                    </p>
+                    <p class="text-gray-600 mt-2">
+                        <span class="lang-vi">Trụ sở chính Hapulico và cũng là cơ sở Taekwondo Kids đầu tiên được thành lập.</span>
+                        <span class="lang-en hidden">Hapulico Headquarters and the first Taekwondo Kids branch were established.</span> <br>
+                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
+                        <span class="lang-vi">83 Vũ Trọng Phụng - Thanh Xuân - Hà Nội.</span>
+                        <span class="lang-en hidden">83 Vu Trong Phung, Thanh Xuan, Hanoi.</span>
                     </p>
                 </div>
 
                 <div class="mb-10 ml-8 relative">
                     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-800 rounded-full -left-11 ring-4 ring-white mt-1"></span>
-                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">Năm 2018</h3>
-                    <p class="mb-2 text-lg font-bold text-gray-800">Thành lập Cơ sở 2</p>
-                    <p class="text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm inline-block w-full">
-                        Chi nhánh Green Stars được thành lập. <br>
-                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 234 Phạm Văn Đồng - Hà Nội.
+                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">
+                        <span class="lang-vi">Năm 2018</span><span class="lang-en hidden">2018</span>
+                    </h3>
+                    <p class="mb-2 text-lg font-bold text-gray-800">
+                        <span class="lang-vi">Thành lập Cơ sở 2</span>
+                        <span class="lang-en hidden">Established 2nd Branch</span>
+                    </p>
+                    <p class="text-gray-600 mt-2">
+                        <span class="lang-vi">Chi nhánh Green Stars được thành lập.</span>
+                        <span class="lang-en hidden">Green Stars branch was founded.</span> <br>
+                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
+                        <span class="lang-vi">234 Phạm Văn Đồng - Hà Nội.</span>
+                        <span class="lang-en hidden">234 Pham Van Dong, Hanoi.</span>
                     </p>
                 </div>
 
                 <div class="mb-10 ml-8 relative">
                     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-800 rounded-full -left-11 ring-4 ring-white mt-1"></span>
-                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">Năm 2019</h3>
-                    <p class="mb-2 text-lg font-bold text-gray-800">Thành lập Cơ sở 3 (Mở rộng khu vực phía Nam)</p>
-                    <p class="text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm inline-block w-full">
-                        Chi nhánh Gia Hòa - Cơ sở đầu tiên tại Thành phố Hồ Chí Minh của Trung tâm Taekwondo Kids. <br>
-                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 523A Đỗ Xuân Hợp - Quận 9 - TP. Hồ Chí Minh.
+                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">
+                        <span class="lang-vi">Năm 2019</span><span class="lang-en hidden">2019</span>
+                    </h3>
+                    <p class="mb-2 text-lg font-bold text-gray-800">
+                        <span class="lang-vi">Thành lập Cơ sở 3 (Mở rộng khu vực phía Nam)</span>
+                        <span class="lang-en hidden">Established 3rd Branch (Southern Expansion)</span>
+                    </p>
+                    <p class="text-gray-600 mt-2">
+                        <span class="lang-vi">Chi nhánh Gia Hòa - Cơ sở đầu tiên tại Thành phố Hồ Chí Minh của Trung tâm Taekwondo Kids.</span>
+                        <span class="lang-en hidden">Gia Hoa branch - the very first Taekwondo Kids center in Ho Chi Minh City.</span> <br>
+                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
+                        <span class="lang-vi">523A Đỗ Xuân Hợp - Quận 9 - TP. Hồ Chí Minh.</span>
+                        <span class="lang-en hidden">523A Do Xuan Hop, District 9, HCMC.</span>
                     </p>
                 </div>
 
                 <div class="mb-10 ml-8 relative">
                     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-800 rounded-full -left-11 ring-4 ring-white mt-1"></span>
-                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">Năm 2020</h3>
-                    <p class="mb-2 text-lg font-bold text-gray-800">Thành lập Cơ sở 4</p>
-                    <p class="text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm inline-block w-full">
-                        Chi nhánh Nghĩa Đô được thành lập. <br>
-                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> Tầng 1 - Chung cư CT3 - KĐT mới Nghĩa Đô.
+                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">
+                        <span class="lang-vi">Năm 2020</span><span class="lang-en hidden">2020</span>
+                    </h3>
+                    <p class="mb-2 text-lg font-bold text-gray-800">
+                        <span class="lang-vi">Thành lập Cơ sở 4</span>
+                        <span class="lang-en hidden">Established 4th Branch</span>
+                    </p>
+                    <p class="text-gray-600 mt-2">
+                        <span class="lang-vi">Chi nhánh Nghĩa Đô được thành lập.</span>
+                        <span class="lang-en hidden">Nghia Do branch was founded.</span> <br>
+                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
+                        <span class="lang-vi">Tầng 1 - Chung cư CT3 - KĐT mới Nghĩa Đô.</span>
+                        <span class="lang-en hidden">1st Floor, CT3 Apartment, Nghia Do Urban Area.</span>
                     </p>
                 </div>
 
                 <div class="mb-10 ml-8 relative">
                     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-800 rounded-full -left-11 ring-4 ring-white mt-1"></span>
-                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">Năm 2021</h3>
-                    <p class="mb-2 text-lg font-bold text-gray-800">Thành lập Cơ sở 5</p>
-                    <p class="text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm inline-block w-full">
-                        Chi nhánh Hạ Long được thành lập. <br>
-                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> Tầng 3, Lô 1-2 - Tòa nhà Trần Hưng Đạo Plaza, đường Trần Hưng Đạo, Quảng Ninh.
+                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">
+                        <span class="lang-vi">Năm 2021</span><span class="lang-en hidden">2021</span>
+                    </h3>
+                    <p class="mb-2 text-lg font-bold text-gray-800">
+                        <span class="lang-vi">Thành lập Cơ sở 5</span>
+                        <span class="lang-en hidden">Established 5th Branch</span>
+                    </p>
+                    <p class="text-gray-600 mt-2">
+                        <span class="lang-vi">Chi nhánh Hạ Long được thành lập.</span>
+                        <span class="lang-en hidden">Ha Long branch was founded.</span> <br>
+                        <i class="fa-solid fa-location-dot text-yellow-500 mr-2 mt-2"></i> 
+                        <span class="lang-vi">Tầng 3, Lô 1-2 - Tòa nhà Trần Hưng Đạo Plaza, đường Trần Hưng Đạo, Quảng Ninh.</span>
+                        <span class="lang-en hidden">3rd Floor, Lot 1-2, Tran Hung Dao Plaza, Quang Ninh.</span>
                     </p>
                 </div>
 
                 <div class="ml-8 relative">
                     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-800 rounded-full -left-11 ring-4 ring-white mt-1"></span>
-                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">Năm 2025</h3>
-                    <p class="mb-2 text-lg font-bold text-gray-800">Mở rộng mạnh mẽ (Thành lập Cơ sở 8 & 9)</p>
-                    <div class="text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm inline-block w-full space-y-3">
-                        <p><strong>Cơ sở 8 - Chi nhánh Hà Đông:</strong> <br> <i class="fa-solid fa-location-dot text-yellow-500 mr-2"></i> T2A - tòa TSQ EuroLand, 25 P. Nguyễn Văn Lộc, P. Mộ Lao.</p>
-                        <p><strong>Cơ sở 9 - Chi nhánh Long Biên:</strong> <br> <i class="fa-solid fa-location-dot text-yellow-500 mr-2"></i> Tòa nhà L4 - Chung cư LeGrand Jadin Sài Đồng, Long Biên.</p>
+                    <h3 class="flex items-center mb-1 text-2xl font-black text-blue-900">
+                        <span class="lang-vi">Năm 2025</span><span class="lang-en hidden">2025</span>
+                    </h3>
+                    <p class="mb-2 text-lg font-bold text-gray-800">
+                        <span class="lang-vi">Mở rộng mạnh mẽ (Thành lập Cơ sở 8 & 9)</span>
+                        <span class="lang-en hidden">Massive Expansion (8th & 9th Branches)</span>
+                    </p>
+                    <div class="text-gray-600 space-y-3 mt-2">
+                        <p><strong><span class="lang-vi">Cơ sở 8 - Chi nhánh Hà Đông:</span><span class="lang-en hidden">Branch 8 - Ha Dong:</span></strong> <br> <i class="fa-solid fa-location-dot text-yellow-500 mr-2"></i> <span class="lang-vi">T2A - tòa TSQ EuroLand, 25 P. Nguyễn Văn Lộc, P. Mộ Lao.</span><span class="lang-en hidden">T2A - TSQ EuroLand, 25 Nguyen Van Loc St.</span></p>
+                        <p><strong><span class="lang-vi">Cơ sở 9 - Chi nhánh Long Biên:</span><span class="lang-en hidden">Branch 9 - Long Bien:</span></strong> <br> <i class="fa-solid fa-location-dot text-yellow-500 mr-2"></i> <span class="lang-vi">Tòa nhà L4 - Chung cư LeGrand Jadin Sài Đồng, Long Biên.</span><span class="lang-en hidden">L4 Building - LeGrand Jardin, Sai Dong, Long Bien.</span></p>
                     </div>
                 </div>
             </div>
 
             <div class="mt-24">
                 <div class="text-center mb-10">
-                    <h3 class="text-2xl md:text-3xl font-bold text-blue-800 uppercase">Những hình ảnh đầu tiên của Trung tâm</h3>
-                    <p class="text-gray-500 mt-2">Nhìn lại chặng đường gắn bó và phát triển cùng các võ sinh</p>
+                    <h3 class="text-2xl md:text-3xl font-bold text-blue-800 uppercase">
+                        <span class="lang-vi">Những hình ảnh đầu tiên của Trung tâm</span>
+                        <span class="lang-en hidden">The Early Days of the Center</span>
+                    </h3>
+                    <p class="text-gray-500 mt-2">
+                        <span class="lang-vi">Nhìn lại chặng đường gắn bó và phát triển cùng các võ sinh</span>
+                        <span class="lang-en hidden">Looking back at the journey of growth with our students</span>
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -149,64 +240,88 @@
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+1" alt="Ảnh 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Lớp học đầu tiên năm 2015</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Lớp học đầu tiên năm 2015</span><span class="lang-en hidden">First class in 2015</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+2" alt="Ảnh 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Lễ khai giảng cơ sở 1</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Lễ khai giảng cơ sở 1</span><span class="lang-en hidden">Opening ceremony of Branch 1</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+3" alt="Ảnh 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Các võ sinh khóa đầu</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Các võ sinh khóa đầu</span><span class="lang-en hidden">First generation of students</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+4" alt="Ảnh 4" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Đội ngũ HLV năm 2018</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Đội ngũ HLV năm 2018</span><span class="lang-en hidden">Coaching staff in 2018</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+5" alt="Ảnh 5" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Khai trương CS Green Stars</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Khai trương CS Green Stars</span><span class="lang-en hidden">Opening Green Stars Branch</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+6" alt="Ảnh 6" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Kỳ thi thăng đai đầu tiên</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Kỳ thi thăng đai đầu tiên</span><span class="lang-en hidden">First belt promotion exam</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+7" alt="Ảnh 7" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Kỷ niệm ngoại khóa</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Kỷ niệm ngoại khóa</span><span class="lang-en hidden">Extracurricular memories</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+8" alt="Ảnh 8" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Giải đấu năm 2019</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Giải đấu năm 2019</span><span class="lang-en hidden">2019 Tournament</span>
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden group">
                         <div class="overflow-hidden h-56">
                             <img src="https://via.placeholder.com/600x400/eeeeee/999999?text=Anh+9" alt="Ảnh 9" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">Sự kiện năm 2020</p>
+                        <p class="p-4 text-center font-bold text-blue-900 bg-blue-50 border-t border-gray-200">
+                            <span class="lang-vi">Sự kiện năm 2020</span><span class="lang-en hidden">2020 Event</span>
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="mt-32">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-blue-800 uppercase">Đối tác đồng hành và phát triển</h2>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-blue-800 uppercase">
+                        <span class="lang-vi">Đối tác đồng hành và phát triển</span>
+                        <span class="lang-en hidden">Our Partners</span>
+                    </h2>
                     <div class="w-24 h-1.5 bg-yellow-400 mx-auto rounded mt-4"></div>
-                    <p class="text-gray-500 mt-4">Taekwondo Kids tự hào hợp tác cùng các đơn vị Quốc tế uy tín</p>
+                    <p class="text-gray-500 mt-4">
+                        <span class="lang-vi">Taekwondo Kids tự hào hợp tác cùng các đơn vị Quốc tế uy tín</span>
+                        <span class="lang-en hidden">Taekwondo Kids proudly partners with prestigious international organizations</span>
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -218,7 +333,9 @@
                             </div>
                         </div>
                         <div class="p-4 bg-blue-50 border-t border-gray-200 flex items-center justify-center min-h-[80px]">
-                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">TIRAK TAEKWONDO - THÁI LAN</p>
+                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">
+                                <span class="lang-vi">TIRAK TAEKWONDO - THÁI LAN</span><span class="lang-en hidden">TIRAK TAEKWONDO - THAILAND</span>
+                            </p>
                         </div>
                     </a>
 
@@ -230,7 +347,9 @@
                             </div>
                         </div>
                         <div class="p-4 bg-blue-50 border-t border-gray-200 flex items-center justify-center min-h-[80px]">
-                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">KOREA BLACK BELT CENTER - HÀN QUỐC</p>
+                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">
+                                <span class="lang-vi">KOREA BLACK BELT CENTER - HÀN QUỐC</span><span class="lang-en hidden">KOREA BLACK BELT CENTER - SOUTH KOREA</span>
+                            </p>
                         </div>
                     </a>
 
@@ -242,7 +361,9 @@
                             </div>
                         </div>
                         <div class="p-4 bg-blue-50 border-t border-gray-200 flex items-center justify-center min-h-[80px]">
-                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">WHITECOURT MARTIAL ARTS CENTER - CANADA</p>
+                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">
+                                WHITECOURT MARTIAL ARTS CENTER - CANADA
+                            </p>
                         </div>
                     </a>
 
@@ -254,7 +375,9 @@
                             </div>
                         </div>
                         <div class="p-4 bg-blue-50 border-t border-gray-200 flex items-center justify-center min-h-[80px]">
-                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">JAEIL SPORT CENTER - HÀN QUỐC</p>
+                            <p class="text-center font-bold text-blue-900 uppercase text-sm leading-snug">
+                                <span class="lang-vi">JAEIL SPORT CENTER - HÀN QUỐC</span><span class="lang-en hidden">JAEIL SPORT CENTER - SOUTH KOREA</span>
+                            </p>
                         </div>
                     </a>
                 </div>
@@ -266,16 +389,21 @@
     <section id="portal" class="py-16 md:py-24 bg-blue-50 relative">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-blue-800 mb-4">Hệ Thống Tra Cứu Thông Tin</h2>
-                <p class="text-gray-600">Hệ thống quản lý thông tin thông minh, tiện lợi của Taekwondo Kids</p>
+                <h2 class="text-3xl font-bold text-blue-800 mb-4">
+                    <span class="lang-vi">Hệ Thống Tra Cứu Thông Tin</span><span class="lang-en hidden">Information Portal</span>
+                </h2>
+                <p class="text-gray-600">
+                    <span class="lang-vi">Hệ thống quản lý thông tin thông minh, tiện lợi của Taekwondo Kids</span>
+                    <span class="lang-en hidden">Smart and convenient information management system by Taekwondo Kids</span>
+                </p>
             </div>
 
             <div class="flex flex-col md:flex-row bg-white rounded-xl shadow-md overflow-hidden mb-8">
                 <button id="btn-phuhuynh" onclick="switchTab('phuhuynh')" class="flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer">
-                    Phụ huynh & Võ sinh
+                    <span class="lang-vi">Phụ huynh & Võ sinh</span><span class="lang-en hidden">Parents & Students</span>
                 </button>
                 <button id="btn-hlv" onclick="switchTab('hlv')" class="flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer">
-                    Huấn luyện viên & Nhân viên
+                    <span class="lang-vi">Huấn luyện viên & Nhân viên</span><span class="lang-en hidden">Coaches & Staff</span>
                 </button>
             </div>
 
@@ -283,26 +411,28 @@
                 
                 <div id="tab-phuhuynh" class="block relative">
                     <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2 text-center">
-                        Dành cho phụ huynh và võ sinh của Trung tâm Taekwondo Kids Việt Nam
+                        <span class="lang-vi">Dành cho phụ huynh và võ sinh của Trung tâm Taekwondo Kids Việt Nam</span>
+                        <span class="lang-en hidden">For parents and students of Taekwondo Kids Vietnam Center</span>
                     </h3>
                     <form id="parentLoginForm" class="max-w-sm mx-auto mt-6 space-y-4">
-                        <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại đăng nhập" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
-                        <input type="password" id="parentLoginPass" required placeholder="Mật khẩu" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại đăng nhập" data-en-placeholder="Login Phone Number" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="password" id="parentLoginPass" required placeholder="Mật khẩu" data-en-placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
                         <button type="submit" id="parentLoginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow cursor-pointer transition">
-                            ĐĂNG NHẬP PHỤ HUYNH
+                            <span class="lang-vi">ĐĂNG NHẬP PHỤ HUYNH</span><span class="lang-en hidden">PARENT LOGIN</span>
                         </button>
                     </form>
                 </div>
 
                 <div id="tab-hlv" class="hidden relative">
                     <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2 text-center">
-                        Chỉ dành cho Huấn luyện viên và nhân viên công tác tại Trung tâm Taekwondo Kids Việt Nam
+                        <span class="lang-vi">Chỉ dành cho Huấn luyện viên và nhân viên công tác tại Trung tâm Taekwondo Kids Việt Nam</span>
+                        <span class="lang-en hidden">Strictly for Coaches and Staff of Taekwondo Kids Vietnam Center</span>
                     </h3>
                     <form id="internalLoginForm" class="max-w-sm mx-auto mt-6 space-y-4">
-                        <input type="text" id="loginPhone" required placeholder="Số điện thoại đăng nhập" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
-                        <input type="password" id="loginPass" required placeholder="Mật khẩu" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" id="loginPhone" required placeholder="Số điện thoại đăng nhập" data-en-placeholder="Login Phone Number" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="password" id="loginPass" required placeholder="Mật khẩu" data-en-placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
                         <button type="submit" id="internalLoginBtn" class="w-full bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-4 rounded-lg shadow cursor-pointer transition">
-                            ĐĂNG NHẬP HỆ THỐNG
+                            <span class="lang-vi">ĐĂNG NHẬP HỆ THỐNG</span><span class="lang-en hidden">SYSTEM LOGIN</span>
                         </button>
                     </form>
                 </div>
@@ -312,9 +442,12 @@
         <div id="internalDashboard" class="hidden fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
             <div class="bg-blue-900 text-white px-6 py-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
                 <div class="font-bold text-sm md:text-lg flex items-center gap-2 uppercase">
-                    <span class="text-yellow-400"><i class="fa-solid fa-user-shield"></i></span> HỆ THỐNG QUẢN LÝ NỘI BỘ TAEKWONDO KIDS
+                    <span class="text-yellow-400"><i class="fa-solid fa-user-shield"></i></span>
+                    <span class="lang-vi">HỆ THỐNG QUẢN LÝ NỘI BỘ TAEKWONDO KIDS</span><span class="lang-en hidden">TAEKWONDO KIDS INTERNAL SYSTEM</span>
                 </div>
-                <button onclick="logoutInternal()" class="text-sm bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-bold cursor-pointer transition">Đăng xuất</button>
+                <button onclick="logoutInternal()" class="text-sm bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-bold cursor-pointer transition">
+                    <span class="lang-vi">Đăng xuất</span><span class="lang-en hidden">Log out</span>
+                </button>
             </div>
             
             <div class="container mx-auto px-4 py-8 max-w-5xl">
@@ -323,7 +456,7 @@
                         <div class="relative w-24 h-32 bg-gray-200 rounded mb-4 border-2 border-yellow-400 flex items-center justify-center overflow-hidden group cursor-pointer" onclick="document.getElementById('avatarUpload').click()">
                             <img id="avatarImg" src="" alt="Avatar" class="w-full h-full object-cover transition duration-300 group-hover:scale-110 group-hover:opacity-40 bg-white">
                             <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 text-blue-900 bg-white bg-opacity-70 font-bold text-xs text-center p-1">
-                                <i class="fa-solid fa-cloud-arrow-up text-2xl mb-1"></i><span id="uploadText">Tải ảnh lên</span>
+                                <i class="fa-solid fa-cloud-arrow-up text-2xl mb-1"></i><span id="uploadText"><span class="lang-vi">Tải ảnh lên</span><span class="lang-en hidden">Upload</span></span>
                             </div>
                         </div>
                         <input type="file" id="avatarUpload" accept="image/*" class="hidden" onchange="handleImageUpload(this)">
@@ -331,39 +464,43 @@
                         <h2 id="dbName" class="text-2xl font-bold text-yellow-400 mb-1">Họ Tên</h2>
                         <p id="dbPosition" class="text-sm opacity-80 mb-3">Vị trí công tác</p>
                         <div class="inline-block bg-blue-700 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-600 shadow-inner">
-                            Cấp đai: <span id="dbBelt" class="text-yellow-300"></span>
+                            <span class="lang-vi">Cấp đai:</span><span class="lang-en hidden">Belt:</span> <span id="dbBelt" class="text-yellow-300"></span>
                         </div>
                     </div>
                     
                     <div class="p-8 md:w-2/3 relative">
-                        <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-6">Thông tin cá nhân</h3>
+                        <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-6">
+                            <span class="lang-vi">Thông tin cá nhân</span><span class="lang-en hidden">Personal Information</span>
+                        </h3>
                         <div class="grid grid-cols-2 gap-6 text-sm text-gray-700 mb-8">
-                            <div><strong class="block text-gray-500 mb-1">Số điện thoại</strong><span id="dbPhone" class="font-semibold text-base"></span></div>
-                            <div><strong class="block text-gray-500 mb-1">Ngày sinh</strong><span id="dbDob" class="font-semibold text-base"></span></div>
+                            <div><strong class="block text-gray-500 mb-1"><span class="lang-vi">Số điện thoại</span><span class="lang-en hidden">Phone</span></strong><span id="dbPhone" class="font-semibold text-base"></span></div>
+                            <div><strong class="block text-gray-500 mb-1"><span class="lang-vi">Ngày sinh</span><span class="lang-en hidden">DOB</span></strong><span id="dbDob" class="font-semibold text-base"></span></div>
                             <div class="col-span-2"><strong class="block text-gray-500 mb-1">Email</strong><span id="dbEmail" class="font-semibold text-base"></span></div>
                         </div>
                         <button onclick="openEditModal()" class="bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold py-2.5 px-6 rounded-lg shadow-sm transition border border-blue-200 cursor-pointer">
-                            <i class="fa-solid fa-pen-to-square mr-2"></i> Sửa đổi thông tin & Mật khẩu
+                            <i class="fa-solid fa-pen-to-square mr-2"></i> <span class="lang-vi">Sửa đổi thông tin & Mật khẩu</span><span class="lang-en hidden">Edit Info & Password</span>
                         </button>
                     </div>
                 </div>
 
-                <h3 class="text-xl font-bold text-blue-900 mb-4 px-2">THEO DÕI NGHIỆP VỤ NHÂN VIÊN</h3>
+                <h3 class="text-xl font-bold text-blue-900 mb-4 px-2">
+                    <span class="lang-vi">THEO DÕI NGHIỆP VỤ NHÂN VIÊN</span><span class="lang-en hidden">STAFF OPERATIONS</span>
+                </h3>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                     <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
-                        <span class="text-4xl mb-3">📅</span> Đăng ký lịch dạy
+                        <span class="text-4xl mb-3">📅</span> <span class="lang-vi">Đăng ký lịch dạy</span><span class="lang-en hidden">Teaching Schedule</span>
                     </button>
                     <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
-                        <span class="text-4xl mb-3">📝</span> Đăng ký nghỉ phép
+                        <span class="text-4xl mb-3">📝</span> <span class="lang-vi">Đăng ký nghỉ phép</span><span class="lang-en hidden">Leave Request</span>
                     </button>
                     <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
-                        <span class="text-4xl mb-3">⏱️</span> Chấm công
+                        <span class="text-4xl mb-3">⏱️</span> <span class="lang-vi">Chấm công</span><span class="lang-en hidden">Attendance</span>
                     </button>
                     <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer">
-                        <span class="text-4xl mb-3">💵</span> Bảng lương
+                        <span class="text-4xl mb-3">💵</span> <span class="lang-vi">Bảng lương</span><span class="lang-en hidden">Payroll</span>
                     </button>
                     <button class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
-                        <span class="text-4xl mb-3">⭐</span> Điểm đánh giá (Phụ huynh)
+                        <span class="text-4xl mb-3">⭐</span> <span class="lang-vi">Điểm đánh giá</span><span class="lang-en hidden">Parent Ratings</span>
                     </button>
                 </div>
             </div>
@@ -372,12 +509,14 @@
         <div id="editModal" onclick="closeEditModal()" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
             <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
                 <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-blue-800 text-white rounded-t-2xl">
-                    <h3 class="text-xl font-bold">Cập nhật tài khoản</h3>
+                    <h3 class="text-xl font-bold"><span class="lang-vi">Cập nhật tài khoản</span><span class="lang-en hidden">Update Account</span></h3>
                     <button type="button" onclick="closeEditModal()" class="text-blue-200 hover:text-white font-bold text-3xl leading-none cursor-pointer transition">&times;</button>
                 </div>
                 <div class="p-6 md:p-8">
                     <form id="updateInfoForm" class="mb-10">
-                        <h4 class="font-bold text-blue-800 mb-4 uppercase text-sm border-l-4 border-yellow-400 pl-2">Sửa thông tin cá nhân</h4>
+                        <h4 class="font-bold text-blue-800 mb-4 uppercase text-sm border-l-4 border-yellow-400 pl-2">
+                            <span class="lang-vi">Sửa thông tin cá nhân</span><span class="lang-en hidden">Edit Personal Info</span>
+                        </h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
                             <div><label class="text-sm font-semibold text-gray-600 block mb-1">Họ và tên</label><input type="text" id="editName" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
                             <div><label class="text-sm font-semibold text-gray-600 block mb-1">Số điện thoại</label><input type="text" id="editPhone" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
@@ -385,20 +524,23 @@
                             <div><label class="text-sm font-semibold text-gray-600 block mb-1">Vị trí công tác</label><input type="text" id="editPos" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
                             <div class="md:col-span-2"><label class="text-sm font-semibold text-gray-600 block mb-1">Email</label><input type="email" id="editEmail" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
                         </div>
-                        <button type="submit" id="btnUpdateInfo" class="bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg shadow hover:bg-blue-800 transition cursor-pointer">Lưu Thay Đổi Thông Tin</button>
+                        <button type="submit" id="btnUpdateInfo" class="bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg shadow hover:bg-blue-800 transition cursor-pointer">
+                            <span class="lang-vi">Lưu Thay Đổi</span><span class="lang-en hidden">Save Changes</span>
+                        </button>
                     </form>
 
                     <hr class="border-gray-200 mb-8">
                     <form id="updatePassForm">
-                        <h4 class="font-bold text-blue-800 mb-2 uppercase text-sm border-l-4 border-yellow-400 pl-2">Đổi mật khẩu</h4>
-                        <p class="text-sm text-red-500 mb-5 bg-red-50 p-3 rounded-md border border-red-100">
-                            <strong>Lưu ý:</strong> Mật khẩu mới tối thiểu 6 ký tự (chỉ bao gồm chữ và số), có ít nhất 1 chữ IN HOA, không chứa ký tự đặc biệt.
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                        <h4 class="font-bold text-blue-800 mb-2 uppercase text-sm border-l-4 border-yellow-400 pl-2">
+                            <span class="lang-vi">Đổi mật khẩu</span><span class="lang-en hidden">Change Password</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6 mt-4">
                             <div><label class="text-sm font-semibold text-gray-600 block mb-1">Mật khẩu mới</label><input type="password" id="newPass" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
                             <div><label class="text-sm font-semibold text-gray-600 block mb-1">Nhập lại mật khẩu</label><input type="password" id="confirmPass" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
                         </div>
-                        <button type="submit" id="btnUpdatePass" class="bg-yellow-400 text-blue-900 font-bold px-6 py-2.5 rounded-lg shadow hover:bg-yellow-500 transition cursor-pointer">Đổi Mật Khẩu Này</button>
+                        <button type="submit" id="btnUpdatePass" class="bg-yellow-400 text-blue-900 font-bold px-6 py-2.5 rounded-lg shadow hover:bg-yellow-500 transition cursor-pointer">
+                            <span class="lang-vi">Xác Nhận Đổi Mật Khẩu</span><span class="lang-en hidden">Confirm Password Change</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -407,9 +549,12 @@
         <div id="parentDashboard" class="hidden fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
             <div class="bg-blue-600 text-white px-6 py-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
                 <div class="font-bold text-sm md:text-lg flex items-center gap-2 uppercase">
-                    <span class="text-yellow-300"><i class="fa-solid fa-users"></i></span> CỔNG THÔNG TIN PHỤ HUYNH & VÕ SINH
+                    <span class="text-yellow-300"><i class="fa-solid fa-users"></i></span> 
+                    <span class="lang-vi">CỔNG THÔNG TIN PHỤ HUYNH & VÕ SINH</span><span class="lang-en hidden">PARENT & STUDENT PORTAL</span>
                 </div>
-                <button onclick="logoutParent()" class="text-sm bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-bold cursor-pointer transition">Đăng xuất</button>
+                <button onclick="logoutParent()" class="text-sm bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-bold cursor-pointer transition">
+                    <span class="lang-vi">Đăng xuất</span><span class="lang-en hidden">Log out</span>
+                </button>
             </div>
             
             <div class="container mx-auto px-4 py-8 max-w-5xl">
@@ -420,44 +565,50 @@
                         </div>
                         <h2 id="p_vsName" class="text-2xl font-extrabold text-blue-900 mb-1">Tên Võ Sinh</h2>
                         <div class="inline-block bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-200 mt-2">
-                            Mã HV: <span id="p_vsId" class="text-blue-600"></span>
+                            <span class="lang-vi">Mã HV:</span><span class="lang-en hidden">ID:</span> <span id="p_vsId" class="text-blue-600"></span>
                         </div>
                     </div>
                     
                     <div class="p-8 md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 relative">
                         <div>
-                            <h3 class="text-lg font-bold text-blue-800 border-b border-blue-200 pb-2 mb-4"><i class="fa-solid fa-child-reaching mr-2 text-blue-500"></i>Thông tin Võ sinh</h3>
+                            <h3 class="text-lg font-bold text-blue-800 border-b border-blue-200 pb-2 mb-4"><i class="fa-solid fa-child-reaching mr-2 text-blue-500"></i>
+                                <span class="lang-vi">Thông tin Võ sinh</span><span class="lang-en hidden">Student Info</span>
+                            </h3>
                             <div class="space-y-3 text-sm text-gray-700">
-                                <div><span class="text-gray-500 block text-xs">Ngày sinh:</span> <strong id="p_vsDob"></strong></div>
-                                <div><span class="text-gray-500 block text-xs">Trường học:</span> <strong id="p_vsSchool"></strong></div>
-                                <div><span class="text-gray-500 block text-xs">Lớp học:</span> <strong id="p_vsClass"></strong></div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Ngày sinh:</span><span class="lang-en hidden">Date of birth:</span></span> <strong id="p_vsDob"></strong></div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Trường học:</span><span class="lang-en hidden">School:</span></span> <strong id="p_vsSchool"></strong></div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Lớp học:</span><span class="lang-en hidden">Class:</span></span> <strong id="p_vsClass"></strong></div>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-lg font-bold text-yellow-600 border-b border-yellow-200 pb-2 mb-4"><i class="fa-solid fa-user-tie mr-2 text-yellow-500"></i>Thông tin Phụ huynh</h3>
+                            <h3 class="text-lg font-bold text-yellow-600 border-b border-yellow-200 pb-2 mb-4"><i class="fa-solid fa-user-tie mr-2 text-yellow-500"></i>
+                                <span class="lang-vi">Thông tin Phụ huynh</span><span class="lang-en hidden">Parent Info</span>
+                            </h3>
                             <div class="space-y-3 text-sm text-gray-700">
-                                <div><span class="text-gray-500 block text-xs">Họ và tên:</span> <strong id="p_phName"></strong> (<span id="p_phRelation"></span>)</div>
-                                <div><span class="text-gray-500 block text-xs">Tuổi / Ngày sinh:</span> <strong id="p_phAge"></strong> / <strong id="p_phDob"></strong></div>
-                                <div><span class="text-gray-500 block text-xs">Nghề nghiệp:</span> <strong id="p_phJob"></strong></div>
-                                <div><span class="text-gray-500 block text-xs">Liên hệ:</span> <strong id="p_phPhone"></strong><br><span id="p_phEmail" class="text-xs"></span></div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Họ và tên:</span><span class="lang-en hidden">Full name:</span></span> <strong id="p_phName"></strong> (<span id="p_phRelation"></span>)</div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Tuổi / Ngày sinh:</span><span class="lang-en hidden">Age / DOB:</span></span> <strong id="p_phAge"></strong> / <strong id="p_phDob"></strong></div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Nghề nghiệp:</span><span class="lang-en hidden">Occupation:</span></span> <strong id="p_phJob"></strong></div>
+                                <div><span class="text-gray-500 block text-xs"><span class="lang-vi">Liên hệ:</span><span class="lang-en hidden">Contact:</span></span> <strong id="p_phPhone"></strong><br><span id="p_phEmail" class="text-xs"></span></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="text-xl font-bold text-blue-900 mb-4 px-2">Tra cứu & Dịch vụ</h3>
+                <h3 class="text-xl font-bold text-blue-900 mb-4 px-2">
+                    <span class="lang-vi">Tra cứu & Dịch vụ</span><span class="lang-en hidden">Services & Lookup</span>
+                </h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     <button onclick="openParentModal('beltModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
-                        <span class="text-4xl mb-3">🥋</span> Lịch sử thăng cấp đai
+                        <span class="text-4xl mb-3">🥋</span> <span class="lang-vi">Lịch sử thăng cấp đai</span><span class="lang-en hidden">Belt Promotion History</span>
                     </button>
                     <button onclick="openParentModal('progressModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
-                        <span class="text-4xl mb-3">📈</span> Tiến độ tập luyện
+                        <span class="text-4xl mb-3">📈</span> <span class="lang-vi">Tiến độ tập luyện</span><span class="lang-en hidden">Training Progress</span>
                     </button>
                     <button onclick="openParentModal('reviewModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
-                        <span class="text-4xl mb-3">🏆</span> Đánh giá & Nhận xét
+                        <span class="text-4xl mb-3">🏆</span> <span class="lang-vi">Đánh giá & Nhận xét</span><span class="lang-en hidden">Reviews & Feedback</span>
                     </button>
                     <button onclick="openParentModal('tuitionModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
-                        <span class="text-4xl mb-3">💳</span> Lịch học & Học phí
+                        <span class="text-4xl mb-3">💳</span> <span class="lang-vi">Lịch học & Học phí</span><span class="lang-en hidden">Schedule & Tuition</span>
                     </button>
                 </div>
             </div>
@@ -472,8 +623,7 @@
                 <div class="p-6 overflow-y-auto">
                     <table class="w-full text-left border-collapse">
                         <thead><tr class="bg-gray-100 text-gray-700"><th class="p-3 border-b">Cấp đai cũ</th><th class="p-3 border-b">Cấp đai thi lên</th><th class="p-3 border-b">Thời gian thi</th><th class="p-3 border-b">Trạng thái</th></tr></thead>
-                        <tbody id="beltTableBody">
-                            </tbody>
+                        <tbody id="beltTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -488,8 +638,7 @@
                 <div class="p-6 overflow-y-auto">
                     <table class="w-full text-left border-collapse">
                         <thead><tr class="bg-gray-100 text-gray-700"><th class="p-3 border-b w-1/4">HLV Nhận xét</th><th class="p-3 border-b w-1/2">Chi tiết nhận xét</th><th class="p-3 border-b w-1/4">Lớp học</th></tr></thead>
-                        <tbody id="reviewTableBody">
-                            </tbody>
+                        <tbody id="reviewTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -527,328 +676,12 @@
         let currentUser = null; 
         let currentParent = null;
 
-        function switchTab(tabId) {
-            document.getElementById('tab-phuhuynh').classList.add('hidden');
-            document.getElementById('tab-phuhuynh').classList.remove('block');
-            document.getElementById('tab-hlv').classList.add('hidden');
-            document.getElementById('tab-hlv').classList.remove('block');
-            
-            document.getElementById('btn-phuhuynh').className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
-            document.getElementById('btn-hlv').className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
-            
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('block');
-            document.getElementById('btn-' + tabId).className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer';
-        }
-
         // ==========================================
-        // LOGIC ĐĂNG NHẬP DÀNH CHO PHỤ HUYNH
+        // LOGIC DỊCH NGÔN NGỮ (I18N)
         // ==========================================
-        document.getElementById('parentLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('parentLoginBtn');
-            btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
-
-            const data = new URLSearchParams();
-            data.append('action', 'parentLogin');
-            data.append('phone', document.getElementById('parentLoginPhone').value);
-            data.append('password', document.getElementById('parentLoginPass').value);
-
-            fetch(PARENT_API, { method: 'POST', body: data })
-            .then(res => res.json())
-            .then(resData => {
-                if(resData.status === 'success') {
-                    currentParent = resData.user;
-                    loadParentDashboard();
-                } else alert(resData.message);
-            })
-            .catch(err => alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại!'))
-            .finally(() => { btn.innerHTML = "ĐĂNG NHẬP PHỤ HUYNH"; btn.disabled = false; });
-        });
-
-        function loadParentDashboard() {
-            document.getElementById('parentDashboard').classList.remove('hidden');
-            
-            document.getElementById('p_vsName').innerText = currentParent.vsName;
-            document.getElementById('p_vsId').innerText = currentParent.vsId;
-            document.getElementById('p_vsDob').innerText = currentParent.vsDob;
-            document.getElementById('p_vsSchool').innerText = currentParent.vsSchool;
-            document.getElementById('p_vsClass').innerText = currentParent.vsClass;
-            document.getElementById('p_vsAvatar').src = currentParent.vsAvatar;
-            
-            document.getElementById('p_phName').innerText = currentParent.phName;
-            document.getElementById('p_phRelation').innerText = currentParent.phRelation;
-            document.getElementById('p_phAge').innerText = currentParent.phAge;
-            document.getElementById('p_phDob').innerText = currentParent.phDob;
-            document.getElementById('p_phJob').innerText = currentParent.phJob;
-            document.getElementById('p_phPhone').innerText = currentParent.phone;
-            document.getElementById('p_phEmail').innerText = currentParent.phEmail;
-
-            let beltHTML = '';
-            if(currentParent.beltHistory && currentParent.beltHistory.length > 0) {
-                currentParent.beltHistory.forEach(b => {
-                    beltHTML += `<tr class="border-b"><td class="p-3 font-semibold">${b.oldBelt}</td><td class="p-3 text-blue-600 font-bold">${b.newBelt}</td><td class="p-3">${b.date}</td><td class="p-3"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">${b.status}</span></td></tr>`;
-                });
-            } else { beltHTML = '<tr><td colspan="4" class="p-3 text-center text-gray-500">Chưa có dữ liệu thăng đai.</td></tr>'; }
-            document.getElementById('beltTableBody').innerHTML = beltHTML;
-
-            let reviewHTML = '';
-            if(currentParent.reviews && currentParent.reviews.length > 0) {
-                currentParent.reviews.forEach(r => {
-                    reviewHTML += `<tr class="border-b"><td class="p-3 font-semibold">${r.coach}</td><td class="p-3 italic text-gray-700">${r.comment}</td><td class="p-3">${r.className}</td></tr>`;
-                });
-            } else { reviewHTML = '<tr><td colspan="3" class="p-3 text-center text-gray-500">Chưa có nhận xét nào từ HLV.</td></tr>'; }
-            document.getElementById('reviewTableBody').innerHTML = reviewHTML;
-        }
-
-        function logoutParent() {
-            currentParent = null;
-            document.getElementById('parentDashboard').classList.add('hidden');
-            document.getElementById('parentLoginForm').reset();
-        }
-
-        function openParentModal(modalId) { document.getElementById(modalId).classList.remove('hidden'); }
-        function closeParentModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
-
-        // ==========================================
-        // LOGIC ĐĂNG NHẬP NỘI BỘ (HLV) VẪN GIỮ NGUYÊN
-        // ==========================================
-        document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('internalLoginBtn');
-            btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
-
-            const data = new URLSearchParams();
-            data.append('action', 'login');
-            data.append('phone', document.getElementById('loginPhone').value);
-            data.append('password', document.getElementById('loginPass').value);
-
-            fetch(INTERNAL_API, { method: 'POST', body: data })
-            .then(res => res.json())
-            .then(resData => {
-                if(resData.status === 'success') {
-                    currentUser = resData.user;
-                    loadDashboardData();
-                } else alert(resData.message);
-            })
-            .catch(err => alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại!'))
-            .finally(() => { btn.innerHTML = "ĐĂNG NHẬP HỆ THỐNG"; btn.disabled = false; });
-        });
-
-        function loadDashboardData() {
-            document.getElementById('internalDashboard').classList.remove('hidden');
-            document.getElementById('dbName').innerText = currentUser.name;
-            document.getElementById('dbPosition').innerText = currentUser.position;
-            document.getElementById('dbBelt').innerText = currentUser.belt;
-            document.getElementById('dbPhone').innerText = currentUser.phone;
-            document.getElementById('dbDob').innerText = currentUser.dob;
-            document.getElementById('dbEmail').innerText = currentUser.email;
-            document.getElementById('avatarImg').src = currentUser.avatar;
-        }
-
-        function logoutInternal() {
-            currentUser = null;
-            document.getElementById('internalDashboard').classList.add('hidden');
-            document.getElementById('internalLoginForm').reset();
-        }
-
-        function handleImageUpload(input) {
-            if (!input.files || !input.files[0]) return;
-            const file = input.files[0];
-            const reader = new FileReader();
-
-            document.getElementById('uploadText').innerText = "Đang up...";
-            
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 400; 
-                    const scaleSize = MAX_WIDTH / img.width;
-                    canvas.width = MAX_WIDTH;
-                    canvas.height = img.height * scaleSize;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    
-                    const base64Data = canvas.toDataURL('image/jpeg', 0.8);
-                    document.getElementById('avatarImg').src = base64Data;
-
-                    const data = new URLSearchParams();
-                    data.append('action', 'uploadAvatar');
-                    data.append('row', currentUser.row);
-                    data.append('phone', currentUser.phone);
-                    data.append('image', base64Data);
-
-                    fetch(INTERNAL_API, { method: 'POST', body: data })
-                    .then(res => res.json())
-                    .then(resData => {
-                        if(resData.status === 'success') {
-                            currentUser.avatar = resData.url;
-                            alert('Tải ảnh đại diện thành công!');
-                        } else alert('Có lỗi khi lưu ảnh.');
-                    })
-                    .catch(err => alert('Lỗi đường truyền!'))
-                    .finally(() => { document.getElementById('uploadText').innerText = "Upload ảnh"; });
-                }
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function openEditModal() {
-            document.getElementById('editModal').classList.remove('hidden');
-            document.getElementById('editName').value = currentUser.name;
-            document.getElementById('editPhone').value = currentUser.phone;
-            document.getElementById('editDob').value = currentUser.dob;
-            document.getElementById('editPos').value = currentUser.position;
-            document.getElementById('editEmail').value = currentUser.email;
-        }
-        
-        function closeEditModal() { 
-            document.getElementById('editModal').classList.add('hidden'); 
-            document.getElementById('updatePassForm').reset();
-        }
-
-        document.getElementById('updateInfoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnUpdateInfo');
-            btn.innerHTML = "Đang lưu..."; btn.disabled = true;
-
-            const data = new URLSearchParams();
-            data.append('action', 'updateInfo');
-            data.append('row', currentUser.row);
-            data.append('name', document.getElementById('editName').value);
-            data.append('phone', document.getElementById('editPhone').value);
-            data.append('dob', document.getElementById('editDob').value);
-            data.append('position', document.getElementById('editPos').value);
-            data.append('email', document.getElementById('editEmail').value);
-
-            fetch(INTERNAL_API, { method: 'POST', body: data })
-            .then(res => res.json())
-            .then(resData => {
-                if(resData.status === 'success') {
-                    alert('Cập nhật thông tin cá nhân thành công!');
-                    currentUser.name = document.getElementById('editName').value;
-                    currentUser.phone = document.getElementById('editPhone').value;
-                    currentUser.dob = document.getElementById('editDob').value;
-                    currentUser.position = document.getElementById('editPos').value;
-                    currentUser.email = document.getElementById('editEmail').value;
-                    loadDashboardData();
-                }
-            })
-            .finally(() => { btn.innerHTML = "Lưu Thay Đổi Thông Tin"; btn.disabled = false; });
-        });
-
-        document.getElementById('updatePassForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const newPass = document.getElementById('newPass').value;
-            const confirmPass = document.getElementById('confirmPass').value;
-            const passwordRegex = /^(?=.*[A-Z])[A-Za-z0-9]{6,}$/;
-            
-            if(newPass !== confirmPass) return alert("Mật khẩu nhập lại không khớp!");
-            if(!passwordRegex.test(newPass)) return alert("LỖI BẢO MẬT: Mật khẩu mới chưa hợp lệ.\n(Tối thiểu 6 ký tự, có số, có chữ in hoa, KHÔNG có ký tự đặc biệt).");
-
-            const btn = document.getElementById('btnUpdatePass');
-            btn.innerHTML = "Đang đổi..."; btn.disabled = true;
-
-            const data = new URLSearchParams();
-            data.append('action', 'updatePassword');
-            data.append('row', currentUser.row);
-            data.append('phone', currentUser.phone);
-            data.append('name', currentUser.name);
-            data.append('email', currentUser.email);
-            data.append('dob', currentUser.dob);
-            data.append('position', currentUser.position);
-            data.append('newPassword', newPass);
-
-            fetch(INTERNAL_API, { method: 'POST', body: data })
-            .then(res => res.json())
-            .then(resData => {
-                if(resData.status === 'success') {
-                    alert('Thành công! Mật khẩu mới đã được cập nhật.');
-                    document.getElementById('updatePassForm').reset();
-                }
-            })
-            .finally(() => { btn.innerHTML = "Đổi Mật Khẩu Này"; btn.disabled = false; });
-        });
-    </script>
-
-    <section id="locations" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">HỆ THỐNG CƠ SỞ TẠI HÀ NỘI</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="hapu.jpg" alt="Cơ sở Hapulico" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ HAPULICO</h3><p class="text-gray-600 text-sm">Tầng B1, toà 21T1 - Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</p></div></div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="green.JPG" alt="Cơ sở Greenstars" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ GREENSTARS</h3><p class="text-gray-600 text-sm">Tầng 1 Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</p></div></div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="nghiado.jpg" alt="Cơ sở Nghĩa Đô" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ NGHĨA ĐÔ</h3><p class="text-gray-600 text-sm">Tầng 1, toà CT3 - Khu đô thị mới Nghĩa Đô, Bắc Từ Liêm</p></div></div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="hadong.jpg" alt="Cơ sở Hà Đông" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ HÀ ĐÔNG</h3><p class="text-gray-600 text-sm">Tầng 1, tòa T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</p></div></div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="longbien.jpg" alt="Cơ sở Long Biên" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ LONG BIÊN</h3><p class="text-gray-600 text-sm">Tầng 1, tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</p></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="register" class="py-16 md:py-24 bg-yellow-400 relative overflow-hidden">
-        <div class="absolute inset-0 bg-blue-900 w-1/2 hidden lg:block transform -skew-x-12 -ml-20"></div>
-        <div class="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
-            <div class="lg:w-1/2 text-white text-center lg:text-left lg:pr-16 z-10">
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-white">Hãy để trẻ tự tin tỏa sáng cùng Taekwondo Kids Việt Nam!</h2>
-                <p class="text-base text-blue-100 mb-8 font-medium max-w-md mx-auto lg:mx-0">Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí.</p>
-            </div>
-            <div class="lg:w-1/2 w-full max-w-md mx-auto lg:mx-0">
-                <form id="registerForm" class="bg-white p-8 rounded-2xl shadow-2xl">
-                    <h3 class="text-2xl font-bold text-blue-800 mb-6 text-center">ĐĂNG KÝ HỌC THỬ</h3>
-                    <div class="space-y-4">
-                        <div><label class="block text-sm font-semibold text-gray-700 mb-1">Họ và tên Phụ huynh *</label><input type="text" name="parentName" required class="w-full px-4 py-3 rounded-lg border border-gray-300"></div>
-                        <div><label class="block text-sm font-semibold text-gray-700 mb-1">Họ và tên Võ sinh *</label><input type="text" name="childName" required class="w-full px-4 py-3 rounded-lg border border-gray-300"></div>
-                        <div><label class="block text-sm font-semibold text-gray-700 mb-1">Số điện thoại *</label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300"></div>
-                        <button type="submit" id="submitBtn" class="w-full mt-4 bg-blue-700 hover:bg-blue-800 text-yellow-400 font-extrabold py-4 px-6 rounded-lg text-lg transition-colors shadow-lg cursor-pointer">ĐĂNG KÝ NGAY</button>
-                    </div>
-                </form>
-                <script>
-                    const scriptURLRegister = 'https://script.google.com/macros/s/AKfycbyrUKEFb3DgwNlDSBdQOze2lSafwkXnkw3mnBPvDYjPsSEazVVQ2kKI_bI-5cptHxUX/exec';
-                    const formRegister = document.getElementById('registerForm');
-                    const btnRegister = document.getElementById('submitBtn');
-
-                    formRegister.addEventListener('submit', e => {
-                        e.preventDefault(); 
-                        btnRegister.innerHTML = 'Đang xử lý...'; btnRegister.disabled = true;
-                        fetch(scriptURLRegister, { method: 'POST', body: new URLSearchParams(new FormData(formRegister)) })
-                        .then(response => {
-                            alert('🎉 Cảm ơn bạn! Thông tin đăng ký đã được gửi thành công.');
-                            formRegister.reset(); btnRegister.innerHTML = 'ĐĂNG KÝ NGAY'; btnRegister.disabled = false;
-                        }).catch(error => {
-                            alert('🎉 Cảm ơn bạn! Thông tin đăng ký đã được gửi thành công.');
-                            formRegister.reset(); btnRegister.innerHTML = 'ĐĂNG KÝ NGAY'; btnRegister.disabled = false;
-                        });
-                    });
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-blue-900 text-blue-100 py-12">
-        <div class="container mx-auto px-4 grid md:grid-cols-3 gap-8">
-            <div>
-                <div class="flex items-center gap-2 mb-4"><img src="LOGO.png" alt="Logo" class="h-10 w-auto object-contain"><span class="font-bold text-white text-lg">TRUNG TÂM TAEKWONDO KIDS VIỆT NAM</span></div>
-                <p class="text-sm font-medium text-blue-200">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</p>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-4 uppercase">Liên hệ</h4>
-                <ul class="space-y-2 text-sm"><li>Hotline: <strong class="text-yellow-400">097 893 1747</strong></li><li>Email: taekwondokids.vn@gmail.com</li></ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-4 uppercase">Kết nối mạng xã hội</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="https://fb.com/taekwondokids.vietnam" target="_blank" class="hover:text-yellow-400 transition">Fanpage Facebook</a></li>
-                    <li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank" class="hover:text-yellow-400 transition">TikTok Channel</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-blue-800 text-center text-sm text-blue-300">© 2026 Taekwondo Kids Việt Nam. All rights reserved.</div>
-    </footer>
-
-    <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
-        <button class="w-12 h-12 bg-blue-500 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition cursor-pointer">Zalo</button>
-        <button class="w-12 h-12 bg-blue-600 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition cursor-pointer">Mess</button>
-    </div>
-</body>
-</html>
+        function setLang(lang) {
+            if (lang === 'en') {
+                document.querySelectorAll('.lang-vi').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('hidden'));
+                
+                document.
