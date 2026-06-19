@@ -165,23 +165,23 @@
 
             <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-yellow-400 min-h-[250px]">
                 
-                <div id="tab-phuhuynh" class="block">
-                    <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2">Khu vực dành cho Phụ huynh</h3>
-                    <ul class="space-y-4 mb-6 text-gray-700">
-                        <li><strong>Quản lý hồ sơ:</strong> Xem trường lớp, cấp đai, tiến độ tập luyện.</li>
-                        <li><strong>Học phí & Khóa học:</strong> Nhắc nhở, báo xin nghỉ, đăng ký học bù.</li>
-                        <li><strong>Sổ liên lạc 24/7:</strong> Xem ảnh độc quyền, gửi feedback trực tiếp.</li>
-                    </ul>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow cursor-pointer">
-                        Đăng nhập bằng SĐT
-                    </button>
+                <div id="tab-phuhuynh" class="block relative">
+                    <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2 text-center">
+                        Dành cho phụ huynh và võ sinh của Trung tâm Taekwondo Kids Việt Nam
+                    </h3>
+                    <form id="parentLoginForm" class="max-w-sm mx-auto mt-6 space-y-4">
+                        <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại đăng nhập" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="password" id="parentLoginPass" required placeholder="Mật khẩu" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" id="parentLoginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow cursor-pointer transition">
+                            ĐĂNG NHẬP PHỤ HUYNH
+                        </button>
+                    </form>
                 </div>
 
                 <div id="tab-hlv" class="hidden relative">
                     <h3 class="text-xl font-bold text-blue-800 mb-6 border-b pb-2 text-center">
                         Chỉ dành cho Huấn luyện viên và nhân viên công tác tại Trung tâm Taekwondo Kids Việt Nam
                     </h3>
-                    
                     <form id="internalLoginForm" class="max-w-sm mx-auto mt-6 space-y-4">
                         <input type="text" id="loginPhone" required placeholder="Số điện thoại đăng nhập" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
                         <input type="password" id="loginPass" required placeholder="Mật khẩu" class="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500">
@@ -190,7 +190,6 @@
                         </button>
                     </form>
                 </div>
-
             </div>
         </div>
 
@@ -205,12 +204,10 @@
             <div class="container mx-auto px-4 py-8 max-w-5xl">
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 flex flex-col md:flex-row">
                     <div class="bg-blue-800 text-white p-8 md:w-1/3 flex flex-col items-center text-center justify-center">
-                        
                         <div class="relative w-24 h-32 bg-gray-200 rounded mb-4 border-2 border-yellow-400 flex items-center justify-center overflow-hidden group cursor-pointer" onclick="document.getElementById('avatarUpload').click()">
-                            <img id="avatarImg" src="https://via.placeholder.com/150/cccccc/666666?text=Ảnh+3x4" alt="Avatar" class="w-full h-full object-cover transition duration-300 group-hover:scale-110 group-hover:opacity-40 bg-white">
+                            <img id="avatarImg" src="" alt="Avatar" class="w-full h-full object-cover transition duration-300 group-hover:scale-110 group-hover:opacity-40 bg-white">
                             <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 text-blue-900 bg-white bg-opacity-70 font-bold text-xs text-center p-1">
-                                <i class="fa-solid fa-cloud-arrow-up text-2xl mb-1"></i>
-                                <span id="uploadText">Tải ảnh lên</span>
+                                <i class="fa-solid fa-cloud-arrow-up text-2xl mb-1"></i><span id="uploadText">Tải ảnh lên</span>
                             </div>
                         </div>
                         <input type="file" id="avatarUpload" accept="image/*" class="hidden" onchange="handleImageUpload(this)">
@@ -258,27 +255,24 @@
 
         <div id="editModal" onclick="closeEditModal()" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
             <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-                
                 <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-blue-800 text-white rounded-t-2xl">
                     <h3 class="text-xl font-bold">Cập nhật tài khoản</h3>
                     <button type="button" onclick="closeEditModal()" class="text-blue-200 hover:text-white font-bold text-3xl leading-none cursor-pointer transition">&times;</button>
                 </div>
-                
                 <div class="p-6 md:p-8">
                     <form id="updateInfoForm" class="mb-10">
                         <h4 class="font-bold text-blue-800 mb-4 uppercase text-sm border-l-4 border-yellow-400 pl-2">Sửa thông tin cá nhân</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Họ và tên</label><input type="text" id="editName" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
-                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Số điện thoại</label><input type="text" id="editPhone" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
-                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Ngày sinh</label><input type="text" id="editDob" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
-                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Vị trí công tác</label><input type="text" id="editPos" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
-                            <div class="md:col-span-2"><label class="text-sm font-semibold text-gray-600 block mb-1">Email</label><input type="email" id="editEmail" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Họ và tên</label><input type="text" id="editName" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Số điện thoại</label><input type="text" id="editPhone" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Ngày sinh</label><input type="text" id="editDob" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div><label class="text-sm font-semibold text-gray-600 block mb-1">Vị trí công tác</label><input type="text" id="editPos" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
+                            <div class="md:col-span-2"><label class="text-sm font-semibold text-gray-600 block mb-1">Email</label><input type="email" id="editEmail" class="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></div>
                         </div>
                         <button type="submit" id="btnUpdateInfo" class="bg-blue-700 text-white font-bold px-6 py-2.5 rounded-lg shadow hover:bg-blue-800 transition cursor-pointer">Lưu Thay Đổi Thông Tin</button>
                     </form>
 
                     <hr class="border-gray-200 mb-8">
-                    
                     <form id="updatePassForm">
                         <h4 class="font-bold text-blue-800 mb-2 uppercase text-sm border-l-4 border-yellow-400 pl-2">Đổi mật khẩu</h4>
                         <p class="text-sm text-red-500 mb-5 bg-red-50 p-3 rounded-md border border-red-100">
@@ -293,14 +287,134 @@
                 </div>
             </div>
         </div>
+
+        <div id="parentDashboard" class="hidden fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
+            <div class="bg-blue-600 text-white px-6 py-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
+                <div class="font-bold text-sm md:text-lg flex items-center gap-2 uppercase">
+                    <span class="text-yellow-300"><i class="fa-solid fa-users"></i></span> CỔNG THÔNG TIN PHỤ HUYNH & VÕ SINH
+                </div>
+                <button onclick="logoutParent()" class="text-sm bg-red-500 hover:bg-red-600 px-4 py-2 rounded font-bold cursor-pointer transition">Đăng xuất</button>
+            </div>
+            
+            <div class="container mx-auto px-4 py-8 max-w-5xl">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 flex flex-col md:flex-row">
+                    <div class="bg-blue-50 p-8 md:w-1/3 flex flex-col items-center text-center justify-center border-r border-gray-200">
+                        <div class="w-24 h-32 bg-white rounded mb-4 border border-gray-300 overflow-hidden shadow">
+                            <img id="p_vsAvatar" src="" alt="Avatar Võ Sinh" class="w-full h-full object-cover">
+                        </div>
+                        <h2 id="p_vsName" class="text-2xl font-extrabold text-blue-900 mb-1">Tên Võ Sinh</h2>
+                        <div class="inline-block bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-200 mt-2">
+                            Mã HV: <span id="p_vsId" class="text-blue-600"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8 md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                        <div>
+                            <h3 class="text-lg font-bold text-blue-800 border-b border-blue-200 pb-2 mb-4"><i class="fa-solid fa-child-reaching mr-2 text-blue-500"></i>Thông tin Võ sinh</h3>
+                            <div class="space-y-3 text-sm text-gray-700">
+                                <div><span class="text-gray-500 block text-xs">Ngày sinh:</span> <strong id="p_vsDob"></strong></div>
+                                <div><span class="text-gray-500 block text-xs">Trường học:</span> <strong id="p_vsSchool"></strong></div>
+                                <div><span class="text-gray-500 block text-xs">Lớp học:</span> <strong id="p_vsClass"></strong></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-yellow-600 border-b border-yellow-200 pb-2 mb-4"><i class="fa-solid fa-user-tie mr-2 text-yellow-500"></i>Thông tin Phụ huynh</h3>
+                            <div class="space-y-3 text-sm text-gray-700">
+                                <div><span class="text-gray-500 block text-xs">Họ và tên:</span> <strong id="p_phName"></strong> (<span id="p_phRelation"></span>)</div>
+                                <div><span class="text-gray-500 block text-xs">Tuổi / Ngày sinh:</span> <strong id="p_phAge"></strong> / <strong id="p_phDob"></strong></div>
+                                <div><span class="text-gray-500 block text-xs">Nghề nghiệp:</span> <strong id="p_phJob"></strong></div>
+                                <div><span class="text-gray-500 block text-xs">Liên hệ:</span> <strong id="p_phPhone"></strong><br><span id="p_phEmail" class="text-xs"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-blue-900 mb-4 px-2">Tra cứu & Dịch vụ</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <button onclick="openParentModal('beltModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
+                        <span class="text-4xl mb-3">🥋</span> Lịch sử thăng cấp đai
+                    </button>
+                    <button onclick="openParentModal('progressModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
+                        <span class="text-4xl mb-3">📈</span> Tiến độ tập luyện
+                    </button>
+                    <button onclick="openParentModal('reviewModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
+                        <span class="text-4xl mb-3">🏆</span> Đánh giá & Nhận xét
+                    </button>
+                    <button onclick="openParentModal('tuitionModal')" class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 hover:border-blue-500 hover:shadow-md transition text-blue-900 font-bold flex flex-col items-center cursor-pointer text-center">
+                        <span class="text-4xl mb-3">💳</span> Lịch học & Học phí
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="beltModal" onclick="closeParentModal('beltModal')" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
+            <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+                <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-blue-600 text-white">
+                    <h3 class="text-xl font-bold">Lịch sử thăng cấp đai</h3>
+                    <button type="button" onclick="closeParentModal('beltModal')" class="hover:text-yellow-300 font-bold text-3xl leading-none transition cursor-pointer">&times;</button>
+                </div>
+                <div class="p-6 overflow-y-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead><tr class="bg-gray-100 text-gray-700"><th class="p-3 border-b">Cấp đai cũ</th><th class="p-3 border-b">Cấp đai thi lên</th><th class="p-3 border-b">Thời gian thi</th><th class="p-3 border-b">Trạng thái</th></tr></thead>
+                        <tbody id="beltTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviewModal" onclick="closeParentModal('reviewModal')" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
+            <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+                <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-blue-600 text-white">
+                    <h3 class="text-xl font-bold">Đánh giá và nhận xét của HLV</h3>
+                    <button type="button" onclick="closeParentModal('reviewModal')" class="hover:text-yellow-300 font-bold text-3xl leading-none transition cursor-pointer">&times;</button>
+                </div>
+                <div class="p-6 overflow-y-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead><tr class="bg-gray-100 text-gray-700"><th class="p-3 border-b w-1/4">HLV Nhận xét</th><th class="p-3 border-b w-1/2">Chi tiết nhận xét</th><th class="p-3 border-b w-1/4">Lớp học</th></tr></thead>
+                        <tbody id="reviewTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="progressModal" onclick="closeParentModal('progressModal')" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
+            <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] p-8 text-center">
+                <i class="fa-solid fa-chart-line text-6xl text-blue-400 mb-4"></i>
+                <h3 class="text-2xl font-bold text-blue-900 mb-2">Tiến độ tập luyện</h3>
+                <p class="text-gray-600 mb-8">Tính năng đang được Trung tâm tổng hợp và sẽ sớm cập nhật biểu đồ tiến bộ chi tiết của võ sinh.</p>
+                <button onclick="closeParentModal('progressModal')" class="bg-gray-200 px-6 py-2 rounded-lg font-bold text-gray-700 hover:bg-gray-300 cursor-pointer">Đóng lại</button>
+            </div>
+        </div>
+
+        <div id="tuitionModal" onclick="closeParentModal('tuitionModal')" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 z-[70] flex items-center justify-center p-4">
+            <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
+                <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-blue-600 text-white">
+                    <h3 class="text-xl font-bold">Lịch học & Học phí</h3>
+                    <button type="button" onclick="closeParentModal('tuitionModal')" class="hover:text-yellow-300 font-bold text-3xl leading-none transition cursor-pointer">&times;</button>
+                </div>
+                <div class="p-6 grid grid-cols-2 gap-4">
+                    <div class="border p-4 rounded-lg bg-gray-50"><strong class="block text-blue-800 mb-1"><i class="fa-solid fa-wallet mr-2"></i>Tình trạng học phí</strong>Chưa có thông báo nợ cước.</div>
+                    <div class="border p-4 rounded-lg bg-gray-50"><strong class="block text-blue-800 mb-1"><i class="fa-solid fa-box-open mr-2"></i>Gói đăng ký hiện tại</strong>Đang cập nhật...</div>
+                    <div class="col-span-2 border p-4 rounded-lg bg-blue-50 cursor-pointer hover:bg-blue-100 transition"><strong class="block text-blue-800 mb-1 text-center"><i class="fa-solid fa-calendar-plus mr-2"></i>Gửi yêu cầu Xin nghỉ / Đăng ký học bù</strong></div>
+                    <div class="col-span-2 border p-4 rounded-lg bg-yellow-50 cursor-pointer hover:bg-yellow-100 transition"><strong class="block text-yellow-800 mb-1 text-center"><i class="fa-solid fa-book mr-2"></i>Mở Sổ liên lạc trao đổi với Trung tâm</strong></div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <script>
-        // API CỦA HỆ THỐNG NỘI BỘ
-        const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxXdTQBt4gFTgCO3uap4iqUdpuKc35ZLZLRCyYrPeN0DXUGWXBdUaTLkHyyUZDM9haDEg/exec';
-        let currentUser = null; 
+        // ====================================================================
+        // KHAI BÁO LINK APP SCRIPT
+        // ====================================================================
+        const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxXdTQBt4gFTgCO3uap4iqUdpuKc35ZLZLRCyYrPeN0DXUGWXBdUaTLkHyyUZDM9haDEg/exec'; // Của HLV (Giữ nguyên)
+        const PARENT_API = 'https://script.google.com/macros/s/AKfycbylP2EXSr2mgt1thkCttPI8a3eyVj-X2Y1_RSPYt3I4qFnL7v4lBy3zpn7xGWLou4mUuQ/exec'; // Của Phụ Huynh
 
-        // LOGIC CHUYỂN TABS
+        let currentUser = null; 
+        let currentParent = null;
+
+        // CHUYỂN TABS
         function switchTab(tabId) {
             document.getElementById('tab-phuhuynh').classList.add('hidden');
             document.getElementById('tab-phuhuynh').classList.remove('block');
@@ -315,7 +429,81 @@
             document.getElementById('btn-' + tabId).className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer';
         }
 
-        // ĐĂNG NHẬP NỘI BỘ
+        // ==========================================
+        // LOGIC ĐĂNG NHẬP DÀNH CHO PHỤ HUYNH
+        // ==========================================
+        document.getElementById('parentLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('parentLoginBtn');
+            btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'parentLogin');
+            data.append('phone', document.getElementById('parentLoginPhone').value);
+            data.append('password', document.getElementById('parentLoginPass').value);
+
+            fetch(PARENT_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    currentParent = resData.user;
+                    loadParentDashboard();
+                } else alert(resData.message);
+            })
+            .catch(err => alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại!'))
+            .finally(() => { btn.innerHTML = "ĐĂNG NHẬP PHỤ HUYNH"; btn.disabled = false; });
+        });
+
+        function loadParentDashboard() {
+            document.getElementById('parentDashboard').classList.remove('hidden');
+            
+            // Gắn thông tin Võ sinh & Phụ huynh
+            document.getElementById('p_vsName').innerText = currentParent.vsName;
+            document.getElementById('p_vsId').innerText = currentParent.vsId;
+            document.getElementById('p_vsDob').innerText = currentParent.vsDob;
+            document.getElementById('p_vsSchool').innerText = currentParent.vsSchool;
+            document.getElementById('p_vsClass').innerText = currentParent.vsClass;
+            document.getElementById('p_vsAvatar').src = currentParent.vsAvatar;
+            
+            document.getElementById('p_phName').innerText = currentParent.phName;
+            document.getElementById('p_phRelation').innerText = currentParent.phRelation;
+            document.getElementById('p_phAge').innerText = currentParent.phAge;
+            document.getElementById('p_phDob').innerText = currentParent.phDob;
+            document.getElementById('p_phJob').innerText = currentParent.phJob;
+            document.getElementById('p_phPhone').innerText = currentParent.phone;
+            document.getElementById('p_phEmail').innerText = currentParent.phEmail;
+
+            // Load Bảng Lịch sử Thăng Đai
+            let beltHTML = '';
+            if(currentParent.beltHistory && currentParent.beltHistory.length > 0) {
+                currentParent.beltHistory.forEach(b => {
+                    beltHTML += `<tr class="border-b"><td class="p-3 font-semibold">${b.oldBelt}</td><td class="p-3 text-blue-600 font-bold">${b.newBelt}</td><td class="p-3">${b.date}</td><td class="p-3"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">${b.status}</span></td></tr>`;
+                });
+            } else { beltHTML = '<tr><td colspan="4" class="p-3 text-center text-gray-500">Chưa có dữ liệu thăng đai.</td></tr>'; }
+            document.getElementById('beltTableBody').innerHTML = beltHTML;
+
+            // Load Bảng Nhận xét
+            let reviewHTML = '';
+            if(currentParent.reviews && currentParent.reviews.length > 0) {
+                currentParent.reviews.forEach(r => {
+                    reviewHTML += `<tr class="border-b"><td class="p-3 font-semibold">${r.coach}</td><td class="p-3 italic text-gray-700">${r.comment}</td><td class="p-3">${r.className}</td></tr>`;
+                });
+            } else { reviewHTML = '<tr><td colspan="3" class="p-3 text-center text-gray-500">Chưa có nhận xét nào từ HLV.</td></tr>'; }
+            document.getElementById('reviewTableBody').innerHTML = reviewHTML;
+        }
+
+        function logoutParent() {
+            currentParent = null;
+            document.getElementById('parentDashboard').classList.add('hidden');
+            document.getElementById('parentLoginForm').reset();
+        }
+
+        function openParentModal(modalId) { document.getElementById(modalId).classList.remove('hidden'); }
+        function closeParentModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
+
+        // ==========================================
+        // LOGIC ĐĂNG NHẬP NỘI BỘ (HLV) VẪN GIỮ NGUYÊN
+        // ==========================================
         document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.getElementById('internalLoginBtn');
@@ -346,7 +534,7 @@
             document.getElementById('dbPhone').innerText = currentUser.phone;
             document.getElementById('dbDob').innerText = currentUser.dob;
             document.getElementById('dbEmail').innerText = currentUser.email;
-            document.getElementById('avatarImg').src = currentUser.avatar; // Ảnh Avatar
+            document.getElementById('avatarImg').src = currentUser.avatar;
         }
 
         function logoutInternal() {
@@ -399,7 +587,6 @@
             reader.readAsDataURL(file);
         }
 
-        // BẬT/TẮT MODAL VÀ ĐỔI THÔNG TIN
         function openEditModal() {
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editName').value = currentUser.name;
@@ -408,6 +595,7 @@
             document.getElementById('editPos').value = currentUser.position;
             document.getElementById('editEmail').value = currentUser.email;
         }
+        
         function closeEditModal() { 
             document.getElementById('editModal').classList.add('hidden'); 
             document.getElementById('updatePassForm').reset();
@@ -482,7 +670,7 @@
             <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">HỆ THỐNG CƠ SỞ TẠI HÀ NỘI</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="hapu.jpg" alt="Cơ sở Hapulico" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ HAPULICO</h3><p class="text-gray-600 text-sm">Tầng B1, toà 21T1 - Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</p></div></div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="green.JPG" alt="Cơ sở Greenstars" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ GREENSTAR</h3><p class="text-gray-600 text-sm">Tầng 1 Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</p></div></div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="green.JPG" alt="Cơ sở Greenstars" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ GREENSTARS</h3><p class="text-gray-600 text-sm">Tầng 1 Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</p></div></div>
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="nghiado.jpg" alt="Cơ sở Nghĩa Đô" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ NGHĨA ĐÔ</h3><p class="text-gray-600 text-sm">Tầng 1, toà CT3 - Khu đô thị mới Nghĩa Đô, Bắc Từ Liêm</p></div></div>
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="hadong.jpg" alt="Cơ sở Hà Đông" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ HÀ ĐÔNG</h3><p class="text-gray-600 text-sm">Tầng 1, tòa T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</p></div></div>
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="longbien.jpg" alt="Cơ sở Long Biên" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase">CƠ SỞ LONG BIÊN</h3><p class="text-gray-600 text-sm">Tầng 1, tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</p></div></div>
@@ -493,16 +681,10 @@
     <section id="register" class="py-16 md:py-24 bg-yellow-400 relative overflow-hidden">
         <div class="absolute inset-0 bg-blue-900 w-1/2 hidden lg:block transform -skew-x-12 -ml-20"></div>
         <div class="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
-            
             <div class="lg:w-1/2 text-white text-center lg:text-left lg:pr-16 z-10">
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-white">
-                    Hãy để trẻ tự tin tỏa sáng cùng Taekwondo Kids Việt Nam!
-                </h2>
-                <p class="text-base text-blue-100 mb-8 font-medium max-w-md mx-auto lg:mx-0">
-                    Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí.
-                </p>
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-white">Hãy để trẻ tự tin tỏa sáng cùng Taekwondo Kids Việt Nam!</h2>
+                <p class="text-base text-blue-100 mb-8 font-medium max-w-md mx-auto lg:mx-0">Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí.</p>
             </div>
-            
             <div class="lg:w-1/2 w-full max-w-md mx-auto lg:mx-0">
                 <form id="registerForm" class="bg-white p-8 rounded-2xl shadow-2xl">
                     <h3 class="text-2xl font-bold text-blue-800 mb-6 text-center">ĐĂNG KÝ HỌC THỬ</h3>
@@ -513,9 +695,7 @@
                         <button type="submit" id="submitBtn" class="w-full mt-4 bg-blue-700 hover:bg-blue-800 text-yellow-400 font-extrabold py-4 px-6 rounded-lg text-lg transition-colors shadow-lg cursor-pointer">ĐĂNG KÝ NGAY</button>
                     </div>
                 </form>
-
                 <script>
-                    // API ĐĂNG KÝ HỌC THỬ (VẪN ĐƯỢC GIỮ NGUYÊN)
                     const scriptURLRegister = 'https://script.google.com/macros/s/AKfycbyrUKEFb3DgwNlDSBdQOze2lSafwkXnkw3mnBPvDYjPsSEazVVQ2kKI_bI-5cptHxUX/exec';
                     const formRegister = document.getElementById('registerForm');
                     const btnRegister = document.getElementById('submitBtn');
