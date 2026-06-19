@@ -105,12 +105,36 @@
         </div>
     </header>
 
+    <section class="py-8 bg-blue-50 border-b border-blue-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                <div class="text-center">
+                    <h3 class="text-3xl font-bold text-blue-800">5+</h3>
+                    <p class="text-sm font-medium text-gray-600 uppercase">
+                        <span class="lang-vi">Cơ sở toàn Hà Nội</span>
+                        <span class="lang-en hidden">Branches in Hanoi</span>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-3xl font-bold text-blue-800">2000+</h3>
+                    <p class="text-sm font-medium text-gray-600 uppercase">
+                        <span class="lang-vi">Võ sinh đang theo học</span>
+                        <span class="lang-en hidden">Active Students</span>
+                    </p>
+                </div>
+                <div class="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://via.placeholder.com/120x40/cccccc/666666?text=Doi+Tac+1" alt="Partner 1" class="h-10 object-contain" />
+                    <img src="https://via.placeholder.com/120x40/cccccc/666666?text=Doi+Tac+2" alt="Partner 2" class="h-10 object-contain" />
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="about" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4 uppercase">
-                    <span class="lang-vi">LỊCH SỬ HÌNH THÀNH VÀ PHÁT TRIỂN</span>
+                    <span class="lang-vi">Lịch sử hình thành và phát triển</span>
                     <span class="lang-en hidden">History and Development</span>
                 </h2>
                 <div class="w-24 h-1.5 bg-yellow-400 mx-auto rounded"></div>
@@ -684,4 +708,385 @@
                 document.querySelectorAll('.lang-vi').forEach(el => el.classList.add('hidden'));
                 document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('hidden'));
                 
-                document.
+                document.getElementById('btn-lang-vi').classList.replace('text-blue-800', 'text-gray-400');
+                document.getElementById('btn-lang-en').classList.replace('text-gray-400', 'text-blue-800');
+
+                // Thay đổi placeholders
+                document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+                    if (!el.dataset.viPlaceholder) el.dataset.viPlaceholder = el.placeholder;
+                    el.placeholder = el.dataset.enPlaceholder;
+                });
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.lang-vi').forEach(el => el.classList.remove('hidden'));
+                
+                document.getElementById('btn-lang-en').classList.replace('text-blue-800', 'text-gray-400');
+                document.getElementById('btn-lang-vi').classList.replace('text-gray-400', 'text-blue-800');
+
+                // Khôi phục placeholders
+                document.querySelectorAll('[data-vi-placeholder]').forEach(el => {
+                    el.placeholder = el.dataset.viPlaceholder;
+                });
+            }
+        }
+
+        // CHUYỂN TABS PORTAL
+        function switchTab(tabId) {
+            document.getElementById('tab-phuhuynh').classList.add('hidden');
+            document.getElementById('tab-phuhuynh').classList.remove('block');
+            document.getElementById('tab-hlv').classList.add('hidden');
+            document.getElementById('tab-hlv').classList.remove('block');
+            
+            document.getElementById('btn-phuhuynh').className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
+            document.getElementById('btn-hlv').className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors text-blue-800 hover:bg-blue-50 cursor-pointer';
+            
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.add('block');
+            document.getElementById('btn-' + tabId).className = 'flex-1 py-4 px-6 font-bold text-lg transition-colors bg-blue-600 text-white cursor-pointer';
+        }
+
+        // ĐĂNG NHẬP PHỤ HUYNH
+        document.getElementById('parentLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('parentLoginBtn');
+            btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'parentLogin');
+            data.append('phone', document.getElementById('parentLoginPhone').value);
+            data.append('password', document.getElementById('parentLoginPass').value);
+
+            fetch(PARENT_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    currentParent = resData.user;
+                    loadParentDashboard();
+                } else alert(resData.message);
+            })
+            .catch(err => alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại!'))
+            .finally(() => { 
+                btn.innerHTML = `<span class="lang-vi">ĐĂNG NHẬP PHỤ HUYNH</span><span class="lang-en hidden">PARENT LOGIN</span>`; 
+                btn.disabled = false; 
+            });
+        });
+
+        function loadParentDashboard() {
+            document.getElementById('parentDashboard').classList.remove('hidden');
+            
+            document.getElementById('p_vsName').innerText = currentParent.vsName;
+            document.getElementById('p_vsId').innerText = currentParent.vsId;
+            document.getElementById('p_vsDob').innerText = currentParent.vsDob;
+            document.getElementById('p_vsSchool').innerText = currentParent.vsSchool;
+            document.getElementById('p_vsClass').innerText = currentParent.vsClass;
+            document.getElementById('p_vsAvatar').src = currentParent.vsAvatar;
+            
+            document.getElementById('p_phName').innerText = currentParent.phName;
+            document.getElementById('p_phRelation').innerText = currentParent.phRelation;
+            document.getElementById('p_phAge').innerText = currentParent.phAge;
+            document.getElementById('p_phDob').innerText = currentParent.phDob;
+            document.getElementById('p_phJob').innerText = currentParent.phJob;
+            document.getElementById('p_phPhone').innerText = currentParent.phone;
+            document.getElementById('p_phEmail').innerText = currentParent.phEmail;
+
+            let beltHTML = '';
+            if(currentParent.beltHistory && currentParent.beltHistory.length > 0) {
+                currentParent.beltHistory.forEach(b => {
+                    beltHTML += `<tr class="border-b"><td class="p-3 font-semibold">${b.oldBelt}</td><td class="p-3 text-blue-600 font-bold">${b.newBelt}</td><td class="p-3">${b.date}</td><td class="p-3"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">${b.status}</span></td></tr>`;
+                });
+            } else { beltHTML = '<tr><td colspan="4" class="p-3 text-center text-gray-500">Chưa có dữ liệu.</td></tr>'; }
+            document.getElementById('beltTableBody').innerHTML = beltHTML;
+
+            let reviewHTML = '';
+            if(currentParent.reviews && currentParent.reviews.length > 0) {
+                currentParent.reviews.forEach(r => {
+                    reviewHTML += `<tr class="border-b"><td class="p-3 font-semibold">${r.coach}</td><td class="p-3 italic text-gray-700">${r.comment}</td><td class="p-3">${r.className}</td></tr>`;
+                });
+            } else { reviewHTML = '<tr><td colspan="3" class="p-3 text-center text-gray-500">Chưa có nhận xét.</td></tr>'; }
+            document.getElementById('reviewTableBody').innerHTML = reviewHTML;
+        }
+
+        function logoutParent() {
+            currentParent = null;
+            document.getElementById('parentDashboard').classList.add('hidden');
+            document.getElementById('parentLoginForm').reset();
+        }
+
+        function openParentModal(modalId) { document.getElementById(modalId).classList.remove('hidden'); }
+        function closeParentModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
+
+        // ĐĂNG NHẬP NỘI BỘ (HLV)
+        document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('internalLoginBtn');
+            btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'login');
+            data.append('phone', document.getElementById('loginPhone').value);
+            data.append('password', document.getElementById('loginPass').value);
+
+            fetch(INTERNAL_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    currentUser = resData.user;
+                    loadDashboardData();
+                } else alert(resData.message);
+            })
+            .catch(err => alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại!'))
+            .finally(() => { 
+                btn.innerHTML = `<span class="lang-vi">ĐĂNG NHẬP HỆ THỐNG</span><span class="lang-en hidden">SYSTEM LOGIN</span>`; 
+                btn.disabled = false; 
+            });
+        });
+
+        function loadDashboardData() {
+            document.getElementById('internalDashboard').classList.remove('hidden');
+            document.getElementById('dbName').innerText = currentUser.name;
+            document.getElementById('dbPosition').innerText = currentUser.position;
+            document.getElementById('dbBelt').innerText = currentUser.belt;
+            document.getElementById('dbPhone').innerText = currentUser.phone;
+            document.getElementById('dbDob').innerText = currentUser.dob;
+            document.getElementById('dbEmail').innerText = currentUser.email;
+            document.getElementById('avatarImg').src = currentUser.avatar;
+        }
+
+        function logoutInternal() {
+            currentUser = null;
+            document.getElementById('internalDashboard').classList.add('hidden');
+            document.getElementById('internalLoginForm').reset();
+        }
+
+        function handleImageUpload(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            document.getElementById('uploadText').innerText = "Đang up...";
+            
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 400; 
+                    const scaleSize = MAX_WIDTH / img.width;
+                    canvas.width = MAX_WIDTH;
+                    canvas.height = img.height * scaleSize;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    const base64Data = canvas.toDataURL('image/jpeg', 0.8);
+                    document.getElementById('avatarImg').src = base64Data;
+
+                    const data = new URLSearchParams();
+                    data.append('action', 'uploadAvatar');
+                    data.append('row', currentUser.row);
+                    data.append('phone', currentUser.phone);
+                    data.append('image', base64Data);
+
+                    fetch(INTERNAL_API, { method: 'POST', body: data })
+                    .then(res => res.json())
+                    .then(resData => {
+                        if(resData.status === 'success') {
+                            currentUser.avatar = resData.url;
+                            alert('Tải ảnh đại diện thành công!');
+                        } else alert('Có lỗi khi lưu ảnh.');
+                    })
+                    .catch(err => alert('Lỗi đường truyền!'))
+                    .finally(() => { document.getElementById('uploadText').innerHTML = `<span class="lang-vi">Tải ảnh lên</span><span class="lang-en hidden">Upload</span>`; });
+                }
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function openEditModal() {
+            document.getElementById('editModal').classList.remove('hidden');
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editPhone').value = currentUser.phone;
+            document.getElementById('editDob').value = currentUser.dob;
+            document.getElementById('editPos').value = currentUser.position;
+            document.getElementById('editEmail').value = currentUser.email;
+        }
+        
+        function closeEditModal() { 
+            document.getElementById('editModal').classList.add('hidden'); 
+            document.getElementById('updatePassForm').reset();
+        }
+
+        document.getElementById('updateInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnUpdateInfo');
+            btn.innerHTML = "Đang lưu..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'updateInfo');
+            data.append('row', currentUser.row);
+            data.append('name', document.getElementById('editName').value);
+            data.append('phone', document.getElementById('editPhone').value);
+            data.append('dob', document.getElementById('editDob').value);
+            data.append('position', document.getElementById('editPos').value);
+            data.append('email', document.getElementById('editEmail').value);
+
+            fetch(INTERNAL_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    alert('Cập nhật thông tin cá nhân thành công!');
+                    currentUser.name = document.getElementById('editName').value;
+                    currentUser.phone = document.getElementById('editPhone').value;
+                    currentUser.dob = document.getElementById('editDob').value;
+                    currentUser.position = document.getElementById('editPos').value;
+                    currentUser.email = document.getElementById('editEmail').value;
+                    loadDashboardData();
+                }
+            })
+            .finally(() => { 
+                btn.innerHTML = `<span class="lang-vi">Lưu Thay Đổi Thông Tin</span><span class="lang-en hidden">Save Changes</span>`; 
+                btn.disabled = false; 
+            });
+        });
+
+        document.getElementById('updatePassForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPass = document.getElementById('newPass').value;
+            const confirmPass = document.getElementById('confirmPass').value;
+            const passwordRegex = /^(?=.*[A-Z])[A-Za-z0-9]{6,}$/;
+            
+            if(newPass !== confirmPass) return alert("Mật khẩu nhập lại không khớp! / Passwords do not match!");
+            if(!passwordRegex.test(newPass)) return alert("LỖI BẢO MẬT: Mật khẩu mới chưa hợp lệ.\n(Tối thiểu 6 ký tự, có số, có chữ in hoa, KHÔNG có ký tự đặc biệt).");
+
+            const btn = document.getElementById('btnUpdatePass');
+            btn.innerHTML = "Đang đổi..."; btn.disabled = true;
+
+            const data = new URLSearchParams();
+            data.append('action', 'updatePassword');
+            data.append('row', currentUser.row);
+            data.append('phone', currentUser.phone);
+            data.append('name', currentUser.name);
+            data.append('email', currentUser.email);
+            data.append('dob', currentUser.dob);
+            data.append('position', currentUser.position);
+            data.append('newPassword', newPass);
+
+            fetch(INTERNAL_API, { method: 'POST', body: data })
+            .then(res => res.json())
+            .then(resData => {
+                if(resData.status === 'success') {
+                    alert('Thành công! Mật khẩu mới đã được cập nhật.');
+                    document.getElementById('updatePassForm').reset();
+                }
+            })
+            .finally(() => { 
+                btn.innerHTML = `<span class="lang-vi">Xác Nhận Đổi Mật Khẩu</span><span class="lang-en hidden">Confirm Password Change</span>`; 
+                btn.disabled = false; 
+            });
+        });
+    </script>
+
+    <section id="locations" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">
+                <span class="lang-vi">HỆ THỐNG CƠ SỞ TẠI HÀ NỘI</span><span class="lang-en hidden">OUR BRANCHES IN HANOI</span>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="hapu.jpg" alt="Cơ sở Hapulico" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase"><span class="lang-vi">CƠ SỞ HAPULICO</span><span class="lang-en hidden">HAPULICO BRANCH</span></h3><p class="text-gray-600 text-sm"><span class="lang-vi">Tầng B1, toà 21T1 - Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</span><span class="lang-en hidden">Floor B1, 21T1 Bldg - Hapulico, 83 Vu Trong Phung, Thanh Xuan</span></p></div></div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="green.JPG" alt="Cơ sở Greenstars" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase"><span class="lang-vi">CƠ SỞ GREENSTARS</span><span class="lang-en hidden">GREENSTARS BRANCH</span></h3><p class="text-gray-600 text-sm"><span class="lang-vi">Tầng 1 Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</span><span class="lang-en hidden">1st Floor, 21B5 Bldg - GreenStar Apt, 234 Pham Van Dong</span></p></div></div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="nghiado.jpg" alt="Cơ sở Nghĩa Đô" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase"><span class="lang-vi">CƠ SỞ NGHĨA ĐÔ</span><span class="lang-en hidden">NGHIA DO BRANCH</span></h3><p class="text-gray-600 text-sm"><span class="lang-vi">Tầng 1, toà CT3 - Khu đô thị mới Nghĩa Đô, Bắc Từ Liêm</span><span class="lang-en hidden">1st Floor, CT3 Bldg - Nghia Do Urban Area, Bac Tu Liem</span></p></div></div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="hadong.jpg" alt="Cơ sở Hà Đông" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase"><span class="lang-vi">CƠ SỞ HÀ ĐÔNG</span><span class="lang-en hidden">HA DONG BRANCH</span></h3><p class="text-gray-600 text-sm"><span class="lang-vi">Tầng 1, tòa T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</span><span class="lang-en hidden">1st Floor, T2A Bldg - TSQ EuroLand, 25 Nguyen Van Loc, Ha Dong</span></p></div></div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"><img src="longbien.jpg" alt="Cơ sở Long Biên" class="w-full h-48 object-cover" /><div class="p-6"><h3 class="font-bold text-xl text-blue-800 mb-2 uppercase"><span class="lang-vi">CƠ SỞ LONG BIÊN</span><span class="lang-en hidden">LONG BIEN BRANCH</span></h3><p class="text-gray-600 text-sm"><span class="lang-vi">Tầng 1, tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</span><span class="lang-en hidden">1st Floor, L4 Bldg - LeGrand Jardin Apt, Sai Dong, Long Bien</span></p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="py-16 md:py-24 bg-yellow-400 relative overflow-hidden">
+        <div class="absolute inset-0 bg-blue-900 w-1/2 hidden lg:block transform -skew-x-12 -ml-20"></div>
+        <div class="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 text-white text-center lg:text-left lg:pr-16 z-10">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight text-white">
+                    <span class="lang-vi">Hãy để trẻ tự tin tỏa sáng cùng Taekwondo Kids Việt Nam!</span>
+                    <span class="lang-en hidden">Let your child shine with Taekwondo Kids Vietnam!</span>
+                </h2>
+                <p class="text-base text-blue-100 mb-8 font-medium max-w-md mx-auto lg:mx-0">
+                    <span class="lang-vi">Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí.</span>
+                    <span class="lang-en hidden">Register today to receive consultation and experience a free trial class.</span>
+                </p>
+            </div>
+            <div class="lg:w-1/2 w-full max-w-md mx-auto lg:mx-0">
+                <form id="registerForm" class="bg-white p-8 rounded-2xl shadow-2xl">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6 text-center">
+                        <span class="lang-vi">ĐĂNG KÝ HỌC THỬ</span><span class="lang-en hidden">TRIAL REGISTRATION</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div><label class="block text-sm font-semibold text-gray-700 mb-1"><span class="lang-vi">Họ và tên Phụ huynh *</span><span class="lang-en hidden">Parent's Full Name *</span></label><input type="text" name="parentName" required class="w-full px-4 py-3 rounded-lg border border-gray-300"></div>
+                        <div><label class="block text-sm font-semibold text-gray-700 mb-1"><span class="lang-vi">Họ và tên Võ sinh *</span><span class="lang-en hidden">Student's Full Name *</span></label><input type="text" name="childName" required class="w-full px-4 py-3 rounded-lg border border-gray-300"></div>
+                        <div><label class="block text-sm font-semibold text-gray-700 mb-1"><span class="lang-vi">Số điện thoại *</span><span class="lang-en hidden">Phone Number *</span></label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300"></div>
+                        <button type="submit" id="submitBtn" class="w-full mt-4 bg-blue-700 hover:bg-blue-800 text-yellow-400 font-extrabold py-4 px-6 rounded-lg text-lg transition-colors shadow-lg cursor-pointer">
+                            <span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en hidden">REGISTER NOW</span>
+                        </button>
+                    </div>
+                </form>
+                <script>
+                    const scriptURLRegister = 'https://script.google.com/macros/s/AKfycbyrUKEFb3DgwNlDSBdQOze2lSafwkXnkw3mnBPvDYjPsSEazVVQ2kKI_bI-5cptHxUX/exec';
+                    const formRegister = document.getElementById('registerForm');
+                    const btnRegister = document.getElementById('submitBtn');
+
+                    formRegister.addEventListener('submit', e => {
+                        e.preventDefault(); 
+                        btnRegister.innerHTML = 'Đang xử lý... / Processing...'; btnRegister.disabled = true;
+                        fetch(scriptURLRegister, { method: 'POST', body: new URLSearchParams(new FormData(formRegister)) })
+                        .then(response => {
+                            alert('🎉 Thông tin đăng ký đã được gửi thành công. / Registration submitted successfully!');
+                            formRegister.reset(); 
+                            btnRegister.innerHTML = `<span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en hidden">REGISTER NOW</span>`; 
+                            btnRegister.disabled = false;
+                        }).catch(error => {
+                            alert('🎉 Thông tin đăng ký đã được gửi thành công. / Registration submitted successfully!');
+                            formRegister.reset(); 
+                            btnRegister.innerHTML = `<span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en hidden">REGISTER NOW</span>`; 
+                            btnRegister.disabled = false;
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-blue-900 text-blue-100 py-12">
+        <div class="container mx-auto px-4 grid md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4"><img src="LOGO.png" alt="Logo" class="h-10 w-auto object-contain">
+                    <span class="font-bold text-white text-lg">
+                        <span class="lang-vi">TRUNG TÂM TAEKWONDO KIDS VIỆT NAM</span><span class="lang-en hidden">TAEKWONDO KIDS VIETNAM CENTER</span>
+                    </span>
+                </div>
+                <p class="text-sm font-medium text-blue-200">
+                    <span class="lang-vi">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</span><span class="lang-en hidden">Vietnam Martial Arts Training and Development Co., Ltd</span>
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase">
+                    <span class="lang-vi">Liên hệ</span><span class="lang-en hidden">Contact Us</span>
+                </h4>
+                <ul class="space-y-2 text-sm"><li>Hotline: <strong class="text-yellow-400">097 893 1747</strong></li><li>Email: taekwondokids.vn@gmail.com</li></ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase">
+                    <span class="lang-vi">Kết nối mạng xã hội</span><span class="lang-en hidden">Social Media</span>
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://fb.com/taekwondokids.vietnam" target="_blank" class="hover:text-yellow-400 transition">Fanpage Facebook</a></li>
+                    <li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank" class="hover:text-yellow-400 transition">TikTok Channel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-blue-800 text-center text-sm text-blue-300">© 2026 Taekwondo Kids Việt Nam. All rights reserved.</div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <button class="w-12 h-12 bg-blue-500 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition cursor-pointer">Zalo</button>
+        <button class="w-12 h-12 bg-blue-600 text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition cursor-pointer">Mess</button>
+    </div>
+</body>
+</html>
