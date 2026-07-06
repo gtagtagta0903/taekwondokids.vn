@@ -928,77 +928,87 @@
         /* ═══════════════════════════════════════
            LOCATIONS
         ═══════════════════════════════════════ */
-<section id="locations">
-    <div class="container">
-        <div class="locations-header reveal">
-            <div class="sec-tag">
-                <span class="lang-vi">Tìm cơ sở gần bạn</span>
-                <span class="lang-en">Find a Branch Near You</span>
-            </div>
-            <h2 class="sec-title">
-                <span class="lang-vi">Hệ thống <span class="accent">5 cơ sở</span><br>tại Hà Nội</span>
-                <span class="lang-en">Our <span class="accent">5 Branches</span><br>in Hanoi</span>
-            </h2>
-        </div>
+        #locations {
+            padding: 110px 0;
+            background: var(--deep);
+            position: relative;
+        }
+        .locations-header { text-align: center; margin-bottom: 60px; }
 
-        <div class="locations-grid">
-            <div class="loc-card reveal">
-                <div class="loc-img-wrap">
-                    <img src="hapu.jpg" alt="Hapulico">
-                    <div class="loc-tag"><span class="lang-vi">CS 01</span><span class="lang-en">BR 01</span></div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">Hapulico</div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng B1 - Toà 21T1 - Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân, Hà Nội</span><span class="lang-en">B1 Floor - 21T1 Bldg - Hapulico Apt, 83 Vu Trong Phung, Thanh Xuan, Hanoi</span></div>
-                </div>
-            </div>
+        .locations-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
 
-            <div class="loc-card reveal delay-1">
-                <div class="loc-img-wrap">
-                    <img src="green.JPG" alt="GreenStars">
-                    <div class="loc-tag"><span class="lang-vi">CS 02</span><span class="lang-en">BR 02</span></div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">GreenStars</div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1 - Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn, Hà Nội</span><span class="lang-en">1st Floor - 21B5 Bldg - GreenStar Apt, 234 Pham Van Dong, Phu Dien, Hanoi</span></div>
-                </div>
-            </div>
+        .loc-card {
+            width: calc((100% - 2px) / 3); /* Chia 3 cột, trừ hao 2px cho gap */
+            flex: 0 0 auto;
+            background: var(--card);
+            overflow: hidden;
+            position: relative;
+            transition: background .25s;
+        }
+        .loc-card:hover { background: var(--card2); }
 
-            <div class="loc-card reveal delay-2">
-                <div class="loc-img-wrap">
-                    <img src="nghiado.jpg" alt="Nghĩa Đô">
-                    <div class="loc-tag"><span class="lang-vi">CS 03</span><span class="lang-en">BR 03</span></div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">Nghĩa Đô</div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1 - Toà CT3 - Khu đô thị mới Nghĩa Đô, Nghĩa Đô, Hà Nội</span><span class="lang-en">1st Floor - CT3 Bldg - Nghia Do New Urban Area, Nghia Do, Hanoi</span></div>
-                </div>
-            </div>
+        @media(max-width:900px){ 
+            .loc-card { width: calc((100% - 1px) / 2); } 
+        }
+        @media(max-width:500px){ 
+            .loc-card { width: 100%; } 
+        }
 
-            <div class="loc-card reveal">
-                <div class="loc-img-wrap">
-                    <img src="hadong.jpg" alt="Hà Đông">
-                    <div class="loc-tag"><span class="lang-vi">CS 04</span><span class="lang-en">BR 04</span></div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">Hà Đông</div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">T2A - Tòa TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Nội</span><span class="lang-en">T2A - TSQ EuroLand Bldg, 25 Nguyen Van Loc, Mo Lao, Hanoi</span></div>
-                </div>
-            </div>
+        .loc-img-wrap {
+            height: 190px;
+            overflow: hidden;
+            position: relative;
+        }
+        .loc-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s, filter .4s;
+            filter: brightness(.65) grayscale(.25);
+        }
+        .loc-card:hover .loc-img-wrap img {
+            transform: scale(1.06);
+            filter: brightness(.85) grayscale(0);
+        }
 
-            <div class="loc-card reveal delay-1">
-                <div class="loc-img-wrap">
-                    <img src="longbien.jpg" alt="Long Biên">
-                    <div class="loc-tag"><span class="lang-vi">CS 05</span><span class="lang-en">BR 05</span></div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">Long Biên</div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên, Hà Nội</span><span class="lang-en">L4 Bldg - LeGrand Jardin Apt, Sai Dong, Long Bien, Hanoi</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        .loc-tag {
+            position: absolute;
+            top: 14px;
+            left: 0;
+            background: var(--red);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+        }
+
+        .loc-info { padding: 22px 20px; }
+        .loc-name {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        .loc-addr {
+            font-family: var(--font-body);
+            font-size: 12.5px;
+            color: var(--muted);
+            line-height: 1.65;
+            display: flex;
+            gap: 8px;
+        }
+        .loc-addr i { color: var(--red); flex-shrink: 0; margin-top: 3px; font-size: 11px; }
 
         /* ═══════════════════════════════════════
            PORTAL
@@ -1536,8 +1546,8 @@
     <div class="hero-content">
         <div class="hero-left">
             <div class="hero-eyebrow">
-                <span class="lang-vi">Thành lập từ 2015 · 7 Cơ sở toàn quốc</span>
-                <span class="lang-en">Est. 2015 · 7 Branches Nationwide</span>
+                <span class="lang-vi">Thành lập từ 2015 · 5 Cơ sở tại Hà Nội</span>
+                <span class="lang-en">Est. 2015 · 5 Branches in Hanoi</span>
             </div>
 
             <h1 class="hero-title">
@@ -1569,8 +1579,8 @@
                     <div class="stat-label"><span class="lang-vi">Năm kinh nghiệm</span><span class="lang-en">Years Exp.</span></div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-num">7</div>
-                    <div class="stat-label"><span class="lang-vi">Cơ sở trên toàn quốc</span><span class="lang-en">Branches</span></div>
+                    <div class="stat-num">5</div>
+                    <div class="stat-label"><span class="lang-vi">Cơ sở tại Hà Nội</span><span class="lang-en">Branches</span></div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">4 +</div>
@@ -1611,8 +1621,8 @@
         <div class="feat-item reveal delay-3">
             <div class="feat-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div class="feat-text">
-                <div class="feat-title"><span class="lang-vi">7 Cơ sở trên toàn quốc</span><span class="lang-en">7 Branches Nationwide</span></div>
-                <div class="feat-desc"><span class="lang-vi">Hà Nội, TP.HCM, Quảng Ninh</span><span class="lang-en">Hanoi, HCMC, Quang Ninh</span></div>
+                <div class="feat-title"><span class="lang-vi">5 Cơ sở tại Hà Nội</span><span class="lang-en">5 Branches in Hanoi</span></div>
+                <div class="feat-desc"><span class="lang-vi">Thanh Xuân, Cầu Giấy, Bắc Từ Liêm, Hà Đông, Long Biên</span><span class="lang-en">Thanh Xuan, Cau Giay, Bac Tu Liem, Ha Dong, Long Bien</span></div>
             </div>
         </div>
     </div>
@@ -1630,8 +1640,8 @@
                 <span class="lang-en">History &amp; <span class="accent">Development</span></span>
             </h2>
             <p class="about-intro" style="margin-top:16px">
-                <span class="lang-vi">Từ một cơ sở nhỏ tại Hà Nội năm 2015, Taekwondo Kids đã phát triển thành<br>hệ thống đào tạo võ thuật trẻ em hàng đầu với 7 cơ sở trên toàn quốc</span>
-                <span class="lang-en">From a single location in Hanoi in 2015, Taekwondo Kids has grown into a leading youth martial arts training network with 7 branches nationwide</span>
+                <span class="lang-vi">Từ một cơ sở nhỏ tại Hà Nội năm 2015, Taekwondo Kids đã phát triển thành<br>hệ thống đào tạo võ thuật trẻ em hàng đầu với 5 cơ sở tại Hà Nội</span>
+                <span class="lang-en">From a single location in Hanoi in 2015, Taekwondo Kids has grown into a leading youth martial arts training network with 5 branches in Hanoi</span>
             </p>
         </div>
 
@@ -1678,26 +1688,11 @@
             </div>
 
             <div class="tl-item">
-                <div class="tl-left"><div class="tl-year">2019</div></div>
+                <div class="tl-left"><div class="tl-year">2020</div></div>
                 <div class="tl-center"><div class="tl-dot"></div></div>
                 <div class="tl-right">
                     <div class="tl-card">
                         <div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 3</span><span class="lang-en">3rd Branch Opened</span></div>
-                        <div class="tl-card-text">
-                            <span class="lang-vi">Chi nhánh Gia Hòa — cơ sở đầu tiên tại TP. Hồ Chí Minh.</span>
-                            <span class="lang-en">Gia Hoa branch — first in Ho Chi Minh City.</span><br>
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span class="lang-vi">Phòng B3.01.09 - Chung cư Gia Hoà 523A, Đỗ Xuân Hợp, Quận 9, TP. HCM</span>
-                            <span class="lang-en">Room B3.01.09 - Gia Hoa Apt, 523A Do Xuan Hop, District 9, HCMC</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-left">
-                    <div class="tl-card">
-                        <div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 4</span><span class="lang-en">4th Branch Opened</span></div>
                         <div class="tl-card-text">
                             <span class="lang-vi">Chi nhánh Nghĩa Đô được thành lập.</span>
                             <span class="lang-en">Nghia Do branch was founded.</span><br>
@@ -1707,37 +1702,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="tl-center"><div class="tl-dot"></div></div>
-                <div class="tl-right"><div class="tl-year">2020</div></div>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-left"><div class="tl-year">2021</div></div>
-                <div class="tl-center"><div class="tl-dot"></div></div>
-                <div class="tl-right">
-                    <div class="tl-card">
-                        <div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 5</span><span class="lang-en">5th Branch Opened</span></div>
-                        <div class="tl-card-text">
-                            <span class="lang-vi">Chi nhánh Hạ Long được thành lập.</span>
-                            <span class="lang-en">Ha Long branch was founded.</span><br>
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span class="lang-vi">Tổ 3, Khu 3 - Trần Hưng Đạo, TP. Hạ Long</span>
-                            <span class="lang-en">Residential Group 3, Quarter 3, Tran Hung Dao, Ha Long City</span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="tl-item">
                 <div class="tl-left">
                     <div class="tl-card">
-                        <div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 6 &amp; 7</span><span class="lang-en">6th &amp; 7th Branches Opened</span></div>
+                        <div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 4 &amp; 5</span><span class="lang-en">4th &amp; 5th Branches Opened</span></div>
                         <div class="tl-card-text">
-                            <strong style="color:var(--white)"><span class="lang-vi">Cơ sở 6 - Hà Đông:</span><span class="lang-en">Branch 6 - Ha Dong:</span></strong><br>
+                            <strong style="color:var(--white)"><span class="lang-vi">Cơ sở 4 - Hà Đông:</span><span class="lang-en">Branch 4 - Ha Dong:</span></strong><br>
                             <i class="fa-solid fa-location-dot"></i>
                             <span class="lang-vi">T2A - Tòa TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Nội</span>
                             <span class="lang-en">T2A - TSQ EuroLand, 25 Nguyen Van Loc, Ha Dong, Ha Noi</span><br><br>
-                            <strong style="color:var(--white)"><span class="lang-vi">Cơ sở 7 - Long Biên:</span><span class="lang-en">Branch 7 - Long Bien:</span></strong><br>
+                            <strong style="color:var(--white)"><span class="lang-vi">Cơ sở 5 - Long Biên:</span><span class="lang-en">Branch 5 - Long Bien:</span></strong><br>
                             <i class="fa-solid fa-location-dot"></i>
                             <span class="lang-vi">Tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên, Hà Nội</span>
                             <span class="lang-en">L4 Bldg - LeGrand Jardin, Sai Dong, Long Bien, Ha Noi</span>
@@ -1916,70 +1892,64 @@
                 <span class="lang-en">Find a Branch Near You</span>
             </div>
             <h2 class="sec-title">
-                <span class="lang-vi">Hệ thống <span class="accent">5 cơ sở</span><br>TẠI HÀ NỘI</span>
-                <span class="lang-en">Our <span class="accent">5 Branches</span><br>IN HA NOI</span>
+                <span class="lang-vi">Hệ thống <span class="accent">5 cơ sở</span><br>tại Hà Nội</span>
+                <span class="lang-en">Our <span class="accent">5 Branches</span><br>in Hanoi</span>
             </h2>
         </div>
 
         <div class="locations-grid">
             <div class="loc-card reveal">
                 <div class="loc-img-wrap">
-                    <img src="https://via.placeholder.com/400x200/111/222" alt="CS 1">
+                    <img src="hapu.jpg" alt="Hapulico">
                     <div class="loc-tag"><span class="lang-vi">CS 01</span><span class="lang-en">BR 01</span></div>
                 </div>
                 <div class="loc-info">
-                    <div class="loc-name"><span class="lang-vi">Hapulico — Thanh Xuân</span><span class="lang-en">Hapulico — Thanh Xuan</span></div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng B1, Toà 21T1, Hapulico, 83 Vũ Trọng Phụng, Hà Nội</span><span class="lang-en">B1 Floor, 21T1 Bldg, Hapulico, 83 Vu Trong Phung, Hanoi</span></div>
+                    <div class="loc-name">Hapulico</div>
+                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng B1 - Toà 21T1 - Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân, Hà Nội</span><span class="lang-en">B1 Floor - 21T1 Bldg - Hapulico Apt, 83 Vu Trong Phung, Thanh Xuan, Hanoi</span></div>
                 </div>
             </div>
+
             <div class="loc-card reveal delay-1">
                 <div class="loc-img-wrap">
-                    <img src="https://via.placeholder.com/400x200/111/222" alt="CS 2">
+                    <img src="green.JPG" alt="GreenStars">
                     <div class="loc-tag"><span class="lang-vi">CS 02</span><span class="lang-en">BR 02</span></div>
                 </div>
                 <div class="loc-info">
-                    <div class="loc-name">Green Stars — Phú Diễn</div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1, Toà 21B5, GreenStar, 234 Phạm Văn Đồng, Hà Nội</span><span class="lang-en">1st Floor, 21B5 Bldg, GreenStar, 234 Pham Van Dong, Hanoi</span></div>
+                    <div class="loc-name">GreenStars</div>
+                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1 - Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn, Hà Nội</span><span class="lang-en">1st Floor - 21B5 Bldg - GreenStar Apt, 234 Pham Van Dong, Phu Dien, Hanoi</span></div>
                 </div>
             </div>
+
             <div class="loc-card reveal delay-2">
                 <div class="loc-img-wrap">
-                    <img src="https://via.placeholder.com/400x200/111/222" alt="CS 3">
+                    <img src="nghiado.jpg" alt="Nghĩa Đô">
                     <div class="loc-tag"><span class="lang-vi">CS 03</span><span class="lang-en">BR 03</span></div>
                 </div>
                 <div class="loc-info">
-                    <div class="loc-name"><span class="lang-vi">Gia Hoà — TP. HCM</span><span class="lang-en">Gia Hoa — Ho Chi Minh City</span></div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">P. B3.01.09, CC Gia Hoà, 523A Đỗ Xuân Hợp, Quận 9, TP.HCM</span><span class="lang-en">Room B3.01.09, Gia Hoa Apt, 523A Do Xuan Hop, Dist. 9, HCMC</span></div>
+                    <div class="loc-name">Nghĩa Đô</div>
+                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1 - Toà CT3 - Khu đô thị mới Nghĩa Đô, Nghĩa Đô, Hà Nội</span><span class="lang-en">1st Floor - CT3 Bldg - Nghia Do New Urban Area, Nghia Do, Hanoi</span></div>
                 </div>
             </div>
+
             <div class="loc-card reveal">
                 <div class="loc-img-wrap">
-                    <img src="https://via.placeholder.com/400x200/111/222" alt="CS 4">
+                    <img src="hadong.jpg" alt="Hà Đông">
                     <div class="loc-tag"><span class="lang-vi">CS 04</span><span class="lang-en">BR 04</span></div>
                 </div>
                 <div class="loc-info">
-                    <div class="loc-name"><span class="lang-vi">Nghĩa Đô — Cầu Giấy</span><span class="lang-en">Nghia Do — Cau Giay</span></div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1, Toà CT3, KĐT Nghĩa Đô, Nghĩa Đô, Hà Nội</span><span class="lang-en">1st Floor, CT3 Bldg, Nghia Do Urban Area, Ha Noi</span></div>
+                    <div class="loc-name">Hà Đông</div>
+                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">T2A - Tòa TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Nội</span><span class="lang-en">T2A - TSQ EuroLand Bldg, 25 Nguyen Van Loc, Mo Lao, Hanoi</span></div>
                 </div>
             </div>
+
             <div class="loc-card reveal delay-1">
                 <div class="loc-img-wrap">
-                    <img src="https://via.placeholder.com/400x200/111/222" alt="CS 5">
+                    <img src="longbien.jpg" alt="Long Biên">
                     <div class="loc-tag"><span class="lang-vi">CS 05</span><span class="lang-en">BR 05</span></div>
                 </div>
                 <div class="loc-info">
-                    <div class="loc-name"><span class="lang-vi">Hạ Long — Quảng Ninh</span><span class="lang-en">Ha Long — Quang Ninh</span></div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tổ 3, Khu 3, Trần Hưng Đạo, TP. Hạ Long, Quảng Ninh</span><span class="lang-en">Group 3, Quarter 3, Tran Hung Dao, Ha Long City, Quang Ninh</span></div>
-                </div>
-            </div>
-            <div class="loc-card reveal delay-2">
-                <div class="loc-img-wrap">
-                    <img src="https://via.placeholder.com/400x200/111/222" alt="CS 6-7">
-                    <div class="loc-tag"><span class="lang-vi">CS 06 &amp; 07</span><span class="lang-en">BR 06 &amp; 07</span></div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name"><span class="lang-vi">Hà Đông &amp; Long Biên</span><span class="lang-en">Ha Dong &amp; Long Bien</span></div>
-                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">TSQ EuroLand, Mộ Lao — LeGrand Jardin, Sài Đồng, Hà Nội</span><span class="lang-en">TSQ EuroLand, Mo Lao — LeGrand Jardin, Sai Dong, Hanoi</span></div>
+                    <div class="loc-name">Long Biên</div>
+                    <div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tòa L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên, Hà Nội</span><span class="lang-en">L4 Bldg - LeGrand Jardin Apt, Sai Dong, Long Bien, Hanoi</span></div>
                 </div>
             </div>
         </div>
@@ -2413,7 +2383,7 @@
             .then(r => r.json())
             .then(d => { if (d.status === 'success') { currentParent = d.user; loadParentDashboard(); } else alert(d.message); })
             .catch(() => alert('Lỗi kết nối. Vui lòng thử lại!'))
-            .finally(() => { btn.innerHTML = '<span class="lang-vi">ĐĂNG NHẬP PHỤ HUYNH</span><span class="lang-en">PARENT LOGIN</span>'; btn.disabled = false; });
+            .finally(() => { btn.innerHTML = '<span class="lang-vi">PHỤ HUYNH ĐĂNG NHẬP</span><span class="lang-en">PARENT LOGIN</span>'; btn.disabled = false; });
     });
 
     function loadParentDashboard() {
@@ -2586,6 +2556,6 @@
             .finally(() => { btn.innerHTML = '<span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en">REGISTER NOW</span>'; btn.disabled = false; });
     });
 </script>
-
+ 
 </body>
 </html>
