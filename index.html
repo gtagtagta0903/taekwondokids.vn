@@ -195,25 +195,23 @@
         .partner-name { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--white); line-height:1.4; }
 
         /* LOCATIONS */
-/* Thay thế CSS cũ bằng đoạn này để căn giữa 2 card ở hàng dưới */
-#locations { padding:110px 0; background:var(--deep); }
-.locations-header { text-align:center; margin-bottom:60px; }
-.locations-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:1px; background:var(--border); border:1px solid var(--border); }
-.loc-card { flex:1 1 calc(33.333% - 1px); max-width:calc(33.333% - 1px); background:var(--card); overflow:hidden; position:relative; transition:background .25s; }
-@media(max-width:900px){ .loc-card{ flex:1 1 calc(50% - 1px); max-width:calc(50% - 1px); } }
-@media(max-width:500px){ .loc-card{ flex:1 1 100%; max-width:100%; } }
-.loc-card:hover { background:var(--card2); }
-.loc-img-wrap { height:190px; overflow:hidden; position:relative; }
-.loc-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .5s,filter .4s; filter:brightness(.65) grayscale(.25); }
-.loc-card:hover .loc-img-wrap img { transform:scale(1.06); filter:brightness(.85) grayscale(0); }
-.loc-tag { position:absolute; top:14px; left:0; background:var(--red); color:var(--white); font-size:9px; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; }
-.loc-info { padding:22px 20px; }
-.loc-name { font-weight:700; font-size:15px; color:var(--white); margin-bottom:10px; text-transform:uppercase; }
-.loc-addr { font-size:12.5px; color:var(--muted); line-height:1.65; display:flex; gap:8px; }
-.loc-addr i { color:var(--red); flex-shrink:0; margin-top:3px; font-size:11px; }
+        #locations { padding:110px 0; background:var(--deep); }
+        .locations-header { text-align:center; margin-bottom:60px; }
+        .locations-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:1px; background:var(--border); border:1px solid var(--border); }
+        .loc-card { flex:1 1 calc(33.333% - 1px); max-width:calc(33.333% - 1px); background:var(--card); overflow:hidden; position:relative; transition:background .25s; }
+        @media(max-width:900px){ .loc-card{ flex:1 1 calc(50% - 1px); max-width:calc(50% - 1px); } }
+        @media(max-width:500px){ .loc-card{ flex:1 1 100%; max-width:100%; } }
+        .loc-card:hover { background:var(--card2); }
+        .loc-img-wrap { height:190px; overflow:hidden; position:relative; }
+        .loc-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .5s,filter .4s; filter:brightness(.65) grayscale(.25); }
+        .loc-card:hover .loc-img-wrap img { transform:scale(1.06); filter:brightness(.85) grayscale(0); }
+        .loc-tag { position:absolute; top:14px; left:0; background:var(--red); color:var(--white); font-size:9px; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; }
+        .loc-info { padding:22px 20px; }
+        .loc-name { font-weight:700; font-size:15px; color:var(--white); margin-bottom:10px; text-transform:uppercase; }
+        .loc-addr { font-size:12.5px; color:var(--muted); line-height:1.65; display:flex; gap:8px; }
+        .loc-addr i { color:var(--red); flex-shrink:0; margin-top:3px; font-size:11px; }
 
-        /* PORTAL */
-        #portal { padding:110px 0; background:var(--black); }
+        /* PORTAL & DASHBOARD STYLES */
         .portal-header { text-align:center; margin-bottom:52px; }
         .portal-header p { color:var(--muted); font-size:14px; margin-top:12px; }
         .portal-tabs { display:flex; border-bottom:1px solid var(--border); }
@@ -224,6 +222,7 @@
         .tab-panel { display:none; }
         .tab-panel.active { display:block; }
         .portal-box h3 { font-size:17px; font-weight:700; color:var(--white); text-align:center; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--border); }
+        
         .login-form { max-width:380px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
         .login-form input { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:14px 18px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
         .login-form input:focus { border-color:var(--red); }
@@ -233,7 +232,67 @@
         .btn-login-staff { width:100%; background:var(--yellow); color:var(--black); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
         .btn-login-staff:hover { background:#E6BF00; }
 
-        /* REGISTER */
+        /* DASHBOARD (staff/admin) */
+        #internalDashboard, #parentDashboard { display:none; position:fixed; inset:0; background:var(--black); z-index:200; overflow-y:auto; }
+        .db-topbar { background:var(--card); border-bottom:2px solid var(--red); padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
+        .pdb-topbar { background:var(--card); border-bottom:2px solid #00AEEF; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
+        .db-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
+        .pdb-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#60D0FF; }
+        .btn-logout { background:#c0392b; color:var(--white); border:none; padding:8px 20px; font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
+        .btn-logout:hover { background:#992d22; }
+        .db-content { max-width:960px; margin:0 auto; padding:40px 32px; }
+        
+        .db-card, .pdb-card { background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; margin-bottom:32px; }
+        @media(min-width:640px){ .db-card, .pdb-card { flex-direction:row; } }
+        
+        .db-avatar-panel { background:linear-gradient(160deg,#100020,#0E0E1A); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:240px; border-right:1px solid var(--border); }
+        .pdb-avatar-panel { background:linear-gradient(160deg,#041830,#0A1020); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:220px; border-right:1px solid var(--border); }
+        .db-avatar { width:96px; height:130px; object-fit:cover; border:3px solid var(--red); cursor:pointer; background:var(--dark); transition:border-color .2s; }
+        .pdb-avatar { width:96px; height:130px; object-fit:cover; border:3px solid #00AEEF; background:var(--dark); }
+        .db-avatar-wrap { position:relative; display:inline-block; }
+        .db-avatar-wrap:hover .db-avatar { border-color:var(--yellow); }
+        .db-avatar-overlay { position:absolute; inset:0; background:rgba(0,0,0,.7); display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; transition:opacity .2s; font-size:11px; font-weight:700; color:var(--white); gap:6px; cursor:pointer; }
+        .db-avatar-wrap:hover .db-avatar-overlay { opacity:1; }
+        
+        .db-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--yellow); margin-top:16px; }
+        .pdb-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--white); margin-top:14px; }
+        .db-position { font-size:12px; color:var(--muted); margin-bottom:12px; }
+        .db-belt-badge { background:rgba(255,214,0,.1); border:1px solid rgba(255,214,0,.3); color:var(--yellow); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; }
+        .pdb-id-badge { background:rgba(0,174,239,.1); border:1px solid rgba(0,174,239,.3); color:#60D0FF; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; margin-top:10px; }
+        
+        .db-info-panel { padding:40px 36px; flex:1; }
+        .db-info-title { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:24px; }
+        .db-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
+        .db-info-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+        .db-info-value { font-size:15px; font-weight:600; color:var(--white); }
+        .btn-edit { background:none; border:1px solid var(--border); color:var(--white); padding:10px 24px; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s; }
+        .btn-edit:hover { border-color:var(--yellow); color:var(--yellow); }
+        
+        .pdb-info { flex:1; display:grid; grid-template-columns:1fr 1fr; }
+        @media(max-width:640px){ .pdb-info{ grid-template-columns:1fr; } }
+        .pdb-info-col { padding:32px 28px; border-right:1px solid var(--border); }
+        .pdb-info-col:last-child { border-right:none; }
+        .pdb-col-title { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+        .pdb-col-title i { color:#00AEEF; }
+        .pdb-field { margin-bottom:14px; }
+        .pdb-field-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+        .pdb-field-value { font-size:14px; font-weight:600; color:var(--white); margin-top:2px; }
+        
+        .ops-title { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+        .ops-grid, .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+        .ops-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; transition:border-color .2s,background .2s; text-align:center; }
+        .ops-btn:hover { border-color:var(--red); background:rgba(232,35,42,.08); }
+        .ops-btn span:first-child { font-size:28px; }
+        .svc-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; text-align:center; transition:border-color .2s,background .2s; }
+        .svc-btn:hover { border-color:#00AEEF; background:rgba(0,174,239,.06); }
+        .svc-btn span:first-child { font-size:30px; }
+        
+        /* Admin nav */
+        .admin-nav-btn { background:none; border:none; border-bottom:3px solid transparent; color:var(--muted); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; padding:0 16px; height:62px; cursor:pointer; transition:color .2s,border-color .2s; white-space:nowrap; }
+        .admin-nav-btn:hover { color:var(--white); }
+        .admin-nav-btn.active { color:var(--yellow); border-bottom-color:var(--yellow); }
+
+        /* REGISTER SECTION */
         #register { padding:110px 0; background:var(--dark); position:relative; overflow:hidden; }
         #register::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,#0D0020 0%,var(--dark) 100%); }
         #register::after { content:''; position:absolute; top:0; right:0; width:50%; height:100%; background:linear-gradient(160deg,rgba(232,35,42,.10) 0%,rgba(180,20,25,.04) 100%); clip-path:polygon(20% 0%,100% 0%,100% 100%,0% 100%); }
@@ -254,99 +313,6 @@
         .btn-register { width:100%; margin-top:10px; background:var(--red); color:var(--white); border:none; padding:18px; font-family:var(--font-body); font-size:14px; font-weight:800; letter-spacing:3px; text-transform:uppercase; cursor:pointer; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:background .2s,transform .2s,box-shadow .2s; }
         .btn-register:hover { background:var(--red-dark); transform:translateY(-2px); box-shadow:0 8px 32px rgba(232,35,42,.4); }
         .btn-register:disabled { opacity:.6; transform:none; box-shadow:none; }
-
-        /* DASHBOARD (staff) */
-        #internalDashboard { display:none; position:fixed; inset:0; background:var(--black); z-index:200; overflow-y:auto; }
-        .db-topbar { background:var(--card); border-bottom:2px solid var(--red); padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
-        .db-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
-        .btn-logout { background:#c0392b; color:var(--white); border:none; padding:8px 20px; font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
-        .btn-logout:hover { background:#992d22; }
-        .db-content { max-width:960px; margin:0 auto; padding:40px 32px; }
-        .db-card { background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; margin-bottom:32px; }
-        @media(min-width:640px){ .db-card{ flex-direction:row; } }
-        .db-avatar-panel { background:linear-gradient(160deg,#100020,#0E0E1A); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:240px; border-right:1px solid var(--border); }
-        .db-avatar { width:96px; height:130px; object-fit:cover; border:3px solid var(--red); cursor:pointer; background:var(--dark); transition:border-color .2s; }
-        .db-avatar-wrap { position:relative; display:inline-block; }
-        .db-avatar-wrap:hover .db-avatar { border-color:var(--yellow); }
-        .db-avatar-overlay { position:absolute; inset:0; background:rgba(0,0,0,.7); display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; transition:opacity .2s; font-size:11px; font-weight:700; color:var(--white); gap:6px; cursor:pointer; }
-        .db-avatar-wrap:hover .db-avatar-overlay { opacity:1; }
-        .db-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--yellow); margin-top:16px; }
-        .db-position { font-size:12px; color:var(--muted); margin-bottom:12px; }
-        .db-belt-badge { background:rgba(255,214,0,.1); border:1px solid rgba(255,214,0,.3); color:var(--yellow); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; }
-        .db-info-panel { padding:40px 36px; flex:1; }
-        .db-info-title { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:24px; }
-        .db-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
-        .db-info-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
-        .db-info-value { font-size:15px; font-weight:600; color:var(--white); }
-        .btn-edit { background:none; border:1px solid var(--border); color:var(--white); padding:10px 24px; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s; }
-        .btn-edit:hover { border-color:var(--yellow); color:var(--yellow); }
-        .ops-title { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-        .ops-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
-        .ops-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; transition:border-color .2s,background .2s; text-align:center; }
-        .ops-btn:hover { border-color:var(--red); background:rgba(232,35,42,.08); }
-        .ops-btn span:first-child { font-size:28px; }
-
-        /* MODAL */
-        .modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:300; align-items:center; justify-content:center; padding:20px; }
-        .modal-backdrop.open { display:flex; }
-        .modal-box { background:var(--dark); border:1px solid var(--border2); width:100%; max-width:720px; max-height:90vh; overflow-y:auto; }
-        .modal-header { background:var(--card); border-bottom:2px solid var(--red); padding:20px 28px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:5; }
-        .modal-header h3 { font-weight:700; font-size:16px; letter-spacing:2px; text-transform:uppercase; }
-        .modal-close { background:none; border:none; color:var(--muted); font-size:26px; cursor:pointer; line-height:1; transition:color .2s; }
-        .modal-close:hover { color:var(--white); }
-        .modal-body { padding:32px 28px; }
-        .form-section-title { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--red); border-left:3px solid var(--red); padding-left:10px; margin-bottom:20px; }
-        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
-        @media(max-width:500px){ .form-grid{ grid-template-columns:1fr; } }
-        .form-col-full { grid-column:1 / -1; }
-        .form-label { display:block; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-        .form-input { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:12px 16px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
-        .form-input:focus { border-color:var(--yellow); }
-        textarea.form-input { resize:vertical; }
-        .btn-form-save { background:var(--red); color:var(--white); border:none; padding:12px 28px; font-family:var(--font-body); font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
-        .btn-form-save:hover { background:var(--red-dark); }
-        .btn-form-pass { background:var(--yellow); color:var(--black); border:none; padding:12px 28px; font-family:var(--font-body); font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
-        .btn-form-pass:hover { background:#E6BF00; }
-        .form-divider { border:none; border-top:1px solid var(--border); margin:32px 0; }
-
-        /* DATA TABLE */
-        .data-table { width:100%; border-collapse:collapse; }
-        .data-table th { background:rgba(255,255,255,.04); padding:12px 16px; text-align:left; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
-        .data-table td { padding:14px 16px; font-size:14px; color:var(--white); border-bottom:1px solid var(--border); }
-        .data-table tr:last-child td { border-bottom:none; }
-        .badge-pass { background:rgba(0,176,80,.15); color:#50D080; font-size:10px; font-weight:700; letter-spacing:1px; padding:3px 10px; text-transform:uppercase; }
-
-        /* PARENT DASHBOARD */
-        #parentDashboard { display:none; position:fixed; inset:0; background:var(--black); z-index:200; overflow-y:auto; }
-        .pdb-topbar { background:var(--card); border-bottom:2px solid #00AEEF; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
-        .pdb-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#60D0FF; }
-        .pdb-card { background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; margin-bottom:32px; }
-        @media(min-width:640px){ .pdb-card{ flex-direction:row; } }
-        .pdb-avatar-panel { background:linear-gradient(160deg,#041830,#0A1020); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:220px; border-right:1px solid var(--border); }
-        .pdb-avatar { width:96px; height:130px; object-fit:cover; border:3px solid #00AEEF; background:var(--dark); }
-        .pdb-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--white); margin-top:14px; }
-        .pdb-id-badge { background:rgba(0,174,239,.1); border:1px solid rgba(0,174,239,.3); color:#60D0FF; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; margin-top:10px; }
-        .pdb-info { flex:1; display:grid; grid-template-columns:1fr 1fr; }
-        @media(max-width:640px){ .pdb-info{ grid-template-columns:1fr; } }
-        .pdb-info-col { padding:32px 28px; border-right:1px solid var(--border); }
-        .pdb-info-col:last-child { border-right:none; }
-        .pdb-col-title { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:20px; display:flex; align-items:center; gap:8px; }
-        .pdb-col-title i { color:#00AEEF; }
-        .pdb-field { margin-bottom:14px; }
-        .pdb-field-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
-        .pdb-field-value { font-size:14px; font-weight:600; color:var(--white); margin-top:2px; }
-        .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
-        .svc-btn { background:var(--card); border:1px solid var(--border); padding:28px 20px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; text-align:center; transition:border-color .2s,background .2s; }
-        .svc-btn:hover { border-color:#00AEEF; background:rgba(0,174,239,.06); }
-        .svc-btn span:first-child { font-size:30px; }
-        .pdb-modal-header { background:var(--card); border-bottom:2px solid #00AEEF; padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
-        .pdb-modal-header h3 { font-weight:700; font-size:16px; letter-spacing:2px; text-transform:uppercase; }
-        .tuition-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:24px; }
-        @media(max-width:500px){ .tuition-grid{ grid-template-columns:1fr; } }
-        .tuition-item { background:rgba(255,255,255,.04); border:1px solid var(--border); padding:20px; cursor:pointer; transition:border-color .2s; }
-        .tuition-item:hover { border-color:#00AEEF; }
-        .tuition-item.full { grid-column:1 / -1; }
-        .tuition-item strong { display:block; font-weight:700; letter-spacing:1px; margin-bottom:4px; }
 
         /* FOOTER */
         footer { background:var(--card); border-top:3px solid var(--red); padding:64px 0 28px; }
@@ -378,86 +344,10 @@
         .reveal { opacity:0; animation:fadeUp .6s ease forwards; }
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s} .delay-4{animation-delay:.4s}
 
-        /* ══════════════════════════════════════════════
-           NEW: SCHEDULE / LEAVE / ADMIN STYLES
-        ══════════════════════════════════════════════ */
-        /* Schedule day card (staff view) */
-        .sched-day-card { background:var(--card); border:1px solid var(--border); margin-bottom:8px; overflow:hidden; }
-        .sched-day-header { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:rgba(255,255,255,.03); border-bottom:1px solid var(--border); }
-        .sched-day-name { font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
-        .sched-day-date { font-size:11px; color:var(--muted); }
-        .sched-shifts { padding:12px 16px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-        .sched-shift-group { display:flex; align-items:center; gap:4px; flex-wrap:wrap; margin-right:8px; margin-bottom:4px; }
-        .sched-group-label { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.28); min-width:46px; flex-shrink:0; }
-        .shift-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; background:rgba(255,255,255,.04); border:1.5px solid var(--border); color:var(--muted); font-family:var(--font-body); font-size:12px; font-weight:600; cursor:pointer; transition:all .2s; white-space:nowrap; }
-        .shift-btn:hover { border-color:rgba(255,255,255,.25); color:var(--white); }
-        .shift-btn.active { background:rgba(232,35,42,.14); border-color:var(--red); color:var(--white); }
-        .shift-btn.morning.active { background:rgba(0,176,80,.12); border-color:#00B050; color:#40DD80; }
-        .shift-btn.afternoon.active { background:rgba(255,149,0,.12); border-color:#FF9500; color:#FFBE50; }
-        .shift-btn.evening.active { background:rgba(232,35,42,.14); border-color:var(--red); color:#FF8080; }
-        .shift-btn i { font-size:11px; }
-        /* Week nav buttons */
-        .week-nav-btn { background:var(--card); border:1px solid var(--border); color:var(--white); width:36px; height:36px; cursor:pointer; font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center; transition:border-color .2s; flex-shrink:0; }
-        .week-nav-btn:hover { border-color:var(--red); }
-        /* Admin nav */
-        .admin-nav-btn { background:none; border:none; border-bottom:3px solid transparent; color:var(--muted); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; padding:0 16px; height:62px; cursor:pointer; transition:color .2s,border-color .2s; white-space:nowrap; }
-        .admin-nav-btn:hover { color:var(--white); }
-        .admin-nav-btn.active { color:var(--yellow); border-bottom-color:var(--yellow); }
-        /* Admin day block */
-        .admin-day-block { background:var(--card); border:1px solid var(--border); margin-bottom:10px; overflow:hidden; }
-        .admin-day-header { background:rgba(255,255,255,.03); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); }
-        .admin-day-title { font-size:11px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; color:var(--yellow); }
-        .admin-day-date { font-size:12px; color:var(--muted); }
-        .admin-shift-row { display:flex; align-items:center; padding:10px 20px; border-bottom:1px solid rgba(255,255,255,.04); }
-        .admin-shift-row:last-child { border-bottom:none; }
-        .admin-shift-time { font-size:12px; font-weight:600; color:var(--muted); min-width:140px; flex-shrink:0; }
-        .admin-shift-staff { display:flex; flex-wrap:wrap; gap:6px; flex:1; }
-        .staff-chip { background:rgba(232,35,42,.14); border:1px solid rgba(232,35,42,.3); color:var(--white); font-size:11px; font-weight:600; padding:3px 10px; }
-        .empty-shift { font-size:12px; color:rgba(255,255,255,.18); font-style:italic; }
-        /* Leave filter buttons */
-        .lf-btn { background:var(--card); border:1px solid var(--border); color:var(--muted); font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:1px; padding:8px 16px; cursor:pointer; transition:all .2s; }
-        .lf-btn.active-lf { background:var(--red); border-color:var(--red); color:var(--white); }
-        /* Leave cards */
-        .leave-card { background:var(--card); border:1px solid var(--border); padding:20px 24px; margin-bottom:10px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; border-left:3px solid var(--border); transition:border-left-color .2s; }
-        .leave-card:hover { border-left-color:var(--red); }
-        .leave-staff-name { font-weight:700; font-size:15px; color:var(--white); margin-bottom:6px; }
-        .leave-dates { font-size:13px; color:var(--muted); margin-bottom:4px; }
-        .leave-reason { font-size:13px; color:var(--off-white); font-style:italic; }
-        .leave-actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; flex-shrink:0; }
-        .leave-status { font-size:10px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:2px; }
-        .status-pending  { background:rgba(255,149,0,.15); color:#FF9500; }
-        .status-approved { background:rgba(0,176,80,.15); color:#4CD080; }
-        .status-rejected { background:rgba(232,35,42,.15); color:#FF6B6B; }
-        .btn-approve { background:rgba(0,176,80,.12); border:1px solid rgba(0,176,80,.35); color:#4CD080; font-family:var(--font-body); font-size:11px; font-weight:700; padding:7px 16px; cursor:pointer; letter-spacing:1px; transition:background .2s; }
-        .btn-approve:hover { background:rgba(0,176,80,.25); }
-        .btn-reject { background:rgba(232,35,42,.10); border:1px solid rgba(232,35,42,.3); color:#FF6B6B; font-family:var(--font-body); font-size:11px; font-weight:700; padding:7px 16px; cursor:pointer; letter-spacing:1px; transition:background .2s; }
-        .btn-reject:hover { background:rgba(232,35,42,.22); }
-        .btn-undo { background:none; border:1px solid var(--border); color:var(--muted); font-family:var(--font-body); font-size:11px; padding:6px 12px; cursor:pointer; transition:all .2s; }
-        .btn-undo:hover { border-color:var(--yellow); color:var(--yellow); }
-        /* Payroll table */
-        .payroll-table { width:100%; border-collapse:collapse; font-family:var(--font-body); }
-        .payroll-table th { background:rgba(255,255,255,.04); padding:12px 16px; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); text-align:left; }
-        .payroll-table td { padding:14px 16px; font-size:13px; color:var(--white); border-bottom:1px solid var(--border); }
-        .payroll-table tfoot td { font-weight:800; font-size:14px; color:var(--yellow); border-top:2px solid var(--yellow); border-bottom:none; }
-        /* Attendance table */
-        .att-table { width:100%; border-collapse:collapse; min-width:700px; font-family:var(--font-body); }
-        .att-table th,.att-table td { padding:10px 12px; border:1px solid var(--border); text-align:center; font-size:12px; }
-        .att-table th { background:rgba(255,255,255,.04); font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
-        .att-table td { color:var(--white); }
-        .att-check { width:18px; height:18px; cursor:pointer; accent-color:var(--red); }
-        /* My leave history badge */
-        .my-leave-status { font-size:10px; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; }
-
-        @media print {
-            body * { visibility:hidden; }
-            #payrollPrintArea, #payrollPrintArea * { visibility:visible; }
-            #payrollPrintArea { position:fixed; top:0; left:0; width:100%; background:white; color:black; }
-        }
     </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
 <nav>
     <div class="nav-logo">
         <img src="LOGO.png" alt="Taekwondo Kids Logo">
@@ -482,7 +372,6 @@
     </div>
 </nav>
 
-<!-- ══ HERO ══ -->
 <section id="hero">
     <div class="hero-grid-bg"></div>
     <div class="hero-slash"></div>
@@ -513,7 +402,6 @@
     </div>
 </section>
 
-<!-- ══ FEATURES ══ -->
 <section id="features">
     <div class="features-strip">
         <div class="feat-item reveal"><div class="feat-icon"><i class="fa-solid fa-child-reaching"></i></div><div class="feat-text"><div class="feat-title"><span class="lang-vi">Học thử miễn phí</span><span class="lang-en">Free Trial Lesson</span></div><div class="feat-desc"><span class="lang-vi">Đăng ký trải nghiệm không mất phí</span><span class="lang-en">No-cost trial registration</span></div></div></div>
@@ -523,7 +411,6 @@
     </div>
 </section>
 
-<!-- ══ ABOUT ══ -->
 <section id="about">
     <div class="container">
         <div class="about-header reveal">
@@ -542,7 +429,6 @@
     </div>
 </section>
 
-<!-- ══ GALLERY ══ -->
 <section id="gallery">
     <div class="container"><div class="gallery-header reveal"><div class="sec-tag"><span class="lang-vi">Ảnh kỷ niệm</span><span class="lang-en">Our Memories</span></div><h2 class="sec-title"><span class="lang-vi">Chặng đường <span class="accent">gắn bó</span></span><span class="lang-en">Our <span class="accent">Journey</span></span></h2></div></div>
     <div class="gallery-grid">
@@ -558,7 +444,6 @@
     </div>
 </section>
 
-<!-- ══ PRICING ══ -->
 <section id="pricing">
     <div class="container">
         <div class="pricing-header reveal">
@@ -574,7 +459,6 @@
     </div>
 </section>
 
-<!-- ══ PARTNERS ══ -->
 <section id="partners">
     <div class="container">
         <div class="partners-header reveal">
@@ -590,7 +474,6 @@
     </div>
 </section>
 
-<!-- ══ LOCATIONS ══ -->
 <section id="locations">
     <div class="container">
         <div class="locations-header reveal">
@@ -682,13 +565,12 @@
     </div>
 </section>
 
-<!-- ══ PORTAL ══ -->
 <section id="portal">
     <div class="container">
         <div class="portal-header reveal">
             <div class="sec-tag"><span class="lang-vi">Dành riêng cho thành viên</span><span class="lang-en">Members Only</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Hệ thống <span class="accent">tra cứu</span> thông tin</span><span class="lang-en">Information <span class="accent">Portal</span></span></h2>
-            <p><span class="lang-vi">Hệ thống quản lý thông tin thông minh, tiện lợi của Taekwondo Kids</span><span class="lang-en">Smart and convenient information management system by Taekwondo Kids</span></p>
+            <h2 class="sec-title"><span class="lang-vi">Hệ thống quản lý thông tin <span class="accent">thông minh</span></span><span class="lang-en">Smart Information <span class="accent">Management</span></span></h2>
+            <p><span class="lang-vi">Hệ thống tra cứu thông tin tiện lợi của Taekwondo Kids Việt Nam</span><span class="lang-en">Convenient information portal by Taekwondo Kids Vietnam</span></p>
         </div>
         <div class="portal-tabs">
             <button class="tab-btn active" id="btn-phuhuynh" onclick="switchTab('phuhuynh')"><span class="lang-vi">Phụ huynh &amp; Võ sinh</span><span class="lang-en">Parents &amp; Students</span></button>
@@ -698,15 +580,15 @@
             <div class="tab-panel active" id="tab-phuhuynh">
                 <h3><span class="lang-vi">Dành cho Phụ huynh &amp; Võ sinh của Trung tâm Taekwondo Kids Việt Nam</span><span class="lang-en">For Parents &amp; Students of Taekwondo Kids Vietnam Center</span></h3>
                 <form id="parentLoginForm" class="login-form">
-                    <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại đăng nhập" data-en-placeholder="Login Phone Number">
+                    <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại / Mã học viên" data-en-placeholder="Phone / Student ID">
                     <input type="password" id="parentLoginPass" required placeholder="Mật khẩu" data-en-placeholder="Password">
                     <button type="submit" id="parentLoginBtn" class="btn-login-parent"><span class="lang-vi">PHỤ HUYNH ĐĂNG NHẬP</span><span class="lang-en">PARENT LOGIN</span></button>
                 </form>
             </div>
             <div class="tab-panel" id="tab-hlv">
-                <h3><span class="lang-vi">Chỉ dành cho Huấn luyện viên &amp; Nhân viên Taekwondo Kids Việt Nam</span><span class="lang-en">Strictly for Coaches &amp; Staff of Taekwondo Kids Vietnam</span></h3>
+                <h3><span class="lang-vi">Chỉ dành cho Huấn luyện viên &amp; Nhân viên công tác tại Trung tâm</span><span class="lang-en">Strictly for Coaches &amp; Staff of Taekwondo Kids Vietnam</span></h3>
                 <form id="internalLoginForm" class="login-form">
-                    <input type="text" id="loginPhone" required placeholder="Số điện thoại / Tài khoản" data-en-placeholder="Phone / Account">
+                    <input type="text" id="loginPhone" required placeholder="Tài khoản / Số điện thoại" data-en-placeholder="Account / Phone">
                     <input type="password" id="loginPass" required placeholder="Mật khẩu" data-en-placeholder="Password">
                     <button type="submit" id="internalLoginBtn" class="btn-login-staff"><span class="lang-vi">ĐĂNG NHẬP HỆ THỐNG</span><span class="lang-en">SYSTEM LOGIN</span></button>
                 </form>
@@ -715,13 +597,19 @@
     </div>
 </section>
 
-<!-- ══ STAFF DASHBOARD ══ -->
 <div id="internalDashboard">
     <div class="db-topbar">
-        <div class="db-topbar-title"><i class="fa-solid fa-user-shield" style="color:var(--red);margin-right:8px"></i><span class="lang-vi">Hệ thống Quản lý Nội bộ — Taekwondo Kids</span><span class="lang-en">Internal Management System — Taekwondo Kids</span></div>
+        <div class="db-topbar-title"><i class="fa-solid fa-user-shield" style="color:var(--red);margin-right:8px"></i><span class="lang-vi">Hệ thống Quản lý Nội bộ</span><span class="lang-en">Internal Management System</span></div>
+        <div id="adminNavTabs" style="display:none; gap:10px;">
+            <button class="admin-nav-btn active" onclick="showAdminTab('overview')">Tổng quan</button>
+            <button class="admin-nav-btn" onclick="showAdminTab('schedule')">Lịch dạy</button>
+            <button class="admin-nav-btn" onclick="showAdminTab('leave')">Nghỉ phép</button>
+            <button class="admin-nav-btn" onclick="showAdminTab('attendance')">Chấm công</button>
+            <button class="admin-nav-btn" onclick="showAdminTab('payroll')">Bảng lương</button>
+        </div>
         <button onclick="logoutInternal()" class="btn-logout"><span class="lang-vi">Đăng xuất</span><span class="lang-en">Log out</span></button>
     </div>
-    <div class="db-content">
+    <div class="db-content" id="staffViewContent">
         <div class="db-card">
             <div class="db-avatar-panel">
                 <div class="db-avatar-wrap" onclick="document.getElementById('avatarUpload').click()">
@@ -730,121 +618,34 @@
                 </div>
                 <input type="file" id="avatarUpload" accept="image/*" style="display:none" onchange="handleImageUpload(this)">
                 <div class="db-name" id="dbName">Họ Tên</div>
-                <div class="db-position" id="dbPosition">Vị trí công tác</div>
+                <div class="db-position" id="dbPosition">Vị trí</div>
                 <div class="db-belt-badge"><span class="lang-vi">Cấp đai:</span><span class="lang-en">Belt:</span> <span id="dbBelt"></span></div>
             </div>
             <div class="db-info-panel">
                 <div class="db-info-title"><span class="lang-vi">Thông tin cá nhân</span><span class="lang-en">Personal Information</span></div>
                 <div class="db-info-grid">
                     <div><div class="db-info-label"><span class="lang-vi">Số điện thoại</span><span class="lang-en">Phone</span></div><div class="db-info-value" id="dbPhone"></div></div>
-                    <div><div class="db-info-label"><span class="lang-vi">Ngày sinh</span><span class="lang-en">DOB</span></div><div class="db-info-value" id="dbDob"></div></div>
-                    <div style="grid-column:1/-1"><div class="db-info-label">Email</div><div class="db-info-value" id="dbEmail"></div></div>
+                    <div><div class="db-info-label"><span class="lang-vi">Tuổi / Ngày sinh</span><span class="lang-en">Age / DOB</span></div><div class="db-info-value" id="dbDob"></div></div>
+                    <div><div class="db-info-label">Email</div><div class="db-info-value" id="dbEmail"></div></div>
+                    <div><div class="db-info-label">Cơ sở phụ trách</div><div class="db-info-value" id="dbBranch" style="color:var(--yellow)"></div></div>
                 </div>
-                <button onclick="openEditModal()" class="btn-edit"><i class="fa-solid fa-pen-to-square" style="margin-right:8px"></i><span class="lang-vi">Sửa đổi thông tin &amp; Mật khẩu</span><span class="lang-en">Edit Info &amp; Password</span></button>
+                <button onclick="openEditModal()" class="btn-edit"><i class="fa-solid fa-pen-to-square" style="margin-right:8px"></i><span class="lang-vi">Sửa thông tin &amp; Mật khẩu</span><span class="lang-en">Edit Info &amp; Password</span></button>
             </div>
         </div>
-        <div class="ops-title"><span class="lang-vi">Theo dõi nghiệp vụ nhân viên</span><span class="lang-en">Staff Operations</span></div>
+        <div class="ops-title"><span class="lang-vi">Nghiệp vụ HLV / Nhân viên</span><span class="lang-en">Staff Operations</span></div>
         <div class="ops-grid">
-            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span class="lang-vi">Đăng ký lịch dạy</span><span class="lang-en">Teaching Schedule</span></button>
-            <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span class="lang-vi">Đăng ký nghỉ phép</span><span class="lang-en">Leave Request</span></button>
-            <button class="ops-btn"><span>⏱️</span><span class="lang-vi">Chấm công</span><span class="lang-en">Attendance</span></button>
-            <button class="ops-btn"><span>💵</span><span class="lang-vi">Bảng lương</span><span class="lang-en">Payroll</span></button>
-            <button class="ops-btn"><span>⭐</span><span class="lang-vi">Điểm đánh giá</span><span class="lang-en">Parent Ratings</span></button>
+            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span class="lang-vi">Đăng ký lịch dạy</span></button>
+            <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span class="lang-vi">Đăng ký nghỉ phép</span></button>
+            <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span class="lang-vi">Nhận xét học viên</span></button>
+            <button class="ops-btn" onclick="viewMyAttendance()"><span>⏱️</span><span class="lang-vi">Xem chấm công</span></button>
+            <button class="ops-btn" onclick="viewMyPayroll()"><span>💵</span><span class="lang-vi">Xem bảng lương</span></button>
         </div>
     </div>
+    
+    <div class="db-content" id="adminViewContent" style="display:none;">
+        </div>
 </div>
 
-<!-- ══ EDIT MODAL (staff) ══ -->
-<div id="editModal" class="modal-backdrop" onclick="closeEditModal()">
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <div class="modal-header"><h3><span class="lang-vi">Cập nhật tài khoản</span><span class="lang-en">Update Account</span></h3><button class="modal-close" onclick="closeEditModal()">&times;</button></div>
-        <div class="modal-body">
-            <form id="updateInfoForm">
-                <div class="form-section-title"><span class="lang-vi">Sửa thông tin cá nhân</span><span class="lang-en">Edit Personal Info</span></div>
-                <div class="form-grid">
-                    <div><label class="form-label">Họ và tên</label><input type="text" id="editName" class="form-input"></div>
-                    <div><label class="form-label">Số điện thoại</label><input type="text" id="editPhone" class="form-input"></div>
-                    <div><label class="form-label">Ngày sinh</label><input type="text" id="editDob" class="form-input"></div>
-                    <div><label class="form-label">Vị trí công tác</label><input type="text" id="editPos" class="form-input"></div>
-                    <div class="form-col-full"><label class="form-label">Email</label><input type="email" id="editEmail" class="form-input"></div>
-                </div>
-                <button type="submit" id="btnUpdateInfo" class="btn-form-save"><span class="lang-vi">Lưu Thay Đổi</span><span class="lang-en">Save Changes</span></button>
-            </form>
-            <hr class="form-divider">
-            <form id="updatePassForm">
-                <div class="form-section-title"><span class="lang-vi">Đổi mật khẩu</span><span class="lang-en">Change Password</span></div>
-                <div class="form-grid">
-                    <div><label class="form-label">Mật khẩu mới</label><input type="password" id="newPass" class="form-input"></div>
-                    <div><label class="form-label">Nhập lại mật khẩu</label><input type="password" id="confirmPass" class="form-input"></div>
-                </div>
-                <button type="submit" id="btnUpdatePass" class="btn-form-pass"><span class="lang-vi">Xác Nhận Đổi Mật Khẩu</span><span class="lang-en">Confirm Password Change</span></button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- ══ SCHEDULE MODAL (staff) ══ -->
-<div id="scheduleModal" class="modal-backdrop" onclick="closeScheduleModal()">
-    <div class="modal-box" style="max-width:740px" onclick="event.stopPropagation()">
-        <div class="modal-header">
-            <h3><i class="fa-solid fa-calendar-days" style="margin-right:8px;color:var(--yellow)"></i><span class="lang-vi">Đăng ký lịch dạy</span><span class="lang-en">Register Teaching Schedule</span></h3>
-            <button class="modal-close" onclick="closeScheduleModal()">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--border);margin-bottom:20px">
-                <button class="week-nav-btn" onclick="prevWeekSched()">‹</button>
-                <div style="text-align:center">
-                    <div id="schedWeekLabel" style="font-weight:700;font-size:14px;color:var(--yellow)"></div>
-                    <div id="schedCount" style="font-size:11px;color:var(--muted);margin-top:3px"></div>
-                </div>
-                <button class="week-nav-btn" onclick="nextWeekSched()">›</button>
-            </div>
-            <p style="font-size:12px;color:var(--muted);margin-bottom:14px;padding:10px 12px;background:rgba(255,214,0,.06);border-left:3px solid var(--yellow)">
-                <i class="fa-solid fa-circle-info" style="color:var(--yellow);margin-right:6px"></i>
-                <span class="lang-vi">Chọn ca bạn có thể dạy trong tuần. Dữ liệu lưu tại thiết bị này và hiển thị trong bảng quản lý của Admin.</span>
-                <span class="lang-en">Select shifts you can teach this week. Data is saved on this device and visible in Admin's management panel.</span>
-            </p>
-            <div id="scheduleGrid" style="max-height:52vh;overflow-y:auto;padding-right:4px"></div>
-            <button onclick="saveSchedule()" style="width:100%;margin-top:18px;background:var(--red);color:var(--white);border:none;padding:16px;font-family:var(--font-body);font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:background .2s" onmouseover="this.style.background='var(--red-dark)'" onmouseout="this.style.background='var(--red)'">
-                <i class="fa-solid fa-floppy-disk" style="margin-right:8px"></i><span class="lang-vi">LƯU LỊCH DẠY TUẦN NÀY</span><span class="lang-en">SAVE THIS WEEK'S SCHEDULE</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- ══ LEAVE MODAL (staff) ══ -->
-<div id="leaveModal" class="modal-backdrop" onclick="closeLeaveModal()">
-    <div class="modal-box" style="max-width:640px" onclick="event.stopPropagation()">
-        <div class="modal-header">
-            <h3><i class="fa-solid fa-file-medical" style="margin-right:8px;color:var(--yellow)"></i><span class="lang-vi">Đăng ký nghỉ phép</span><span class="lang-en">Leave Request</span></h3>
-            <button class="modal-close" onclick="closeLeaveModal()">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="leaveForm">
-                <div class="form-grid" style="margin-bottom:16px">
-                    <div><label class="form-label"><span class="lang-vi">Từ ngày *</span><span class="lang-en">From Date *</span></label><input type="date" id="leaveStart" class="form-input" required></div>
-                    <div><label class="form-label"><span class="lang-vi">Đến ngày *</span><span class="lang-en">To Date *</span></label><input type="date" id="leaveEnd" class="form-input" required></div>
-                </div>
-                <div style="margin-bottom:20px">
-                    <label class="form-label"><span class="lang-vi">Lý do nghỉ phép *</span><span class="lang-en">Reason *</span></label>
-                    <textarea id="leaveReason" class="form-input" rows="3" placeholder="Nêu rõ lý do..."></textarea>
-                </div>
-                <button type="submit" style="background:var(--yellow);color:var(--black);border:none;padding:14px 28px;font-family:var(--font-body);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);margin-bottom:32px">
-                    <i class="fa-solid fa-paper-plane" style="margin-right:8px"></i><span class="lang-vi">GỬI ĐƠN NGHỈ PHÉP</span><span class="lang-en">SUBMIT LEAVE REQUEST</span>
-                </button>
-            </form>
-            <h4 style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px"><span class="lang-vi">Lịch sử nghỉ phép của tôi</span><span class="lang-en">My Leave History</span></h4>
-            <div style="overflow-x:auto">
-                <table class="data-table" style="min-width:480px">
-                    <thead><tr><th><span class="lang-vi">Từ ngày</span><span class="lang-en">From</span></th><th><span class="lang-vi">Đến ngày</span><span class="lang-en">To</span></th><th><span class="lang-vi">Lý do</span><span class="lang-en">Reason</span></th><th><span class="lang-vi">Trạng thái</span><span class="lang-en">Status</span></th></tr></thead>
-                    <tbody id="myLeaveTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ══ PARENT DASHBOARD ══ -->
 <div id="parentDashboard">
     <div class="pdb-topbar">
         <div class="pdb-topbar-title"><i class="fa-solid fa-users" style="margin-right:8px"></i><span class="lang-vi">Cổng Thông tin Phụ huynh &amp; Võ sinh</span><span class="lang-en">Parent &amp; Student Portal</span></div>
@@ -852,188 +653,36 @@
     </div>
     <div class="db-content">
         <div class="pdb-card">
-            <div class="pdb-avatar-panel"><img id="p_vsAvatar" src="" alt="Avatar" class="pdb-avatar"><div class="pdb-name" id="p_vsName">Tên Võ Sinh</div><div class="pdb-id-badge"><span class="lang-vi">Mã HV:</span><span class="lang-en">ID:</span> <span id="p_vsId"></span></div></div>
+            <div class="pdb-avatar-panel">
+                <img id="p_vsAvatar" src="" alt="Avatar" class="pdb-avatar">
+                <div class="pdb-name" id="p_vsName">Tên Võ Sinh</div>
+                <div class="pdb-id-badge"><span class="lang-vi">Mã HV:</span><span class="lang-en">ID:</span> <span id="p_vsId"></span></div>
+                <div style="font-size:12px; color:var(--muted); margin-top:10px;">Cơ sở: <strong id="p_vsBranch" style="color:var(--white)"></strong></div>
+            </div>
             <div class="pdb-info">
                 <div class="pdb-info-col">
-                    <div class="pdb-col-title"><i class="fa-solid fa-child-reaching"></i><span class="lang-vi">Thông tin Võ sinh</span><span class="lang-en">Student Info</span></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Ngày sinh</span><span class="lang-en">DOB</span></div><div class="pdb-field-value" id="p_vsDob"></div></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Trường học</span><span class="lang-en">School</span></div><div class="pdb-field-value" id="p_vsSchool"></div></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Lớp học</span><span class="lang-en">Class</span></div><div class="pdb-field-value" id="p_vsClass"></div></div>
+                    <div class="pdb-col-title"><i class="fa-solid fa-child-reaching"></i><span class="lang-vi">Thông tin Võ sinh</span></div>
+                    <div class="pdb-field"><div class="pdb-field-label">Ngày sinh</div><div class="pdb-field-value" id="p_vsDob"></div></div>
+                    <div class="pdb-field"><div class="pdb-field-label">Cấp đai</div><div class="pdb-field-value" id="p_vsBelt" style="color:var(--yellow)"></div></div>
+                    <div class="pdb-field"><div class="pdb-field-label">Hạn mức học</div><div class="pdb-field-value"><span id="p_vsMaxSessions"></span> buổi/tuần</div></div>
                 </div>
                 <div class="pdb-info-col">
-                    <div class="pdb-col-title" style="color:var(--yellow);border-color:var(--yellow)"><i class="fa-solid fa-user-tie" style="color:var(--yellow)"></i><span class="lang-vi">Thông tin Phụ huynh</span><span class="lang-en">Parent Info</span></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Họ và tên</span><span class="lang-en">Full Name</span></div><div class="pdb-field-value"><span id="p_phName"></span> (<span id="p_phRelation"></span>)</div></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Tuổi / Ngày sinh</span><span class="lang-en">Age / DOB</span></div><div class="pdb-field-value"><span id="p_phAge"></span> / <span id="p_phDob"></span></div></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Nghề nghiệp</span><span class="lang-en">Occupation</span></div><div class="pdb-field-value" id="p_phJob"></div></div>
-                    <div class="pdb-field"><div class="pdb-field-label"><span class="lang-vi">Liên hệ</span><span class="lang-en">Contact</span></div><div class="pdb-field-value" id="p_phPhone"></div><div style="font-size:12px;color:var(--muted)" id="p_phEmail"></div></div>
+                    <div class="pdb-col-title" style="color:var(--yellow);border-color:var(--yellow)"><i class="fa-solid fa-user-tie" style="color:var(--yellow)"></i><span class="lang-vi">Thông tin Phụ huynh</span></div>
+                    <div class="pdb-field"><div class="pdb-field-label">Họ và tên giám hộ</div><div class="pdb-field-value"><span id="p_phName"></span> (<span id="p_phRelation"></span>)</div></div>
+                    <div class="pdb-field"><div class="pdb-field-label">Liên hệ</div><div class="pdb-field-value" id="p_phPhone"></div></div>
                 </div>
             </div>
         </div>
-        <div class="ops-title"><span class="lang-vi">Tra cứu &amp; Dịch vụ</span><span class="lang-en">Services &amp; Lookup</span></div>
+        <div class="ops-title"><span class="lang-vi">Tra cứu &amp; Đăng ký</span><span class="lang-en">Services &amp; Registration</span></div>
         <div class="svc-grid">
-            <button onclick="openParentModal('beltModal')" class="svc-btn"><span>🥋</span><span class="lang-vi">Lịch sử thăng cấp đai</span><span class="lang-en">Belt Promotion History</span></button>
-            <button onclick="openParentModal('progressModal')" class="svc-btn"><span>📈</span><span class="lang-vi">Tiến độ tập luyện</span><span class="lang-en">Training Progress</span></button>
-            <button onclick="openParentModal('reviewModal')" class="svc-btn"><span>🏆</span><span class="lang-vi">Đánh giá &amp; Nhận xét</span><span class="lang-en">Reviews &amp; Feedback</span></button>
-            <button onclick="openParentModal('tuitionModal')" class="svc-btn"><span>💳</span><span class="lang-vi">Lịch học &amp; Học phí</span><span class="lang-en">Schedule &amp; Tuition</span></button>
+            <button onclick="openParentModal('beltModal')" class="svc-btn"><span>🥋</span><span class="lang-vi">Lịch sử thăng đai</span></button>
+            <button onclick="openParentModal('reviewModal')" class="svc-btn"><span>🏆</span><span class="lang-vi">Nhận xét của HLV</span></button>
+            <button onclick="openParentModal('attendanceModal')" class="svc-btn"><span>📅</span><span class="lang-vi">Đăng ký lịch học</span></button>
+            <button onclick="openParentModal('makeupModal')" class="svc-btn"><span>🔄</span><span class="lang-vi">Xin nghỉ &amp; Học bù</span></button>
         </div>
     </div>
 </div>
 
-<!-- Parent modals -->
-<div id="beltModal" onclick="closeParentModal('beltModal')" class="modal-backdrop"><div class="modal-box" onclick="event.stopPropagation()"><div class="pdb-modal-header"><h3><span class="lang-vi">Lịch sử thăng cấp đai</span><span class="lang-en">Belt Promotion History</span></h3><button class="modal-close" onclick="closeParentModal('beltModal')">&times;</button></div><div style="padding:24px;overflow-y:auto;max-height:60vh"><table class="data-table"><thead><tr><th><span class="lang-vi">Cấp đai cũ</span><span class="lang-en">Old Belt</span></th><th><span class="lang-vi">Cấp đai mới</span><span class="lang-en">New Belt</span></th><th><span class="lang-vi">Thời gian</span><span class="lang-en">Date</span></th><th><span class="lang-vi">Trạng thái</span><span class="lang-en">Status</span></th></tr></thead><tbody id="beltTableBody"></tbody></table></div></div></div>
-<div id="reviewModal" onclick="closeParentModal('reviewModal')" class="modal-backdrop"><div class="modal-box" onclick="event.stopPropagation()"><div class="pdb-modal-header"><h3><span class="lang-vi">Đánh giá và Nhận xét của HLV</span><span class="lang-en">Coach Reviews</span></h3><button class="modal-close" onclick="closeParentModal('reviewModal')">&times;</button></div><div style="padding:24px;overflow-y:auto;max-height:60vh"><table class="data-table"><thead><tr><th><span class="lang-vi">HLV</span><span class="lang-en">Coach</span></th><th><span class="lang-vi">Chi tiết nhận xét</span><span class="lang-en">Comment</span></th><th><span class="lang-vi">Lớp học</span><span class="lang-en">Class</span></th></tr></thead><tbody id="reviewTableBody"></tbody></table></div></div></div>
-<div id="progressModal" onclick="closeParentModal('progressModal')" class="modal-backdrop"><div class="modal-box" style="max-width:480px" onclick="event.stopPropagation()"><div class="pdb-modal-header"><h3><span class="lang-vi">Tiến độ tập luyện</span><span class="lang-en">Training Progress</span></h3><button class="modal-close" onclick="closeParentModal('progressModal')">&times;</button></div><div style="padding:40px;text-align:center"><i class="fa-solid fa-chart-line" style="font-size:56px;color:#00AEEF;margin-bottom:20px;display:block"></i><h3 style="font-family:var(--font-display);font-weight:900;font-size:28px;text-transform:uppercase;margin-bottom:12px"><span class="lang-vi">Sắp ra mắt</span><span class="lang-en">Coming Soon</span></h3><p style="color:var(--muted);font-size:14px;line-height:1.75"><span class="lang-vi">Tính năng đang được Trung tâm tổng hợp và sẽ sớm cập nhật.</span><span class="lang-en">Feature is being developed and will be available soon.</span></p><button onclick="closeParentModal('progressModal')" style="margin-top:24px;background:var(--card);border:1px solid var(--border);color:var(--white);padding:10px 28px;font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer"><span class="lang-vi">Đóng lại</span><span class="lang-en">Close</span></button></div></div></div>
-<div id="tuitionModal" onclick="closeParentModal('tuitionModal')" class="modal-backdrop"><div class="modal-box" style="max-width:600px" onclick="event.stopPropagation()"><div class="pdb-modal-header"><h3><span class="lang-vi">Lịch học &amp; Học phí</span><span class="lang-en">Schedule &amp; Tuition</span></h3><button class="modal-close" onclick="closeParentModal('tuitionModal')">&times;</button></div><div class="tuition-grid"><div class="tuition-item"><strong><span class="lang-vi">Lịch học cố định</span><span class="lang-en">Fixed Schedule</span></strong><span style="font-size:13px;color:var(--muted)"><span class="lang-vi">Thứ 2,4,6 hoặc Thứ 3,5,7 — tuỳ cơ sở</span><span class="lang-en">Mon,Wed,Fri or Tue,Thu,Sat — per branch</span></span></div><div class="tuition-item"><strong><span class="lang-vi">Thời gian mỗi buổi</span><span class="lang-en">Session Duration</span></strong><span style="font-size:13px;color:var(--muted)">60 – 90 phút / buổi</span></div><div class="tuition-item full"><strong><span class="lang-vi">Liên hệ học phí</span><span class="lang-en">Tuition Inquiry</span></strong><span style="font-size:13px;color:var(--muted)"><span class="lang-vi">Hotline: <b style="color:var(--yellow)">097 893 1747</b> để nhận tư vấn chi tiết.</span><span class="lang-en">Hotline: <b style="color:var(--yellow)">097 893 1747</b> for detailed info.</span></span></div></div></div></div>
-
-<!-- ══════════════════════════════════════
-     ADMIN DASHBOARD
-══════════════════════════════════════ -->
-<div id="adminDashboard" style="display:none;position:fixed;inset:0;background:var(--black);z-index:200;overflow-y:auto">
-    <!-- Top bar -->
-    <div style="background:var(--card);border-bottom:3px solid var(--yellow);position:sticky;top:0;z-index:10">
-        <div style="display:flex;align-items:stretch;justify-content:space-between;max-width:1400px;margin:0 auto;padding:0 24px">
-            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;flex-shrink:0">
-                <i class="fa-solid fa-shield-halved" style="color:var(--yellow);font-size:20px"></i>
-                <span style="font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white)">ADMIN — TAEKWONDO KIDS</span>
-            </div>
-            <div style="display:flex;align-items:stretch;overflow-x:auto">
-                <button id="atab-overview"    class="admin-nav-btn active" onclick="showAdminTab('overview')">📊 <span class="lang-vi">Tổng quan</span><span class="lang-en">Overview</span></button>
-                <button id="atab-schedule"    class="admin-nav-btn"        onclick="showAdminTab('schedule')">📅 <span class="lang-vi">Lịch dạy</span><span class="lang-en">Schedule</span></button>
-                <button id="atab-leave"       class="admin-nav-btn"        onclick="showAdminTab('leave')">📝 <span class="lang-vi">Nghỉ phép</span><span class="lang-en">Leave</span></button>
-                <button id="atab-attendance"  class="admin-nav-btn"        onclick="showAdminTab('attendance')">⏱️ <span class="lang-vi">Chấm công</span><span class="lang-en">Attendance</span></button>
-                <button id="atab-payroll"     class="admin-nav-btn"        onclick="showAdminTab('payroll')">💰 <span class="lang-vi">Bảng lương</span><span class="lang-en">Payroll</span></button>
-            </div>
-            <div style="display:flex;align-items:center;padding:0 0 0 16px;flex-shrink:0">
-                <button onclick="logoutAdmin()" class="btn-logout"><span class="lang-vi">Đăng xuất</span><span class="lang-en">Log out</span></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content wrapper -->
-    <div style="max-width:1200px;margin:0 auto;padding:32px 24px">
-
-        <!-- ─── OVERVIEW ─── -->
-        <div id="admin-tab-overview" class="admin-tab-panel">
-            <h2 style="font-family:var(--font-display);font-weight:900;font-size:clamp(24px,4vw,36px);text-transform:uppercase;margin-bottom:28px"><span class="lang-vi">Tổng quan hệ thống</span><span class="lang-en">System Overview</span></h2>
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:28px">
-                <div style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--yellow);padding:24px 20px">
-                    <div style="font-family:var(--font-display);font-size:52px;font-weight:900;color:var(--yellow);line-height:1" id="stat-schedules">0</div>
-                    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px"><span class="lang-vi">Ca đăng ký tuần này</span><span class="lang-en">Shifts this week</span></div>
-                </div>
-                <div style="background:var(--card);border:1px solid var(--border);border-top:4px solid #00AEEF;padding:24px 20px">
-                    <div style="font-family:var(--font-display);font-size:52px;font-weight:900;color:#00AEEF;line-height:1" id="stat-staff">0</div>
-                    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px"><span class="lang-vi">HLV đăng ký tuần này</span><span class="lang-en">Staff registered</span></div>
-                </div>
-                <div style="background:var(--card);border:1px solid var(--border);border-top:4px solid #FF9500;padding:24px 20px">
-                    <div style="font-family:var(--font-display);font-size:52px;font-weight:900;color:#FF9500;line-height:1" id="stat-leaves">0</div>
-                    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px"><span class="lang-vi">Đơn nghỉ chờ duyệt</span><span class="lang-en">Pending leaves</span></div>
-                </div>
-                <div style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--red);padding:24px 20px">
-                    <div style="font-family:var(--font-display);font-size:52px;font-weight:900;color:var(--red);line-height:1" id="stat-today">0</div>
-                    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px"><span class="lang-vi">Ca dạy hôm nay</span><span class="lang-en">Shifts today</span></div>
-                </div>
-            </div>
-            <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid var(--red);padding:24px">
-                <h3 style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--white);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
-                    <i class="fa-solid fa-calendar-day" style="color:var(--red);margin-right:8px"></i><span class="lang-vi">Lịch dạy hôm nay</span><span class="lang-en">Today's Schedule</span>
-                </h3>
-                <div id="todaySchedulePreview" style="font-size:14px;color:var(--muted)"></div>
-            </div>
-        </div>
-
-        <!-- ─── SCHEDULE ─── -->
-        <div id="admin-tab-schedule" class="admin-tab-panel" style="display:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px">
-                <h2 style="font-family:var(--font-display);font-weight:900;font-size:clamp(22px,4vw,34px);text-transform:uppercase"><span class="lang-vi">Lịch dạy theo tuần</span><span class="lang-en">Weekly Schedule</span></h2>
-                <div style="display:flex;align-items:center;gap:10px">
-                    <button class="week-nav-btn" onclick="adminPrevWeek()">‹</button>
-                    <span id="adminWeekLabel" style="font-weight:700;font-size:14px;color:var(--yellow);white-space:nowrap;min-width:220px;text-align:center"></span>
-                    <button class="week-nav-btn" onclick="adminNextWeek()">›</button>
-                </div>
-            </div>
-            <div id="adminScheduleGrid"></div>
-        </div>
-
-        <!-- ─── LEAVE ─── -->
-        <div id="admin-tab-leave" class="admin-tab-panel" style="display:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px">
-                <h2 style="font-family:var(--font-display);font-weight:900;font-size:clamp(22px,4vw,34px);text-transform:uppercase"><span class="lang-vi">Quản lý Nghỉ phép</span><span class="lang-en">Leave Management</span></h2>
-                <div style="display:flex;gap:8px;flex-wrap:wrap">
-                    <button onclick="filterLeaves('all')"      id="lf-all"      class="lf-btn active-lf"><span class="lang-vi">Tất cả</span><span class="lang-en">All</span></button>
-                    <button onclick="filterLeaves('pending')"  id="lf-pending"  class="lf-btn"><span class="lang-vi">Chờ duyệt</span><span class="lang-en">Pending</span></button>
-                    <button onclick="filterLeaves('approved')" id="lf-approved" class="lf-btn"><span class="lang-vi">Đã duyệt</span><span class="lang-en">Approved</span></button>
-                    <button onclick="filterLeaves('rejected')" id="lf-rejected" class="lf-btn"><span class="lang-vi">Từ chối</span><span class="lang-en">Rejected</span></button>
-                </div>
-            </div>
-            <div id="adminLeaveList"></div>
-        </div>
-
-        <!-- ─── ATTENDANCE ─── -->
-        <div id="admin-tab-attendance" class="admin-tab-panel" style="display:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px">
-                <h2 style="font-family:var(--font-display);font-weight:900;font-size:clamp(22px,4vw,34px);text-transform:uppercase"><span class="lang-vi">Chấm công</span><span class="lang-en">Attendance</span></h2>
-                <div style="display:flex;align-items:center;gap:10px">
-                    <button class="week-nav-btn" onclick="attPrevWeek()">‹</button>
-                    <span id="attWeekLabel" style="font-weight:700;font-size:14px;color:var(--yellow);white-space:nowrap;min-width:220px;text-align:center"></span>
-                    <button class="week-nav-btn" onclick="attNextWeek()">›</button>
-                </div>
-            </div>
-            <p style="font-size:13px;color:var(--muted);margin-bottom:20px;padding:12px 16px;background:rgba(255,214,0,.05);border-left:3px solid var(--yellow)">
-                <i class="fa-solid fa-circle-info" style="color:var(--yellow);margin-right:6px"></i>
-                <span class="lang-vi">Tích ✓ để xác nhận HLV đã dạy đúng ca. Chấm công sẽ được dùng để tính bảng lương. Mặc định là đã dạy (✓).</span>
-                <span class="lang-en">Check ✓ to confirm the coach taught the shift. Used for payroll calculation. Default: attended.</span>
-            </p>
-            <div style="overflow-x:auto" id="adminAttendanceGrid"></div>
-        </div>
-
-        <!-- ─── PAYROLL ─── -->
-        <div id="admin-tab-payroll" class="admin-tab-panel" style="display:none">
-            <h2 style="font-family:var(--font-display);font-weight:900;font-size:clamp(22px,4vw,34px);text-transform:uppercase;margin-bottom:28px"><span class="lang-vi">Bảng lương</span><span class="lang-en">Payroll</span></h2>
-
-            <!-- Rate settings -->
-            <div style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--yellow);padding:24px;margin-bottom:16px">
-                <h4 style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);margin-bottom:16px"><span class="lang-vi">Mức thù lao / ca (VNĐ)</span><span class="lang-en">Rate per shift (VND)</span></h4>
-                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px">
-                    <div>
-                        <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px"><span class="lang-vi">Ca thường (T2–T6)</span><span class="lang-en">Weekday (Mon–Fri)</span></label>
-                        <input type="number" id="rate-weekday"   class="form-input" style="margin:0" value="100000" oninput="saveRates()">
-                    </div>
-                    <div>
-                        <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px"><span class="lang-vi">Ca sáng cuối tuần</span><span class="lang-en">Weekend morning</span></label>
-                        <input type="number" id="rate-morning"   class="form-input" style="margin:0" value="130000" oninput="saveRates()">
-                    </div>
-                    <div>
-                        <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px"><span class="lang-vi">Ca chiều cuối tuần</span><span class="lang-en">Weekend afternoon</span></label>
-                        <input type="number" id="rate-afternoon" class="form-input" style="margin:0" value="130000" oninput="saveRates()">
-                    </div>
-                    <div>
-                        <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px"><span class="lang-vi">Ca tối cuối tuần</span><span class="lang-en">Weekend evening</span></label>
-                        <input type="number" id="rate-evening"   class="form-input" style="margin:0" value="150000" oninput="saveRates()">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Period selector -->
-            <div style="background:var(--card);border:1px solid var(--border);padding:20px 24px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
-                <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)"><span class="lang-vi">Kỳ tính lương:</span><span class="lang-en">Pay period:</span></span>
-                <input type="date" id="payroll-start" class="form-input" style="width:auto;margin:0">
-                <span style="color:var(--muted)">→</span>
-                <input type="date" id="payroll-end"   class="form-input" style="width:auto;margin:0">
-                <button onclick="calculatePayroll()" style="background:var(--red);color:var(--white);border:none;padding:12px 28px;font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);flex-shrink:0">
-                    <i class="fa-solid fa-calculator" style="margin-right:8px"></i><span class="lang-vi">TÍNH LƯƠNG</span><span class="lang-en">CALCULATE</span>
-                </button>
-                <button onclick="window.print()" style="background:var(--card);border:1px solid var(--border);color:var(--white);padding:12px 20px;font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0">
-                    <i class="fa-solid fa-print" style="margin-right:6px"></i><span class="lang-vi">In bảng lương</span><span class="lang-en">Print</span>
-                </button>
-            </div>
-
-            <div id="payrollTableWrapper"></div>
-        </div>
-
-    </div><!-- /content wrapper -->
-</div><!-- /adminDashboard -->
-
-<!-- ══ REGISTER ══ -->
 <section id="register">
     <div class="container">
         <div class="register-grid">
@@ -1058,7 +707,6 @@
     </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer>
     <div class="container">
         <div class="footer-grid">
@@ -1084,89 +732,31 @@
     <button class="float-btn mess" title="Messenger">Mess</button>
 </div>
 
-<!-- ══════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════ -->
 <script>
 /* ─────────────────────────────────────────────
-   CONSTANTS & API ENDPOINTS
+   CONSTANTS & CONFIGURATIONS
 ───────────────────────────────────────────── */
-const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxXdTQBt4gFTgCO3uap4iqUdpuKc35ZLZLRCyYrPeN0DXUGWXBdUaTLkHyyUZDM9haDEg/exec';
-const PARENT_API   = 'https://script.google.com/macros/s/AKfycbylP2EXSr2mgt1thkCttPI8a3eyVj-X2Y1_RSPYt3I4qFnL7v4lBy3zpn7xGWLou4mUuQ/exec';
-const REG_API      = 'https://script.google.com/macros/s/AKfycbyrUKEFb3DgwNlDSBdQOze2lSafwkXnkw3mnBPvDYjPsSEazVVQ2kKI_bI-5cptHxUX/exec';
+const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbx680zhdbHNYdHPluouvymiGCx3V9yIpNOgsYXvuq4gSfivf-h1Scx-6u6W7O3FreBw/exec';
+const PARENT_API   = 'https://script.google.com/macros/s/AKfycbxo_nQ-PSu7BdGQjym6fNjghrS-4QBRCdNXz5ZJk0ZRbIRutdUH4a70cfJrtkWHczaG/exec';
+const REG_API      = 'https://script.google.com/macros/s/AKfycbwPHR55eENb5VVrquuh_mPhPeceonbFM1nYH8W4WAAlbiNxCObfNKm3aFZMlxRhsSxs/exec';
 
-// Admin credentials (hardcoded for simplicity)
-const ADMIN_USER = 'tkdkidsvn';
-const ADMIN_PASS = 'tkdtkdtkd';
-
-let currentUser   = null;
+let currentUser = null;
 let currentParent = null;
 
-/* ─────────────────────────────────────────────
-   SHIFT DEFINITIONS
-   dayIdx: 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri, 5=Sat, 6=Sun
-───────────────────────────────────────────── */
-const SHIFT_DEFS = [
-    { id:'C1', time:'17:00 - 18:00', label:'Ca 1',    rate:'weekday',   days:[0,1,2,3,4] },
-    { id:'C2', time:'18:00 - 19:00', label:'Ca 2',    rate:'weekday',   days:[0,1,2,3,4] },
-    { id:'S1', time:'09:00 - 10:00', label:'Sáng 1',  rate:'morning',   days:[5,6] },
-    { id:'S2', time:'10:00 - 11:00', label:'Sáng 2',  rate:'morning',   days:[5,6] },
-    { id:'A1', time:'14:00 - 15:00', label:'Chiều 1', rate:'afternoon', days:[5,6] },
-    { id:'A2', time:'15:00 - 16:00', label:'Chiều 2', rate:'afternoon', days:[5,6] },
-    { id:'E1', time:'17:00 - 18:00', label:'Tối 1',   rate:'evening',   days:[5,6] },
-    { id:'E2', time:'18:00 - 19:00', label:'Tối 2',   rate:'evening',   days:[5,6] },
+// Ca học chuẩn toàn hệ thống
+const TIME_SLOTS = [
+    { id: 'T26_C1', type: 'weekday', time: '17:00 - 18:00', label: 'Ca 1 (T2-T6)' },
+    { id: 'T26_C2', type: 'weekday', time: '18:00 - 19:00', label: 'Ca 2 (T2-T6)' },
+    { id: 'WE_S1', type: 'weekend_morning', time: '09:00 - 10:00', label: 'Sáng 1 (T7-CN)' },
+    { id: 'WE_S2', type: 'weekend_morning', time: '10:00 - 11:00', label: 'Sáng 2 (T7-CN)' },
+    { id: 'WE_C1', type: 'weekend_afternoon', time: '14:00 - 15:00', label: 'Chiều 1 (T7-CN)' },
+    { id: 'WE_C2', type: 'weekend_afternoon', time: '15:00 - 16:00', label: 'Chiều 2 (T7-CN)' },
+    { id: 'WE_T1', type: 'weekend_evening', time: '17:00 - 18:00', label: 'Tối 1 (T7-CN)' },
+    { id: 'WE_T2', type: 'weekend_evening', time: '18:00 - 19:00', label: 'Tối 2 (T7-CN)' }
 ];
-const DAY_NAMES = ['Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7','Chủ nhật'];
-const DAY_SHORT = ['T2','T3','T4','T5','T6','T7','CN'];
-
-function getShiftsForDay(dayIdx) {
-    return SHIFT_DEFS.filter(s => s.days.includes(dayIdx));
-}
 
 /* ─────────────────────────────────────────────
-   WEEK UTILITIES
-───────────────────────────────────────────── */
-function getWeekKey(date) {
-    const d = date ? new Date(date) : new Date();
-    d.setHours(0,0,0,0);
-    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
-    const y = d.getFullYear();
-    const yearStart = new Date(y, 0, 1);
-    const wk = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-    return `${y}-W${String(wk).padStart(2,'0')}`;
-}
-function getWeekDates(weekKey) {
-    const [yStr, wStr] = weekKey.split('-W');
-    const year = parseInt(yStr), week = parseInt(wStr);
-    const jan4 = new Date(year, 0, 4);
-    const dow4 = jan4.getDay() || 7;
-    const wk1Mon = new Date(jan4);
-    wk1Mon.setDate(jan4.getDate() - dow4 + 1);
-    return Array.from({length:7}, (_,i) => {
-        const d = new Date(wk1Mon);
-        d.setDate(wk1Mon.getDate() + (week-1)*7 + i);
-        return d;
-    });
-}
-function fmtDate(d)     { return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`; }
-function fmtDateFull(d) { return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; }
-function fmtDateISO(d)  { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-function weekLabel(wk)  { const d=getWeekDates(wk); return `Tuần ${wk.split('-W')[1]} / ${d[0].getFullYear()} (${fmtDate(d[0])} – ${fmtDate(d[6])})`; }
-
-/* ─────────────────────────────────────────────
-   LOCAL STORAGE HELPERS
-───────────────────────────────────────────── */
-function getSchedules()          { try { return JSON.parse(localStorage.getItem('tkd_schedules')||'[]'); } catch { return []; } }
-function setSchedules(arr)       { localStorage.setItem('tkd_schedules', JSON.stringify(arr)); }
-function getLeaves()             { try { return JSON.parse(localStorage.getItem('tkd_leaves')||'[]'); }    catch { return []; } }
-function setLeaves(arr)          { localStorage.setItem('tkd_leaves', JSON.stringify(arr)); }
-function getAttendance()         { try { return JSON.parse(localStorage.getItem('tkd_attendance')||'{}'); } catch { return {}; } }
-function setAttendance(obj)      { localStorage.setItem('tkd_attendance', JSON.stringify(obj)); }
-function getPayrollSettings()    { try { return JSON.parse(localStorage.getItem('tkd_payroll_cfg')||'null') || {weekday:100000,morning:130000,afternoon:130000,evening:150000}; } catch { return {weekday:100000,morning:130000,afternoon:130000,evening:150000}; } }
-function setPayrollSettings(obj) { localStorage.setItem('tkd_payroll_cfg', JSON.stringify(obj)); }
-
-/* ─────────────────────────────────────────────
-   I18N
+   I18N (Ngôn ngữ)
 ───────────────────────────────────────────── */
 function setLang(lang) {
     const isEn = lang === 'en';
@@ -1181,19 +771,7 @@ function setLang(lang) {
 }
 
 /* ─────────────────────────────────────────────
-   PORTAL TABS
-───────────────────────────────────────────── */
-function switchTab(id) {
-    ['phuhuynh','hlv'].forEach(t => {
-        document.getElementById('tab-'+t).classList.remove('active');
-        document.getElementById('btn-'+t).classList.remove('active');
-    });
-    document.getElementById('tab-'+id).classList.add('active');
-    document.getElementById('btn-'+id).classList.add('active');
-}
-
-/* ─────────────────────────────────────────────
-   SCROLL REVEAL
+   SCROLL REVEAL (Hiệu ứng cuộn)
 ───────────────────────────────────────────── */
 const revealObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.style.animationPlayState='running'; revealObs.unobserve(e.target); } });
@@ -1201,571 +779,160 @@ const revealObs = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => { el.style.animationPlayState='paused'; revealObs.observe(el); });
 
 /* ─────────────────────────────────────────────
-   PARENT LOGIN
+   PORTAL TABS
+───────────────────────────────────────────── */
+function switchTab(id) {
+    ['phuhuynh','hlv'].forEach(t => {
+        const tab = document.getElementById('tab-'+t);
+        const btn = document.getElementById('btn-'+t);
+        if(tab) tab.classList.remove('active');
+        if(btn) btn.classList.remove('active');
+    });
+    const activeTab = document.getElementById('tab-'+id);
+    const activeBtn = document.getElementById('btn-'+id);
+    if(activeTab) activeTab.classList.add('active');
+    if(activeBtn) activeBtn.classList.add('active');
+}
+
+/* ─────────────────────────────────────────────
+   AUTH & ROLE-BASED ACCESS CONTROL (RBAC)
+───────────────────────────────────────────── */
+document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('internalLoginBtn');
+    btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
+
+    const data = new URLSearchParams();
+    data.append('action', 'login');
+    data.append('phone', document.getElementById('loginPhone').value);
+    data.append('password', document.getElementById('loginPass').value);
+
+    fetch(INTERNAL_API, { method: 'POST', body: data })
+        .then(res => res.json())
+        .then(resData => {
+            if(resData.status === 'success') {
+                currentUser = resData.user;
+                loadStaffDashboard();
+            } else {
+                alert(resData.message || 'Sai thông tin đăng nhập.');
+            }
+        })
+        .catch(err => alert('Lỗi kết nối máy chủ.'))
+        .finally(() => { btn.innerHTML = "<span class='lang-vi'>ĐĂNG NHẬP HỆ THỐNG</span><span class='lang-en'>SYSTEM LOGIN</span>"; btn.disabled = false; });
+});
+
+function loadStaffDashboard() {
+    document.getElementById('portal').style.display = 'none';
+    document.getElementById('internalDashboard').style.display = 'block';
+
+    if(currentUser.full_name) document.getElementById('dbName').textContent = currentUser.full_name;
+    if(currentUser.role) document.getElementById('dbPosition').textContent = currentUser.role;
+    if(currentUser.belt_level) document.getElementById('dbBelt').textContent = currentUser.belt_level;
+    if(currentUser.phone) document.getElementById('dbPhone').textContent = currentUser.phone;
+    if(currentUser.managed_branch_ids) document.getElementById('dbBranch').textContent = (currentUser.managed_branch_ids || []).join(', ');
+
+    if(currentUser.dob) {
+        const age = new Date().getFullYear() - new Date(currentUser.dob).getFullYear();
+        document.getElementById('dbDob').textContent = `${age} tuổi (${currentUser.dob})`;
+    }
+
+    if(currentUser.role === 'HLV_TRUONG' || currentUser.role === 'ADMIN') {
+        const adminNav = document.getElementById('adminNavTabs');
+        if(adminNav) adminNav.style.display = 'flex';
+    } else {
+        const adminNav = document.getElementById('adminNavTabs');
+        if(adminNav) adminNav.style.display = 'none';
+    }
+}
+
+function logoutInternal() {
+    currentUser = null;
+    document.getElementById('internalDashboard').style.display = 'none';
+    document.getElementById('portal').style.display = 'block';
+    document.getElementById('internalLoginForm').reset();
+}
+
+/* ─────────────────────────────────────────────
+   PARENT PORTAL LOGIC
 ───────────────────────────────────────────── */
 document.getElementById('parentLoginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('parentLoginBtn');
-    btn.textContent = 'Đang xác thực...'; btn.disabled = true;
+    btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
+
     const data = new URLSearchParams();
-    data.append('action','parentLogin');
+    data.append('action', 'parentLogin');
     data.append('phone', document.getElementById('parentLoginPhone').value);
     data.append('password', document.getElementById('parentLoginPass').value);
-    fetch(PARENT_API, {method:'POST', body:data})
-        .then(r=>r.json())
-        .then(d=>{ if(d.status==='success'){currentParent=d.user; loadParentDashboard();} else alert(d.message); })
-        .catch(()=>alert('Lỗi kết nối. Vui lòng thử lại!'))
-        .finally(()=>{ btn.innerHTML='<span class="lang-vi">PHỤ HUYNH ĐĂNG NHẬP</span><span class="lang-en">PARENT LOGIN</span>'; btn.disabled=false; });
+
+    fetch(PARENT_API, { method: 'POST', body: data })
+        .then(res => res.json())
+        .then(resData => {
+            if(resData.status === 'success') {
+                currentParent = resData.user;
+                loadParentDashboard();
+            } else {
+                alert(resData.message || 'Sai thông tin đăng nhập.');
+            }
+        })
+        .catch(err => alert('Lỗi kết nối máy chủ.'))
+        .finally(() => { btn.innerHTML = "<span class='lang-vi'>PHỤ HUYNH ĐĂNG NHẬP</span><span class='lang-en'>PARENT LOGIN</span>"; btn.disabled = false; });
 });
 
 function loadParentDashboard() {
+    document.getElementById('portal').style.display = 'none';
     document.getElementById('parentDashboard').style.display = 'block';
-    const p = currentParent;
-    ['vsName','vsId','vsDob','vsSchool','vsClass'].forEach(k => document.getElementById('p_'+k).textContent = p[k]||'');
-    document.getElementById('p_vsAvatar').src = p.vsAvatar||'';
-    document.getElementById('p_phName').textContent     = p.phName||'';
-    document.getElementById('p_phRelation').textContent = p.phRelation||'';
-    document.getElementById('p_phAge').textContent      = p.phAge||'';
-    document.getElementById('p_phDob').textContent      = p.phDob||'';
-    document.getElementById('p_phJob').textContent      = p.phJob||'';
-    document.getElementById('p_phPhone').textContent    = p.phone||'';
-    document.getElementById('p_phEmail').textContent    = p.phEmail||'';
-    // belt history
-    const bh = p.beltHistory||[];
-    document.getElementById('beltTableBody').innerHTML = bh.length
-        ? bh.map(b=>`<tr><td>${b.oldBelt}</td><td style="color:var(--yellow);font-weight:700">${b.newBelt}</td><td>${b.date}</td><td><span class="badge-pass">${b.status}</span></td></tr>`).join('')
-        : '<tr><td colspan="4" style="text-align:center;color:var(--muted)">Chưa có dữ liệu.</td></tr>';
-    const rv = p.reviews||[];
-    document.getElementById('reviewTableBody').innerHTML = rv.length
-        ? rv.map(r=>`<tr><td style="font-weight:700">${r.coach}</td><td style="color:var(--muted);font-style:italic">${r.comment}</td><td>${r.className}</td></tr>`).join('')
-        : '<tr><td colspan="3" style="text-align:center;color:var(--muted)">Chưa có nhận xét.</td></tr>';
+
+    if(currentParent.full_name) document.getElementById('p_vsName').textContent = currentParent.full_name;
+    if(currentParent.student_id) document.getElementById('p_vsId').textContent = currentParent.student_id;
+    if(currentParent.branch_name) document.getElementById('p_vsBranch').textContent = currentParent.branch_name;
+    if(currentParent.belt_level) document.getElementById('p_vsBelt').textContent = currentParent.belt_level;
+    if(currentParent.sessions_per_week) document.getElementById('p_vsMaxSessions').textContent = currentParent.sessions_per_week;
+    if(currentParent.dob) document.getElementById('p_vsDob').textContent = currentParent.dob;
+
+    if(currentParent.guardian_name) document.getElementById('p_phName').textContent = currentParent.guardian_name;
+    if(currentParent.guardian_relation) document.getElementById('p_phRelation').textContent = currentParent.guardian_relation;
+    if(currentParent.phone) document.getElementById('p_phPhone').textContent = currentParent.phone;
 }
-function logoutParent() { currentParent=null; document.getElementById('parentDashboard').style.display='none'; document.getElementById('parentLoginForm').reset(); }
-function openParentModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeParentModal(id) { document.getElementById(id).classList.remove('open'); }
 
-/* ─────────────────────────────────────────────
-   INTERNAL LOGIN (Staff + Admin)
-───────────────────────────────────────────── */
-document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const phone = document.getElementById('loginPhone').value.trim();
-    const pass  = document.getElementById('loginPass').value.trim();
-
-    // ── Admin check ──
-    if (phone === ADMIN_USER && pass === ADMIN_PASS) {
-        document.getElementById('internalLoginForm').reset();
-        showAdminDashboard();
-        return;
-    }
-
-    // ── Regular staff login via GAS ──
-    const btn = document.getElementById('internalLoginBtn');
-    btn.textContent='Đang xác thực...'; btn.disabled=true;
-    const data = new URLSearchParams();
-    data.append('action','login');
-    data.append('phone', phone);
-    data.append('password', pass);
-    fetch(INTERNAL_API, {method:'POST', body:data})
-        .then(r=>r.json())
-        .then(d=>{ if(d.status==='success'){currentUser=d.user; loadDashboard();} else alert(d.message); })
-        .catch(()=>alert('Lỗi kết nối. Vui lòng thử lại!'))
-        .finally(()=>{ btn.innerHTML='<span class="lang-vi">ĐĂNG NHẬP HỆ THỐNG</span><span class="lang-en">SYSTEM LOGIN</span>'; btn.disabled=false; });
-});
-
-function loadDashboard() {
-    document.getElementById('internalDashboard').style.display='block';
-    document.getElementById('dbName').textContent     = currentUser.name;
-    document.getElementById('dbPosition').textContent = currentUser.position;
-    document.getElementById('dbBelt').textContent     = currentUser.belt;
-    document.getElementById('dbPhone').textContent    = currentUser.phone;
-    document.getElementById('dbDob').textContent      = currentUser.dob;
-    document.getElementById('dbEmail').textContent    = currentUser.email;
-    document.getElementById('avatarImg').src          = currentUser.avatar||'';
-}
-function logoutInternal() { currentUser=null; document.getElementById('internalDashboard').style.display='none'; document.getElementById('internalLoginForm').reset(); }
-
-/* ─────────────────────────────────────────────
-   AVATAR UPLOAD
-───────────────────────────────────────────── */
-function handleImageUpload(input) {
-    if (!input.files||!input.files[0]) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const scale = 400 / img.width;
-            canvas.width=400; canvas.height=img.height*scale;
-            canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-            const b64 = canvas.toDataURL('image/jpeg',0.8);
-            document.getElementById('avatarImg').src = b64;
-            const data = new URLSearchParams();
-            data.append('action','uploadAvatar'); data.append('row',currentUser.row);
-            data.append('phone',currentUser.phone); data.append('image',b64);
-            fetch(INTERNAL_API,{method:'POST',body:data}).then(r=>r.json())
-                .then(d=>{ if(d.status==='success'){currentUser.avatar=d.url; alert('Tải ảnh thành công!');} else alert('Lỗi khi lưu ảnh.'); })
-                .catch(()=>alert('Lỗi đường truyền!'));
-        };
-        img.src = e.target.result;
-    };
-    reader.readAsDataURL(input.files[0]);
+function logoutParent() {
+    currentParent = null;
+    document.getElementById('parentDashboard').style.display = 'none';
+    document.getElementById('portal').style.display = 'block';
+    document.getElementById('parentLoginForm').reset();
 }
 
 /* ─────────────────────────────────────────────
-   EDIT MODAL (staff)
+   REGISTER FORM (Học thử)
 ───────────────────────────────────────────── */
-function openEditModal() {
-    document.getElementById('editModal').classList.add('open');
-    document.getElementById('editName').value  = currentUser.name;
-    document.getElementById('editPhone').value = currentUser.phone;
-    document.getElementById('editDob').value   = currentUser.dob;
-    document.getElementById('editPos').value   = currentUser.position;
-    document.getElementById('editEmail').value = currentUser.email;
-}
-function closeEditModal() { document.getElementById('editModal').classList.remove('open'); document.getElementById('updatePassForm').reset(); }
-
-document.getElementById('updateInfoForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('btnUpdateInfo');
-    btn.textContent='Đang lưu...'; btn.disabled=true;
-    const data = new URLSearchParams();
-    data.append('action','updateInfo'); data.append('row',currentUser.row);
-    data.append('name',document.getElementById('editName').value);
-    data.append('phone',document.getElementById('editPhone').value);
-    data.append('dob',document.getElementById('editDob').value);
-    data.append('position',document.getElementById('editPos').value);
-    data.append('email',document.getElementById('editEmail').value);
-    fetch(INTERNAL_API,{method:'POST',body:data}).then(r=>r.json()).then(d=>{
-        if(d.status==='success'){
-            alert('Cập nhật thành công!');
-            currentUser.name=document.getElementById('editName').value;
-            currentUser.phone=document.getElementById('editPhone').value;
-            currentUser.dob=document.getElementById('editDob').value;
-            currentUser.position=document.getElementById('editPos').value;
-            currentUser.email=document.getElementById('editEmail').value;
-            loadDashboard();
-        }
-    }).finally(()=>{ btn.innerHTML='<span class="lang-vi">Lưu Thay Đổi</span><span class="lang-en">Save Changes</span>'; btn.disabled=false; });
-});
-
-document.getElementById('updatePassForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const np=document.getElementById('newPass').value, cp=document.getElementById('confirmPass').value;
-    if(np!==cp) return alert('Mật khẩu nhập lại không khớp!');
-    if(!/^(?=.*[A-Z])[A-Za-z0-9]{6,}$/.test(np)) return alert('Mật khẩu tối thiểu 6 ký tự, có chữ in hoa, chỉ dùng chữ và số.');
-    const btn=document.getElementById('btnUpdatePass');
-    btn.textContent='Đang đổi...'; btn.disabled=true;
-    const data=new URLSearchParams();
-    ['action','row','phone','name','email','dob','position','newPassword'].forEach((k,i)=>data.append(k,['updatePassword',currentUser.row,currentUser.phone,currentUser.name,currentUser.email,currentUser.dob,currentUser.position,np][i]));
-    fetch(INTERNAL_API,{method:'POST',body:data}).then(r=>r.json()).then(d=>{if(d.status==='success'){alert('Mật khẩu đã được cập nhật!'); document.getElementById('updatePassForm').reset();}})
-    .finally(()=>{ btn.innerHTML='<span class="lang-vi">Xác Nhận Đổi Mật Khẩu</span><span class="lang-en">Confirm Password Change</span>'; btn.disabled=false; });
-});
-
-/* ─────────────────────────────────────────────
-   REGISTER FORM
-───────────────────────────────────────────── */
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.textContent='Đang xử lý...'; btn.disabled=true;
-    fetch(REG_API,{method:'POST',body:new URLSearchParams(new FormData(this))})
-        .then(()=>{ alert('🎉 Đăng ký thành công! / Registration submitted successfully!'); this.reset(); })
-        .catch(()=>{ alert('🎉 Đăng ký thành công! / Registration submitted successfully!'); this.reset(); })
-        .finally(()=>{ btn.innerHTML='<span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en">REGISTER NOW</span>'; btn.disabled=false; });
-});
-
-/* ═══════════════════════════════════════════════════════════
-   SCHEDULE MODAL — Staff side
-═══════════════════════════════════════════════════════════ */
-let schedWeekKey    = getWeekKey();
-let schedSelections = {}; // key: 'dayIdx_shiftId' → true/false
-
-function openScheduleModal() {
-    if (!currentUser) return;
-    schedWeekKey = getWeekKey();
-    loadMyScheduleForWeek();
-    document.getElementById('scheduleModal').classList.add('open');
-}
-function closeScheduleModal() { document.getElementById('scheduleModal').classList.remove('open'); }
-
-function loadMyScheduleForWeek() {
-    const mine = getSchedules().find(s => s.phone===currentUser.phone && s.weekKey===schedWeekKey);
-    schedSelections = {};
-    if (mine) mine.entries.forEach(e => { schedSelections[`${e.dayIdx}_${e.shiftId}`]=true; });
-    renderScheduleGrid();
-    document.getElementById('schedWeekLabel').textContent = weekLabel(schedWeekKey);
-}
-
-function renderScheduleGrid() {
-    const dates = getWeekDates(schedWeekKey);
-    let html = '';
-    for (let dayIdx=0; dayIdx<7; dayIdx++) {
-        const date   = dates[dayIdx];
-        const shifts = getShiftsForDay(dayIdx);
-        const isWE   = dayIdx >= 5;
-        html += `<div class="sched-day-card">
-            <div class="sched-day-header">
-                <span class="sched-day-name">${DAY_NAMES[dayIdx]}</span>
-                <span class="sched-day-date">${fmtDateFull(date)}</span>
-            </div>
-            <div class="sched-shifts">`;
-        if (!isWE) {
-            shifts.forEach(sh => {
-                const key=`${dayIdx}_${sh.id}`, act=schedSelections[key]?'active':'';
-                html += `<button class="shift-btn ${act}" onclick="toggleShift(${dayIdx},'${sh.id}')">
-                    <i class="fa-solid fa-${schedSelections[key]?'circle-check':'circle'}"></i>${sh.time}
-                </button>`;
-            });
-        } else {
-            ['morning','afternoon','evening'].forEach(grp => {
-                const gLabel = grp==='morning'?'SÁNG':grp==='afternoon'?'CHIỀU':'TỐI';
-                const gShifts = shifts.filter(s=>s.rate===grp);
-                html += `<div class="sched-shift-group"><span class="sched-group-label">${gLabel}</span>`;
-                gShifts.forEach(sh => {
-                    const key=`${dayIdx}_${sh.id}`, act=schedSelections[key]?'active':'';
-                    html += `<button class="shift-btn ${grp} ${act}" onclick="toggleShift(${dayIdx},'${sh.id}')">
-                        <i class="fa-solid fa-${schedSelections[key]?'circle-check':'circle'}"></i>${sh.time}
-                    </button>`;
-                });
-                html += `</div>`;
-            });
-        }
-        html += `</div></div>`;
-    }
-    document.getElementById('scheduleGrid').innerHTML = html;
-    const cnt = Object.values(schedSelections).filter(Boolean).length;
-    document.getElementById('schedCount').textContent = `Đã chọn: ${cnt} ca trong tuần này`;
-}
-
-function toggleShift(dayIdx, shiftId) {
-    const key=`${dayIdx}_${shiftId}`;
-    schedSelections[key] = !schedSelections[key];
-    renderScheduleGrid();
-}
-function prevWeekSched() { const d=getWeekDates(schedWeekKey); const p=new Date(d[0]); p.setDate(p.getDate()-7); schedWeekKey=getWeekKey(p); loadMyScheduleForWeek(); }
-function nextWeekSched() { const d=getWeekDates(schedWeekKey); const n=new Date(d[0]); n.setDate(n.getDate()+7); schedWeekKey=getWeekKey(n); loadMyScheduleForWeek(); }
-
-function saveSchedule() {
-    if (!currentUser) return;
-    const entries = Object.entries(schedSelections).filter(([,v])=>v).map(([k])=>{
-        const [di,si]=k.split('_'); return {dayIdx:parseInt(di), shiftId:si};
+const registerForm = document.getElementById('registerForm');
+if (registerForm) {
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerHTML = 'Đang xử lý...'; btn.disabled = true;
+        fetch(REG_API, { method: 'POST', body: new URLSearchParams(new FormData(this)) })
+            .then(() => { alert('🎉 Đăng ký thành công! / Registration submitted successfully!'); this.reset(); })
+            .catch(() => { alert('🎉 Đăng ký thành công! / Registration submitted successfully!'); this.reset(); })
+            .finally(() => { btn.innerHTML = '<span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en">REGISTER NOW</span>'; btn.disabled = false; });
     });
-    const all = getSchedules();
-    const idx = all.findIndex(s=>s.phone===currentUser.phone && s.weekKey===schedWeekKey);
-    const entry = { id: idx>=0 ? all[idx].id : `sch_${Date.now()}`, phone:currentUser.phone, name:currentUser.name, position:currentUser.position||'', weekKey:schedWeekKey, entries, updatedAt:Date.now() };
-    if (idx>=0) all[idx]=entry; else all.push(entry);
-    setSchedules(all);
-    closeScheduleModal();
-    alert(`✅ Đã lưu lịch dạy ${entries.length} ca cho ${weekLabel(schedWeekKey)}`);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LEAVE MODAL — Staff side
-═══════════════════════════════════════════════════════════ */
-function openLeaveModal() {
-    if (!currentUser) return;
-    const today = fmtDateISO(new Date());
-    document.getElementById('leaveStart').value = today;
-    document.getElementById('leaveEnd').value   = today;
-    document.getElementById('leaveReason').value = '';
-    renderMyLeaves();
-    document.getElementById('leaveModal').classList.add('open');
-}
-function closeLeaveModal() { document.getElementById('leaveModal').classList.remove('open'); }
-
-function renderMyLeaves() {
-    const mine = getLeaves().filter(l=>l.phone===currentUser.phone).sort((a,b)=>b.createdAt-a.createdAt);
-    const STATUS_LABEL = {pending:'Chờ duyệt', approved:'Đã duyệt', rejected:'Từ chối'};
-    document.getElementById('myLeaveTableBody').innerHTML = mine.length
-        ? mine.map(l=>`<tr>
-            <td>${fmtDateFull(new Date(l.startDate+'T00:00:00'))}</td>
-            <td>${fmtDateFull(new Date(l.endDate  +'T00:00:00'))}</td>
-            <td style="max-width:180px;word-break:break-word">${l.reason}</td>
-            <td><span class="leave-status status-${l.status}">${STATUS_LABEL[l.status]||l.status}</span></td>
-            </tr>`).join('')
-        : '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">Chưa có đơn nghỉ phép nào.</td></tr>';
-}
-
-document.getElementById('leaveForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (!currentUser) return;
-    const start  = document.getElementById('leaveStart').value;
-    const end    = document.getElementById('leaveEnd').value;
-    const reason = document.getElementById('leaveReason').value.trim();
-    if (!start||!end||!reason) return alert('Vui lòng điền đầy đủ thông tin.');
-    if (end<start) return alert('Ngày kết thúc phải sau ngày bắt đầu.');
-    const leaves = getLeaves();
-    leaves.push({ id:`leave_${Date.now()}`, phone:currentUser.phone, name:currentUser.name, position:currentUser.position||'', startDate:start, endDate:end, reason, status:'pending', adminNote:'', createdAt:Date.now() });
-    setLeaves(leaves);
-    alert('✅ Đơn xin nghỉ phép đã được gửi thành công!');
-    closeLeaveModal();
-});
-
-/* ═══════════════════════════════════════════════════════════
-   ADMIN DASHBOARD
-═══════════════════════════════════════════════════════════ */
-let adminWeekKey = getWeekKey();
-let attWeekKey   = getWeekKey();
-let leaveFilter  = 'all';
-
-function showAdminDashboard() {
-    document.getElementById('adminDashboard').style.display='block';
-    showAdminTab('overview');
-}
-function logoutAdmin() { document.getElementById('adminDashboard').style.display='none'; }
-
+// Stub functions for buttons to prevent console errors
+function openParentModal(id) { alert("Chức năng đang được cập nhật kết nối với DB mới!"); }
+function closeParentModal(id) {}
+function openEditModal() { alert("Chức năng đang được cập nhật!"); }
+function openScheduleModal() { alert("Chức năng đang được cập nhật!"); }
+function openLeaveModal() { alert("Chức năng đang được cập nhật!"); }
+function openReviewModal() { alert("Chức năng đang được cập nhật!"); }
+function viewMyAttendance() { alert("Chức năng đang được cập nhật!"); }
+function viewMyPayroll() { alert("Chức năng đang được cập nhật!"); }
 function showAdminTab(tab) {
-    document.querySelectorAll('.admin-tab-panel').forEach(p=>p.style.display='none');
-    document.querySelectorAll('.admin-nav-btn').forEach(b=>b.classList.remove('active'));
-    const panel=document.getElementById('admin-tab-'+tab);
-    if(panel) panel.style.display='block';
-    const btn=document.getElementById('atab-'+tab);
-    if(btn) btn.classList.add('active');
-    if(tab==='overview')    loadAdminOverview();
-    if(tab==='schedule')    loadAdminSchedule();
-    if(tab==='leave')       loadAdminLeaves();
-    if(tab==='attendance')  loadAdminAttendance();
-    if(tab==='payroll')     loadAdminPayroll();
-}
-
-/* ── Overview ── */
-function loadAdminOverview() {
-    const scheds   = getSchedules();
-    const leaves   = getLeaves();
-    const thisWeek = getWeekKey();
-    const thisWS   = scheds.filter(s=>s.weekKey===thisWeek);
-    const totalShifts = thisWS.reduce((s,x)=>s+x.entries.length,0);
-    const pendingL    = leaves.filter(l=>l.status==='pending').length;
-
-    // Today's shifts
-    const today    = new Date();
-    const todayDI  = (today.getDay()+6)%7;
-    const todayStaff = {};
-    thisWS.forEach(sc => {
-        sc.entries.filter(e=>e.dayIdx===todayDI).forEach(e=>{
-            const sh=SHIFT_DEFS.find(s=>s.id===e.shiftId&&s.days.includes(e.dayIdx));
-            if(sh){ if(!todayStaff[sh.time]) todayStaff[sh.time]=[]; todayStaff[sh.time].push(sc.name); }
-        });
-    });
-    const todayCount = Object.values(todayStaff).reduce((s,a)=>s+a.length,0);
-
-    document.getElementById('stat-schedules').textContent = totalShifts;
-    document.getElementById('stat-staff').textContent     = thisWS.length;
-    document.getElementById('stat-leaves').textContent    = pendingL;
-    document.getElementById('stat-today').textContent     = todayCount;
-
-    const prev = document.getElementById('todaySchedulePreview');
-    if(!Object.keys(todayStaff).length) {
-        prev.innerHTML='<p style="color:var(--muted);font-style:italic">Không có ca dạy nào hôm nay.</p>';
-    } else {
-        prev.innerHTML = Object.entries(todayStaff).sort().map(([time,names])=>`
-            <div style="display:flex;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--border)">
-                <span style="font-weight:700;color:var(--yellow);min-width:130px;font-size:13px">${time}</span>
-                <div style="display:flex;gap:8px;flex-wrap:wrap">${names.map(n=>`<span class="staff-chip">${n}</span>`).join('')}</div>
-            </div>`).join('');
-    }
-}
-
-/* ── Schedule grid (admin) ── */
-function loadAdminSchedule() {
-    const dates  = getWeekDates(adminWeekKey);
-    document.getElementById('adminWeekLabel').textContent = weekLabel(adminWeekKey);
-    const scheds = getSchedules().filter(s=>s.weekKey===adminWeekKey);
-    let html='';
-    for(let di=0;di<7;di++){
-        const dayShifts=getShiftsForDay(di);
-        html+=`<div class="admin-day-block">
-            <div class="admin-day-header">
-                <span class="admin-day-title">${DAY_NAMES[di]}</span>
-                <span class="admin-day-date">${fmtDateFull(dates[di])}</span>
-            </div>`;
-        if(!dayShifts.length){ html+=`<div style="padding:12px 20px;color:var(--muted);font-size:13px">Không có ca dạy</div>`; }
-        else {
-            dayShifts.forEach(sh=>{
-                const staff=scheds.filter(s=>s.entries.some(e=>e.dayIdx===di&&e.shiftId===sh.id)).map(s=>s.name);
-                html+=`<div class="admin-shift-row">
-                    <div class="admin-shift-time">${sh.time} <span style="font-size:10px;color:rgba(255,255,255,.3)">(${sh.label})</span></div>
-                    <div class="admin-shift-staff">${staff.length?staff.map(n=>`<span class="staff-chip">${n}</span>`).join(''):'<span class="empty-shift">Chưa có HLV đăng ký</span>'}</div>
-                </div>`;
-            });
-        }
-        html+=`</div>`;
-    }
-    document.getElementById('adminScheduleGrid').innerHTML = html;
-}
-function adminPrevWeek(){ const d=getWeekDates(adminWeekKey); const p=new Date(d[0]); p.setDate(p.getDate()-7); adminWeekKey=getWeekKey(p); loadAdminSchedule(); }
-function adminNextWeek(){ const d=getWeekDates(adminWeekKey); const n=new Date(d[0]); n.setDate(n.getDate()+7); adminWeekKey=getWeekKey(n); loadAdminSchedule(); }
-
-/* ── Leave list (admin) ── */
-function loadAdminLeaves() {
-    const all      = getLeaves().sort((a,b)=>b.createdAt-a.createdAt);
-    const filtered = leaveFilter==='all' ? all : all.filter(l=>l.status===leaveFilter);
-    ['all','pending','approved','rejected'].forEach(f=>{
-        const btn=document.getElementById('lf-'+f);
-        if(btn){ btn.classList.toggle('active-lf', f===leaveFilter); }
-    });
-    const STATUS_LABEL={pending:'Chờ duyệt',approved:'Đã duyệt',rejected:'Từ chối'};
-    const c=document.getElementById('adminLeaveList');
-    if(!filtered.length){ c.innerHTML='<div style="text-align:center;padding:48px;color:var(--muted)">Không có đơn nghỉ phép nào.</div>'; return; }
-    c.innerHTML=filtered.map(l=>`
-        <div class="leave-card" id="lc-${l.id}">
-            <div class="leave-info">
-                <div class="leave-staff-name">${l.name} <span style="font-size:11px;color:var(--muted);font-weight:400">${l.position}</span></div>
-                <div class="leave-dates"><i class="fa-regular fa-calendar" style="margin-right:6px;color:var(--red)"></i>${fmtDateFull(new Date(l.startDate+'T00:00:00'))} → ${fmtDateFull(new Date(l.endDate+'T00:00:00'))}</div>
-                <div class="leave-reason">"${l.reason}"</div>
-                ${l.adminNote?`<div style="font-size:12px;color:var(--yellow);margin-top:4px">Ghi chú: ${l.adminNote}</div>`:''}
-            </div>
-            <div class="leave-actions">
-                <span class="leave-status status-${l.status}">${STATUS_LABEL[l.status]||l.status}</span>
-                ${l.status==='pending'
-                    ?`<button class="btn-approve" onclick="updateLeaveStatus('${l.id}','approved')">✓ Duyệt</button><button class="btn-reject" onclick="updateLeaveStatus('${l.id}','rejected')">✕ Từ chối</button>`
-                    :`<button class="btn-undo" onclick="updateLeaveStatus('${l.id}','pending')">↩ Hoàn tác</button>`
-                }
-            </div>
-        </div>`).join('');
-}
-function filterLeaves(status){ leaveFilter=status; loadAdminLeaves(); }
-function updateLeaveStatus(id, status){
-    const all=getLeaves();
-    const idx=all.findIndex(l=>l.id===id);
-    if(idx<0) return;
-    all[idx].status=status;
-    setLeaves(all);
-    loadAdminLeaves();
-}
-
-/* ── Attendance (admin) ── */
-function loadAdminAttendance() {
-    document.getElementById('attWeekLabel').textContent = weekLabel(attWeekKey);
-    const scheds    = getSchedules().filter(s=>s.weekKey===attWeekKey);
-    const attendance= getAttendance();
-    const grid      = document.getElementById('adminAttendanceGrid');
-    if(!scheds.length){ grid.innerHTML='<div style="text-align:center;padding:48px;color:var(--muted)">Chưa có HLV nào đăng ký lịch tuần này.</div>'; return; }
-
-    // Build header: for each day, for each possible shift of that day
-    let headerCols='';
-    for(let di=0;di<7;di++){
-        getShiftsForDay(di).forEach(sh=>{
-            headerCols+=`<th style="min-width:70px">${DAY_SHORT[di]}<br><span style="font-size:9px;font-weight:400;letter-spacing:0">${sh.time}</span></th>`;
-        });
-    }
-    let rows='';
-    scheds.forEach(sc=>{
-        let cells='';
-        for(let di=0;di<7;di++){
-            getShiftsForDay(di).forEach(sh=>{
-                const hasShift=sc.entries.some(e=>e.dayIdx===di&&e.shiftId===sh.id);
-                const key=`${sc.phone}_${attWeekKey}_${di}_${sh.id}`;
-                const att=key in attendance ? attendance[key] : true;
-                if(hasShift){
-                    cells+=`<td><input type="checkbox" class="att-check" ${att?'checked':''} onchange="toggleAtt('${sc.phone}',${di},'${sh.id}',this.checked)" title="${sc.name} - ${DAY_NAMES[di]} ${sh.time}"></td>`;
-                } else {
-                    cells+=`<td style="background:rgba(0,0,0,.25);color:rgba(255,255,255,.1)">—</td>`;
-                }
-            });
-        }
-        rows+=`<tr><td style="text-align:left;font-weight:600;white-space:nowrap">${sc.name}</td>${cells}</tr>`;
-    });
-    grid.innerHTML=`<table class="att-table"><thead><tr><th style="text-align:left;min-width:120px">HLV / Nhân viên</th>${headerCols}</tr></thead><tbody>${rows}</tbody></table>`;
-}
-function toggleAtt(phone, di, shiftId, checked){
-    const att=getAttendance();
-    att[`${phone}_${attWeekKey}_${di}_${shiftId}`]=checked;
-    setAttendance(att);
-}
-function attPrevWeek(){ const d=getWeekDates(attWeekKey); const p=new Date(d[0]); p.setDate(p.getDate()-7); attWeekKey=getWeekKey(p); loadAdminAttendance(); }
-function attNextWeek(){ const d=getWeekDates(attWeekKey); const n=new Date(d[0]); n.setDate(n.getDate()+7); attWeekKey=getWeekKey(n); loadAdminAttendance(); }
-
-/* ── Payroll (admin) ── */
-function loadAdminPayroll() {
-    const cfg=getPayrollSettings();
-    document.getElementById('rate-weekday').value   = cfg.weekday;
-    document.getElementById('rate-morning').value   = cfg.morning;
-    document.getElementById('rate-afternoon').value = cfg.afternoon;
-    document.getElementById('rate-evening').value   = cfg.evening;
-    // Set default period: current month
-    const now=new Date();
-    document.getElementById('payroll-start').value = fmtDateISO(new Date(now.getFullYear(),now.getMonth(),1));
-    document.getElementById('payroll-end').value   = fmtDateISO(new Date(now.getFullYear(),now.getMonth()+1,0));
-}
-function saveRates(){
-    setPayrollSettings({
-        weekday:   parseInt(document.getElementById('rate-weekday').value)   ||100000,
-        morning:   parseInt(document.getElementById('rate-morning').value)   ||130000,
-        afternoon: parseInt(document.getElementById('rate-afternoon').value) ||130000,
-        evening:   parseInt(document.getElementById('rate-evening').value)   ||150000
-    });
-}
-function calculatePayroll(){
-    const startStr=document.getElementById('payroll-start').value;
-    const endStr  =document.getElementById('payroll-end').value;
-    if(!startStr||!endStr) return alert('Vui lòng chọn kỳ tính lương.');
-    const start=new Date(startStr+'T00:00:00'), end=new Date(endStr+'T23:59:59');
-    const cfg=getPayrollSettings(), scheds=getSchedules(), att=getAttendance();
-    const map={}; // phone → {name,pos,weekday,morning,afternoon,evening}
-
-    scheds.forEach(sc=>{
-        const dates=getWeekDates(sc.weekKey);
-        sc.entries.forEach(en=>{
-            const dt=dates[en.dayIdx];
-            if(dt<start||dt>end) return;
-            const attKey=`${sc.phone}_${sc.weekKey}_${en.dayIdx}_${en.shiftId}`;
-            const attended = attKey in att ? att[attKey] : true;
-            if(!attended) return;
-            if(!map[sc.phone]) map[sc.phone]={name:sc.name,pos:sc.position||'',weekday:0,morning:0,afternoon:0,evening:0};
-            const sh=SHIFT_DEFS.find(s=>s.id===en.shiftId&&s.days.includes(en.dayIdx));
-            if(sh) map[sc.phone][sh.rate]++;
-        });
-    });
-
-    const staff=Object.entries(map);
-    const fmtVND=n=>n.toLocaleString('vi-VN')+' đ';
-    const wrap=document.getElementById('payrollTableWrapper');
-
-    if(!staff.length){
-        wrap.innerHTML='<div style="text-align:center;padding:48px;color:var(--muted)">Không có dữ liệu lịch dạy trong kỳ đã chọn.</div>';
-        return;
-    }
-
-    let totalAll=0;
-    const rows=staff.map(([,s])=>{
-        const total=s.weekday*cfg.weekday+s.morning*cfg.morning+s.afternoon*cfg.afternoon+s.evening*cfg.evening;
-        totalAll+=total;
-        return `<tr>
-            <td><strong>${s.name}</strong><br><span style="font-size:11px;color:var(--muted)">${s.pos}</span></td>
-            <td style="text-align:center">${s.weekday}</td>
-            <td style="text-align:center">${s.morning}</td>
-            <td style="text-align:center">${s.afternoon}</td>
-            <td style="text-align:center">${s.evening}</td>
-            <td style="text-align:center;font-weight:700">${s.weekday+s.morning+s.afternoon+s.evening}</td>
-            <td style="text-align:right;color:var(--yellow);font-weight:700">${fmtVND(total)}</td>
-        </tr>`;
-    }).join('');
-
-    wrap.innerHTML=`
-        <div id="payrollPrintArea" style="background:var(--card);border:1px solid var(--border)">
-            <div style="padding:16px 20px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:20px;font-size:12px;color:var(--muted)">
-                <span><span class="lang-vi">Kỳ lương:</span><span class="lang-en">Pay period:</span> <strong style="color:var(--white)">${startStr} → ${endStr}</strong></span>
-                <span><span class="lang-vi">Tổng nhân sự:</span><span class="lang-en">Staff count:</span> <strong style="color:var(--yellow)">${staff.length}</strong></span>
-                <span><span class="lang-vi">Tổng quỹ lương:</span><span class="lang-en">Total payroll:</span> <strong style="color:var(--red)">${fmtVND(totalAll)}</strong></span>
-            </div>
-            <div style="overflow-x:auto">
-            <table class="payroll-table">
-                <thead><tr>
-                    <th><span class="lang-vi">Họ tên / Vị trí</span><span class="lang-en">Name / Role</span></th>
-                    <th style="text-align:center"><span class="lang-vi">Ca thường</span><span class="lang-en">Weekday</span></th>
-                    <th style="text-align:center"><span class="lang-vi">Ca sáng (CK)</span><span class="lang-en">WE Morning</span></th>
-                    <th style="text-align:center"><span class="lang-vi">Ca chiều (CK)</span><span class="lang-en">WE Afternoon</span></th>
-                    <th style="text-align:center"><span class="lang-vi">Ca tối (CK)</span><span class="lang-en">WE Evening</span></th>
-                    <th style="text-align:center"><span class="lang-vi">Tổng ca</span><span class="lang-en">Total</span></th>
-                    <th style="text-align:right"><span class="lang-vi">Tổng lương</span><span class="lang-en">Total Pay</span></th>
-                </tr></thead>
-                <tbody>${rows}</tbody>
-                <tfoot><tr><td colspan="6"><span class="lang-vi">TỔNG CỘNG</span><span class="lang-en">GRAND TOTAL</span></td><td style="text-align:right">${fmtVND(totalAll)}</td></tr></tfoot>
-            </table>
-            </div>
-        </div>`;
+    document.querySelectorAll('.admin-nav-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('adminViewContent').innerHTML = `<div style='padding:40px;text-align:center;color:var(--muted);'>Đang tải dữ liệu ${tab}...</div>`;
+    document.getElementById('staffViewContent').style.display = 'none';
+    document.getElementById('adminViewContent').style.display = 'block';
 }
 </script>
 </body>
