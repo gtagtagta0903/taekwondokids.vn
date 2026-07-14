@@ -343,7 +343,46 @@
         @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
         .reveal { opacity:0; animation:fadeUp .6s ease forwards; }
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s} .delay-4{animation-delay:.4s}
+/* MODAL SYSTEM */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.78); backdrop-filter:blur(4px); z-index:300; display:none; align-items:center; justify-content:center; padding:20px; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:var(--card); border:1px solid var(--border2); border-top:4px solid var(--red); max-width:560px; width:100%; max-height:88vh; overflow-y:auto; padding:36px 32px; position:relative; }
+.modal-box.wide { max-width:840px; }
+.modal-close { position:absolute; top:14px; right:16px; background:none; border:none; color:var(--muted); font-size:24px; line-height:1; cursor:pointer; transition:color .2s; }
+.modal-close:hover { color:var(--red); }
+.modal-title { font-family:var(--font-display); font-weight:800; font-size:24px; letter-spacing:.5px; text-transform:uppercase; color:var(--white); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.reg-form-group select { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:14px 18px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
+.reg-form-group select:focus { border-color:var(--red); }
+.reg-form-group select option { background:var(--card); color:var(--white); }
 
+/* WEEK / MONTH NAV */
+.week-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; background:rgba(255,255,255,.03); border:1px solid var(--border); padding:12px 18px; }
+.week-nav button { background:var(--red); color:#fff; border:none; width:34px; height:34px; font-size:14px; cursor:pointer; transition:background .2s; flex-shrink:0; }
+.week-nav button:hover { background:var(--red-dark); }
+.week-nav-label { font-weight:700; color:var(--yellow); font-size:14px; letter-spacing:.5px; text-align:center; flex:1; }
+
+/* SCHEDULE GRID */
+.sched-table { width:100%; border-collapse:collapse; margin-bottom:8px; }
+.sched-table th { background:rgba(255,255,255,.04); font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; padding:10px 4px; color:var(--muted); border:1px solid var(--border); line-height:1.6; }
+.sched-table td { border:1px solid var(--border); padding:5px; text-align:center; }
+.slot-cell { width:100%; padding:10px 4px; background:rgba(255,255,255,.03); border:1px solid var(--border); color:var(--off-white); font-size:11px; font-weight:600; cursor:pointer; transition:.2s; user-select:none; }
+.slot-cell:hover { border-color:var(--yellow); color:var(--yellow); }
+.slot-cell.selected { background:var(--red); border-color:var(--red); color:#fff; }
+
+/* CALENDAR (CUỐN LỊCH) */
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; background:var(--border); border:1px solid var(--border); }
+.cal-dow { background:var(--card2); text-align:center; padding:8px 2px; font-size:10px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; font-weight:700; }
+.cal-day { background:var(--card); min-height:76px; padding:8px; font-size:12px; color:var(--white); cursor:pointer; transition:background .2s; }
+.cal-day:hover { background:var(--card2); }
+.cal-day.other-month { opacity:.25; }
+.cal-day.today { box-shadow:inset 0 0 0 1.5px var(--yellow); }
+.cal-day.selected-day { background:rgba(232,35,42,.2); }
+.cal-date-num { font-weight:700; }
+.cal-badges { display:flex; gap:4px; margin-top:8px; }
+.cal-badge { width:7px; height:7px; border-radius:50%; }
+.cal-badge.class { background:var(--red); }
+.cal-badge.note { background:var(--yellow); }
+.cal-day-detail { margin-top:22px; background:rgba(255,255,255,.03); border:1px solid var(--border); padding:22px; }
     </style>
 </head>
 <body>
@@ -634,7 +673,8 @@
         </div>
         <div class="ops-title"><span class="lang-vi">Nghiệp vụ HLV / Nhân viên</span><span class="lang-en">Staff Operations</span></div>
         <div class="ops-grid">
-            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span class="lang-vi">Đăng ký lịch dạy</span></button>
+           <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span class="lang-vi">Đăng ký lịch dạy</span></button>
+            <button class="ops-btn" onclick="openCalendarModal()"><span>📖</span><span class="lang-vi">Cuốn lịch giảng dạy</span></button>
             <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span class="lang-vi">Đăng ký nghỉ phép</span></button>
             <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span class="lang-vi">Nhận xét học viên</span></button>
             <button class="ops-btn" onclick="viewMyAttendance()"><span>⏱️</span><span class="lang-vi">Xem chấm công</span></button>
@@ -682,7 +722,75 @@
         </div>
     </div>
 </div>
+<!-- MODAL: SỬA THÔNG TIN CÁ NHÂN & MẬT KHẨU -->
+<div class="modal-overlay" id="editModalOverlay">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('editModalOverlay')">&times;</button>
+        <div class="modal-title">Sửa thông tin &amp; Mật khẩu</div>
+        <form id="editInfoForm">
+            <div class="reg-form-group"><label>Ngày sinh</label><input type="date" id="editDob"></div>
+            <div class="reg-form-group"><label>Email</label><input type="email" id="editEmail" placeholder="email@example.com"></div>
+            <div class="reg-form-group"><label>Số điện thoại</label><input type="tel" id="editPhone" placeholder="0xxxxxxxxx"></div>
+            <div class="reg-form-group">
+                <label>Cấp đai</label>
+                <select id="editBelt">
+                    <option value="Đai trắng">Đai trắng</option>
+                    <option value="Đai vàng">Đai vàng</option>
+                    <option value="Đai xanh lá">Đai xanh lá</option>
+                    <option value="Đai xanh dương">Đai xanh dương</option>
+                    <option value="Đai đỏ">Đai đỏ</option>
+                    <option value="Đai đen">Đai đen</option>
+                </select>
+            </div>
+            <div class="reg-form-group"><label>Mật khẩu mới (để trống nếu không đổi)</label><input type="password" id="editNewPass" placeholder="••••••••"></div>
+            <div class="reg-form-group"><label>Xác nhận mật khẩu mới</label><input type="password" id="editNewPass2" placeholder="••••••••"></div>
+            <button type="submit" class="btn-register" id="editSaveBtn">LƯU THAY ĐỔI</button>
+        </form>
+    </div>
+</div>
 
+<!-- MODAL: ĐĂNG KÝ LỊCH GIẢNG DẠY THEO TUẦN -->
+<div class="modal-overlay" id="scheduleModalOverlay">
+    <div class="modal-box wide">
+        <button class="modal-close" onclick="closeModal('scheduleModalOverlay')">&times;</button>
+        <div class="modal-title">Đăng ký lịch giảng dạy</div>
+        <div class="week-nav">
+            <button type="button" onclick="changeWeek(-1)">&larr;</button>
+            <div class="week-nav-label" id="weekLabel"></div>
+            <button type="button" onclick="changeWeek(1)">&rarr;</button>
+        </div>
+        <div class="reg-form-group">
+            <label>Chọn cơ sở giảng dạy</label>
+            <select id="scheduleBranch">
+                <option value="Cơ sở Hapulico">Cơ sở Hapulico</option>
+                <option value="Cơ sở GreenStars">Cơ sở GreenStars</option>
+                <option value="Cơ sở Nghĩa Đô">Cơ sở Nghĩa Đô</option>
+                <option value="Cơ sở Hà Đông">Cơ sở Hà Đông</option>
+                <option value="Cơ sở Long Biên">Cơ sở Long Biên</option>
+            </select>
+        </div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:22px 0 10px;">Lịch trong tuần (Thứ 2 – Thứ 6)</div>
+        <table class="sched-table" id="weekdayTable"></table>
+        <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:22px 0 10px;">Lịch cuối tuần (Thứ 7 – Chủ nhật)</div>
+        <table class="sched-table" id="weekendTable"></table>
+        <button type="button" class="btn-register" id="scheduleSaveBtn" onclick="submitSchedule()" style="margin-top:20px;">XÁC NHẬN ĐĂNG KÝ LỊCH</button>
+    </div>
+</div>
+
+<!-- MODAL: CUỐN LỊCH GIẢNG DẠY -->
+<div class="modal-overlay" id="calendarModalOverlay">
+    <div class="modal-box wide">
+        <button class="modal-close" onclick="closeModal('calendarModalOverlay')">&times;</button>
+        <div class="modal-title">Cuốn lịch giảng dạy</div>
+        <div class="week-nav">
+            <button type="button" onclick="changeMonth(-1)">&larr;</button>
+            <div class="week-nav-label" id="monthLabel"></div>
+            <button type="button" onclick="changeMonth(1)">&rarr;</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-day-detail" id="calDayDetail" style="display:none;"></div>
+    </div>
+</div>
 <section id="register">
     <div class="container">
         <div class="register-grid">
@@ -832,6 +940,8 @@ function loadStaffDashboard() {
     if(currentUser.managed_branch_ids) document.getElementById('dbBranch').textContent = (currentUser.managed_branch_ids || []).join(', ');
 
     if(currentUser.dob) {
+            myScheduleEvents = currentUser.schedule || [];
+    calendarNotes    = currentUser.notes || {};
         const age = new Date().getFullYear() - new Date(currentUser.dob).getFullYear();
         document.getElementById('dbDob').textContent = `${age} tuổi (${currentUser.dob})`;
     }
@@ -847,6 +957,8 @@ function loadStaffDashboard() {
 
 function logoutInternal() {
     currentUser = null;
+    myScheduleEvents = [];
+    calendarNotes = {};
     document.getElementById('internalDashboard').style.display = 'none';
     document.getElementById('portal').style.display = 'block';
     document.getElementById('internalLoginForm').reset();
@@ -921,8 +1033,7 @@ if (registerForm) {
 // Stub functions for buttons to prevent console errors
 function openParentModal(id) { alert("Chức năng đang được cập nhật kết nối với DB mới!"); }
 function closeParentModal(id) {}
-function openEditModal() { alert("Chức năng đang được cập nhật!"); }
-function openScheduleModal() { alert("Chức năng đang được cập nhật!"); }
+// openEditModal() và openScheduleModal() được định nghĩa ở khối MODAL LOGIC bên dưới
 function openLeaveModal() { alert("Chức năng đang được cập nhật!"); }
 function openReviewModal() { alert("Chức năng đang được cập nhật!"); }
 function viewMyAttendance() { alert("Chức năng đang được cập nhật!"); }
@@ -935,5 +1046,246 @@ function showAdminTab(tab) {
     document.getElementById('adminViewContent').style.display = 'block';
 }
 </script>
+/* ═════════════════════════════════════
+   MODAL LOGIC: SỬA TT / LỊCH DẠY / CUỐN LỊCH
+═════════════════════════════════════ */
+function closeModal(id){ document.getElementById(id).classList.remove('active'); }
+
+/* ---- Helpers ngày tháng ---- */
+function getMonday(date){
+    const d = new Date(date);
+    const day = d.getDay();
+    const diff = day===0 ? -6 : 1-day;
+    d.setDate(d.getDate()+diff);
+    d.setHours(0,0,0,0);
+    return d;
+}
+function formatDMY(d){ return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear(); }
+function formatISO(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+
+const DOW_LABELS = ['T2','T3','T4','T5','T6','T7','CN'];
+const WEEKDAY_SLOTS = TIME_SLOTS.filter(s=>s.type==='weekday');
+const WEEKEND_SLOTS = TIME_SLOTS.filter(s=>s.type!=='weekday');
+
+let currentWeekStart = getMonday(new Date());
+let myScheduleEvents = [];   // {date, slotId, time, dayLabel, branch}
+let calendarNotes = {};      // { 'YYYY-MM-DD': ['ghi chú', ...] }
+let calCurrentDate = new Date();
+let calSelectedDate = null;
+
+/* ---- 1. SỬA THÔNG TIN CÁ NHÂN & MẬT KHẨU ---- */
+function openEditModal(){
+    if(!currentUser) return;
+    document.getElementById('editDob').value = currentUser.dob || '';
+    document.getElementById('editEmail').value = currentUser.email || '';
+    document.getElementById('editPhone').value = currentUser.phone || '';
+    if(currentUser.belt_level) document.getElementById('editBelt').value = currentUser.belt_level;
+    document.getElementById('editNewPass').value = '';
+    document.getElementById('editNewPass2').value = '';
+    document.getElementById('editModalOverlay').classList.add('active');
+}
+const editInfoForm = document.getElementById('editInfoForm');
+if(editInfoForm){
+    editInfoForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const pass1 = document.getElementById('editNewPass').value;
+        const pass2 = document.getElementById('editNewPass2').value;
+        if(pass1 !== pass2){ alert('Mật khẩu xác nhận không khớp!'); return; }
+
+        const payload = new URLSearchParams();
+        payload.append('action','updateProfile');
+        payload.append('phone', currentUser.phone || '');
+        payload.append('dob', document.getElementById('editDob').value);
+        payload.append('email', document.getElementById('editEmail').value);
+        payload.append('newPhone', document.getElementById('editPhone').value);
+        payload.append('belt_level', document.getElementById('editBelt').value);
+        if(pass1) payload.append('newPassword', pass1);
+
+        const btn = document.getElementById('editSaveBtn');
+        btn.textContent = 'Đang lưu...'; btn.disabled = true;
+
+        fetch(INTERNAL_API, { method:'POST', body: payload })
+            .then(res=>res.json())
+            .then(()=>{
+                currentUser.dob = document.getElementById('editDob').value || currentUser.dob;
+                currentUser.email = document.getElementById('editEmail').value || currentUser.email;
+                currentUser.phone = document.getElementById('editPhone').value || currentUser.phone;
+                currentUser.belt_level = document.getElementById('editBelt').value;
+                document.getElementById('dbBelt').textContent = currentUser.belt_level;
+                document.getElementById('dbPhone').textContent = currentUser.phone;
+                if(currentUser.dob){
+                    const age = new Date().getFullYear() - new Date(currentUser.dob).getFullYear();
+                    document.getElementById('dbDob').textContent = `${age} tuổi (${currentUser.dob})`;
+                }
+                alert('Cập nhật thông tin thành công!');
+                closeModal('editModalOverlay');
+            })
+            .catch(()=>{ alert('Không thể kết nối máy chủ, vui lòng thử lại sau.'); })
+            .finally(()=>{ btn.textContent='LƯU THAY ĐỔI'; btn.disabled=false; });
+    });
+}
+
+/* ---- 2. ĐĂNG KÝ LỊCH GIẢNG DẠY THEO TUẦN ---- */
+function openScheduleModal(){
+    currentWeekStart = getMonday(new Date());
+    document.getElementById('scheduleModalOverlay').classList.add('active');
+    renderScheduleModal();
+}
+function changeWeek(delta){
+    currentWeekStart.setDate(currentWeekStart.getDate() + delta*7);
+    renderScheduleModal();
+}
+function weekDateFor(offset){
+    const d = new Date(currentWeekStart);
+    d.setDate(d.getDate()+offset);
+    return d;
+}
+function renderScheduleModal(){
+    const weekEnd = weekDateFor(6);
+    document.getElementById('weekLabel').textContent = `Tuần từ ${formatDMY(currentWeekStart)} đến ${formatDMY(weekEnd)}`;
+
+    let wd = '<tr><th></th>';
+    for(let i=0;i<5;i++){ wd += `<th>${DOW_LABELS[i]}<br>${formatDMY(weekDateFor(i))}</th>`; }
+    wd += '</tr>';
+    WEEKDAY_SLOTS.forEach(slot=>{
+        wd += `<tr><td style="font-size:11px;color:var(--muted);white-space:nowrap;">${slot.time}</td>`;
+        for(let i=0;i<5;i++){
+            const dateStr = formatISO(weekDateFor(i));
+            const isSelected = myScheduleEvents.some(ev=>ev.date===dateStr && ev.slotId===slot.id);
+            wd += `<td><div class="slot-cell${isSelected?' selected':''}" data-date="${dateStr}" data-slot="${slot.id}" data-time="${slot.time}" data-daylabel="${DOW_LABELS[i]}" onclick="toggleSlotCell(this)">${isSelected?'Đã đăng ký':'Chọn'}</div></td>`;
+        }
+        wd += '</tr>';
+    });
+    document.getElementById('weekdayTable').innerHTML = wd;
+
+    let we = '<tr><th></th>';
+    for(let i=5;i<7;i++){ we += `<th>${DOW_LABELS[i]}<br>${formatDMY(weekDateFor(i))}</th>`; }
+    we += '</tr>';
+    WEEKEND_SLOTS.forEach(slot=>{
+        we += `<tr><td style="font-size:11px;color:var(--muted);white-space:nowrap;">${slot.time}</td>`;
+        for(let i=5;i<7;i++){
+            const dateStr = formatISO(weekDateFor(i));
+            const isSelected = myScheduleEvents.some(ev=>ev.date===dateStr && ev.slotId===slot.id);
+            we += `<td><div class="slot-cell${isSelected?' selected':''}" data-date="${dateStr}" data-slot="${slot.id}" data-time="${slot.time}" data-daylabel="${DOW_LABELS[i]}" onclick="toggleSlotCell(this)">${isSelected?'Đã đăng ký':'Chọn'}</div></td>`;
+        }
+        we += '</tr>';
+    });
+    document.getElementById('weekendTable').innerHTML = we;
+}
+function toggleSlotCell(el){
+    el.classList.toggle('selected');
+    el.textContent = el.classList.contains('selected') ? 'Đã chọn' : 'Chọn';
+}
+function submitSchedule(){
+    const branch = document.getElementById('scheduleBranch').value;
+    const cells = document.querySelectorAll('#weekdayTable .slot-cell.selected, #weekendTable .slot-cell.selected');
+    if(cells.length===0){ alert('Vui lòng chọn ít nhất một ca giảng dạy.'); return; }
+
+    const newEvents = [];
+    cells.forEach(cell=>{
+        const date = cell.dataset.date, slotId = cell.dataset.slot, time = cell.dataset.time, dayLabel = cell.dataset.daylabel;
+        if(!myScheduleEvents.some(ev=>ev.date===date && ev.slotId===slotId)){
+            newEvents.push({date, slotId, time, dayLabel, branch});
+        }
+    });
+    myScheduleEvents = myScheduleEvents.concat(newEvents);
+
+    const payload = new URLSearchParams();
+    payload.append('action','registerSchedule');
+    payload.append('phone', currentUser ? currentUser.phone : '');
+    payload.append('branch', branch);
+    payload.append('slots', JSON.stringify(newEvents));
+    fetch(INTERNAL_API, { method:'POST', body: payload }).catch(()=>{});
+
+    alert(`Đăng ký thành công ${newEvents.length} ca giảng dạy tại ${branch}!`);
+    renderScheduleModal();
+}
+
+/* ---- 3. CUỐN LỊCH GIẢNG DẠY (có thêm ghi chú) ---- */
+function openCalendarModal(){
+    calCurrentDate = new Date();
+    document.getElementById('calDayDetail').style.display='none';
+    document.getElementById('calendarModalOverlay').classList.add('active');
+    renderCalendar();
+}
+function changeMonth(delta){
+    calCurrentDate.setMonth(calCurrentDate.getMonth()+delta);
+    renderCalendar();
+}
+function renderCalendar(){
+    const year = calCurrentDate.getFullYear(), month = calCurrentDate.getMonth();
+    document.getElementById('monthLabel').textContent = `Tháng ${month+1} / ${year}`;
+
+    const gridStart = getMonday(new Date(year, month, 1));
+    const todayStr = formatISO(new Date());
+    let html = '';
+    DOW_LABELS.forEach(l=> html += `<div class="cal-dow">${l}</div>`);
+
+    for(let i=0;i<42;i++){
+        const d = new Date(gridStart);
+        d.setDate(d.getDate()+i);
+        const dateStr = formatISO(d);
+        const isOtherMonth = d.getMonth()!==month;
+        const isToday = dateStr===todayStr;
+        const hasClass = myScheduleEvents.some(ev=>ev.date===dateStr);
+        const hasNote = (calendarNotes[dateStr] || []).length>0;
+        let badges = '';
+        if(hasClass) badges += '<span class="cal-badge class"></span>';
+        if(hasNote) badges += '<span class="cal-badge note"></span>';
+        html += `<div class="cal-day${isOtherMonth?' other-month':''}${isToday?' today':''}" onclick="selectCalDay('${dateStr}', this)">
+            <div class="cal-date-num">${d.getDate()}</div>
+            <div class="cal-badges">${badges}</div>
+        </div>`;
+    }
+    document.getElementById('calGrid').innerHTML = html;
+}
+function selectCalDay(dateStr, el){
+    calSelectedDate = dateStr;
+    document.querySelectorAll('.cal-day').forEach(e=>e.classList.remove('selected-day'));
+    if(el) el.classList.add('selected-day');
+
+    const classEvents = myScheduleEvents.filter(ev=>ev.date===dateStr);
+    const notes = calendarNotes[dateStr] || [];
+    const [y,m,dd] = dateStr.split('-');
+
+    let html = `<div style="font-weight:700;color:var(--yellow);font-size:15px;margin-bottom:14px;">Ngày ${dd}/${m}/${y}</div>`;
+    html += '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Lịch giảng dạy</div>';
+    if(classEvents.length){
+        classEvents.forEach(ev=>{
+            html += `<div style="background:rgba(232,35,42,.1);border-left:3px solid var(--red);padding:8px 12px;margin-bottom:6px;font-size:13px;">${ev.time} — ${ev.branch}</div>`;
+        });
+    } else {
+        html += '<div style="font-size:13px;color:var(--muted);margin-bottom:10px;">Không có lịch giảng dạy.</div>';
+    }
+    html += '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;">Ghi chú</div>';
+    notes.forEach(n=>{
+        html += `<div style="background:rgba(255,214,0,.08);border-left:3px solid var(--yellow);padding:8px 12px;margin-bottom:6px;font-size:13px;">${n}</div>`;
+    });
+    html += `<div style="display:flex;gap:8px;margin-top:12px;">
+        <input type="text" id="newNoteInput" placeholder="Thêm ghi chú mới..." style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);padding:10px 14px;color:var(--white);font-size:13px;font-family:var(--font-body);outline:none;">
+        <button onclick="addCalendarNote()" style="background:var(--yellow);color:var(--black);border:none;padding:0 20px;font-weight:700;font-size:12px;cursor:pointer;">THÊM</button>
+    </div>`;
+
+    const detail = document.getElementById('calDayDetail');
+    detail.innerHTML = html;
+    detail.style.display = 'block';
+}
+function addCalendarNote(){
+    const input = document.getElementById('newNoteInput');
+    const text = input.value.trim();
+    if(!text || !calSelectedDate) return;
+    if(!calendarNotes[calSelectedDate]) calendarNotes[calSelectedDate] = [];
+    calendarNotes[calSelectedDate].push(text);
+
+    const payload = new URLSearchParams();
+    payload.append('action','addCalendarNote');
+    payload.append('phone', currentUser ? currentUser.phone : '');
+    payload.append('date', calSelectedDate);
+    payload.append('note', text);
+    fetch(INTERNAL_API, { method:'POST', body: payload }).catch(()=>{});
+
+    renderCalendar();
+    selectCalDay(calSelectedDate);
+}    
 </body>
 </html>
