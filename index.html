@@ -674,12 +674,21 @@
         <div class="ops-title"><span class="lang-vi">Nghiệp vụ HLV / Nhân viên</span><span class="lang-en">Staff Operations</span></div>
         <div class="ops-grid">
            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span class="lang-vi">Đăng ký lịch dạy</span></button>
-            <button class="ops-btn" onclick="openCalendarModal()"><span>📖</span><span class="lang-vi">Cuốn lịch giảng dạy</span></button>
             <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span class="lang-vi">Đăng ký nghỉ phép</span></button>
             <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span class="lang-vi">Nhận xét học viên</span></button>
             <button class="ops-btn" onclick="viewMyAttendance()"><span>⏱️</span><span class="lang-vi">Xem chấm công</span></button>
             <button class="ops-btn" onclick="viewMyPayroll()"><span>💵</span><span class="lang-vi">Xem bảng lương</span></button>
         </div>
+        <div class="ops-title" style="margin-top:38px;">Cuốn lịch giảng dạy</div>
+<div style="background:var(--card); border:1px solid var(--border2); border-top:4px solid var(--yellow); padding:28px 26px;">
+    <div class="week-nav">
+        <button type="button" onclick="changeMonth(-1)">&larr;</button>
+        <div class="week-nav-label" id="monthLabel"></div>
+        <button type="button" onclick="changeMonth(1)">&rarr;</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-day-detail" id="calDayDetail" style="display:none;"></div>
+</div>
     </div>
     
     <div class="db-content" id="adminViewContent" style="display:none;">
@@ -777,20 +786,6 @@
     </div>
 </div>
 
-<!-- MODAL: CUỐN LỊCH GIẢNG DẠY -->
-<div class="modal-overlay" id="calendarModalOverlay">
-    <div class="modal-box wide">
-        <button class="modal-close" onclick="closeModal('calendarModalOverlay')">&times;</button>
-        <div class="modal-title">Cuốn lịch giảng dạy</div>
-        <div class="week-nav">
-            <button type="button" onclick="changeMonth(-1)">&larr;</button>
-            <div class="week-nav-label" id="monthLabel"></div>
-            <button type="button" onclick="changeMonth(1)">&rarr;</button>
-        </div>
-        <div class="cal-grid" id="calGrid"></div>
-        <div class="cal-day-detail" id="calDayDetail" style="display:none;"></div>
-    </div>
-</div>
 <section id="register">
     <div class="container">
         <div class="register-grid">
@@ -940,8 +935,6 @@ function loadStaffDashboard() {
     if(currentUser.managed_branch_ids) document.getElementById('dbBranch').textContent = (currentUser.managed_branch_ids || []).join(', ');
 
     if(currentUser.dob) {
-            myScheduleEvents = currentUser.schedule || [];
-    calendarNotes    = currentUser.notes || {};
         const age = new Date().getFullYear() - new Date(currentUser.dob).getFullYear();
         document.getElementById('dbDob').textContent = `${age} tuổi (${currentUser.dob})`;
     }
@@ -952,6 +945,12 @@ function loadStaffDashboard() {
     } else {
         const adminNav = document.getElementById('adminNavTabs');
         if(adminNav) adminNav.style.display = 'none';
+    }
+
+    myScheduleEvents = currentUser.schedule || [];
+    calendarNotes    = currentUser.notes || {};
+    calCurrentDate   = new Date();
+    renderCalendar();   // ← tự vẽ cuốn lịch ngay khi đăng nhập, không cần bấm nút
     }
 }
 
@@ -1202,12 +1201,6 @@ function submitSchedule(){
 }
 
 /* ---- 3. CUỐN LỊCH GIẢNG DẠY (có thêm ghi chú) ---- */
-function openCalendarModal(){
-    calCurrentDate = new Date();
-    document.getElementById('calDayDetail').style.display='none';
-    document.getElementById('calendarModalOverlay').classList.add('active');
-    renderCalendar();
-}
 function changeMonth(delta){
     calCurrentDate.setMonth(calCurrentDate.getMonth()+delta);
     renderCalendar();
