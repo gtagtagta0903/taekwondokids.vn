@@ -768,7 +768,7 @@
         </form>
     </div>
 </div>
- /ĐIỀN ĐĂNG KÝ HỌC THỬ/   
+  
 <section id="register">
     <div class="container">
         <div class="register-grid">
@@ -792,38 +792,32 @@
         </div>
     </div>
 </section>
-<script>
-/* ─────────────────────────────────────────────
-   CONSTANTS & CONFIGURATIONS
-───────────────────────────────────────────── */
-const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxgISoI1pVxh6hwTYEjxZeSdujEDhhPM-vV4H1VZk40HwcCmCUYdjJzSD0v0lGie4be/exec';
-const PARENT_API   = 'https://script.google.com/macros/s/AKfycbzS1EiWudbPexUEGYCV1MqDBFqutS1Daa_C7V9qDMes7T5ryuhXN5Flm3F3jVKY55qK/exec';
-const REG_API      = 'https://script.google.com/macros/s/AKfycbyELHZv8q93Dqa7dyzXqSyOYyZnaFk4dXnWytspOWry9XsI4i1SqwfDn1ioYx5kd00n/exec';
 
-let currentUser = null;
-let currentParent = null;
 <!-- FOOTER -->
 <footer>
     <div class="container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand"><img src="LOGO.png" alt="Logo"><div class="footer-brand-name">Trung tâm Taekwondo Kids Việt Nam</div></div>
-                <p class="footer-desc">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</p>
+                <div class="footer-brand"><img src="LOGO.png" alt="Logo"><div class="footer-brand-name"><span class="lang-vi">Trung tâm Taekwondo Kids Việt Nam</span><span class="lang-en">Taekwondo Kids Vietnam Center</span></div></div>
+                <p class="footer-desc"><span class="lang-vi">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</span><span class="lang-en">Vietnam Martial Arts Training and Development Co., Ltd</span></p>
             </div>
             <div>
-                <div class="footer-col-title">Liên hệ</div>
+                <div class="footer-col-title"><span class="lang-vi">Liên hệ</span><span class="lang-en">Contact</span></div>
                 <ul class="footer-list"><li>Hotline: <strong>097 893 1747</strong></li><li>taekwondokids.vn@gmail.com</li></ul>
             </div>
             <div>
-                <div class="footer-col-title">Kết nối</div>
-                <ul class="footer-list">
-                    <li><a href="https://fb.com/taekwondokids.vietnam" target="_blank"><i class="fa-brands fa-facebook" style="margin-right:8px"></i>Fanpage Facebook</a></li>
-                </ul>
+                <div class="footer-col-title"><span class="lang-vi">Kết nối</span><span class="lang-en">Follow Us</span></div>
+                <ul class="footer-list"><li><a href="https://fb.com/taekwondokids.vietnam" target="_blank"><i class="fa-brands fa-facebook" style="margin-right:8px"></i>Fanpage Facebook</a></li><li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank"><i class="fa-brands fa-tiktok" style="margin-right:8px"></i>TikTok Channel</a></li></ul>
             </div>
         </div>
         <div class="footer-bottom">© 2026 Taekwondo Kids Việt Nam. All rights reserved.</div>
     </div>
 </footer>
+
+<div class="float-btns">
+    <button class="float-btn zalo" title="Zalo">Zalo</button>
+    <button class="float-btn mess" title="Messenger">Mess</button>
+</div>
 
 <script>
 /* ─────────────────────────────────────────────
@@ -885,7 +879,16 @@ let customCalendarEvents = {
     '2026-07-08': [{ id: 101, type: 'working', label: 'Họp HLV' }],
     '2026-07-25': [{ id: 102, type: 'leave', label: 'Nghỉ phép' }]
 };
+/* ─────────────────────────────────────────────
+   CONSTANTS & CONFIGURATIONS
+───────────────────────────────────────────── */
+const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxgISoI1pVxh6hwTYEjxZeSdujEDhhPM-vV4H1VZk40HwcCmCUYdjJzSD0v0lGie4be/exec';
+const PARENT_API   = 'https://script.google.com/macros/s/AKfycbzS1EiWudbPexUEGYCV1MqDBFqutS1Daa_C7V9qDMes7T5ryuhXN5Flm3F3jVKY55qK/exec';
+const REG_API      = 'https://script.google.com/macros/s/AKfycbyELHZv8q93Dqa7dyzXqSyOYyZnaFk4dXnWytspOWry9XsI4i1SqwfDn1ioYx5kd00n/exec';
 
+let currentUser = null;
+let currentParent = null;
+};
 /* ─────────────────────────────────────────────
    AUTH & BASIC UI
 ───────────────────────────────────────────── */
