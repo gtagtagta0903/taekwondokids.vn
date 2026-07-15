@@ -792,7 +792,16 @@
         </div>
     </div>
 </section>
-    
+<script>
+/* ─────────────────────────────────────────────
+   CONSTANTS & CONFIGURATIONS
+───────────────────────────────────────────── */
+const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxgISoI1pVxh6hwTYEjxZeSdujEDhhPM-vV4H1VZk40HwcCmCUYdjJzSD0v0lGie4be/exec';
+const PARENT_API   = 'https://script.google.com/macros/s/AKfycbzS1EiWudbPexUEGYCV1MqDBFqutS1Daa_C7V9qDMes7T5ryuhXN5Flm3F3jVKY55qK/exec';
+const REG_API      = 'https://script.google.com/macros/s/AKfycbyELHZv8q93Dqa7dyzXqSyOYyZnaFk4dXnWytspOWry9XsI4i1SqwfDn1ioYx5kd00n/exec';
+
+let currentUser = null;
+let currentParent = null;
 <!-- FOOTER -->
 <footer>
     <div class="container">
