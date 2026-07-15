@@ -821,16 +821,96 @@
 
 <script>
 /* ─────────────────────────────────────────────
-   GLOBAL STATE & DATA DEFINITIONS
+   GLOBAL STATE & API
 ───────────────────────────────────────────── */
-let currentUser = {
-    phone: "0966148683",
-    full_name: "Giang Thuỳ Anh",
-    role: "HLV",
-    belt_level: "Trắng",
-    dob: "2004-09-03", 
-    email: "",
-    managed_branch_ids: ["Hapulico"]
+// DÁN LINK API BẠN VỪA TẠO Ở BƯỚC 1 VÀO ĐÂY
+const HLV_API_URL = 'DÁN_LINK_API_CỦA_BẠN_VÀO_ĐÂY'; 
+
+let currentUser = null; // Trạng thái User (Real)
+
+/* ─────────────────────────────────────────────
+   AUTH & DASHBOARD UI LOGIC
+───────────────────────────────────────────── */
+// Chuyển Tab Đăng nhập (Phụ huynh / HLV)
+function switchTab(id) {
+    ['phuhuynh','hlv'].forEach(t => {
+        document.getElementById('tab-'+t)?.classList.remove('active');
+        document.getElementById('btn-'+t)?.classList.remove('active');
+    });
+    document.getElementById('tab-'+id)?.classList.add('active');
+    document.getElementById('btn-'+id)?.classList.add('active');
+}
+
+// Xử lý Login Hệ thống HLV
+document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('internalLoginBtn');
+    const originalText = btn.innerHTML;
+    
+    const phone = document.getElementById('loginPhone').value.trim();
+    const pass = document.getElementById('loginPass').value.trim();
+    
+    // UX Loading
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" style="margin-right:8px"></i>ĐANG KẾT NỐI...';
+    btn.disabled = true;
+
+    const data = new URLSearchParams();
+    data.append('action', 'login_hlv');
+    data.append('phone', phone);
+    data.append('password', pass);
+
+    fetch(HLV_API_URL, { method: 'POST', body: data })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                currentUser = data.user;
+                document.getElementById('portal').style.display = 'none';
+                document.getElementById('internalDashboard').style.display = 'block';
+                loadStaffDashboard();
+                document.getElementById('internalLoginForm').reset();
+            } else {
+                alert('❌ ' + data.message);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Lỗi kết nối máy chủ. Vui lòng thử lại!');
+        })
+        .finally(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        });
+});
+
+// Render thông tin HLV từ Google Sheet lên Dashboard
+function loadStaffDashboard() {
+    if(!currentUser) return;
+    
+    // Định danh
+    document.getElementById('dbName').textContent = currentUser.full_name || 'Đang cập nhật';
+    document.getElementById('dbPosition').textContent = currentUser.role || 'Nhân viên';
+    document.getElementById('dbBelt').textContent = currentUser.belt_level || 'Chưa cập nhật';
+    
+    // Liên hệ & Cơ sở
+    document.getElementById('dbPhone').textContent = currentUser.phone || 'Chưa cập nhật';
+    document.getElementById('dbEmail').textContent = currentUser.email || 'Chưa cập nhật';
+    document.getElementById('dbBranch').textContent = currentUser.branch || 'Chưa phân công';
+    
+    // Tính tuổi và format ngày sinh
+    if(currentUser.dob) {
+        const parts = currentUser.dob.split('-'); // yyyy-mm-dd
+        const age = new Date().getFullYear() - parseInt(parts[0]);
+        document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
+    } else {
+        document.getElementById('dbDob').textContent = 'Chưa cập nhật';
+    }
+}
+
+// Đăng xuất
+function logoutInternal() {
+    currentUser = null;
+    document.getElementById('internalDashboard').style.display = 'none';
+    document.getElementById('portal').style.display = 'block';
 };
 
 const BRANCH_NAMES = {
