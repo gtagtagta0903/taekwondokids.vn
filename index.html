@@ -878,17 +878,7 @@ let weeklySchedule = {
 let customCalendarEvents = {
     '2026-07-08': [{ id: 101, type: 'working', label: 'Họp HLV' }],
     '2026-07-25': [{ id: 102, type: 'leave', label: 'Nghỉ phép' }]
-};
-/* ─────────────────────────────────────────────
-   CONSTANTS & CONFIGURATIONS
-───────────────────────────────────────────── */
-const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxgISoI1pVxh6hwTYEjxZeSdujEDhhPM-vV4H1VZk40HwcCmCUYdjJzSD0v0lGie4be/exec';
-const PARENT_API   = 'https://script.google.com/macros/s/AKfycbzS1EiWudbPexUEGYCV1MqDBFqutS1Daa_C7V9qDMes7T5ryuhXN5Flm3F3jVKY55qK/exec';
-const REG_API      = 'https://script.google.com/macros/s/AKfycbyELHZv8q93Dqa7dyzXqSyOYyZnaFk4dXnWytspOWry9XsI4i1SqwfDn1ioYx5kd00n/exec';
 
-let currentUser = null;
-let currentParent = null;
-};
 /* ─────────────────────────────────────────────
    AUTH & BASIC UI
 ───────────────────────────────────────────── */
@@ -1243,6 +1233,77 @@ function deleteCustomEvent() {
     
     closeEventModal();
     renderCalendar();
+}
+    /* ─────────────────────────────────────────────
+   XỬ LÝ FORM ĐĂNG KÝ HỌC THỬ -> GOOGLE SHEET
+───────────────────────────────────────────── */
+const scriptURL = 'PASTE_URL_WEB_APP_CỦA_BẠN_VÀO_ĐÂY'; // Thay link URL copy ở Bước 1 vào đây
+const registerForm = document.getElementById('registerForm');
+const submitBtn = document.getElementById('submitBtn');
+
+if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+        e.preventDefault(); // Chặn hành vi tải lại trang
+        
+        // Hiệu ứng loading cho nút bấm
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...';
+        submitBtn.disabled = true;
+        
+        // Thu thập dữ liệu từ Form
+        const formData = new FormData(registerForm);
+        
+        // Gửi dữ liệu tới Google Apps Script
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                alert('Đăng ký thành công! Trung tâm sẽ liên hệ với bạn trong thời gian sớm nhất.');
+                registerForm.reset(); // Xóa trắng form sau khi thành công
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert('Có lỗi xảy ra, vui lòng thử lại sau.');
+            })
+            .finally(() => {
+                // Khôi phục lại nút bấm
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            });
+    });
+}/* ─────────────────────────────────────────────
+   XỬ LÝ FORM ĐĂNG KÝ HỌC THỬ -> GOOGLE SHEET
+───────────────────────────────────────────── */
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzXvLNy1TW3NifbUWWsQUgXjH5LpiqAKigwacjimH1U2-ZMASz5q_X3jSRvA4fyezaR/exec'; // Thay link URL copy ở Bước 1 vào đây
+const registerForm = document.getElementById('registerForm');
+const submitBtn = document.getElementById('submitBtn');
+
+if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+        e.preventDefault(); // Chặn hành vi tải lại trang
+        
+        // Hiệu ứng loading cho nút bấm
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...';
+        submitBtn.disabled = true;
+        
+        // Thu thập dữ liệu từ Form
+        const formData = new FormData(registerForm);
+        
+        // Gửi dữ liệu tới Google Apps Script
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                alert('Đăng ký thành công! Trung tâm sẽ liên hệ với bạn trong thời gian sớm nhất.');
+                registerForm.reset(); // Xóa trắng form sau khi thành công
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert('Có lỗi xảy ra, vui lòng thử lại sau.');
+            })
+            .finally(() => {
+                // Khôi phục lại nút bấm
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            });
+    });
 }
 </script>
 </body>
