@@ -820,528 +820,506 @@
 </div>
 
 <script>
-/* ─────────────────────────────────────────────
-   GLOBAL STATE & API
-───────────────────────────────────────────── */
-// DÁN LINK API BẠN VỪA TẠO Ở BƯỚC 1 VÀO ĐÂY
-const HLV_API_URL = 'DÁN_LINK_API_CỦA_BẠN_VÀO_ĐÂY'; 
+/* =============================================================
+   TAEKWONDO KIDS – CLIENT SCRIPT (thay thế toàn bộ thẻ <script>
+   cũ trong file HTML bằng nội dung file này)
+   ============================================================= */
 
-let currentUser = null; // Trạng thái User (Real)
+// 1. DÁN URL WEB APP (kết thúc bằng /exec) SAU KHI DEPLOY Code.gs
+const API_URL = 'https://script.google.com/macros/s/AKfycbzZZn2rh-b1csnlE14ujH5WWjw6iAxn1MSJZbwjWHbTKANoTR5b66IoEOsLBi9BcOR4/exec';
 
-/* ─────────────────────────────────────────────
-   AUTH & DASHBOARD UI LOGIC
-───────────────────────────────────────────── */
-// Chuyển Tab Đăng nhập (Phụ huynh / HLV)
+let currentUser = null;   // HLV/Nhân viên đang đăng nhập
+let currentParent = null; // Phụ huynh đang đăng nhập
+let currentDate = new Date();
+let weeklySchedule = {};        // {thu: {ca: maNV_hoặc_coSo}} — dùng bản đồ theo cơ sở của TÔI
+let allSchedules = [];          // toàn bộ lịch từ server (để check trùng)
+let customCalendarEvents = {};  // {dateStr: [{id, type, label}]}
+
+/* ---------- GỌI API ---------- */
+function callApi(action, params = {}) {
+  const data = new URLSearchParams();
+  data.append('action', action);
+  Object.keys(params).forEach(k => data.append(k, params[k]));
+  return fetch(API_URL, { method: 'POST', body: data }).then(res => res.json());
+}
+
+/* ---------- TABS ĐĂNG NHẬP ---------- */
 function switchTab(id) {
-    ['phuhuynh','hlv'].forEach(t => {
-        document.getElementById('tab-'+t)?.classList.remove('active');
-        document.getElementById('btn-'+t)?.classList.remove('active');
-    });
-    document.getElementById('tab-'+id)?.classList.add('active');
-    document.getElementById('btn-'+id)?.classList.add('active');
+  ['phuhuynh', 'hlv'].forEach(t => {
+    document.getElementById('tab-' + t)?.classList.remove('active');
+    document.getElementById('btn-' + t)?.classList.remove('active');
+  });
+  document.getElementById('tab-' + id)?.classList.add('active');
+  document.getElementById('btn-' + id)?.classList.add('active');
 }
 
-// Xử lý Login Hệ thống HLV
-document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('internalLoginBtn');
-    const originalText = btn.innerHTML;
-    
-    const phone = document.getElementById('loginPhone').value.trim();
-    const pass = document.getElementById('loginPass').value.trim();
-    
-    // UX Loading
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" style="margin-right:8px"></i>ĐANG KẾT NỐI...';
-    btn.disabled = true;
+/* ---------- ĐĂNG NHẬP HLV / NHÂN VIÊN ---------- */
+document.getElementById('internalLoginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const btn = document.getElementById('internalLoginBtn');
+  const original = btn.innerHTML;
+  btn.innerHTML = 'ĐANG KẾT NỐI...'; btn.disabled = true;
 
-    const data = new URLSearchParams();
-    data.append('action', 'login_hlv');
-    data.append('phone', phone);
-    data.append('password', pass);
+  const phone = document.getElementById('loginPhone').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
 
-    fetch(HLV_API_URL, { method: 'POST', body: data })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 'success') {
-                currentUser = data.user;
-                document.getElementById('portal').style.display = 'none';
-                document.getElementById('internalDashboard').style.display = 'block';
-                loadStaffDashboard();
-                document.getElementById('internalLoginForm').reset();
-            } else {
-                alert('❌ ' + data.message);
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert('Lỗi kết nối máy chủ. Vui lòng thử lại!');
-        })
-        .finally(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        });
-});
-
-// Render thông tin HLV từ Google Sheet lên Dashboard
-function loadStaffDashboard() {
-    if(!currentUser) return;
-    
-    // Định danh
-    document.getElementById('dbName').textContent = currentUser.full_name || 'Đang cập nhật';
-    document.getElementById('dbPosition').textContent = currentUser.role || 'Nhân viên';
-    document.getElementById('dbBelt').textContent = currentUser.belt_level || 'Chưa cập nhật';
-    
-    // Liên hệ & Cơ sở
-    document.getElementById('dbPhone').textContent = currentUser.phone || 'Chưa cập nhật';
-    document.getElementById('dbEmail').textContent = currentUser.email || 'Chưa cập nhật';
-    document.getElementById('dbBranch').textContent = currentUser.branch || 'Chưa phân công';
-    
-    // Tính tuổi và format ngày sinh
-    if(currentUser.dob) {
-        const parts = currentUser.dob.split('-'); // yyyy-mm-dd
-        const age = new Date().getFullYear() - parseInt(parts[0]);
-        document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
-    } else {
-        document.getElementById('dbDob').textContent = 'Chưa cập nhật';
-    }
-}
-
-// Đăng xuất
-function logoutInternal() {
-    currentUser = null;
-    document.getElementById('internalDashboard').style.display = 'none';
-    document.getElementById('portal').style.display = 'block';
-};
-
-const BRANCH_NAMES = {
-    'Hapulico': 'Cơ sở Hapulico',
-    'GreenStars': 'Cơ sở GreenStars',
-    'NghiaDo': 'Cơ sở Nghĩa Đô',
-    'HaDong': 'Cơ sở Hà Đông',
-    'LongBien': 'Cơ sở Long Biên'
-};
-
-const WEEK_DAYS = [
-    { id: 1, label: 'Thứ 2' },
-    { id: 2, label: 'Thứ 3' },
-    { id: 3, label: 'Thứ 4' },
-    { id: 4, label: 'Thứ 5' },
-    { id: 5, label: 'Thứ 6' },
-    { id: 6, label: 'Thứ 7', isWeekend: true },
-    { id: 0, label: 'Chủ Nhật', isWeekend: true }
-];
-
-const SHIFT_SLOTS = {
-    weekday: [
-        { id: '17', label: '17:00 - 18:00', short: '17h' },
-        { id: '18', label: '18:00 - 19:00', short: '18h' }
-    ],
-    weekend: [
-        { id: '09', label: 'Sáng: 09:00 - 10:00', short: '09h' },
-        { id: '10', label: 'Sáng: 10:00 - 11:00', short: '10h' },
-        { id: '14', label: 'Chiều: 14:00 - 15:00', short: '14h' },
-        { id: '15', label: 'Chiều: 15:00 - 16:00', short: '15h' },
-        { id: '17', label: 'Tối: 17:00 - 18:00', short: '17h' },
-        { id: '18', label: 'Tối: 18:00 - 19:00', short: '18h' }
-    ]
-};
-
-let weeklySchedule = {
-    1: { '17': 'Hapulico', '18': 'Hapulico' },
-    3: { '17': 'Hapulico' },
-    6: { '09': 'GreenStars' }
-};
-
-let customCalendarEvents = {
-    '2026-07-08': [{ id: 101, type: 'working', label: 'Họp HLV' }],
-    '2026-07-25': [{ id: 102, type: 'leave', label: 'Nghỉ phép' }]
-}; // [FIX 1] Lỗi thiếu dấu }; ở đây khiến toàn bộ code JS bên dưới bị sập
-
-/* ─────────────────────────────────────────────
-   AUTH & BASIC UI
-───────────────────────────────────────────── */
-function switchTab(id) {
-    ['phuhuynh','hlv'].forEach(t => {
-        document.getElementById('tab-'+t)?.classList.remove('active');
-        document.getElementById('btn-'+t)?.classList.remove('active');
-    });
-    document.getElementById('tab-'+id)?.classList.add('active');
-    document.getElementById('btn-'+id)?.classList.add('active');
-}
-
-document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('internalLoginBtn');
-    btn.innerHTML = "ĐANG TẢI...";
-    setTimeout(() => {
+  callApi('login_hlv', { phone, password: pass })
+    .then(res => {
+      if (res.status === 'success') {
+        currentUser = res.user;
         document.getElementById('portal').style.display = 'none';
         document.getElementById('internalDashboard').style.display = 'block';
         loadStaffDashboard();
-        btn.innerHTML = "ĐĂNG NHẬP HỆ THỐNG";
-    }, 500);
+        this.reset();
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ. Vui lòng thử lại!'))
+    .finally(() => { btn.innerHTML = original; btn.disabled = false; });
 });
 
 function loadStaffDashboard() {
-    document.getElementById('dbName').textContent = currentUser.full_name;
-    document.getElementById('dbPosition').textContent = currentUser.role;
-    document.getElementById('dbBelt').textContent = currentUser.belt_level;
-    document.getElementById('dbPhone').textContent = currentUser.phone;
-    document.getElementById('dbEmail').textContent = currentUser.email || 'Chưa cập nhật';
-    document.getElementById('dbBranch').textContent = BRANCH_NAMES[currentUser.managed_branch_ids[0]] || 'Chưa phân công';
-    
-    if(currentUser.dob) {
-        const age = 2026 - parseInt(currentUser.dob.split('-')[0]);
-        const parts = currentUser.dob.split('-');
-        document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
-    }
-    
-    currentDate = new Date(2026, 6, 1); 
-    renderCalendar();
+  document.getElementById('dbName').textContent = currentUser.full_name || 'Chưa cập nhật';
+  document.getElementById('dbPosition').textContent = currentUser.role || 'Nhân viên';
+  document.getElementById('dbBelt').textContent = currentUser.belt_level || 'Chưa cập nhật';
+  document.getElementById('dbPhone').textContent = currentUser.phone || 'Chưa cập nhật';
+  document.getElementById('dbEmail').textContent = currentUser.email || 'Chưa cập nhật';
+  document.getElementById('dbBranch').textContent = currentUser.branch || 'Chưa phân công';
+
+  if (currentUser.dob) {
+    const parts = currentUser.dob.split('-'); // yyyy-mm-dd
+    const age = new Date().getFullYear() - parseInt(parts[0]);
+    document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
+  }
+
+  refreshScheduleFromServer().then(() => renderCalendar());
+  loadCalendarNotesFromServer();
 }
 
 function logoutInternal() {
-    document.getElementById('internalDashboard').style.display = 'none';
-    document.getElementById('portal').style.display = 'block';
-    document.getElementById('internalLoginForm').reset();
+  currentUser = null;
+  document.getElementById('internalDashboard').style.display = 'none';
+  document.getElementById('portal').style.display = 'block';
+  document.getElementById('internalLoginForm').reset();
 }
 
-/* ─────────────────────────────────────────────
-   EDIT PROFILE MODAL
-───────────────────────────────────────────── */
+/* ---------- ĐĂNG NHẬP PHỤ HUYNH ---------- */
+document.getElementById('parentLoginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const btn = document.getElementById('parentLoginBtn');
+  const original = btn.innerHTML;
+  btn.innerHTML = 'ĐANG KẾT NỐI...'; btn.disabled = true;
+
+  const phone = document.getElementById('parentLoginPhone').value.trim();
+  const pass = document.getElementById('parentLoginPass').value.trim();
+
+  callApi('login_parent', { phone, password: pass })
+    .then(res => {
+      if (res.status === 'success') {
+        currentParent = res.user;
+        renderParentDashboard();
+        this.reset();
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ. Vui lòng thử lại!'))
+    .finally(() => { btn.innerHTML = original; btn.disabled = false; });
+});
+
+// Cần thêm khối HTML #parentDashboard đơn giản (xem file parent-dashboard.html đính kèm)
+function renderParentDashboard() {
+  const box = document.getElementById('parentDashboardContent');
+  if (!box) { alert('Thiếu khối #parentDashboardContent trong HTML.'); return; }
+  document.getElementById('portal').style.display = 'none';
+  document.getElementById('parentDashboard').style.display = 'block';
+
+  box.innerHTML = currentParent.students.map(s => `
+    <div class="pdb-card">
+      <div class="db-avatar-panel">
+        <div class="db-name" style="color:#60D0FF">${s.student_name}</div>
+        <div class="db-position">Mã học viên: ${s.maHV}</div>
+        <div class="db-belt-badge">Cấp đai: ${s.belt_level || 'Chưa cập nhật'}</div>
+      </div>
+      <div class="db-info-panel">
+        <div class="db-info-title">Thông tin học viên</div>
+        <div class="db-info-grid">
+          <div><div class="db-info-label">Ngày sinh</div><div class="db-info-value">${s.dob || 'Chưa cập nhật'}</div></div>
+          <div><div class="db-info-label">Số buổi / tuần</div><div class="db-info-value">${s.sessions_per_week || 'Chưa cập nhật'}</div></div>
+          <div><div class="db-info-label">Cơ sở học</div><div class="db-info-value">${s.branch || 'Chưa phân công'}</div></div>
+          <div><div class="db-info-label">Người giám hộ</div><div class="db-info-value">${s.guardian_name} (${s.relationship || ''})</div></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function logoutParent() {
+  currentParent = null;
+  document.getElementById('parentDashboard').style.display = 'none';
+  document.getElementById('portal').style.display = 'block';
+}
+
+/* ---------- SỬA THÔNG TIN CÁ NHÂN ---------- */
 function openEditProfileModal() {
-    document.getElementById('epFullName').value = currentUser.full_name;
-    document.getElementById('epPhone').value = currentUser.phone;
-    document.getElementById('epEmail').value = currentUser.email;
-    document.getElementById('epDob').value = currentUser.dob; 
-    document.getElementById('epRole').value = currentUser.role;
-    document.getElementById('epNewPass').value = '';
-    document.getElementById('epConfirmPass').value = '';
-    document.getElementById('passErr').classList.remove('visible');
-    document.getElementById('passMatchErr').classList.remove('visible');
-    switchModalTab('info');
-    document.getElementById('editProfileModal').classList.add('active');
+  document.getElementById('epFullName').value = currentUser.full_name || '';
+  document.getElementById('epPhone').value = currentUser.phone || '';
+  document.getElementById('epEmail').value = currentUser.email || '';
+  document.getElementById('epDob').value = currentUser.dob || '';
+  document.getElementById('epRole').value = currentUser.role || '';
+  document.getElementById('epNewPass').value = '';
+  document.getElementById('epConfirmPass').value = '';
+  document.getElementById('passErr').classList.remove('visible');
+  document.getElementById('passMatchErr').classList.remove('visible');
+  switchModalTab('info');
+  document.getElementById('editProfileModal').classList.add('active');
 }
-
 function closeEditProfileModal() { document.getElementById('editProfileModal').classList.remove('active'); }
 
 function switchModalTab(tabId) {
-    document.getElementById('mTabInfoBtn').classList.remove('active');
-    document.getElementById('mTabPassBtn').classList.remove('active');
-    document.getElementById('mTabInfo').classList.remove('active');
-    document.getElementById('mTabPass').classList.remove('active');
-    document.getElementById(tabId === 'info' ? 'mTabInfoBtn' : 'mTabPassBtn').classList.add('active');
-    document.getElementById(tabId === 'info' ? 'mTabInfo' : 'mTabPass').classList.add('active');
+  document.getElementById('mTabInfoBtn').classList.remove('active');
+  document.getElementById('mTabPassBtn').classList.remove('active');
+  document.getElementById('mTabInfo').classList.remove('active');
+  document.getElementById('mTabPass').classList.remove('active');
+  document.getElementById(tabId === 'info' ? 'mTabInfoBtn' : 'mTabPassBtn').classList.add('active');
+  document.getElementById(tabId === 'info' ? 'mTabInfo' : 'mTabPass').classList.add('active');
 }
 
-document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const newPass = document.getElementById('epNewPass').value;
-    const confirmPass = document.getElementById('epConfirmPass').value;
-    document.getElementById('passErr').classList.remove('visible');
-    document.getElementById('passMatchErr').classList.remove('visible');
-    if(newPass) {
-        if (!/^[a-zA-Z0-9]{6,}$/.test(newPass) || !/[A-Z]/.test(newPass)) {
-            switchModalTab('pass'); document.getElementById('passErr').classList.add('visible'); return;
-        }
-        if(newPass !== confirmPass) {
-            switchModalTab('pass'); document.getElementById('passMatchErr').classList.add('visible'); return;
-        }
+document.getElementById('editProfileForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const newPass = document.getElementById('epNewPass').value;
+  const confirmPass = document.getElementById('epConfirmPass').value;
+  document.getElementById('passErr').classList.remove('visible');
+  document.getElementById('passMatchErr').classList.remove('visible');
+
+  if (newPass) {
+    if (!/^[a-zA-Z0-9]{6,}$/.test(newPass) || !/[A-Z]/.test(newPass)) {
+      switchModalTab('pass'); document.getElementById('passErr').classList.add('visible'); return;
     }
-    const btn = document.getElementById('epSaveBtn');
-    btn.innerHTML = "ĐANG LƯU..."; btn.disabled = true;
-    setTimeout(() => {
-        currentUser.full_name = document.getElementById('epFullName').value;
-        currentUser.phone = document.getElementById('epPhone').value;
-        currentUser.email = document.getElementById('epEmail').value;
-        currentUser.dob = document.getElementById('epDob').value;
-        currentUser.role = document.getElementById('epRole').value;
-        alert('Cập nhật thông tin thành công!');
-        loadStaffDashboard();
-        closeEditProfileModal();
-        btn.innerHTML = "LƯU THAY ĐỔI"; btn.disabled = false;
-    }, 600);
+    if (newPass !== confirmPass) {
+      switchModalTab('pass'); document.getElementById('passMatchErr').classList.add('visible'); return;
+    }
+  }
+
+  const btn = document.getElementById('epSaveBtn');
+  btn.innerHTML = 'ĐANG LƯU...'; btn.disabled = true;
+
+  callApi('updateProfile', {
+    maNV: currentUser.maNV,
+    fullName: document.getElementById('epFullName').value,
+    phone: document.getElementById('epPhone').value,
+    email: document.getElementById('epEmail').value,
+    dob: document.getElementById('epDob').value,
+    role: document.getElementById('epRole').value,
+    newPassword: newPass
+  }).then(res => {
+    if (res.status === 'success') {
+      currentUser.full_name = document.getElementById('epFullName').value;
+      currentUser.phone = document.getElementById('epPhone').value;
+      currentUser.email = document.getElementById('epEmail').value;
+      currentUser.dob = document.getElementById('epDob').value;
+      currentUser.role = document.getElementById('epRole').value;
+      alert('Cập nhật thông tin thành công!');
+      loadStaffDashboard();
+      closeEditProfileModal();
+    } else {
+      alert('❌ ' + res.message);
+    }
+  }).catch(() => alert('Lỗi kết nối máy chủ.'))
+    .finally(() => { btn.innerHTML = 'LƯU THAY ĐỔI'; btn.disabled = false; });
 });
 
-/* ─────────────────────────────────────────────
-   SCHEDULE MODAL (DAY-BY-DAY SELECTION)
-───────────────────────────────────────────── */
-function openScheduleModal() {
-    document.getElementById('scheduleModal').classList.add('active');
-    document.getElementById('conflictWarning').classList.remove('active');
-    document.getElementById('schBranchSelect').value = currentUser.managed_branch_ids[0] || 'Hapulico';
-    renderScheduleSlots();
+/* ---------- LỊCH GIẢNG DẠY HÀNG TUẦN ---------- */
+const BRANCH_NAMES = {
+  'Cơ sở Hapulico': 'Hapulico', 'Cơ sở GreenStars': 'GreenStars', 'Cơ sở Nghĩa Đô': 'Nghĩa Đô',
+  'Cơ sở Hà Đông': 'Hà Đông', 'Cơ sở Long Biên': 'Long Biên',
+  'Hapulico': 'Hapulico', 'GreenStars': 'GreenStars', 'NghiaDo': 'Nghĩa Đô', 'HaDong': 'Hà Đông', 'LongBien': 'Long Biên'
+};
+
+const WEEK_DAYS = [
+  { id: 1, label: 'Thứ 2' }, { id: 2, label: 'Thứ 3' }, { id: 3, label: 'Thứ 4' },
+  { id: 4, label: 'Thứ 5' }, { id: 5, label: 'Thứ 6' },
+  { id: 6, label: 'Thứ 7', isWeekend: true }, { id: 0, label: 'Chủ Nhật', isWeekend: true }
+];
+
+const SHIFT_SLOTS = {
+  weekday: [{ id: '17', label: '17:00 - 18:00', short: '17h' }, { id: '18', label: '18:00 - 19:00', short: '18h' }],
+  weekend: [
+    { id: '09', label: 'Sáng: 09:00 - 10:00', short: '09h' }, { id: '10', label: 'Sáng: 10:00 - 11:00', short: '10h' },
+    { id: '14', label: 'Chiều: 14:00 - 15:00', short: '14h' }, { id: '15', label: 'Chiều: 15:00 - 16:00', short: '15h' },
+    { id: '17', label: 'Tối: 17:00 - 18:00', short: '17h' }, { id: '18', label: 'Tối: 18:00 - 19:00', short: '18h' }
+  ]
+};
+
+function refreshScheduleFromServer() {
+  return callApi('getSchedule', { maNV: currentUser.maNV }).then(res => {
+    if (res.status !== 'success') return;
+    allSchedules = res.schedule;
+    weeklySchedule = {};
+    allSchedules.filter(s => s.isMine).forEach(s => {
+      if (!weeklySchedule[s.thu]) weeklySchedule[s.thu] = {};
+      weeklySchedule[s.thu][s.ca] = s.coSo;
+    });
+  });
 }
 
-function closeScheduleModal() {
-    document.getElementById('scheduleModal').classList.remove('active');
+function openScheduleModal() {
+  document.getElementById('scheduleModal').classList.add('active');
+  document.getElementById('conflictWarning').classList.remove('active');
+  document.getElementById('schBranchSelect').value = currentUser.branch || 'Hapulico';
+  renderScheduleSlots();
 }
+function closeScheduleModal() { document.getElementById('scheduleModal').classList.remove('active'); }
 
 function renderScheduleSlots() {
-    const branch = document.getElementById('schBranchSelect').value;
-    document.getElementById('conflictWarning').classList.remove('active');
-    
-    const container = document.getElementById('scheduleGridContainer');
-    container.innerHTML = '';
+  const branch = document.getElementById('schBranchSelect').value;
+  document.getElementById('conflictWarning').classList.remove('active');
+  const container = document.getElementById('scheduleGridContainer');
+  container.innerHTML = '';
 
-    WEEK_DAYS.forEach(day => {
-        const shifts = day.isWeekend ? SHIFT_SLOTS.weekend : SHIFT_SLOTS.weekday;
-        let dayHtml = `<div class="day-group">
-            <div class="day-group-header">${day.label}</div>
-            <div class="day-group-body">
-                <div class="slot-grid">`;
-        
-        shifts.forEach(slot => {
-            const dayRecord = weeklySchedule[day.id] || {};
-            const takenByBranch = dayRecord[slot.id];
-            
-            let isChecked = false;
-            let isDisabled = false;
-
-            if (takenByBranch) {
-                if (takenByBranch === branch) isChecked = true; 
-                else isDisabled = true; 
-            }
-
-            dayHtml += `
-                <label>
-                    <input type="checkbox" class="slot-toggle" value="${slot.id}" 
-                           ${isChecked ? 'checked' : ''} 
-                           ${isDisabled ? 'disabled' : ''}
-                           onchange="handleSlotChange(this, ${day.id}, '${slot.id}', '${branch}')">
-                    <span class="slot-label">${slot.label}</span>
-                </label>
-            `;
-        });
-
-        dayHtml += `</div></div></div>`;
-        container.innerHTML += dayHtml;
+  WEEK_DAYS.forEach(day => {
+    const shifts = day.isWeekend ? SHIFT_SLOTS.weekend : SHIFT_SLOTS.weekday;
+    let html = `<div class="day-group"><div class="day-group-header">${day.label}</div><div class="day-group-body"><div class="slot-grid">`;
+    shifts.forEach(slot => {
+      const dayRecord = weeklySchedule[day.id] || {};
+      const takenByBranch = dayRecord[slot.id];
+      const isChecked = takenByBranch === branch;
+      const isDisabled = takenByBranch && takenByBranch !== branch;
+      html += `<label>
+        <input type="checkbox" class="slot-toggle" value="${slot.id}"
+               ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}
+               onchange="handleSlotChange(this, ${day.id}, '${slot.id}', '${branch}')">
+        <span class="slot-label">${slot.label}</span>
+      </label>`;
     });
+    html += `</div></div></div>`;
+    container.innerHTML += html;
+  });
 }
 
-function handleSlotChange(checkbox, dayId, slotId, currentBranch) {
-    const warningEl = document.getElementById('conflictWarning');
-    const conflictName = document.getElementById('conflictBranchName');
+function handleSlotChange(checkbox, dayId, slotId, branch) {
+  const warningEl = document.getElementById('conflictWarning');
+  const conflictName = document.getElementById('conflictBranchName');
+  if (!weeklySchedule[dayId]) weeklySchedule[dayId] = {};
+  const taken = weeklySchedule[dayId][slotId];
 
-    if (!weeklySchedule[dayId]) weeklySchedule[dayId] = {};
-    const takenByBranch = weeklySchedule[dayId][slotId];
-
-    if (checkbox.checked) {
-        if (takenByBranch && takenByBranch !== currentBranch) {
-            checkbox.checked = false;
-            conflictName.textContent = BRANCH_NAMES[takenByBranch];
-            warningEl.classList.add('active');
-            return;
-        }
-        weeklySchedule[dayId][slotId] = currentBranch;
-        warningEl.classList.remove('active');
-    } else {
-        if (takenByBranch === currentBranch) {
-            delete weeklySchedule[dayId][slotId];
-        }
+  if (checkbox.checked) {
+    if (taken && taken !== branch) {
+      checkbox.checked = false;
+      conflictName.textContent = taken;
+      warningEl.classList.add('active');
+      return;
     }
+    weeklySchedule[dayId][slotId] = branch;
+    warningEl.classList.remove('active');
+  } else {
+    if (taken === branch) delete weeklySchedule[dayId][slotId];
+  }
 }
 
 function saveSchedule() {
-    const btn = document.querySelector('#scheduleModal .btn-save');
-    btn.innerHTML = 'ĐANG LƯU...'; btn.disabled = true;
+  const btn = document.querySelector('#scheduleModal .btn-save');
+  btn.innerHTML = 'ĐANG LƯU...'; btn.disabled = true;
 
-    setTimeout(() => {
-        alert("Lịch giảng dạy hàng tuần đã được lưu thành công!");
-        btn.innerHTML = 'LƯU LỊCH DẠY'; btn.disabled = false;
+  const slots = [];
+  Object.keys(weeklySchedule).forEach(thu => {
+    Object.keys(weeklySchedule[thu]).forEach(ca => {
+      slots.push({ thu: Number(thu), ca, coSo: weeklySchedule[thu][ca] });
+    });
+  });
+
+  callApi('registerSchedule', { maNV: currentUser.maNV, slots: JSON.stringify(slots) })
+    .then(res => {
+      if (res.status === 'success') {
+        alert('Lịch giảng dạy hàng tuần đã được lưu thành công!');
         closeScheduleModal();
-        renderCalendar(); 
-    }, 600);
+        return refreshScheduleFromServer().then(() => renderCalendar());
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ.'))
+    .finally(() => { btn.innerHTML = 'LƯU LỊCH DẠY'; btn.disabled = false; });
 }
 
-/* ─────────────────────────────────────────────
-   CALENDAR WIDGET & CUSTOM EVENTS
-───────────────────────────────────────────── */
-let currentDate = new Date();
+/* ---------- LỊCH CÁ NHÂN (calendar widget) ---------- */
 
 function getTeachingEventsForDate(dateObj) {
-    const dayOfWeek = dateObj.getDay();
-    const dayRecord = weeklySchedule[dayOfWeek];
-    if(!dayRecord) return [];
+  const dayOfWeek = dateObj.getDay();
+  const dayRecord = weeklySchedule[dayOfWeek];
+  if (!dayRecord) return [];
+  const events = [];
+  Object.keys(dayRecord).forEach(slotId => {
+    const branch = dayRecord[slotId];
+    let shortLabel = '';
+    [...SHIFT_SLOTS.weekday, ...SHIFT_SLOTS.weekend].forEach(s => { if (s.id === slotId) shortLabel = s.short; });
+    events.push({ id: `teach_${dateObj.getTime()}_${slotId}`, type: 'teaching', label: `${branch}: ${shortLabel}` });
+  });
+  return events;
+}
 
-    let events = [];
-    Object.keys(dayRecord).forEach(slotId => {
-        const branchName = dayRecord[slotId];
-        let shortLabel = '';
-        [...SHIFT_SLOTS.weekday, ...SHIFT_SLOTS.weekend].forEach(s => {
-            if(s.id === slotId) shortLabel = s.short;
-        });
-        
-        let branchShort = branchName === 'GreenStars' ? 'GS' : 
-                          branchName === 'Hapulico' ? 'Hapu' : 
-                          branchName === 'NghiaDo' ? 'NĐô' : 
-                          branchName === 'HaDong' ? 'HĐ' : 'LB';
-
-        events.push({
-            id: `teach_${dateObj.getTime()}_${slotId}`,
-            type: 'teaching',
-            label: `${branchShort}: ${shortLabel}`,
-            isRecurring: true 
-        });
+function loadCalendarNotesFromServer() {
+  return callApi('listCalendarNotes', { maNV: currentUser.maNV }).then(res => {
+    if (res.status !== 'success') return;
+    customCalendarEvents = {};
+    res.notes.forEach(n => {
+      if (!customCalendarEvents[n.ngay]) customCalendarEvents[n.ngay] = [];
+      customCalendarEvents[n.ngay].push({ id: n.id, type: n.loai, label: n.noiDung });
     });
-    return events;
+    renderCalendar();
+  });
 }
 
-function changeMonth(dir) {
-    currentDate.setMonth(currentDate.getMonth() + dir);
-    renderCalendar();
-}
+function changeMonth(dir) { currentDate.setMonth(currentDate.getMonth() + dir); renderCalendar(); }
 
 function renderCalendar() {
-    const monthNames = ["THÁNG 1", "THÁNG 2", "THÁNG 3", "THÁNG 4", "THÁNG 5", "THÁNG 6", "THÁNG 7", "THÁNG 8", "THÁNG 9", "THÁNG 10", "THÁNG 11", "THÁNG 12"];
-    document.getElementById('calMonthLabel').innerText = `${monthNames[currentDate.getMonth()]}, ${currentDate.getFullYear()}`;
+  const monthNames = ["THÁNG 1","THÁNG 2","THÁNG 3","THÁNG 4","THÁNG 5","THÁNG 6","THÁNG 7","THÁNG 8","THÁNG 9","THÁNG 10","THÁNG 11","THÁNG 12"];
+  document.getElementById('calMonthLabel').innerText = `${monthNames[currentDate.getMonth()]}, ${currentDate.getFullYear()}`;
+  const grid = document.getElementById('calendarGridBody');
+  grid.innerHTML = '';
 
-    const grid = document.getElementById('calendarGridBody');
-    grid.innerHTML = '';
+  const year = currentDate.getFullYear(), month = currentDate.getMonth();
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const startOffset = firstDay === 0 ? 6 : firstDay - 1;
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
+  for (let i = 0; i < startOffset; i++) grid.innerHTML += `<div class="cal-day empty"></div>`;
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    let startOffset = firstDay === 0 ? 6 : firstDay - 1;
-    
-    const today = new Date(); 
-    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
-    for (let i = 0; i < startOffset; i++) {
-        grid.innerHTML += `<div class="cal-day empty"></div>`;
-    }
-
-    for (let d = 1; d <= daysInMonth; d++) {
-        const cellDateObj = new Date(year, month, d);
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        
-        let dayClass = 'cal-day';
-        if (dateStr === todayStr) dayClass += ' today';
-
-        let dayEvents = getTeachingEventsForDate(cellDateObj);
-        
-        if (customCalendarEvents[dateStr]) {
-            dayEvents = dayEvents.concat(customCalendarEvents[dateStr]);
-        }
-
-        let eventsHTML = '';
-        dayEvents.forEach(ev => {
-            eventsHTML += `<div class="event-pill ${ev.type}" title="${ev.label}">${ev.label}</div>`;
-        });
-
-        grid.innerHTML += `
-            <div class="${dayClass}" onclick="openEventModal('${dateStr}')">
-                <div class="cal-day-num">${d}</div>
-                <div class="cal-day-events">${eventsHTML}</div>
-            </div>
-        `;
-    }
-
-    const totalCells = startOffset + daysInMonth;
-    const remainingCells = (Math.ceil(totalCells / 7) * 7) - totalCells;
-    for (let i = 0; i < remainingCells; i++) {
-        grid.innerHTML += `<div class="cal-day empty"></div>`;
-    }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cellDate = new Date(year, month, d);
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    let dayClass = 'cal-day' + (dateStr === todayStr ? ' today' : '');
+    let dayEvents = getTeachingEventsForDate(cellDate);
+    if (customCalendarEvents[dateStr]) dayEvents = dayEvents.concat(customCalendarEvents[dateStr]);
+    const eventsHTML = dayEvents.map(ev => `<div class="event-pill ${ev.type}" title="${ev.label}">${ev.label}</div>`).join('');
+    grid.innerHTML += `<div class="${dayClass}" onclick="openEventModal('${dateStr}')">
+        <div class="cal-day-num">${d}</div><div class="cal-day-events">${eventsHTML}</div></div>`;
+  }
+  const totalCells = startOffset + daysInMonth;
+  const remaining = (Math.ceil(totalCells / 7) * 7) - totalCells;
+  for (let i = 0; i < remaining; i++) grid.innerHTML += `<div class="cal-day empty"></div>`;
 }
 
-/* ─────────────────────────────────────────────
-   CUSTOM EVENT MODAL LOGIC
-───────────────────────────────────────────── */
 function openEventModal(dateStr) {
-    const parts = dateStr.split('-');
-    document.getElementById('evModalDateLabel').textContent = `${parts[2]}/${parts[1]}/${parts[0]}`;
-    document.getElementById('evDateHidden').value = dateStr;
-    
-    const existingEvents = customCalendarEvents[dateStr] || [];
-    if(existingEvents.length > 0) {
-        document.getElementById('evIdHidden').value = existingEvents[0].id;
-        document.getElementById('evType').value = existingEvents[0].type;
-        document.getElementById('evTitle').value = existingEvents[0].label;
-        document.getElementById('evDeleteBtn').style.display = 'block';
-    } else {
-        document.getElementById('evIdHidden').value = '';
-        document.getElementById('evType').value = 'working';
-        document.getElementById('evTitle').value = '';
-        document.getElementById('evDeleteBtn').style.display = 'none';
-    }
-    
-    document.getElementById('eventModal').classList.add('active');
+  const parts = dateStr.split('-');
+  document.getElementById('evModalDateLabel').textContent = `${parts[2]}/${parts[1]}/${parts[0]}`;
+  document.getElementById('evDateHidden').value = dateStr;
+  const existing = (customCalendarEvents[dateStr] || [])[0];
+  if (existing) {
+    document.getElementById('evIdHidden').value = existing.id;
+    document.getElementById('evType').value = existing.type;
+    document.getElementById('evTitle').value = existing.label;
+    document.getElementById('evDeleteBtn').style.display = 'block';
+  } else {
+    document.getElementById('evIdHidden').value = '';
+    document.getElementById('evType').value = 'working';
+    document.getElementById('evTitle').value = '';
+    document.getElementById('evDeleteBtn').style.display = 'none';
+  }
+  document.getElementById('eventModal').classList.add('active');
 }
+function closeEventModal() { document.getElementById('eventModal').classList.remove('active'); }
 
-function closeEventModal() {
-    document.getElementById('eventModal').classList.remove('active');
-}
+document.getElementById('eventForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const dateStr = document.getElementById('evDateHidden').value;
+  const id = document.getElementById('evIdHidden').value;
+  const type = document.getElementById('evType').value;
+  const label = document.getElementById('evTitle').value;
 
-document.getElementById('eventForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const dateStr = document.getElementById('evDateHidden').value;
-    const id = document.getElementById('evIdHidden').value || Date.now(); 
-    const type = document.getElementById('evType').value;
-    const label = document.getElementById('evTitle').value;
-
-    const newEvent = { id, type, label };
-
-    if(!customCalendarEvents[dateStr]) {
-        customCalendarEvents[dateStr] = [];
-    }
-
-    const existingIndex = customCalendarEvents[dateStr].findIndex(ev => ev.id == id);
-    if(existingIndex >= 0) {
-        customCalendarEvents[dateStr][existingIndex] = newEvent;
-    } else {
-        customCalendarEvents[dateStr].push(newEvent);
-    }
-
-    closeEventModal();
-    renderCalendar();
+  callApi('addCalendarNote', { maNV: currentUser.maNV, id, ngay: dateStr, loai: type, noiDung: label })
+    .then(res => {
+      if (res.status === 'success') {
+        if (!customCalendarEvents[dateStr]) customCalendarEvents[dateStr] = [];
+        const idx = customCalendarEvents[dateStr].findIndex(ev => ev.id == (id || res.id));
+        const newEv = { id: id || res.id, type, label };
+        if (idx >= 0) customCalendarEvents[dateStr][idx] = newEv; else customCalendarEvents[dateStr].push(newEv);
+        closeEventModal();
+        renderCalendar();
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ.'));
 });
 
 function deleteCustomEvent() {
-    const dateStr = document.getElementById('evDateHidden').value;
-    const id = document.getElementById('evIdHidden').value;
-    
-    if(customCalendarEvents[dateStr]) {
-        customCalendarEvents[dateStr] = customCalendarEvents[dateStr].filter(ev => ev.id != id);
+  const dateStr = document.getElementById('evDateHidden').value;
+  const id = document.getElementById('evIdHidden').value;
+  callApi('deleteCalendarNote', { maNV: currentUser.maNV, id }).then(res => {
+    if (res.status === 'success' && customCalendarEvents[dateStr]) {
+      customCalendarEvents[dateStr] = customCalendarEvents[dateStr].filter(ev => ev.id != id);
     }
-    
     closeEventModal();
     renderCalendar();
+  });
 }
 
-/* ─────────────────────────────────────────────
-   XỬ LÝ FORM ĐĂNG KÝ HỌC THỬ -> GOOGLE SHEET
-───────────────────────────────────────────── */
-// [FIX 2] Xóa bỏ đoạn mã gọi lặp 2 biến const bị trùng nhau
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzXvLNy1TW3NifbUWWsQUgXjH5LpiqAKigwacjimH1U2-ZMASz5q_X3jSRvA4fyezaR/exec'; 
+/* ---------- ĐĂNG KÝ NGHỈ PHÉP ---------- */
+// Gắn vào nút "Đăng ký nghỉ phép" trong ops-grid: onclick="openLeaveModal()"
+// Yêu cầu thêm modal #leaveModal — xem parent-dashboard.html để lấy mẫu markup tương tự.
+function openLeaveModal() {
+  const modal = document.getElementById('leaveModal');
+  if (!modal) { alert('Thiếu modal #leaveModal trong HTML — xem hướng dẫn đính kèm.'); return; }
+  document.getElementById('lvFrom').value = '';
+  document.getElementById('lvTo').value = '';
+  document.getElementById('lvReason').value = '';
+  modal.classList.add('active');
+  loadLeaveHistory();
+}
+function closeLeaveModal() { document.getElementById('leaveModal').classList.remove('active'); }
+
+function loadLeaveHistory() {
+  callApi('listLeaveRequests', { maNV: currentUser.maNV }).then(res => {
+    const list = document.getElementById('lvHistory');
+    if (!list || res.status !== 'success') return;
+    list.innerHTML = res.requests.map(r =>
+      `<div style="font-size:12px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)">
+        ${r.tuNgay} → ${r.denNgay} · ${r.lyDo} · <strong style="color:var(--yellow)">${r.trangThai}</strong>
+      </div>`).join('') || '<div style="font-size:12px;color:var(--muted)">Chưa có đơn nào.</div>';
+  });
+}
+
+function submitLeaveRequest() {
+  const tuNgay = document.getElementById('lvFrom').value;
+  const denNgay = document.getElementById('lvTo').value;
+  const lyDo = document.getElementById('lvReason').value;
+  if (!tuNgay || !denNgay || !lyDo) { alert('Vui lòng điền đầy đủ thông tin.'); return; }
+  if (new Date(denNgay) < new Date(tuNgay)) { alert('Ngày kết thúc phải sau ngày bắt đầu.'); return; }
+
+  callApi('requestLeave', { maNV: currentUser.maNV, tuNgay, denNgay, lyDo })
+    .then(res => {
+      if (res.status === 'success') {
+        alert('Đã gửi đơn xin nghỉ phép!');
+        closeLeaveModal();
+        loadCalendarNotesFromServer();
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ.'));
+}
+
+/* ---------- ĐĂNG KÝ HỌC THỬ (form công khai) ---------- */
 const registerForm = document.getElementById('registerForm');
 const submitBtn = document.getElementById('submitBtn');
-
 if (registerForm) {
-    registerForm.addEventListener('submit', e => {
-        // Hàm này giờ mới chạy được vì Javascript không còn lỗi Syntax phía trên
-        e.preventDefault(); 
-        
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...';
-        submitBtn.disabled = true;
-        
-        const formData = new FormData(registerForm);
-        
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .then(response => {
-                alert('Đăng ký thành công! Trung tâm sẽ liên hệ với bạn trong thời gian sớm nhất.');
-                registerForm.reset(); 
-            })
-            .catch(error => {
-                console.error('Error!', error);
-                alert('Có lỗi xảy ra, vui lòng thử lại sau.');
-            })
-            .finally(() => {
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            });
-    });
+  registerForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const original = submitBtn.innerHTML;
+    submitBtn.innerHTML = 'ĐANG XỬ LÝ...'; submitBtn.disabled = true;
+    const fd = new FormData(registerForm);
+    callApi('register_trial', {
+      parentName: fd.get('parentName'), childName: fd.get('childName'), phone: fd.get('phone')
+    }).then(res => {
+      alert(res.status === 'success' ? 'Đăng ký thành công! Trung tâm sẽ liên hệ sớm nhất.' : '❌ ' + res.message);
+      if (res.status === 'success') registerForm.reset();
+    }).catch(() => alert('Có lỗi xảy ra, vui lòng thử lại sau.'))
+      .finally(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; });
+  });
 }
 </script>
 </body>
