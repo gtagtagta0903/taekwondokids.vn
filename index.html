@@ -841,7 +841,6 @@ const BRANCH_NAMES = {
     'LongBien': 'Cơ sở Long Biên'
 };
 
-// Weekly Setup Data Map
 const WEEK_DAYS = [
     { id: 1, label: 'Thứ 2' },
     { id: 2, label: 'Thứ 3' },
@@ -849,7 +848,7 @@ const WEEK_DAYS = [
     { id: 4, label: 'Thứ 5' },
     { id: 5, label: 'Thứ 6' },
     { id: 6, label: 'Thứ 7', isWeekend: true },
-    { id: 0, label: 'Chủ Nhật', isWeekend: true } // JS getDay() 0 = Sunday
+    { id: 0, label: 'Chủ Nhật', isWeekend: true }
 ];
 
 const SHIFT_SLOTS = {
@@ -867,17 +866,16 @@ const SHIFT_SLOTS = {
     ]
 };
 
-// State: Store weekly routine (dayId -> { slotId: branch })
 let weeklySchedule = {
     1: { '17': 'Hapulico', '18': 'Hapulico' },
     3: { '17': 'Hapulico' },
     6: { '09': 'GreenStars' }
 };
 
-// Custom Events injected directly to specific dates (dateStr -> array of events)
 let customCalendarEvents = {
     '2026-07-08': [{ id: 101, type: 'working', label: 'Họp HLV' }],
     '2026-07-25': [{ id: 102, type: 'leave', label: 'Nghỉ phép' }]
+}; // [FIX 1] Lỗi thiếu dấu }; ở đây khiến toàn bộ code JS bên dưới bị sập
 
 /* ─────────────────────────────────────────────
    AUTH & BASIC UI
@@ -917,7 +915,7 @@ function loadStaffDashboard() {
         document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
     }
     
-    currentDate = new Date(2026, 6, 1); // Mock setting to July 2026 for context
+    currentDate = new Date(2026, 6, 1); 
     renderCalendar();
 }
 
@@ -943,7 +941,9 @@ function openEditProfileModal() {
     switchModalTab('info');
     document.getElementById('editProfileModal').classList.add('active');
 }
+
 function closeEditProfileModal() { document.getElementById('editProfileModal').classList.remove('active'); }
+
 function switchModalTab(tabId) {
     document.getElementById('mTabInfoBtn').classList.remove('active');
     document.getElementById('mTabPassBtn').classList.remove('active');
@@ -952,6 +952,7 @@ function switchModalTab(tabId) {
     document.getElementById(tabId === 'info' ? 'mTabInfoBtn' : 'mTabPassBtn').classList.add('active');
     document.getElementById(tabId === 'info' ? 'mTabInfo' : 'mTabPass').classList.add('active');
 }
+
 document.getElementById('editProfileForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const newPass = document.getElementById('epNewPass').value;
@@ -1010,7 +1011,6 @@ function renderScheduleSlots() {
                 <div class="slot-grid">`;
         
         shifts.forEach(slot => {
-            // Check state
             const dayRecord = weeklySchedule[day.id] || {};
             const takenByBranch = dayRecord[slot.id];
             
@@ -1086,13 +1086,11 @@ function getTeachingEventsForDate(dateObj) {
     let events = [];
     Object.keys(dayRecord).forEach(slotId => {
         const branchName = dayRecord[slotId];
-        // find short label
         let shortLabel = '';
         [...SHIFT_SLOTS.weekday, ...SHIFT_SLOTS.weekend].forEach(s => {
             if(s.id === slotId) shortLabel = s.short;
         });
         
-        // Use short code for branch to fit UI
         let branchShort = branchName === 'GreenStars' ? 'GS' : 
                           branchName === 'Hapulico' ? 'Hapu' : 
                           branchName === 'NghiaDo' ? 'NĐô' : 
@@ -1102,7 +1100,7 @@ function getTeachingEventsForDate(dateObj) {
             id: `teach_${dateObj.getTime()}_${slotId}`,
             type: 'teaching',
             label: `${branchShort}: ${shortLabel}`,
-            isRecurring: true // Cannot be edited directly via modal in this mockup
+            isRecurring: true 
         });
     });
     return events;
@@ -1127,7 +1125,7 @@ function renderCalendar() {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     let startOffset = firstDay === 0 ? 6 : firstDay - 1;
     
-    const today = new Date(); // Real today 
+    const today = new Date(); 
     const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
     for (let i = 0; i < startOffset; i++) {
@@ -1141,10 +1139,8 @@ function renderCalendar() {
         let dayClass = 'cal-day';
         if (dateStr === todayStr) dayClass += ' today';
 
-        // 1. Get recurring teaching events
         let dayEvents = getTeachingEventsForDate(cellDateObj);
         
-        // 2. Get custom events
         if (customCalendarEvents[dateStr]) {
             dayEvents = dayEvents.concat(customCalendarEvents[dateStr]);
         }
@@ -1177,7 +1173,6 @@ function openEventModal(dateStr) {
     document.getElementById('evModalDateLabel').textContent = `${parts[2]}/${parts[1]}/${parts[0]}`;
     document.getElementById('evDateHidden').value = dateStr;
     
-    // Check if there's an existing custom event for simplicity (we'll just edit the first custom one or create new)
     const existingEvents = customCalendarEvents[dateStr] || [];
     if(existingEvents.length > 0) {
         document.getElementById('evIdHidden').value = existingEvents[0].id;
@@ -1201,7 +1196,7 @@ function closeEventModal() {
 document.getElementById('eventForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const dateStr = document.getElementById('evDateHidden').value;
-    const id = document.getElementById('evIdHidden').value || Date.now(); // Generate ID if new
+    const id = document.getElementById('evIdHidden').value || Date.now(); 
     const type = document.getElementById('evType').value;
     const label = document.getElementById('evTitle').value;
 
@@ -1211,7 +1206,6 @@ document.getElementById('eventForm').addEventListener('submit', function(e) {
         customCalendarEvents[dateStr] = [];
     }
 
-    // Update or Add
     const existingIndex = customCalendarEvents[dateStr].findIndex(ev => ev.id == id);
     if(existingIndex >= 0) {
         customCalendarEvents[dateStr][existingIndex] = newEvent;
@@ -1234,72 +1228,36 @@ function deleteCustomEvent() {
     closeEventModal();
     renderCalendar();
 }
-    /* ─────────────────────────────────────────────
+
+/* ─────────────────────────────────────────────
    XỬ LÝ FORM ĐĂNG KÝ HỌC THỬ -> GOOGLE SHEET
 ───────────────────────────────────────────── */
-const scriptURL = 'PASTE_URL_WEB_APP_CỦA_BẠN_VÀO_ĐÂY'; // Thay link URL copy ở Bước 1 vào đây
+// [FIX 2] Xóa bỏ đoạn mã gọi lặp 2 biến const bị trùng nhau
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzXvLNy1TW3NifbUWWsQUgXjH5LpiqAKigwacjimH1U2-ZMASz5q_X3jSRvA4fyezaR/exec'; 
 const registerForm = document.getElementById('registerForm');
 const submitBtn = document.getElementById('submitBtn');
 
 if (registerForm) {
     registerForm.addEventListener('submit', e => {
-        e.preventDefault(); // Chặn hành vi tải lại trang
+        // Hàm này giờ mới chạy được vì Javascript không còn lỗi Syntax phía trên
+        e.preventDefault(); 
         
-        // Hiệu ứng loading cho nút bấm
         const originalBtnText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...';
         submitBtn.disabled = true;
         
-        // Thu thập dữ liệu từ Form
         const formData = new FormData(registerForm);
         
-        // Gửi dữ liệu tới Google Apps Script
         fetch(scriptURL, { method: 'POST', body: formData })
             .then(response => {
                 alert('Đăng ký thành công! Trung tâm sẽ liên hệ với bạn trong thời gian sớm nhất.');
-                registerForm.reset(); // Xóa trắng form sau khi thành công
+                registerForm.reset(); 
             })
             .catch(error => {
-                console.error('Error!', error.message);
+                console.error('Error!', error);
                 alert('Có lỗi xảy ra, vui lòng thử lại sau.');
             })
             .finally(() => {
-                // Khôi phục lại nút bấm
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            });
-    });
-}/* ─────────────────────────────────────────────
-   XỬ LÝ FORM ĐĂNG KÝ HỌC THỬ -> GOOGLE SHEET
-───────────────────────────────────────────── */
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzXvLNy1TW3NifbUWWsQUgXjH5LpiqAKigwacjimH1U2-ZMASz5q_X3jSRvA4fyezaR/exec'; // Thay link URL copy ở Bước 1 vào đây
-const registerForm = document.getElementById('registerForm');
-const submitBtn = document.getElementById('submitBtn');
-
-if (registerForm) {
-    registerForm.addEventListener('submit', e => {
-        e.preventDefault(); // Chặn hành vi tải lại trang
-        
-        // Hiệu ứng loading cho nút bấm
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...';
-        submitBtn.disabled = true;
-        
-        // Thu thập dữ liệu từ Form
-        const formData = new FormData(registerForm);
-        
-        // Gửi dữ liệu tới Google Apps Script
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .then(response => {
-                alert('Đăng ký thành công! Trung tâm sẽ liên hệ với bạn trong thời gian sớm nhất.');
-                registerForm.reset(); // Xóa trắng form sau khi thành công
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                alert('Có lỗi xảy ra, vui lòng thử lại sau.');
-            })
-            .finally(() => {
-                // Khôi phục lại nút bấm
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
             });
