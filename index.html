@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taekwondo Kids Việt Nam</title>
+    <title>Taekwondo Kids Việt Nam | Premium Martial Arts Academy</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ─────────────────────────────────────────────
+           DESIGN SYSTEM & BASE
+        ───────────────────────────────────────────── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
             --black:     #07070F;
@@ -33,10 +36,11 @@
         html { scroll-behavior: smooth; }
         body { background:var(--black); color:var(--white); font-family:var(--font-body); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
         .lang-en { display:none; }
-        img { max-width:100%; }
+        img { max-width:100%; height:auto; }
         .container { max-width:1200px; margin:0 auto; padding:0 40px; }
         @media(max-width:600px){ .container{ padding:0 20px; } }
 
+        /* TYPOGRAPHY & TAGS */
         .sec-tag { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--red); margin-bottom:14px; }
         .sec-tag::before,.sec-tag::after { content:''; display:block; width:20px; height:1.5px; background:var(--red); }
         .sec-title { font-family:var(--font-display); font-weight:800; font-size:clamp(34px,4.5vw,64px); line-height:1.25; letter-spacing:0.5px; text-transform:uppercase; }
@@ -44,7 +48,7 @@
         .sec-title .accent-y { color:var(--yellow); }
 
         /* NAV */
-        nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 36px; height:68px; background:rgba(7,7,15,0.92); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); }
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 36px; height:68px; background:rgba(7,7,15,0.92); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-bottom:1px solid var(--border); }
         .nav-logo { display:flex; align-items:center; gap:12px; }
         .nav-logo img { height:40px; width:auto; object-fit:contain; }
         .nav-logo-text { font-weight:700; font-size:12px; letter-spacing:0.5px; color:var(--white); line-height:1.4; display:none; }
@@ -65,6 +69,9 @@
         .lang-flags button.active { opacity:1; filter:none; transform:scale(1.1); }
         .lang-flags img { width:26px; height:18px; object-fit:cover; border-radius:2px; display:block; }
 
+        /* ─────────────────────────────────────────────
+           LANDING PAGE SECTIONS
+        ───────────────────────────────────────────── */
         /* HERO */
         #hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; padding-top:68px; background:var(--black); }
         .hero-grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:64px 64px; z-index:0; }
@@ -81,7 +88,7 @@
         .hero-title .slant { font-style:italic; color:var(--red); }
         .hero-sub { font-size:15px; font-weight:400; color:var(--muted); line-height:1.75; max-width:420px; margin-bottom:36px; }
         .hero-cta-row { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-        .btn-primary { background:var(--red); color:var(--white); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:15px 34px; text-decoration:none; display:inline-flex; align-items:center; gap:10px; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:background .2s,transform .2s,box-shadow .2s; }
+        .btn-primary { background:var(--red); color:var(--white); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:15px 34px; text-decoration:none; display:inline-flex; align-items:center; gap:10px; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:background .2s,transform .2s,box-shadow .2s; border:none; cursor:pointer;}
         .btn-primary:hover { background:var(--red-dark); transform:translateY(-2px); box-shadow:0 8px 32px rgba(232,35,42,.35); }
         .btn-ghost { background:transparent; color:var(--white); font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; padding:14px 28px; border:1.5px solid rgba(255,255,255,.25); text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:border-color .2s,color .2s; }
         .btn-ghost:hover { border-color:var(--yellow); color:var(--yellow); }
@@ -211,87 +218,6 @@
         .loc-addr { font-size:12.5px; color:var(--muted); line-height:1.65; display:flex; gap:8px; }
         .loc-addr i { color:var(--red); flex-shrink:0; margin-top:3px; font-size:11px; }
 
-        /* PORTAL & DASHBOARD STYLES */
-        .portal-header { text-align:center; margin-bottom:52px; }
-        .portal-header p { color:var(--muted); font-size:14px; margin-top:12px; }
-        .portal-tabs { display:flex; border-bottom:1px solid var(--border); }
-        .tab-btn { flex:1; padding:18px 20px; background:none; border:none; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-1px; transition:color .2s,border-color .2s; }
-        .tab-btn.active { color:var(--white); border-bottom-color:var(--red); }
-        .portal-box { background:var(--card); border:1px solid var(--border); border-top:none; padding:48px 40px; }
-        @media(max-width:600px){ .portal-box{ padding:32px 20px; } }
-        .tab-panel { display:none; }
-        .tab-panel.active { display:block; }
-        .portal-box h3 { font-size:17px; font-weight:700; color:var(--white); text-align:center; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--border); }
-        
-        .login-form { max-width:380px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
-        .login-form input { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:14px 18px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
-        .login-form input:focus { border-color:var(--red); }
-        .login-form input::placeholder { color:rgba(255,255,255,.28); }
-        .btn-login-parent { width:100%; background:var(--red); color:var(--white); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
-        .btn-login-parent:hover { background:var(--red-dark); }
-        .btn-login-staff { width:100%; background:var(--yellow); color:var(--black); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
-        .btn-login-staff:hover { background:#E6BF00; }
-
-        /* DASHBOARD (staff/admin) */
-        #internalDashboard, #parentDashboard { display:none; position:fixed; inset:0; background:var(--black); z-index:200; overflow-y:auto; }
-        .db-topbar { background:var(--card); border-bottom:2px solid var(--red); padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
-        .pdb-topbar { background:var(--card); border-bottom:2px solid #00AEEF; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
-        .db-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
-        .pdb-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#60D0FF; }
-        .btn-logout { background:#c0392b; color:var(--white); border:none; padding:8px 20px; font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
-        .btn-logout:hover { background:#992d22; }
-        .db-content { max-width:960px; margin:0 auto; padding:40px 32px; }
-        
-        .db-card, .pdb-card { background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; margin-bottom:32px; }
-        @media(min-width:640px){ .db-card, .pdb-card { flex-direction:row; } }
-        
-        .db-avatar-panel { background:linear-gradient(160deg,#100020,#0E0E1A); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:240px; border-right:1px solid var(--border); }
-        .pdb-avatar-panel { background:linear-gradient(160deg,#041830,#0A1020); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:220px; border-right:1px solid var(--border); }
-        .db-avatar { width:96px; height:130px; object-fit:cover; border:3px solid var(--red); cursor:pointer; background:var(--dark); transition:border-color .2s; }
-        .pdb-avatar { width:96px; height:130px; object-fit:cover; border:3px solid #00AEEF; background:var(--dark); }
-        .db-avatar-wrap { position:relative; display:inline-block; }
-        .db-avatar-wrap:hover .db-avatar { border-color:var(--yellow); }
-        .db-avatar-overlay { position:absolute; inset:0; background:rgba(0,0,0,.7); display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; transition:opacity .2s; font-size:11px; font-weight:700; color:var(--white); gap:6px; cursor:pointer; }
-        .db-avatar-wrap:hover .db-avatar-overlay { opacity:1; }
-        
-        .db-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--yellow); margin-top:16px; }
-        .pdb-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--white); margin-top:14px; }
-        .db-position { font-size:12px; color:var(--muted); margin-bottom:12px; }
-        .db-belt-badge { background:rgba(255,214,0,.1); border:1px solid rgba(255,214,0,.3); color:var(--yellow); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; }
-        .pdb-id-badge { background:rgba(0,174,239,.1); border:1px solid rgba(0,174,239,.3); color:#60D0FF; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; margin-top:10px; }
-        
-        .db-info-panel { padding:40px 36px; flex:1; }
-        .db-info-title { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:24px; }
-        .db-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
-        .db-info-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
-        .db-info-value { font-size:15px; font-weight:600; color:var(--white); }
-        .btn-edit { background:none; border:1px solid var(--border); color:var(--white); padding:10px 24px; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s; }
-        .btn-edit:hover { border-color:var(--yellow); color:var(--yellow); }
-        
-        .pdb-info { flex:1; display:grid; grid-template-columns:1fr 1fr; }
-        @media(max-width:640px){ .pdb-info{ grid-template-columns:1fr; } }
-        .pdb-info-col { padding:32px 28px; border-right:1px solid var(--border); }
-        .pdb-info-col:last-child { border-right:none; }
-        .pdb-col-title { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:20px; display:flex; align-items:center; gap:8px; }
-        .pdb-col-title i { color:#00AEEF; }
-        .pdb-field { margin-bottom:14px; }
-        .pdb-field-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
-        .pdb-field-value { font-size:14px; font-weight:600; color:var(--white); margin-top:2px; }
-        
-        .ops-title { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-        .ops-grid, .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
-        .ops-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; transition:border-color .2s,background .2s; text-align:center; }
-        .ops-btn:hover { border-color:var(--red); background:rgba(232,35,42,.08); }
-        .ops-btn span:first-child { font-size:28px; }
-        .svc-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; text-align:center; transition:border-color .2s,background .2s; }
-        .svc-btn:hover { border-color:#00AEEF; background:rgba(0,174,239,.06); }
-        .svc-btn span:first-child { font-size:30px; }
-        
-        /* Admin nav */
-        .admin-nav-btn { background:none; border:none; border-bottom:3px solid transparent; color:var(--muted); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; padding:0 16px; height:62px; cursor:pointer; transition:color .2s,border-color .2s; white-space:nowrap; }
-        .admin-nav-btn:hover { color:var(--white); }
-        .admin-nav-btn.active { color:var(--yellow); border-bottom-color:var(--yellow); }
-
         /* REGISTER SECTION */
         #register { padding:110px 0; background:var(--dark); position:relative; overflow:hidden; }
         #register::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,#0D0020 0%,var(--dark) 100%); }
@@ -339,87 +265,171 @@
         .float-btn.mess { background:#0668E1; }
         .float-btn.mess:hover { background:#0452b3; }
 
+        /* ─────────────────────────────────────────────
+           PORTAL & DASHBOARDS
+        ───────────────────────────────────────────── */
+        .portal-header { text-align:center; margin-bottom:52px; padding-top: 90px;}
+        .portal-header p { color:var(--muted); font-size:14px; margin-top:12px; }
+        .portal-tabs { display:flex; border-bottom:1px solid var(--border); }
+        .tab-btn { flex:1; padding:18px 20px; background:none; border:none; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-1px; transition:color .2s,border-color .2s; }
+        .tab-btn.active { color:var(--white); border-bottom-color:var(--red); }
+        .portal-box { background:var(--card); border:1px solid var(--border); border-top:none; padding:48px 40px; margin-bottom: 90px;}
+        .tab-panel { display:none; }
+        .tab-panel.active { display:block; }
+        .portal-box h3 { font-size:17px; font-weight:700; color:var(--white); text-align:center; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--border); }
+        
+        .login-form { max-width:380px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+        .login-form input { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:14px 18px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
+        .login-form input:focus { border-color:var(--red); }
+        .btn-login-parent { width:100%; background:var(--red); color:var(--white); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
+        .btn-login-parent:hover { background:var(--red-dark); }
+        .btn-login-staff { width:100%; background:var(--yellow); color:var(--black); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
+        .btn-login-staff:hover { background:#E6BF00; }
+
+        /* DASHBOARD (staff/admin) */
+        #internalDashboard, #parentDashboard { display:none; position:fixed; inset:0; background:var(--black); z-index:200; overflow-y:auto; }
+        .db-topbar { background:var(--card); border-bottom:2px solid var(--red); padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
+        .pdb-topbar { background:var(--card); border-bottom:2px solid #00AEEF; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
+        .db-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
+        .pdb-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#60D0FF; }
+        .btn-logout { background:#c0392b; color:var(--white); border:none; padding:8px 20px; font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
+        .btn-logout:hover { background:#992d22; }
+        .db-content { max-width:960px; margin:0 auto; padding:40px 32px; }
+        
+        .db-card, .pdb-card { background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; margin-bottom:32px; }
+        @media(min-width:640px){ .db-card, .pdb-card { flex-direction:row; } }
+        
+        .db-avatar-panel { background:linear-gradient(160deg,#100020,#0E0E1A); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:240px; border-right:1px solid var(--border); }
+        .db-avatar { width:96px; height:130px; object-fit:cover; border:3px solid var(--red); cursor:pointer; background:var(--dark); transition:border-color .2s; }
+        .db-avatar-wrap { position:relative; display:inline-block; }
+        .db-avatar-wrap:hover .db-avatar { border-color:var(--yellow); }
+        .db-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--yellow); margin-top:16px; }
+        .db-position { font-size:12px; color:var(--muted); margin-bottom:12px; }
+        .db-belt-badge { background:rgba(255,214,0,.1); border:1px solid rgba(255,214,0,.3); color:var(--yellow); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; }
+        
+        .db-info-panel { padding:40px 36px; flex:1; }
+        .db-info-title { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:24px; }
+        .db-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
+        .db-info-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+        .db-info-value { font-size:15px; font-weight:600; color:var(--white); }
+        .btn-edit { background:none; border:1px solid var(--border); color:var(--white); padding:10px 24px; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s; }
+        .btn-edit:hover { border-color:var(--yellow); color:var(--yellow); }
+        
+        .ops-title { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+        .ops-grid, .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+        .ops-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; transition:border-color .2s,background .2s; text-align:center; }
+        .ops-btn:hover { border-color:var(--red); background:rgba(232,35,42,.08); }
+        .ops-btn span:first-child { font-size:28px; }
+
+        /* ─────────────────────────────────────────────
+           MODALS (Glassmorphism & Structure)
+        ───────────────────────────────────────────── */
+        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; z-index:300; opacity:0; pointer-events:none; transition:opacity .3s ease; padding:20px; overflow-y:auto; }
+        .modal-overlay.active { opacity:1; pointer-events:auto; }
+        .modal-content { background:var(--card2); width:100%; max-width:520px; border:1px solid var(--border); border-top:3px solid var(--red); transform:translateY(20px); transition:transform .3s ease; display:flex; flex-direction:column; box-shadow:0 24px 64px rgba(0,0,0,0.5); margin: auto; }
+        .modal-overlay.active .modal-content { transform:translateY(0); }
+        
+        #scheduleModal .modal-content { max-width: 760px; }
+        #eventModal .modal-content { max-width: 400px; }
+
+        .modal-header { padding:24px 32px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+        .modal-title { font-size:16px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--white); }
+        .modal-close { background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer; transition:color .2s; }
+        .modal-close:hover { color:var(--red); }
+        
+        .modal-tabs { display:flex; border-bottom:1px solid var(--border); background:var(--card); }
+        .m-tab-btn { flex:1; background:none; border:none; padding:16px; color:var(--muted); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; border-bottom:2px solid transparent; transition:color .2s, border-color .2s; }
+        .m-tab-btn.active { color:var(--yellow); border-bottom-color:var(--yellow); }
+        
+        .modal-body { padding:32px; max-height: 65vh; overflow-y:auto; }
+        .m-tab-panel { display:none; animation:fadeUp .3s ease forwards; }
+        .m-tab-panel.active { display:block; }
+        
+        .form-group { margin-bottom:20px; }
+        .form-group label { display:block; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+        .form-group input, .form-group select { width:100%; background:rgba(0,0,0,0.2); border:1px solid var(--border); padding:14px 16px; color:var(--white); font-family:var(--font-body); font-size:14px; outline:none; transition:border-color .2s, box-shadow .2s; border-radius:2px; }
+        .form-group select { appearance: none; cursor:pointer; }
+        .form-group input:focus, .form-group select:focus { border-color:var(--yellow); box-shadow:0 0 0 2px rgba(255,214,0,0.1); }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+        @media(max-width:480px){ .form-row{ grid-template-columns:1fr; gap:0; } }
+        
+        .modal-footer { padding:24px 32px; border-top:1px solid var(--border); background:var(--card); display:flex; justify-content:flex-end; gap:12px; }
+        .btn-cancel { background:none; border:1px solid var(--border); color:var(--white); padding:12px 24px; font-family:var(--font-body); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color .2s, color .2s; }
+        .btn-cancel:hover { border-color:var(--muted); color:var(--muted); }
+        .btn-save { background:var(--red); color:var(--white); border:none; padding:12px 28px; font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .2s; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+        .btn-save:hover { background:var(--red-dark); transform:translateY(-1px); }
+        .btn-danger { background:none; border:1px solid var(--red-dark); color:var(--red); padding:12px 24px; font-family:var(--font-body); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:background .2s, color .2s; margin-right: auto;}
+        .btn-danger:hover { background:rgba(232,35,42,0.1); }
+        
+        .validation-msg { color:var(--red); font-size:11px; margin-top:6px; display:none; }
+        .validation-msg.visible { display:block; }
+
+        /* SCHEDULE MODAL: DAY-BY-DAY GRID */
+        .day-group { margin-bottom: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+        .day-group-header { background: rgba(0,0,0,0.3); padding: 12px 16px; font-size: 13px; font-weight: 700; color: var(--yellow); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        .day-group-body { padding: 16px; }
+        .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+        
+        .slot-toggle { display: none; }
+        .slot-label { display: block; padding: 10px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; color: var(--muted); }
+        .slot-label:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+        .slot-toggle:checked + .slot-label { background: rgba(232,35,42,0.15); border-color: var(--red); color: var(--white); box-shadow: 0 0 12px rgba(232,35,42,0.2); }
+        .slot-toggle:disabled + .slot-label { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; border-color: transparent; }
+        
+        .conflict-warning { padding: 12px 16px; background: rgba(255,214,0,0.1); border-left: 3px solid var(--yellow); font-size: 11px; color: var(--white); margin-bottom: 20px; display: none; }
+        .conflict-warning.active { display: block; animation: fadeUp 0.3s ease forwards; }
+
+        /* CALENDAR DASHBOARD WIDGET */
+        .calendar-wrapper { margin-top: 32px; }
+        .calendar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+        .cal-title { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        .cal-title i { color: var(--red); }
+        .cal-legend { display: flex; gap: 16px; font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--muted); }
+        .cal-legend-item { display: flex; align-items: center; gap: 6px; }
+        .cal-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .cal-dot.teaching { background: var(--red); box-shadow: 0 0 8px rgba(232,35,42,0.5); }
+        .cal-dot.working { background: #00AEEF; box-shadow: 0 0 8px rgba(0,174,239,0.5); }
+        .cal-dot.leave { background: var(--yellow); box-shadow: 0 0 8px rgba(255,214,0,0.5); }
+        
+        .cal-container { background: var(--card); border: 1px solid var(--border); padding: 24px; border-radius: 4px; }
+        .cal-month-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .cal-month-label { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--yellow); letter-spacing: 1px; }
+        .cal-nav-btn { background: none; border: 1px solid var(--border); color: var(--white); width: 32px; height: 32px; border-radius: 4px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .cal-nav-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+        
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+        .cal-head { text-align: right; font-size: 10px; font-weight: 700; color: var(--muted); padding: 8px 10px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        .cal-day { aspect-ratio: 1; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px solid var(--border); display: flex; flex-direction: column; padding: 6px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+        .cal-day:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.15); box-shadow: inset 0 0 20px rgba(255,255,255,0.02); }
+        .cal-day.empty { background: transparent; border-color: transparent; cursor: default; box-shadow: none; }
+        .cal-day.today { border-color: var(--red); background: rgba(232,35,42,0.05); }
+        .cal-day-num { font-size: 13px; font-weight: 700; color: var(--muted); align-self: flex-end; margin-bottom: 4px; }
+        .cal-day.today .cal-day-num { color: var(--red); }
+        .cal-day-events { display: flex; flex-direction: column; gap: 4px; margin-top: auto; overflow:hidden; }
+        
+        .event-pill { width: 100%; font-size: 9px; font-weight: 700; padding: 4px 6px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left;}
+        .event-pill.teaching { background: rgba(232,35,42,0.15); color: #FF7070; border-left: 2px solid var(--red); }
+        .event-pill.working { background: rgba(0,174,239,0.15); color: #50CCFF; border-left: 2px solid #00AEEF; }
+        .event-pill.leave { background: rgba(255,214,0,0.15); color: var(--yellow); border-left: 2px solid var(--yellow); }
+
+        @media(max-width: 768px) {
+            .cal-day { min-height: 70px; padding: 4px; }
+            .event-pill { font-size: 0; padding: 0; height: 6px; border: none; border-radius: 4px; margin-bottom: 2px; }
+            .event-pill.teaching { background: var(--red); }
+            .event-pill.working { background: #00AEEF; }
+            .event-pill.leave { background: var(--yellow); }
+        }
+
         /* ANIMATIONS */
         @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
         .reveal { opacity:0; animation:fadeUp .6s ease forwards; }
         .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s} .delay-4{animation-delay:.4s}
 
-        /* ==========================================================================
-   MODALS & PREMIUM FORMS (LINEAR/APPLE STYLE)
-   ========================================================================== */
-.modal-overlay {
-    position: fixed; inset: 0; background: rgba(7, 7, 15, 0.85); backdrop-filter: blur(12px);
-    z-index: 1000; display: flex; align-items: center; justify-content: center;
-    opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 20px;
-}
-.modal-overlay.active { opacity: 1; visibility: visible; }
-.modal-content {
-    background: var(--card); border: 1px solid var(--border); width: 100%; max-width: 540px;
-    transform: translateY(20px) scale(0.98); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
-    max-height: 90vh; display: flex; flex-direction: column; overflow: hidden;
-}
-.modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-.modal-header {
-    padding: 24px 32px; border-bottom: 1px solid var(--border); display: flex;
-    justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02);
-}
-.modal-title { font-family: var(--font-body); font-weight: 700; font-size: 16px; color: var(--white); letter-spacing: 0.5px; }
-.btn-close { background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px; transition: color 0.2s; }
-.btn-close:hover { color: var(--red); }
-.modal-body { padding: 32px; overflow-y: auto; }
-.modal-footer { padding: 24px 32px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px; background: rgba(255,255,255,0.01); }
-
-/* Form Controls */
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.form-grid.full { grid-template-columns: 1fr; }
-.input-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;}
-.input-group label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-.modern-input, .modern-select {
-    background: var(--dark); border: 1px solid var(--border); color: var(--white); padding: 12px 16px;
-    font-family: var(--font-body); font-size: 14px; outline: none; transition: all 0.2s;
-}
-.modern-input:focus, .modern-select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(232, 35, 42, 0.15); }
-
-/* Schedule Selection Cards */
-.schedule-group-title { font-size: 12px; font-weight: 700; color: var(--yellow); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 1px;}
-.checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-.cb-card {
-    position: relative; border: 1px solid var(--border); padding: 12px; cursor: pointer; transition: all 0.2s;
-    background: var(--dark); display: flex; flex-direction: column; gap: 4px;
-}
-.cb-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.03); }
-.cb-card input { position: absolute; opacity: 0; cursor: pointer; }
-.cb-card input:checked ~ .cb-bg { position: absolute; inset: 0; border: 1px solid var(--red); background: rgba(232, 35, 42, 0.08); pointer-events: none; }
-.cb-time { font-size: 13px; font-weight: 700; color: var(--white); z-index: 1; }
-.cb-desc { font-size: 11px; color: var(--muted); z-index: 1; }
-
-/* ==========================================================================
-   MODERN CALENDAR (DIGITAL PLANNER STYLE)
-   ========================================================================== */
-.calendar-section { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 32px; }
-.calendar-wrap { background: var(--card); border: 1px solid var(--border); overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
-.cal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); background: var(--card2); }
-.cal-month-year { font-size: 16px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 1px; }
-.cal-nav button { background: none; border: 1px solid var(--border); color: var(--white); width: 32px; height: 32px; cursor: pointer; transition: 0.2s; }
-.cal-nav button:hover { border-color: var(--yellow); color: var(--yellow); }
-.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--border); }
-.cal-day-name { text-align: center; padding: 12px 0; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; border-right: 1px solid var(--border); background: var(--dark); }
-.cal-day-name:last-child { border-right: none; }
-.cal-body { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: minmax(100px, auto); }
-.cal-cell { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 8px; transition: background 0.2s; position: relative; cursor: pointer; }
-.cal-cell:nth-child(7n) { border-right: none; }
-.cal-cell:hover { background: rgba(255,255,255,0.02); }
-.cal-cell.empty { background: var(--dark); cursor: default; }
-.cal-date { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: inline-block; width: 24px; height: 24px; text-align: center; line-height: 24px;}
-.cal-cell.today .cal-date { background: var(--red); color: var(--white); border-radius: 50%; }
-.cal-event { background: rgba(232, 35, 42, 0.15); border-left: 2px solid var(--red); padding: 4px 8px; font-size: 10px; color: var(--white); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
-.cal-note { background: rgba(255, 214, 0, 0.15); border-left: 2px solid var(--yellow); padding: 4px 8px; font-size: 10px; color: var(--yellow); margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
     <div class="nav-logo">
         <img src="LOGO.png" alt="Taekwondo Kids Logo">
@@ -430,20 +440,17 @@
     </div>
     <ul class="nav-links">
         <li><a href="#about"><span class="lang-vi">Về chúng tôi</span><span class="lang-en">About</span></a></li>
-        <li><a href="#locations"><span class="lang-vi">Hệ thống cơ sở</span><span class="lang-en">Branches</span></a></li>
+        <li><a href="#locations"><span class="lang-vi">Cơ sở</span><span class="lang-en">Branches</span></a></li>
         <li><a href="#pricing"><span class="lang-vi">Ưu đãi</span><span class="lang-en">Promotions</span></a></li>
         <li><a href="#portal"><span class="lang-vi">Tra cứu</span><span class="lang-en">Portal</span></a></li>
     </ul>
     <div class="nav-right">
         <span class="nav-phone">097 893 1747</span>
-        <a href="#register" class="btn-nav"><span class="lang-vi">Học thử miễn phí</span><span class="lang-en">Free Trial</span></a>
-        <div class="lang-flags">
-            <button id="btn-lang-vi" onclick="setLang('vi')" class="active" title="Tiếng Việt"><img src="https://flagcdn.com/w40/vn.png" alt="VN"></button>
-            <button id="btn-lang-en" onclick="setLang('en')" title="English"><img src="https://flagcdn.com/w40/gb.png" alt="EN"></button>
-        </div>
+        <a href="#register" class="btn-nav"><span class="lang-vi">Học thử</span><span class="lang-en">Trial</span></a>
     </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
     <div class="hero-grid-bg"></div>
     <div class="hero-slash"></div>
@@ -458,801 +465,746 @@
             </h1>
             <p class="hero-sub">
                 <span class="lang-vi">Chuyên đào tạo Taekwondo cho võ sinh từ 3,5 tuổi trở lên — phát triển thể chất, ý chí và kỷ luật ngay từ nhỏ.</span>
-                <span class="lang-en">Professional Taekwondo training for kids from 3.5 years old — building physical strength, mental toughness and discipline from an early age.</span>
             </p>
             <div class="hero-cta-row">
-                <a href="#register" class="btn-primary"><i class="fa-solid fa-bolt"></i><span class="lang-vi">Đăng ký học thử</span><span class="lang-en">Free Trial</span></a>
-                <a href="#about" class="btn-ghost"><i class="fa-solid fa-play" style="font-size:10px"></i><span class="lang-vi">Tìm hiểu thêm</span><span class="lang-en">Learn More</span></a>
+                <a href="#register" class="btn-primary"><i class="fa-solid fa-bolt"></i><span class="lang-vi">Đăng ký học thử</span></a>
+                <a href="#about" class="btn-ghost"><i class="fa-solid fa-play" style="font-size:10px"></i><span class="lang-vi">Tìm hiểu thêm</span></a>
             </div>
             <div class="hero-stats">
-                <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label"><span class="lang-vi">Năm kinh nghiệm</span><span class="lang-en">Years Exp.</span></div></div>
-                <div class="stat-item"><div class="stat-num">7</div><div class="stat-label"><span class="lang-vi">Cơ sở toàn quốc</span><span class="lang-en">Branches</span></div></div>
-                <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label"><span class="lang-vi">Đối tác quốc tế</span><span class="lang-en">Int'l Partners</span></div></div>
+                <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Năm kinh nghiệm</div></div>
+                <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Cơ sở toàn quốc</div></div>
+                <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Đối tác quốc tế</div></div>
             </div>
         </div>
         <div class="hero-right"><img src="embe1.png" alt="Võ sinh Taekwondo Kids"></div>
     </div>
 </section>
 
+<!-- FEATURES -->
 <section id="features">
     <div class="features-strip">
-        <div class="feat-item reveal"><div class="feat-icon"><i class="fa-solid fa-child-reaching"></i></div><div class="feat-text"><div class="feat-title"><span class="lang-vi">Học thử miễn phí</span><span class="lang-en">Free Trial Lesson</span></div><div class="feat-desc"><span class="lang-vi">Đăng ký trải nghiệm không mất phí</span><span class="lang-en">No-cost trial registration</span></div></div></div>
-        <div class="feat-item reveal delay-1"><div class="feat-icon"><i class="fa-solid fa-medal"></i></div><div class="feat-text"><div class="feat-title"><span class="lang-vi">HLV đẳng cấp Quốc tế</span><span class="lang-en">International-Level Coaches</span></div><div class="feat-desc"><span class="lang-vi">Đội ngũ giàu kinh nghiệm, tận tâm</span><span class="lang-en">Experienced and dedicated team</span></div></div></div>
-        <div class="feat-item reveal delay-2"><div class="feat-icon"><i class="fa-solid fa-globe"></i></div><div class="feat-text"><div class="feat-title"><span class="lang-vi">Chương trình chuyên nghiệp</span><span class="lang-en">Professional Program</span></div><div class="feat-desc"><span class="lang-vi">Phù hợp với mọi độ tuổi</span><span class="lang-en">Suitable for all ages</span></div></div></div>
-        <div class="feat-item reveal delay-3"><div class="feat-icon"><i class="fa-solid fa-location-dot"></i></div><div class="feat-text"><div class="feat-title"><span class="lang-vi">7 Cơ sở toàn quốc</span><span class="lang-en">7 Branches Nationwide</span></div><div class="feat-desc"><span class="lang-vi">Hà Nội, TP.HCM, Quảng Ninh</span><span class="lang-en">Hanoi, HCMC, Quang Ninh</span></div></div></div>
+        <div class="feat-item reveal"><div class="feat-icon"><i class="fa-solid fa-child-reaching"></i></div><div class="feat-text"><div class="feat-title">Học thử miễn phí</div><div class="feat-desc">Đăng ký trải nghiệm không mất phí</div></div></div>
+        <div class="feat-item reveal delay-1"><div class="feat-icon"><i class="fa-solid fa-medal"></i></div><div class="feat-text"><div class="feat-title">HLV đẳng cấp Quốc tế</div><div class="feat-desc">Đội ngũ giàu kinh nghiệm, tận tâm</div></div></div>
+        <div class="feat-item reveal delay-2"><div class="feat-icon"><i class="fa-solid fa-globe"></i></div><div class="feat-text"><div class="feat-title">Chương trình chuyên nghiệp</div><div class="feat-desc">Phù hợp với mọi độ tuổi</div></div></div>
+        <div class="feat-item reveal delay-3"><div class="feat-icon"><i class="fa-solid fa-location-dot"></i></div><div class="feat-text"><div class="feat-title">7 Cơ sở toàn quốc</div><div class="feat-desc">Hà Nội, TP.HCM, Quảng Ninh</div></div></div>
     </div>
 </section>
 
+<!-- ABOUT / TIMELINE -->
 <section id="about">
     <div class="container">
         <div class="about-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Hành trình phát triển</span><span class="lang-en">Our Journey</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Lịch sử hình thành &amp; <span class="accent">phát triển</span></span><span class="lang-en">History &amp; <span class="accent">Development</span></span></h2>
-            <p class="about-intro"><span class="lang-vi">Từ một cơ sở nhỏ tại Hà Nội năm 2015, Taekwondo Kids đã phát triển thành hệ thống đào tạo võ thuật trẻ em hàng đầu với 7 cơ sở trên toàn quốc.</span><span class="lang-en">From a single location in Hanoi in 2015, Taekwondo Kids has grown into a leading youth martial arts training network with 7 branches nationwide.</span></p>
+            <div class="sec-tag">Hành trình phát triển</div>
+            <h2 class="sec-title">Lịch sử hình thành &amp; <span class="accent">phát triển</span></h2>
+            <p class="about-intro">Từ một cơ sở nhỏ tại Hà Nội năm 2015, Taekwondo Kids đã phát triển thành hệ thống đào tạo võ thuật trẻ em hàng đầu với 7 cơ sở trên toàn quốc.</p>
         </div>
         <div class="timeline">
-            <div class="tl-item"><div class="tl-left"><div class="tl-year">2015</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở đầu tiên</span><span class="lang-en">Established Headquarters</span></div><div class="tl-card-text"><span class="lang-vi">Trụ sở chính Hapulico và cơ sở Taekwondo Kids đầu tiên được thành lập.</span><span class="lang-en">Hapulico HQ and the first Taekwondo Kids branch were established.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng B1, Toà 21T1, Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân, Hà Nội</span><span class="lang-en">B1 Floor, 21T1 Bldg, Hapulico Apt, 83 Vu Trong Phung, Thanh Xuan, Hanoi</span></div></div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 2</span><span class="lang-en">2nd Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Green Stars được thành lập.</span><span class="lang-en">Green Stars branch was founded.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1, Toà 21B5, GreenStar, 234 Phạm Văn Đồng, Phú Diễn, Hà Nội</span><span class="lang-en">1st Floor, 21B5, GreenStar, 234 Pham Van Dong, Phu Dien, Hanoi</span></div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2018</div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-year">2019</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 3</span><span class="lang-en">3rd Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Gia Hòa — cơ sở đầu tiên tại TP. HCM.</span><span class="lang-en">Gia Hoa branch — first in Ho Chi Minh City.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Phòng B3.01.09, Chung cư Gia Hoà, 523A Đỗ Xuân Hợp, Quận 9, TP.HCM</span><span class="lang-en">Room B3.01.09, Gia Hoa Apt, 523A Do Xuan Hop, Dist. 9, HCMC</span></div></div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 4</span><span class="lang-en">4th Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Nghĩa Đô được thành lập.</span><span class="lang-en">Nghia Do branch was founded.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1, Toà CT3, KĐT Nghĩa Đô, Nghĩa Đô, Hà Nội</span><span class="lang-en">1st Floor, CT3 Bldg, Nghia Do Urban Area, Hanoi</span></div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2020</div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-year">2021</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 5</span><span class="lang-en">5th Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Hạ Long được thành lập.</span><span class="lang-en">Ha Long branch was founded.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tổ 3, Khu 3, Trần Hưng Đạo, TP. Hạ Long, Quảng Ninh</span><span class="lang-en">Group 3, Quarter 3, Tran Hung Dao, Ha Long City</span></div></div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 8 &amp; 9</span><span class="lang-en">8th &amp; 9th Branches Opened</span></div><div class="tl-card-text"><strong style="color:var(--white)"><span class="lang-vi">Cơ sở Hà Đông:</span><span class="lang-en">Ha Dong Branch:</span></strong><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">T2A, TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Nội</span><span class="lang-en">T2A, TSQ EuroLand, 25 Nguyen Van Loc, Ha Dong, Hanoi</span><br><br><strong style="color:var(--white)"><span class="lang-vi">Cơ sở Long Biên:</span><span class="lang-en">Long Bien Branch:</span></strong><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tòa L4, LeGrand Jardin, Sài Đồng, Long Biên, Hà Nội</span><span class="lang-en">L4 Bldg, LeGrand Jardin, Sai Dong, Long Bien, Hanoi</span></div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2025</div></div></div>
+            <div class="tl-item"><div class="tl-left"><div class="tl-year">2015</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title">Thành lập Cơ sở đầu tiên</div><div class="tl-card-text">Trụ sở chính Hapulico và cơ sở Taekwondo Kids đầu tiên được thành lập.</div></div></div></div>
+            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title">Thành lập Cơ sở 2</div><div class="tl-card-text">Chi nhánh Green Stars được thành lập.</div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2018</div></div></div>
+            <div class="tl-item"><div class="tl-left"><div class="tl-year">2020</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title">Mở rộng & Phát triển</div><div class="tl-card-text">Liên tiếp khai trương các cơ sở tại Nghĩa Đô, Hà Đông, Long Biên.</div></div></div></div>
         </div>
     </div>
 </section>
 
-<section id="gallery">
-    <div class="container"><div class="gallery-header reveal"><div class="sec-tag"><span class="lang-vi">Ảnh kỷ niệm</span><span class="lang-en">Our Memories</span></div><h2 class="sec-title"><span class="lang-vi">Chặng đường <span class="accent">gắn bó</span></span><span class="lang-en">Our <span class="accent">Journey</span></span></h2></div></div>
-    <div class="gallery-grid">
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x800/111/222" alt="Ảnh 1"><div class="gallery-caption"><span class="lang-vi">Lớp học đầu tiên năm 2015</span><span class="lang-en">First class 2015</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 2"><div class="gallery-caption"><span class="lang-vi">Lễ khai giảng cơ sở 1</span><span class="lang-en">Opening ceremony Branch 1</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 3"><div class="gallery-caption"><span class="lang-vi">Các võ sinh khóa đầu</span><span class="lang-en">First generation students</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 4"><div class="gallery-caption"><span class="lang-vi">Đội ngũ HLV năm 2018</span><span class="lang-en">Coaching staff 2018</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 5"><div class="gallery-caption"><span class="lang-vi">Khai trương CS Green Stars</span><span class="lang-en">Opening Green Stars</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 6"><div class="gallery-caption"><span class="lang-vi">Kỳ thi thăng đai đầu tiên</span><span class="lang-en">First belt promotion</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 7"><div class="gallery-caption"><span class="lang-vi">Kỷ niệm ngoại khóa</span><span class="lang-en">Extracurricular memories</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 8"><div class="gallery-caption"><span class="lang-vi">Giải đấu năm 2019</span><span class="lang-en">2019 Tournament</span></div></div>
-        <div class="gallery-item"><img src="https://via.placeholder.com/600x400/111/222" alt="Ảnh 9"><div class="gallery-caption"><span class="lang-vi">Sự kiện năm 2020</span><span class="lang-en">2020 Event</span></div></div>
-    </div>
-</section>
-
+<!-- PRICING / PROMOS -->
 <section id="pricing">
     <div class="container">
         <div class="pricing-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Dành riêng cho bạn</span><span class="lang-en">Exclusive For You</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Chương trình <span class="accent">ưu đãi</span> đặc biệt</span><span class="lang-en">Special <span class="accent">Promotions</span></span></h2>
+            <div class="sec-tag">Dành riêng cho bạn</div>
+            <h2 class="sec-title">Chương trình <span class="accent">ưu đãi</span> đặc biệt</h2>
         </div>
         <div class="promo-grid">
-            <div class="promo-card promo-card-purple reveal"><div class="promo-accent"></div><div class="promo-tag"><span class="lang-vi">Giảm ngay học phí</span><span class="lang-en">Discount</span></div><div class="promo-big">10%</div><span class="promo-unit"><span class="lang-vi">HỌC PHÍ</span><span class="lang-en">OFF</span></span><div class="promo-desc"><span class="lang-vi">Khi đăng ký nhóm từ 3 người</span><span class="lang-en">For groups of 3+ students</span></div></div>
-            <div class="promo-card promo-card-red reveal delay-1"><div class="promo-accent"></div><div class="promo-tag"><span class="lang-vi">Tặng võ phục trị giá</span><span class="lang-en">Free Uniform Worth</span></div><div class="promo-big">500K</div><span class="promo-unit">VNĐ</span><div class="promo-desc"><span class="lang-vi">Khi đăng ký nhóm từ 2 người</span><span class="lang-en">For groups of 2+ students</span></div></div>
-            <div class="promo-card promo-card-blue reveal delay-2"><div class="promo-accent"></div><div class="promo-tag"><span class="lang-vi">Tặng miễn phí kỳ học</span><span class="lang-en">Free Course Term</span></div><div class="promo-big">1</div><span class="promo-unit"><span class="lang-vi">THÁNG</span><span class="lang-en">MONTH</span></span><div class="promo-desc"><span class="lang-vi">Khi đóng học phí 06 tháng</span><span class="lang-en">When paying 6-month tuition</span></div></div>
-            <div class="promo-card promo-card-green reveal delay-3"><div class="promo-accent"></div><div class="promo-tag"><span class="lang-vi">Tặng miễn phí kỳ học</span><span class="lang-en">Free Course Term</span></div><div class="promo-big">3</div><span class="promo-unit"><span class="lang-vi">THÁNG</span><span class="lang-en">MONTHS</span></span><div class="promo-desc"><span class="lang-vi">Khi đóng học phí 12 tháng</span><span class="lang-en">When paying 12-month tuition</span></div></div>
+            <div class="promo-card promo-card-purple reveal"><div class="promo-accent"></div><div class="promo-tag">Giảm ngay học phí</div><div class="promo-big">10%</div><span class="promo-unit">HỌC PHÍ</span><div class="promo-desc">Khi đăng ký nhóm từ 3 người</div></div>
+            <div class="promo-card promo-card-red reveal delay-1"><div class="promo-accent"></div><div class="promo-tag">Tặng võ phục</div><div class="promo-big">500K</div><span class="promo-unit">VNĐ</span><div class="promo-desc">Khi đăng ký nhóm từ 2 người</div></div>
+            <div class="promo-card promo-card-blue reveal delay-2"><div class="promo-accent"></div><div class="promo-tag">Tặng miễn phí</div><div class="promo-big">1</div><span class="promo-unit">THÁNG</span><div class="promo-desc">Khi đóng học phí 06 tháng</div></div>
+            <div class="promo-card promo-card-green reveal delay-3"><div class="promo-accent"></div><div class="promo-tag">Tặng miễn phí</div><div class="promo-big">3</div><span class="promo-unit">THÁNG</span><div class="promo-desc">Khi đóng học phí 12 tháng</div></div>
         </div>
     </div>
 </section>
 
-<section id="partners">
-    <div class="container">
-        <div class="partners-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Hợp tác quốc tế</span><span class="lang-en">International Partners</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Đối tác <span class="accent">đồng hành</span> &amp; phát triển</span><span class="lang-en">Our <span class="accent">Partners</span></span></h2>
-        </div>
-        <div class="partners-grid">
-            <a href="https://www.facebook.com/share/p/1DX4qCHEpv/" target="_blank" class="partner-card reveal"><div class="partner-img-wrap"><img src="tirak.png" alt="TIRAK TAEKWONDO"><div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div></div><div class="partner-info"><div class="partner-name"><span class="lang-vi">TIRAK TAEKWONDO — THÁI LAN</span><span class="lang-en">TIRAK TAEKWONDO — THAILAND</span></div></div></a>
-            <a href="https://www.facebook.com/share/p/1DwRiJRaY1/" target="_blank" class="partner-card reveal delay-1"><div class="partner-img-wrap"><img src="blackbelt.png" alt="KOREA BLACK BELT CENTER"><div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div></div><div class="partner-info"><div class="partner-name"><span class="lang-vi">KOREA BLACK BELT CENTER — HÀN QUỐC</span><span class="lang-en">KOREA BLACK BELT CENTER — KOREA</span></div></div></a>
-            <a href="https://www.facebook.com/share/p/1BSx3VEQX7/" target="_blank" class="partner-card reveal delay-2"><div class="partner-img-wrap"><img src="canada.png" alt="WHITECOURT MARTIAL ARTS"><div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div></div><div class="partner-info"><div class="partner-name">WHITECOURT MARTIAL ARTS — CANADA</div></div></a>
-            <a href="https://www.facebook.com/share/p/1BejzXfdFL/" target="_blank" class="partner-card reveal delay-3"><div class="partner-img-wrap"><img src="jaeil.png" alt="JAEIL SPORT CENTER"><div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div></div><div class="partner-info"><div class="partner-name"><span class="lang-vi">JAEIL SPORT CENTER — HÀN QUỐC</span><span class="lang-en">JAEIL SPORT CENTER — KOREA</span></div></div></a>
-        </div>
-    </div>
-</section>
-
-<section id="locations">
-    <div class="container">
-        <div class="locations-header reveal">
-            <div class="sec-tag">
-                <span class="lang-vi">Tìm cơ sở gần bạn</span>
-                <span class="lang-en">Find a Branch Near You</span>
-            </div>
-            <h2 class="sec-title">
-                <span class="lang-vi">Hệ thống <span class="accent">5 cơ sở</span> tại Hà Nội</span>
-                <span class="lang-en">Our <span class="accent">5 Branches</span> in Hanoi</span>
-            </h2>
-        </div>
-        <div class="locations-grid">
-            <div class="loc-card reveal">
-                <div class="loc-img-wrap"><img src="hapu.jpg" alt="Hapulico"><div class="loc-tag">CS 01</div></div>
-                <div class="loc-info">
-                    <div class="loc-name">
-                        <span class="lang-vi">CƠ SỞ HAPULICO</span>
-                        <span class="lang-en">HAPULICO BRANCH</span>
-                    </div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="lang-vi">Tầng B1 - Toà 21T1 - Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</span>
-                        <span class="lang-en">B1 Floor, 21T1 Bldg, Hapulico Apt, 83 Vu Trong Phung, Thanh Xuan</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="loc-card reveal delay-1">
-                <div class="loc-img-wrap"><img src="green.JPG" alt="Greenstars"><div class="loc-tag">CS 02</div></div>
-                <div class="loc-info">
-                    <div class="loc-name">
-                        <span class="lang-vi">CƠ SỞ GREENSTARS</span>
-                        <span class="lang-en">GREENSTARS BRANCH</span>
-                    </div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="lang-vi">Tầng 1 - Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</span>
-                        <span class="lang-en">1st Floor, 21B5 Bldg, GreenStar Apt, 234 Pham Van Dong, Phu Dien</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="loc-card reveal delay-2">
-                <div class="loc-img-wrap"><img src="nghiado.jpg" alt="Nghĩa Đô"><div class="loc-tag">CS 03</div></div>
-                <div class="loc-info">
-                    <div class="loc-name">
-                        <span class="lang-vi">CƠ SỞ NGHĨA ĐÔ</span>
-                        <span class="lang-en">NGHIA DO BRANCH</span>
-                    </div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="lang-vi">Tầng 1 - Toà CT3 - Khu đô thị mới Nghĩa Đô, Nghĩa Đô</span>
-                        <span class="lang-en">1st Floor, CT3 Bldg, Nghia Do Urban Area, Nghia Do</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="loc-card reveal">
-                <div class="loc-img-wrap"><img src="hadong.jpg" alt="Hà Đông"><div class="loc-tag">CS 04</div></div>
-                <div class="loc-info">
-                    <div class="loc-name">
-                        <span class="lang-vi">CƠ SỞ HÀ ĐÔNG</span>
-                        <span class="lang-en">HA DONG BRANCH</span>
-                    </div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="lang-vi">Tầng 1 - Toà T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</span>
-                        <span class="lang-en">1st Floor, T2A Bldg, TSQ EuroLand, 25 Nguyen Van Loc, Mo Lao, Ha Dong</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="loc-card reveal delay-1">
-                <div class="loc-img-wrap"><img src="longbien.jpg" alt="Long Biên"><div class="loc-tag">CS 05</div></div>
-                <div class="loc-info">
-                    <div class="loc-name">
-                        <span class="lang-vi">CƠ SỞ LONG BIÊN</span>
-                        <span class="lang-en">LONG BIEN BRANCH</span>
-                    </div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="lang-vi">Tầng 1 - Toà L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</span>
-                        <span class="lang-en">1st Floor, L4 Bldg, LeGrand Jardin Apt, Sai Dong, Long Bien</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+<!-- PORTAL LOGIN -->
 <section id="portal">
     <div class="container">
         <div class="portal-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Dành riêng cho thành viên</span><span class="lang-en">Members Only</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Hệ thống quản lý thông tin <span class="accent">thông minh</span></span><span class="lang-en">Smart Information <span class="accent">Management</span></span></h2>
-            <p><span class="lang-vi">Hệ thống tra cứu thông tin tiện lợi của Taekwondo Kids Việt Nam</span><span class="lang-en">Convenient information portal by Taekwondo Kids Vietnam</span></p>
+            <div class="sec-tag">Dành riêng cho thành viên</div>
+            <h2 class="sec-title">Hệ thống quản lý thông tin <span class="accent">thông minh</span></h2>
+            <p>Hệ thống tra cứu thông tin tiện lợi của Taekwondo Kids Việt Nam</p>
         </div>
         <div class="portal-tabs">
-            <button class="tab-btn active" id="btn-phuhuynh" onclick="switchTab('phuhuynh')"><span class="lang-vi">Phụ huynh &amp; Võ sinh</span><span class="lang-en">Parents &amp; Students</span></button>
-            <button class="tab-btn" id="btn-hlv" onclick="switchTab('hlv')"><span class="lang-vi">Huấn luyện viên &amp; Nhân viên</span><span class="lang-en">Coaches &amp; Staff</span></button>
+            <button class="tab-btn active" id="btn-phuhuynh" onclick="switchTab('phuhuynh')">Phụ huynh &amp; Võ sinh</button>
+            <button class="tab-btn" id="btn-hlv" onclick="switchTab('hlv')">Huấn luyện viên &amp; Nhân viên</button>
         </div>
         <div class="portal-box">
             <div class="tab-panel active" id="tab-phuhuynh">
-                <h3><span class="lang-vi">Dành cho Phụ huynh &amp; Võ sinh của Trung tâm Taekwondo Kids Việt Nam</span><span class="lang-en">For Parents &amp; Students of Taekwondo Kids Vietnam Center</span></h3>
+                <h3>Dành cho Phụ huynh &amp; Võ sinh của Trung tâm</h3>
                 <form id="parentLoginForm" class="login-form">
-                    <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại / Mã học viên" data-en-placeholder="Phone / Student ID">
-                    <input type="password" id="parentLoginPass" required placeholder="Mật khẩu" data-en-placeholder="Password">
-                    <button type="submit" id="parentLoginBtn" class="btn-login-parent"><span class="lang-vi">PHỤ HUYNH ĐĂNG NHẬP</span><span class="lang-en">PARENT LOGIN</span></button>
+                    <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại / Mã học viên">
+                    <input type="password" id="parentLoginPass" required placeholder="Mật khẩu">
+                    <button type="submit" id="parentLoginBtn" class="btn-login-parent">PHỤ HUYNH ĐĂNG NHẬP</button>
                 </form>
             </div>
             <div class="tab-panel" id="tab-hlv">
-                <h3><span class="lang-vi">Chỉ dành cho Huấn luyện viên &amp; Nhân viên công tác tại Trung tâm</span><span class="lang-en">Strictly for Coaches &amp; Staff of Taekwondo Kids Vietnam</span></h3>
+                <h3>Chỉ dành cho Huấn luyện viên &amp; Nhân viên</h3>
                 <form id="internalLoginForm" class="login-form">
-                    <input type="text" id="loginPhone" required placeholder="Tài khoản / Số điện thoại" data-en-placeholder="Account / Phone">
-                    <input type="password" id="loginPass" required placeholder="Mật khẩu" data-en-placeholder="Password">
-                    <button type="submit" id="internalLoginBtn" class="btn-login-staff"><span class="lang-vi">ĐĂNG NHẬP HỆ THỐNG</span><span class="lang-en">SYSTEM LOGIN</span></button>
+                    <input type="text" id="loginPhone" required placeholder="Số điện thoại (Nhập số bất kỳ để Test)">
+                    <input type="password" id="loginPass" required placeholder="Mật khẩu">
+                    <button type="submit" id="internalLoginBtn" class="btn-login-staff">ĐĂNG NHẬP HỆ THỐNG</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
 
+<!-- INTERNAL DASHBOARD (STAFF/HLV) -->
 <div id="internalDashboard">
     <div class="db-topbar">
-        <div class="db-topbar-title"><i class="fa-solid fa-user-shield" style="color:var(--red);margin-right:8px"></i><span class="lang-vi">Hệ thống Quản lý Nội bộ</span><span class="lang-en">Internal Management System</span></div>
-        <div id="adminNavTabs" style="display:none; gap:10px;">
-            <button class="admin-nav-btn active" onclick="showAdminTab('overview')">Tổng quan</button>
-            <button class="admin-nav-btn" onclick="showAdminTab('schedule')">Lịch dạy</button>
-            <button class="admin-nav-btn" onclick="showAdminTab('leave')">Nghỉ phép</button>
-            <button class="admin-nav-btn" onclick="showAdminTab('attendance')">Chấm công</button>
-            <button class="admin-nav-btn" onclick="showAdminTab('payroll')">Bảng lương</button>
-        </div>
-        <button onclick="logoutInternal()" class="btn-logout"><span class="lang-vi">Đăng xuất</span><span class="lang-en">Log out</span></button>
+        <div class="db-topbar-title"><i class="fa-solid fa-user-shield" style="color:var(--red);margin-right:8px"></i>Hệ thống Quản lý Nội bộ</div>
+        <button onclick="logoutInternal()" class="btn-logout">Đăng xuất</button>
     </div>
     <div class="db-content" id="staffViewContent">
+        
+        <!-- Profile Card -->
         <div class="db-card">
             <div class="db-avatar-panel">
-                <div class="db-avatar-wrap" onclick="document.getElementById('avatarUpload').click()">
-                    <img id="avatarImg" src="" alt="Avatar" class="db-avatar">
-                    <div class="db-avatar-overlay"><i class="fa-solid fa-cloud-arrow-up" style="font-size:22px"></i><span id="uploadText" style="font-size:11px;letter-spacing:1px"><span class="lang-vi">Tải ảnh lên</span><span class="lang-en">Upload</span></span></div>
+                <div class="db-avatar-wrap">
+                    <img id="avatarImg" src="https://via.placeholder.com/150" alt="Avatar" class="db-avatar">
                 </div>
-                <input type="file" id="avatarUpload" accept="image/*" style="display:none" onchange="handleImageUpload(this)">
-                <div class="db-name" id="dbName">Họ Tên</div>
-                <div class="db-position" id="dbPosition">Vị trí</div>
-                <div class="db-belt-badge"><span class="lang-vi">Cấp đai:</span><span class="lang-en">Belt:</span> <span id="dbBelt"></span></div>
+                <div class="db-name" id="dbName">Huấn Luyện Viên</div>
+                <div class="db-position" id="dbPosition">HLV Chính</div>
+                <div class="db-belt-badge">Cấp đai: <span id="dbBelt">Đen 3 Đẳng</span></div>
             </div>
             <div class="db-info-panel">
-                <div class="db-info-title"><span class="lang-vi">Thông tin cá nhân</span><span class="lang-en">Personal Information</span></div>
+                <div class="db-info-title">Thông tin cá nhân</div>
                 <div class="db-info-grid">
-                    <div><div class="db-info-label"><span class="lang-vi">Số điện thoại</span><span class="lang-en">Phone</span></div><div class="db-info-value" id="dbPhone"></div></div>
-                    <div><div class="db-info-label"><span class="lang-vi">Tuổi / Ngày sinh</span><span class="lang-en">Age / DOB</span></div><div class="db-info-value" id="dbDob"></div></div>
-                    <div><div class="db-info-label">Email</div><div class="db-info-value" id="dbEmail"></div></div>
-                    <div><div class="db-info-label">Cơ sở phụ trách</div><div class="db-info-value" id="dbBranch" style="color:var(--yellow)"></div></div>
+                    <div><div class="db-info-label">Số điện thoại</div><div class="db-info-value" id="dbPhone">0987654321</div></div>
+                    <div><div class="db-info-label">Ngày sinh</div><div class="db-info-value" id="dbDob">03/09/2004</div></div>
+                    <div><div class="db-info-label">Email</div><div class="db-info-value" id="dbEmail">hlv@taekwondokids.vn</div></div>
+                    <div><div class="db-info-label">Cơ sở phụ trách</div><div class="db-info-value" id="dbBranch" style="color:var(--yellow)">Hapulico</div></div>
                 </div>
-                <button onclick="openEditModal()" class="btn-edit"><i class="fa-solid fa-pen-to-square" style="margin-right:8px"></i><span class="lang-vi">Sửa thông tin &amp; Mật khẩu</span><span class="lang-en">Edit Info &amp; Password</span></button>
+                <button onclick="openEditProfileModal()" class="btn-edit"><i class="fa-solid fa-pen-to-square" style="margin-right:8px"></i>Sửa thông tin &amp; Mật khẩu</button>
             </div>
-        </div>
-        <div class="ops-title"><span class="lang-vi">Nghiệp vụ HLV / Nhân viên</span><span class="lang-en">Staff Operations</span></div>
-<div class="ops-grid">
-            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span class="lang-vi">Đăng ký lịch dạy</span></button>
-            <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span class="lang-vi">Đăng ký nghỉ phép</span></button>
-            <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span class="lang-vi">Nhận xét học viên</span></button>
-            <button class="ops-btn" onclick="viewMyAttendance()"><span>⏱️</span><span class="lang-vi">Xem chấm công</span></button>
-            <button class="ops-btn" onclick="viewMyPayroll()"><span>💵</span><span class="lang-vi">Xem bảng lương</span></button>
         </div>
 
-        <!-- CALENDAR SECTION -->
-        <div class="calendar-section">
-            <div class="ops-title" style="display: flex; justify-content: space-between; align-items: center;">
-                <span><span class="lang-vi">Lịch giảng dạy & Sự kiện</span></span>
-                <span style="font-size: 10px; color: var(--muted); text-transform: none; letter-spacing: 0;">Click vào ngày để thêm Note</span>
+        <!-- Operations -->
+        <div class="ops-title">Nghiệp vụ HLV / Nhân viên</div>
+        <div class="ops-grid">
+            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
+            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
+            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⭐</span><span>Nhận xét học viên</span></button>
+            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⏱️</span><span>Xem chấm công</span></button>
+            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>💵</span><span>Xem bảng lương</span></button>
+        </div>
+
+        <!-- Personal Calendar UI -->
+        <div class="calendar-wrapper">
+            <div class="calendar-top">
+                <div class="cal-title"><i class="fa-solid fa-calendar-days"></i> Lịch Trình Cá Nhân</div>
+                <div class="cal-legend">
+                    <div class="cal-legend-item"><div class="cal-dot teaching"></div> Giảng dạy</div>
+                    <div class="cal-legend-item"><div class="cal-dot working"></div> Làm việc / Sự kiện</div>
+                    <div class="cal-legend-item"><div class="cal-dot leave"></div> Nghỉ phép</div>
+                </div>
             </div>
-            <div class="calendar-wrap">
-                <div class="cal-header">
-                    <div class="cal-month-year" id="calMonthYear">THÁNG 8, 2026</div>
-                    <div class="cal-nav">
-                        <button onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
+            <div class="cal-container">
+                <div class="cal-month-nav">
+                    <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="cal-month-label" id="calMonthLabel">THÁNG 7, 2026</div>
+                    <button class="cal-nav-btn" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 <div class="cal-grid">
-                    <div class="cal-day-name">T2</div><div class="cal-day-name">T3</div><div class="cal-day-name">T4</div>
-                    <div class="cal-day-name">T5</div><div class="cal-day-name">T6</div><div class="cal-day-name">T7</div><div class="cal-day-name">CN</div>
+                    <!-- Weekdays -->
+                    <div class="cal-head">T2</div><div class="cal-head">T3</div><div class="cal-head">T4</div>
+                    <div class="cal-head">T5</div><div class="cal-head">T6</div><div class="cal-head">T7</div><div class="cal-head" style="color:var(--red)">CN</div>
                 </div>
-                <div class="cal-body" id="calBody">
-                    <!-- JS will generate calendar here -->
-                </div>
+                <div class="cal-grid" id="calendarGridBody"></div>
             </div>
         </div>
-    
-    <div class="db-content" id="adminViewContent" style="display:none;">
-        </div>
-</div>
 
-<div id="parentDashboard">
-    <div class="pdb-topbar">
-        <div class="pdb-topbar-title"><i class="fa-solid fa-users" style="margin-right:8px"></i><span class="lang-vi">Cổng Thông tin Phụ huynh &amp; Võ sinh</span><span class="lang-en">Parent &amp; Student Portal</span></div>
-        <button onclick="logoutParent()" class="btn-logout"><span class="lang-vi">Đăng xuất</span><span class="lang-en">Log out</span></button>
-    </div>
-    <div class="db-content">
-        <div class="pdb-card">
-            <div class="pdb-avatar-panel">
-                <img id="p_vsAvatar" src="" alt="Avatar" class="pdb-avatar">
-                <div class="pdb-name" id="p_vsName">Tên Võ Sinh</div>
-                <div class="pdb-id-badge"><span class="lang-vi">Mã HV:</span><span class="lang-en">ID:</span> <span id="p_vsId"></span></div>
-                <div style="font-size:12px; color:var(--muted); margin-top:10px;">Cơ sở: <strong id="p_vsBranch" style="color:var(--white)"></strong></div>
-            </div>
-            <div class="pdb-info">
-                <div class="pdb-info-col">
-                    <div class="pdb-col-title"><i class="fa-solid fa-child-reaching"></i><span class="lang-vi">Thông tin Võ sinh</span></div>
-                    <div class="pdb-field"><div class="pdb-field-label">Ngày sinh</div><div class="pdb-field-value" id="p_vsDob"></div></div>
-                    <div class="pdb-field"><div class="pdb-field-label">Cấp đai</div><div class="pdb-field-value" id="p_vsBelt" style="color:var(--yellow)"></div></div>
-                    <div class="pdb-field"><div class="pdb-field-label">Hạn mức học</div><div class="pdb-field-value"><span id="p_vsMaxSessions"></span> buổi/tuần</div></div>
-                </div>
-                <div class="pdb-info-col">
-                    <div class="pdb-col-title" style="color:var(--yellow);border-color:var(--yellow)"><i class="fa-solid fa-user-tie" style="color:var(--yellow)"></i><span class="lang-vi">Thông tin Phụ huynh</span></div>
-                    <div class="pdb-field"><div class="pdb-field-label">Họ và tên giám hộ</div><div class="pdb-field-value"><span id="p_phName"></span> (<span id="p_phRelation"></span>)</div></div>
-                    <div class="pdb-field"><div class="pdb-field-label">Liên hệ</div><div class="pdb-field-value" id="p_phPhone"></div></div>
-                </div>
-            </div>
-        </div>
-        <div class="ops-title"><span class="lang-vi">Tra cứu &amp; Đăng ký</span><span class="lang-en">Services &amp; Registration</span></div>
-        <div class="svc-grid">
-            <button onclick="openParentModal('beltModal')" class="svc-btn"><span>🥋</span><span class="lang-vi">Lịch sử thăng đai</span></button>
-            <button onclick="openParentModal('reviewModal')" class="svc-btn"><span>🏆</span><span class="lang-vi">Nhận xét của HLV</span></button>
-            <button onclick="openParentModal('attendanceModal')" class="svc-btn"><span>📅</span><span class="lang-vi">Đăng ký lịch học</span></button>
-            <button onclick="openParentModal('makeupModal')" class="svc-btn"><span>🔄</span><span class="lang-vi">Xin nghỉ &amp; Học bù</span></button>
-        </div>
     </div>
 </div>
 
-<section id="register">
-    <div class="container">
-        <div class="register-grid">
-            <div class="register-left reveal">
-                <div class="sec-tag"><span class="lang-vi">Bắt đầu hành trình</span><span class="lang-en">Start the Journey</span></div>
-                <h2><span class="lang-vi">Đăng ký<br><span class="hl">học thử</span><br>miễn phí</span><span class="lang-en">Register for<br><span class="hl">Free</span><br>Trial Class</span></h2>
-                <p><span class="lang-vi">Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí. Chúng tôi sẵn sàng đồng hành cùng bạn và con trên hành trình phát triển thể chất và ý chí.</span><span class="lang-en">Register today for free consultation and a complimentary trial class. We are ready to accompany you and your child on their journey of physical and mental development.</span></p>
-                <div class="register-image"><img src="embe1.png" alt="Taekwondo Kid"></div>
-            </div>
-            <div class="reveal delay-2">
-                <div class="reg-form-box">
-                    <div class="reg-form-title"><span class="lang-vi">ĐĂNG KÝ HỌC THỬ</span><span class="lang-en">TRIAL REGISTRATION</span></div>
-                    <form id="registerForm">
-                        <div class="reg-form-group"><label><span class="lang-vi">Họ và tên Phụ huynh *</span><span class="lang-en">Parent's Full Name *</span></label><input type="text" name="parentName" required placeholder="Nguyễn Văn A"></div>
-                        <div class="reg-form-group"><label><span class="lang-vi">Họ và tên Võ sinh *</span><span class="lang-en">Student's Full Name *</span></label><input type="text" name="childName" required placeholder="Nguyễn Văn B"></div>
-                        <div class="reg-form-group"><label><span class="lang-vi">Số điện thoại *</span><span class="lang-en">Phone Number *</span></label><input type="tel" name="phone" required placeholder="0xxxxxxxxx"></div>
-                        <button type="submit" id="submitBtn" class="btn-register"><span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en">REGISTER NOW</span></button>
-                    </form>
+<!-- ==========================================
+     MODALS
+=========================================== -->
+
+<!-- 1. EDIT PROFILE MODAL -->
+<div id="editProfileModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Sửa thông tin cá nhân</div>
+            <button class="modal-close" type="button" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-tabs">
+            <button class="m-tab-btn active" id="mTabInfoBtn" type="button" onclick="switchModalTab('info')">Thông tin</button>
+            <button class="m-tab-btn" id="mTabPassBtn" type="button" onclick="switchModalTab('pass')">Mật khẩu</button>
+        </div>
+        
+        <form id="editProfileForm">
+            <!-- Tab Info -->
+            <div class="modal-body m-tab-panel active" id="mTabInfo">
+                <div class="form-group">
+                    <label>Họ và tên *</label>
+                    <input type="text" id="epFullName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Số điện thoại *</label>
+                        <input type="tel" id="epPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="epEmail" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ngày sinh *</label>
+                        <input type="date" id="epDob" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Vị trí công tác</label>
+                        <input type="text" id="epRole" required>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
 
+            <!-- Tab Password -->
+            <div class="modal-body m-tab-panel" id="mTabPass">
+                <div class="form-group">
+                    <label>Mật khẩu mới</label>
+                    <input type="password" id="epNewPass" placeholder="Bỏ trống nếu không muốn đổi">
+                    <div id="passErr" class="validation-msg">Mật khẩu phải có tối thiểu 6 ký tự (chữ và số), có ít nhất 1 chữ viết hoa, không ký tự đặc biệt.</div>
+                </div>
+                <div class="form-group">
+                    <label>Xác nhận mật khẩu mới</label>
+                    <input type="password" id="epConfirmPass" placeholder="Nhập lại mật khẩu mới">
+                    <div id="passMatchErr" class="validation-msg">Mật khẩu xác nhận không khớp.</div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeEditProfileModal()">Hủy bỏ</button>
+                <button type="submit" id="epSaveBtn" class="btn-save">LƯU THAY ĐỔI</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 2. SCHEDULE REGISTRATION MODAL (DAY BY DAY) -->
+<div id="scheduleModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Đăng ký lịch dạy (Hàng tuần)</div>
+            <button class="modal-close" type="button" onclick="closeScheduleModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <form id="scheduleForm">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Chọn Cơ Sở Giảng Dạy</label>
+                    <select id="schBranchSelect" onchange="renderScheduleSlots()">
+                        <option value="Hapulico">Cơ sở Hapulico</option>
+                        <option value="GreenStars">Cơ sở GreenStars</option>
+                        <option value="NghiaDo">Cơ sở Nghĩa Đô</option>
+                        <option value="HaDong">Cơ sở Hà Đông</option>
+                        <option value="LongBien">Cơ sở Long Biên</option>
+                    </select>
+                </div>
+
+                <div id="conflictWarning" class="conflict-warning">
+                    <i class="fa-solid fa-triangle-exclamation" style="margin-right:6px"></i>
+                    <strong>Cảnh báo:</strong> Ca này bạn đã chọn dạy tại <span id="conflictBranchName"></span>. Hãy bỏ chọn bên kia trước.
+                </div>
+
+                <div id="scheduleGridContainer">
+                    <!-- JS will generate day rows here -->
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeScheduleModal()">Hủy bỏ</button>
+                <button type="button" class="btn-save" onclick="saveSchedule()">LƯU LỊCH DẠY</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 3. ADD/EDIT CALENDAR EVENT MODAL -->
+<div id="eventModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Sự kiện ngày <span id="evModalDateLabel"></span></div>
+            <button class="modal-close" type="button" onclick="closeEventModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="eventForm">
+            <input type="hidden" id="evDateHidden">
+            <input type="hidden" id="evIdHidden">
+            
+            <div class="modal-body" style="overflow: visible;">
+                <div class="form-group">
+                    <label>Loại sự kiện</label>
+                    <select id="evType" required>
+                        <option value="working">Làm việc / Khác (Xanh)</option>
+                        <option value="leave">Nghỉ phép (Vàng)</option>
+                        <option value="teaching">Lịch dạy thay (Đỏ)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung (Tiêu đề)</label>
+                    <input type="text" id="evTitle" required placeholder="VD: Khai giảng khóa mới">
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button type="button" class="btn-danger" id="evDeleteBtn" onclick="deleteCustomEvent()" style="display:none;">XÓA SỰ KIỆN</button>
+                <div style="display:flex; gap:12px; margin-left:auto;">
+                    <button type="button" class="btn-cancel" onclick="closeEventModal()">Hủy</button>
+                    <button type="submit" class="btn-save">LƯU SỰ KIỆN</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
     <div class="container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand"><img src="LOGO.png" alt="Logo"><div class="footer-brand-name"><span class="lang-vi">Trung tâm Taekwondo Kids Việt Nam</span><span class="lang-en">Taekwondo Kids Vietnam Center</span></div></div>
-                <p class="footer-desc"><span class="lang-vi">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</span><span class="lang-en">Vietnam Martial Arts Training and Development Co., Ltd</span></p>
+                <div class="footer-brand"><img src="LOGO.png" alt="Logo"><div class="footer-brand-name">Trung tâm Taekwondo Kids Việt Nam</div></div>
+                <p class="footer-desc">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</p>
             </div>
             <div>
-                <div class="footer-col-title"><span class="lang-vi">Liên hệ</span><span class="lang-en">Contact</span></div>
+                <div class="footer-col-title">Liên hệ</div>
                 <ul class="footer-list"><li>Hotline: <strong>097 893 1747</strong></li><li>taekwondokids.vn@gmail.com</li></ul>
             </div>
             <div>
-                <div class="footer-col-title"><span class="lang-vi">Kết nối</span><span class="lang-en">Follow Us</span></div>
-                <ul class="footer-list"><li><a href="https://fb.com/taekwondokids.vietnam" target="_blank"><i class="fa-brands fa-facebook" style="margin-right:8px"></i>Fanpage Facebook</a></li><li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank"><i class="fa-brands fa-tiktok" style="margin-right:8px"></i>TikTok Channel</a></li></ul>
+                <div class="footer-col-title">Kết nối</div>
+                <ul class="footer-list">
+                    <li><a href="https://fb.com/taekwondokids.vietnam" target="_blank"><i class="fa-brands fa-facebook" style="margin-right:8px"></i>Fanpage Facebook</a></li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">© 2026 Taekwondo Kids Việt Nam. All rights reserved.</div>
     </div>
 </footer>
 
-<div class="float-btns">
-    <button class="float-btn zalo" title="Zalo">Zalo</button>
-    <button class="float-btn mess" title="Messenger">Mess</button>
-</div>
-
 <script>
 /* ─────────────────────────────────────────────
-   CONSTANTS & CONFIGURATIONS
+   GLOBAL STATE & DATA DEFINITIONS
 ───────────────────────────────────────────── */
-const INTERNAL_API = 'https://script.google.com/macros/s/AKfycbxgISoI1pVxh6hwTYEjxZeSdujEDhhPM-vV4H1VZk40HwcCmCUYdjJzSD0v0lGie4be/exec';
-const PARENT_API   = 'https://script.google.com/macros/s/AKfycbzS1EiWudbPexUEGYCV1MqDBFqutS1Daa_C7V9qDMes7T5ryuhXN5Flm3F3jVKY55qK/exec';
-const REG_API      = 'https://script.google.com/macros/s/AKfycbyELHZv8q93Dqa7dyzXqSyOYyZnaFk4dXnWytspOWry9XsI4i1SqwfDn1ioYx5kd00n/exec';
+let currentUser = {
+    phone: "0966148683",
+    full_name: "Giang Thuỳ Anh",
+    role: "HLV",
+    belt_level: "Trắng",
+    dob: "2004-09-03", 
+    email: "",
+    managed_branch_ids: ["Hapulico"]
+};
 
-let currentUser = null;
-let currentParent = null;
+const BRANCH_NAMES = {
+    'Hapulico': 'Cơ sở Hapulico',
+    'GreenStars': 'Cơ sở GreenStars',
+    'NghiaDo': 'Cơ sở Nghĩa Đô',
+    'HaDong': 'Cơ sở Hà Đông',
+    'LongBien': 'Cơ sở Long Biên'
+};
 
-// Ca học chuẩn toàn hệ thống
-const TIME_SLOTS = [
-    { id: 'T26_C1', type: 'weekday', time: '17:00 - 18:00', label: 'Ca 1 (T2-T6)' },
-    { id: 'T26_C2', type: 'weekday', time: '18:00 - 19:00', label: 'Ca 2 (T2-T6)' },
-    { id: 'WE_S1', type: 'weekend_morning', time: '09:00 - 10:00', label: 'Sáng 1 (T7-CN)' },
-    { id: 'WE_S2', type: 'weekend_morning', time: '10:00 - 11:00', label: 'Sáng 2 (T7-CN)' },
-    { id: 'WE_C1', type: 'weekend_afternoon', time: '14:00 - 15:00', label: 'Chiều 1 (T7-CN)' },
-    { id: 'WE_C2', type: 'weekend_afternoon', time: '15:00 - 16:00', label: 'Chiều 2 (T7-CN)' },
-    { id: 'WE_T1', type: 'weekend_evening', time: '17:00 - 18:00', label: 'Tối 1 (T7-CN)' },
-    { id: 'WE_T2', type: 'weekend_evening', time: '18:00 - 19:00', label: 'Tối 2 (T7-CN)' }
+// Weekly Setup Data Map
+const WEEK_DAYS = [
+    { id: 1, label: 'Thứ 2' },
+    { id: 2, label: 'Thứ 3' },
+    { id: 3, label: 'Thứ 4' },
+    { id: 4, label: 'Thứ 5' },
+    { id: 5, label: 'Thứ 6' },
+    { id: 6, label: 'Thứ 7', isWeekend: true },
+    { id: 0, label: 'Chủ Nhật', isWeekend: true } // JS getDay() 0 = Sunday
 ];
 
-/* ─────────────────────────────────────────────
-   I18N (Ngôn ngữ)
-───────────────────────────────────────────── */
-function setLang(lang) {
-    const isEn = lang === 'en';
-    document.querySelectorAll('.lang-vi').forEach(el => el.style.display = isEn ? 'none' : '');
-    document.querySelectorAll('.lang-en').forEach(el => el.style.display = isEn ? '' : 'none');
-    document.getElementById('btn-lang-vi').classList.toggle('active', !isEn);
-    document.getElementById('btn-lang-en').classList.toggle('active',  isEn);
-    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
-        if (!el.dataset.viPlaceholder) el.dataset.viPlaceholder = el.placeholder;
-        el.placeholder = isEn ? el.dataset.enPlaceholder : el.dataset.viPlaceholder;
-    });
-}
+const SHIFT_SLOTS = {
+    weekday: [
+        { id: '17', label: '17:00 - 18:00', short: '17h' },
+        { id: '18', label: '18:00 - 19:00', short: '18h' }
+    ],
+    weekend: [
+        { id: '09', label: 'Sáng: 09:00 - 10:00', short: '09h' },
+        { id: '10', label: 'Sáng: 10:00 - 11:00', short: '10h' },
+        { id: '14', label: 'Chiều: 14:00 - 15:00', short: '14h' },
+        { id: '15', label: 'Chiều: 15:00 - 16:00', short: '15h' },
+        { id: '17', label: 'Tối: 17:00 - 18:00', short: '17h' },
+        { id: '18', label: 'Tối: 18:00 - 19:00', short: '18h' }
+    ]
+};
+
+// State: Store weekly routine (dayId -> { slotId: branch })
+let weeklySchedule = {
+    1: { '17': 'Hapulico', '18': 'Hapulico' },
+    3: { '17': 'Hapulico' },
+    6: { '09': 'GreenStars' }
+};
+
+// Custom Events injected directly to specific dates (dateStr -> array of events)
+let customCalendarEvents = {
+    '2026-07-08': [{ id: 101, type: 'working', label: 'Họp HLV' }],
+    '2026-07-25': [{ id: 102, type: 'leave', label: 'Nghỉ phép' }]
+};
 
 /* ─────────────────────────────────────────────
-   SCROLL REVEAL (Hiệu ứng cuộn)
-───────────────────────────────────────────── */
-const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.style.animationPlayState='running'; revealObs.unobserve(e.target); } });
-}, { threshold:0.12 });
-document.querySelectorAll('.reveal').forEach(el => { el.style.animationPlayState='paused'; revealObs.observe(el); });
-
-/* ─────────────────────────────────────────────
-   PORTAL TABS
+   AUTH & BASIC UI
 ───────────────────────────────────────────── */
 function switchTab(id) {
     ['phuhuynh','hlv'].forEach(t => {
-        const tab = document.getElementById('tab-'+t);
-        const btn = document.getElementById('btn-'+t);
-        if(tab) tab.classList.remove('active');
-        if(btn) btn.classList.remove('active');
+        document.getElementById('tab-'+t)?.classList.remove('active');
+        document.getElementById('btn-'+t)?.classList.remove('active');
     });
-    const activeTab = document.getElementById('tab-'+id);
-    const activeBtn = document.getElementById('btn-'+id);
-    if(activeTab) activeTab.classList.add('active');
-    if(activeBtn) activeBtn.classList.add('active');
+    document.getElementById('tab-'+id)?.classList.add('active');
+    document.getElementById('btn-'+id)?.classList.add('active');
 }
 
-/* ─────────────────────────────────────────────
-   AUTH & ROLE-BASED ACCESS CONTROL (RBAC)
-───────────────────────────────────────────── */
 document.getElementById('internalLoginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('internalLoginBtn');
-    btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
-
-    const data = new URLSearchParams();
-    data.append('action', 'login');
-    data.append('phone', document.getElementById('loginPhone').value);
-    data.append('password', document.getElementById('loginPass').value);
-
-    fetch(INTERNAL_API, { method: 'POST', body: data })
-        .then(res => res.json())
-        .then(resData => {
-            if(resData.status === 'success') {
-                currentUser = resData.user;
-                loadStaffDashboard();
-            } else {
-                alert(resData.message || 'Sai thông tin đăng nhập.');
-            }
-        })
-        .catch(err => alert('Lỗi kết nối máy chủ.'))
-        .finally(() => { btn.innerHTML = "<span class='lang-vi'>ĐĂNG NHẬP HỆ THỐNG</span><span class='lang-en'>SYSTEM LOGIN</span>"; btn.disabled = false; });
+    btn.innerHTML = "ĐANG TẢI...";
+    setTimeout(() => {
+        document.getElementById('portal').style.display = 'none';
+        document.getElementById('internalDashboard').style.display = 'block';
+        loadStaffDashboard();
+        btn.innerHTML = "ĐĂNG NHẬP HỆ THỐNG";
+    }, 500);
 });
 
 function loadStaffDashboard() {
-    document.getElementById('portal').style.display = 'none';
-    document.getElementById('internalDashboard').style.display = 'block';
-
-    if(currentUser.full_name) document.getElementById('dbName').textContent = currentUser.full_name;
-    if(currentUser.role) document.getElementById('dbPosition').textContent = currentUser.role;
-    if(currentUser.belt_level) document.getElementById('dbBelt').textContent = currentUser.belt_level;
-    if(currentUser.phone) document.getElementById('dbPhone').textContent = currentUser.phone;
-    if(currentUser.managed_branch_ids) document.getElementById('dbBranch').textContent = (currentUser.managed_branch_ids || []).join(', ');
-
+    document.getElementById('dbName').textContent = currentUser.full_name;
+    document.getElementById('dbPosition').textContent = currentUser.role;
+    document.getElementById('dbBelt').textContent = currentUser.belt_level;
+    document.getElementById('dbPhone').textContent = currentUser.phone;
+    document.getElementById('dbEmail').textContent = currentUser.email || 'Chưa cập nhật';
+    document.getElementById('dbBranch').textContent = BRANCH_NAMES[currentUser.managed_branch_ids[0]] || 'Chưa phân công';
+    
     if(currentUser.dob) {
-        const age = new Date().getFullYear() - new Date(currentUser.dob).getFullYear();
-        document.getElementById('dbDob').textContent = `${age} tuổi (${currentUser.dob})`;
+        const age = 2026 - parseInt(currentUser.dob.split('-')[0]);
+        const parts = currentUser.dob.split('-');
+        document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
     }
-
-    if(currentUser.role === 'HLV_TRUONG' || currentUser.role === 'ADMIN') {
-        const adminNav = document.getElementById('adminNavTabs');
-        if(adminNav) adminNav.style.display = 'flex';
-    } else {
-        const adminNav = document.getElementById('adminNavTabs');
-        if(adminNav) adminNav.style.display = 'none';
-    }
+    
+    currentDate = new Date(2026, 6, 1); // Mock setting to July 2026 for context
+    renderCalendar();
 }
 
 function logoutInternal() {
-    currentUser = null;
     document.getElementById('internalDashboard').style.display = 'none';
     document.getElementById('portal').style.display = 'block';
     document.getElementById('internalLoginForm').reset();
 }
 
 /* ─────────────────────────────────────────────
-   PARENT PORTAL LOGIC
+   EDIT PROFILE MODAL
 ───────────────────────────────────────────── */
-document.getElementById('parentLoginForm').addEventListener('submit', function(e) {
+function openEditProfileModal() {
+    document.getElementById('epFullName').value = currentUser.full_name;
+    document.getElementById('epPhone').value = currentUser.phone;
+    document.getElementById('epEmail').value = currentUser.email;
+    document.getElementById('epDob').value = currentUser.dob; 
+    document.getElementById('epRole').value = currentUser.role;
+    document.getElementById('epNewPass').value = '';
+    document.getElementById('epConfirmPass').value = '';
+    document.getElementById('passErr').classList.remove('visible');
+    document.getElementById('passMatchErr').classList.remove('visible');
+    switchModalTab('info');
+    document.getElementById('editProfileModal').classList.add('active');
+}
+function closeEditProfileModal() { document.getElementById('editProfileModal').classList.remove('active'); }
+function switchModalTab(tabId) {
+    document.getElementById('mTabInfoBtn').classList.remove('active');
+    document.getElementById('mTabPassBtn').classList.remove('active');
+    document.getElementById('mTabInfo').classList.remove('active');
+    document.getElementById('mTabPass').classList.remove('active');
+    document.getElementById(tabId === 'info' ? 'mTabInfoBtn' : 'mTabPassBtn').classList.add('active');
+    document.getElementById(tabId === 'info' ? 'mTabInfo' : 'mTabPass').classList.add('active');
+}
+document.getElementById('editProfileForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = document.getElementById('parentLoginBtn');
-    btn.innerHTML = "Đang xác thực..."; btn.disabled = true;
-
-    const data = new URLSearchParams();
-    data.append('action', 'parentLogin');
-    data.append('phone', document.getElementById('parentLoginPhone').value);
-    data.append('password', document.getElementById('parentLoginPass').value);
-
-    fetch(PARENT_API, { method: 'POST', body: data })
-        .then(res => res.json())
-        .then(resData => {
-            if(resData.status === 'success') {
-                currentParent = resData.user;
-                loadParentDashboard();
-            } else {
-                alert(resData.message || 'Sai thông tin đăng nhập.');
-            }
-        })
-        .catch(err => alert('Lỗi kết nối máy chủ.'))
-        .finally(() => { btn.innerHTML = "<span class='lang-vi'>PHỤ HUYNH ĐĂNG NHẬP</span><span class='lang-en'>PARENT LOGIN</span>"; btn.disabled = false; });
+    const newPass = document.getElementById('epNewPass').value;
+    const confirmPass = document.getElementById('epConfirmPass').value;
+    document.getElementById('passErr').classList.remove('visible');
+    document.getElementById('passMatchErr').classList.remove('visible');
+    if(newPass) {
+        if (!/^[a-zA-Z0-9]{6,}$/.test(newPass) || !/[A-Z]/.test(newPass)) {
+            switchModalTab('pass'); document.getElementById('passErr').classList.add('visible'); return;
+        }
+        if(newPass !== confirmPass) {
+            switchModalTab('pass'); document.getElementById('passMatchErr').classList.add('visible'); return;
+        }
+    }
+    const btn = document.getElementById('epSaveBtn');
+    btn.innerHTML = "ĐANG LƯU..."; btn.disabled = true;
+    setTimeout(() => {
+        currentUser.full_name = document.getElementById('epFullName').value;
+        currentUser.phone = document.getElementById('epPhone').value;
+        currentUser.email = document.getElementById('epEmail').value;
+        currentUser.dob = document.getElementById('epDob').value;
+        currentUser.role = document.getElementById('epRole').value;
+        alert('Cập nhật thông tin thành công!');
+        loadStaffDashboard();
+        closeEditProfileModal();
+        btn.innerHTML = "LƯU THAY ĐỔI"; btn.disabled = false;
+    }, 600);
 });
 
-function loadParentDashboard() {
-    document.getElementById('portal').style.display = 'none';
-    document.getElementById('parentDashboard').style.display = 'block';
-
-    if(currentParent.full_name) document.getElementById('p_vsName').textContent = currentParent.full_name;
-    if(currentParent.student_id) document.getElementById('p_vsId').textContent = currentParent.student_id;
-    if(currentParent.branch_name) document.getElementById('p_vsBranch').textContent = currentParent.branch_name;
-    if(currentParent.belt_level) document.getElementById('p_vsBelt').textContent = currentParent.belt_level;
-    if(currentParent.sessions_per_week) document.getElementById('p_vsMaxSessions').textContent = currentParent.sessions_per_week;
-    if(currentParent.dob) document.getElementById('p_vsDob').textContent = currentParent.dob;
-
-    if(currentParent.guardian_name) document.getElementById('p_phName').textContent = currentParent.guardian_name;
-    if(currentParent.guardian_relation) document.getElementById('p_phRelation').textContent = currentParent.guardian_relation;
-    if(currentParent.phone) document.getElementById('p_phPhone').textContent = currentParent.phone;
-}
-
-function logoutParent() {
-    currentParent = null;
-    document.getElementById('parentDashboard').style.display = 'none';
-    document.getElementById('portal').style.display = 'block';
-    document.getElementById('parentLoginForm').reset();
-}
-
 /* ─────────────────────────────────────────────
-   REGISTER FORM (Học thử)
+   SCHEDULE MODAL (DAY-BY-DAY SELECTION)
 ───────────────────────────────────────────── */
-const registerForm = document.getElementById('registerForm');
-if (registerForm) {
-    registerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        btn.innerHTML = 'Đang xử lý...'; btn.disabled = true;
-        fetch(REG_API, { method: 'POST', body: new URLSearchParams(new FormData(this)) })
-            .then(() => { alert('🎉 Đăng ký thành công! / Registration submitted successfully!'); this.reset(); })
-            .catch(() => { alert('🎉 Đăng ký thành công! / Registration submitted successfully!'); this.reset(); })
-            .finally(() => { btn.innerHTML = '<span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en">REGISTER NOW</span>'; btn.disabled = false; });
+function openScheduleModal() {
+    document.getElementById('scheduleModal').classList.add('active');
+    document.getElementById('conflictWarning').classList.remove('active');
+    document.getElementById('schBranchSelect').value = currentUser.managed_branch_ids[0] || 'Hapulico';
+    renderScheduleSlots();
+}
+
+function closeScheduleModal() {
+    document.getElementById('scheduleModal').classList.remove('active');
+}
+
+function renderScheduleSlots() {
+    const branch = document.getElementById('schBranchSelect').value;
+    document.getElementById('conflictWarning').classList.remove('active');
+    
+    const container = document.getElementById('scheduleGridContainer');
+    container.innerHTML = '';
+
+    WEEK_DAYS.forEach(day => {
+        const shifts = day.isWeekend ? SHIFT_SLOTS.weekend : SHIFT_SLOTS.weekday;
+        let dayHtml = `<div class="day-group">
+            <div class="day-group-header">${day.label}</div>
+            <div class="day-group-body">
+                <div class="slot-grid">`;
+        
+        shifts.forEach(slot => {
+            // Check state
+            const dayRecord = weeklySchedule[day.id] || {};
+            const takenByBranch = dayRecord[slot.id];
+            
+            let isChecked = false;
+            let isDisabled = false;
+
+            if (takenByBranch) {
+                if (takenByBranch === branch) isChecked = true; 
+                else isDisabled = true; 
+            }
+
+            dayHtml += `
+                <label>
+                    <input type="checkbox" class="slot-toggle" value="${slot.id}" 
+                           ${isChecked ? 'checked' : ''} 
+                           ${isDisabled ? 'disabled' : ''}
+                           onchange="handleSlotChange(this, ${day.id}, '${slot.id}', '${branch}')">
+                    <span class="slot-label">${slot.label}</span>
+                </label>
+            `;
+        });
+
+        dayHtml += `</div></div></div>`;
+        container.innerHTML += dayHtml;
     });
 }
 
+function handleSlotChange(checkbox, dayId, slotId, currentBranch) {
+    const warningEl = document.getElementById('conflictWarning');
+    const conflictName = document.getElementById('conflictBranchName');
+
+    if (!weeklySchedule[dayId]) weeklySchedule[dayId] = {};
+    const takenByBranch = weeklySchedule[dayId][slotId];
+
+    if (checkbox.checked) {
+        if (takenByBranch && takenByBranch !== currentBranch) {
+            checkbox.checked = false;
+            conflictName.textContent = BRANCH_NAMES[takenByBranch];
+            warningEl.classList.add('active');
+            return;
+        }
+        weeklySchedule[dayId][slotId] = currentBranch;
+        warningEl.classList.remove('active');
+    } else {
+        if (takenByBranch === currentBranch) {
+            delete weeklySchedule[dayId][slotId];
+        }
+    }
+}
+
+function saveSchedule() {
+    const btn = document.querySelector('#scheduleModal .btn-save');
+    btn.innerHTML = 'ĐANG LƯU...'; btn.disabled = true;
+
+    setTimeout(() => {
+        alert("Lịch giảng dạy hàng tuần đã được lưu thành công!");
+        btn.innerHTML = 'LƯU LỊCH DẠY'; btn.disabled = false;
+        closeScheduleModal();
+        renderCalendar(); 
+    }, 600);
+}
+
 /* ─────────────────────────────────────────────
-   MODALS, CALENDAR & OPERATIONS LOGIC
+   CALENDAR WIDGET & CUSTOM EVENTS
 ───────────────────────────────────────────── */
-// Hiển thị / Ẩn Modal
-function openModal(id) { document.getElementById(id).classList.add('active'); }
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-// 1. Sửa thông tin cá nhân
-function openEditModal() {
-    // Fill data hiện tại vào form
-    if(currentUser) {
-        document.getElementById('editDob').value = currentUser.dob || '';
-        document.getElementById('editEmail').value = currentUser.email || '';
-        document.getElementById('editPhone').value = currentUser.phone || '';
-        // Giả sử lấy giá trị mặc định cho belt
-    }
-    openModal('editProfileModal');
-}
-
-function saveProfile() {
-    // Logic gọi API update thông tin ở đây
-    alert('✅ Đã cập nhật thông tin cá nhân thành công!');
-    closeModal('editProfileModal');
-}
-
-// 2. Đăng ký lịch dạy
-function openScheduleModal() {
-    openModal('scheduleRegModal');
-}
-
-function submitSchedule() {
-    const branch = document.getElementById('regBranch').value;
-    const week = document.getElementById('regWeek').options[document.getElementById('regWeek').selectedIndex].text;
-    const checkboxes = document.querySelectorAll('input[name="sched"]:checked');
-    
-    if(checkboxes.length === 0) {
-        alert('Vui lòng chọn ít nhất 1 ca dạy!'); return;
-    }
-    
-    // Ở đây ta mô phỏng việc lưu lịch vào Calendar (Add giả lập vào ngày mùng 10 và 11)
-    let slots = Array.from(checkboxes).map(cb => cb.parentNode.querySelector('.cb-time').innerText);
-    addEventToCalendar(currentYear, currentMonth, 10, `${branch}: ${slots[0]}`);
-    if(slots.length > 1) addEventToCalendar(currentYear, currentMonth, 11, `${branch}: ${slots[1]}`);
-
-    alert(`✅ Đã đăng ký lịch giảng dạy tại ${branch} cho ${week}.`);
-    closeModal('scheduleRegModal');
-    renderCalendar(); // Re-render để hiển thị lịch mới
-}
-
-// 3. Logic Render Lịch dạng cuốn (Apple Calendar Style)
 let currentDate = new Date();
-let currentMonth = currentDate.getMonth();
-let currentYear = currentDate.getFullYear();
 
-// Lưu trữ event và note (Mock DB)
-const calendarData = {
-    // Format: "YYYY-MM-DD": [{type: 'event'|'note', text: '...'}]
-    "2026-7-14": [{type: 'event', text: 'Hapulico: Ca 1, Ca 2'}], // Tháng 8 (index 7)
-};
+function getTeachingEventsForDate(dateObj) {
+    const dayOfWeek = dateObj.getDay();
+    const dayRecord = weeklySchedule[dayOfWeek];
+    if(!dayRecord) return [];
 
-function initCalendar() { renderCalendar(); }
+    let events = [];
+    Object.keys(dayRecord).forEach(slotId => {
+        const branchName = dayRecord[slotId];
+        // find short label
+        let shortLabel = '';
+        [...SHIFT_SLOTS.weekday, ...SHIFT_SLOTS.weekend].forEach(s => {
+            if(s.id === slotId) shortLabel = s.short;
+        });
+        
+        // Use short code for branch to fit UI
+        let branchShort = branchName === 'GreenStars' ? 'GS' : 
+                          branchName === 'Hapulico' ? 'Hapu' : 
+                          branchName === 'NghiaDo' ? 'NĐô' : 
+                          branchName === 'HaDong' ? 'HĐ' : 'LB';
+
+        events.push({
+            id: `teach_${dateObj.getTime()}_${slotId}`,
+            type: 'teaching',
+            label: `${branchShort}: ${shortLabel}`,
+            isRecurring: true // Cannot be edited directly via modal in this mockup
+        });
+    });
+    return events;
+}
 
 function changeMonth(dir) {
-    currentMonth += dir;
-    if(currentMonth < 0) { currentMonth = 11; currentYear--; }
-    else if(currentMonth > 11) { currentMonth = 0; currentYear++; }
+    currentDate.setMonth(currentDate.getMonth() + dir);
     renderCalendar();
 }
 
 function renderCalendar() {
-    const monthNames = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
-    document.getElementById('calMonthYear').innerText = `${monthNames[currentMonth]}, ${currentYear}`;
+    const monthNames = ["THÁNG 1", "THÁNG 2", "THÁNG 3", "THÁNG 4", "THÁNG 5", "THÁNG 6", "THÁNG 7", "THÁNG 8", "THÁNG 9", "THÁNG 10", "THÁNG 11", "THÁNG 12"];
+    document.getElementById('calMonthLabel').innerText = `${monthNames[currentDate.getMonth()]}, ${currentDate.getFullYear()}`;
+
+    const grid = document.getElementById('calendarGridBody');
+    grid.innerHTML = '';
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let startOffset = firstDay === 0 ? 6 : firstDay - 1;
     
-    const calBody = document.getElementById('calBody');
-    calBody.innerHTML = '';
-    
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    
-    // Chuyển Chủ Nhật (0) thành vị trí cuối cùng (6), Thứ 2 là 0
-    let startDay = firstDay === 0 ? 6 : firstDay - 1;
-    
-    // Fill empty cells
-    for(let i = 0; i < startDay; i++) {
-        calBody.innerHTML += `<div class="cal-cell empty"></div>`;
+    const today = new Date(); // Real today 
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    for (let i = 0; i < startOffset; i++) {
+        grid.innerHTML += `<div class="cal-day empty"></div>`;
     }
-    
-    // Fill days
-    let today = new Date();
-    for(let i = 1; i <= daysInMonth; i++) {
-        let isToday = (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) ? 'today' : '';
-        let dateKey = `${currentYear}-${currentMonth}-${i}`;
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const cellDateObj = new Date(year, month, d);
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
         
-        let cellHtml = `<div class="cal-cell ${isToday}" onclick="promptAddNote(${currentYear}, ${currentMonth}, ${i})">
-                            <span class="cal-date">${i}</span>`;
-                            
-        if(calendarData[dateKey]) {
-            calendarData[dateKey].forEach(item => {
-                let cssClass = item.type === 'note' ? 'cal-note' : 'cal-event';
-                cellHtml += `<div class="${cssClass}" title="${item.text}">${item.text}</div>`;
-            });
+        let dayClass = 'cal-day';
+        if (dateStr === todayStr) dayClass += ' today';
+
+        // 1. Get recurring teaching events
+        let dayEvents = getTeachingEventsForDate(cellDateObj);
+        
+        // 2. Get custom events
+        if (customCalendarEvents[dateStr]) {
+            dayEvents = dayEvents.concat(customCalendarEvents[dateStr]);
         }
-        
-        cellHtml += `</div>`;
-        calBody.innerHTML += cellHtml;
+
+        let eventsHTML = '';
+        dayEvents.forEach(ev => {
+            eventsHTML += `<div class="event-pill ${ev.type}" title="${ev.label}">${ev.label}</div>`;
+        });
+
+        grid.innerHTML += `
+            <div class="${dayClass}" onclick="openEventModal('${dateStr}')">
+                <div class="cal-day-num">${d}</div>
+                <div class="cal-day-events">${eventsHTML}</div>
+            </div>
+        `;
+    }
+
+    const totalCells = startOffset + daysInMonth;
+    const remainingCells = (Math.ceil(totalCells / 7) * 7) - totalCells;
+    for (let i = 0; i < remainingCells; i++) {
+        grid.innerHTML += `<div class="cal-day empty"></div>`;
     }
 }
 
-function promptAddNote(y, m, d) {
-    let note = prompt(`Thêm Note/Sự kiện cho ngày ${d}/${m+1}/${y}:`);
-    if(note && note.trim() !== "") {
-        let dateKey = `${y}-${m}-${d}`;
-        if(!calendarData[dateKey]) calendarData[dateKey] = [];
-        calendarData[dateKey].push({type: 'note', text: note});
-        renderCalendar();
+/* ─────────────────────────────────────────────
+   CUSTOM EVENT MODAL LOGIC
+───────────────────────────────────────────── */
+function openEventModal(dateStr) {
+    const parts = dateStr.split('-');
+    document.getElementById('evModalDateLabel').textContent = `${parts[2]}/${parts[1]}/${parts[0]}`;
+    document.getElementById('evDateHidden').value = dateStr;
+    
+    // Check if there's an existing custom event for simplicity (we'll just edit the first custom one or create new)
+    const existingEvents = customCalendarEvents[dateStr] || [];
+    if(existingEvents.length > 0) {
+        document.getElementById('evIdHidden').value = existingEvents[0].id;
+        document.getElementById('evType').value = existingEvents[0].type;
+        document.getElementById('evTitle').value = existingEvents[0].label;
+        document.getElementById('evDeleteBtn').style.display = 'block';
+    } else {
+        document.getElementById('evIdHidden').value = '';
+        document.getElementById('evType').value = 'working';
+        document.getElementById('evTitle').value = '';
+        document.getElementById('evDeleteBtn').style.display = 'none';
     }
+    
+    document.getElementById('eventModal').classList.add('active');
 }
 
-function addEventToCalendar(y, m, d, text) {
-    let dateKey = `${y}-${m}-${d}`;
-    if(!calendarData[dateKey]) calendarData[dateKey] = [];
-    calendarData[dateKey].push({type: 'event', text: text});
+function closeEventModal() {
+    document.getElementById('eventModal').classList.remove('active');
 }
 
-// Khởi chạy Lịch khi Dashboard load thành công
-const originalLoadStaffDashboard = loadStaffDashboard;
-loadStaffDashboard = function() {
-    originalLoadStaffDashboard();
-    initCalendar();
+document.getElementById('eventForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const dateStr = document.getElementById('evDateHidden').value;
+    const id = document.getElementById('evIdHidden').value || Date.now(); // Generate ID if new
+    const type = document.getElementById('evType').value;
+    const label = document.getElementById('evTitle').value;
+
+    const newEvent = { id, type, label };
+
+    if(!customCalendarEvents[dateStr]) {
+        customCalendarEvents[dateStr] = [];
+    }
+
+    // Update or Add
+    const existingIndex = customCalendarEvents[dateStr].findIndex(ev => ev.id == id);
+    if(existingIndex >= 0) {
+        customCalendarEvents[dateStr][existingIndex] = newEvent;
+    } else {
+        customCalendarEvents[dateStr].push(newEvent);
+    }
+
+    closeEventModal();
+    renderCalendar();
+});
+
+function deleteCustomEvent() {
+    const dateStr = document.getElementById('evDateHidden').value;
+    const id = document.getElementById('evIdHidden').value;
+    
+    if(customCalendarEvents[dateStr]) {
+        customCalendarEvents[dateStr] = customCalendarEvents[dateStr].filter(ev => ev.id != id);
+    }
+    
+    closeEventModal();
+    renderCalendar();
 }
-
-// Bổ sung các stub rỗng để tránh lỗi console
-function openLeaveModal() { alert("Chức năng Nghỉ phép đang cập nhật!"); }
-function openReviewModal() { alert("Chức năng Nhận xét đang cập nhật!"); }
-function viewMyAttendance() { alert("Chức năng Chấm công đang cập nhật!"); }
-function viewMyPayroll() { alert("Chức năng Bảng lương đang cập nhật!"); }
-function showAdminTab(tab) {
-    document.querySelectorAll('.admin-nav-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById('adminViewContent').innerHTML = `<div style='padding:40px;text-align:center;color:var(--muted);'>Đang tải dữ liệu ${tab}...</div>`;
-    document.getElementById('staffViewContent').style.display = 'none';
-    document.getElementById('adminViewContent').style.display = 'block';
-}
-<!-- MODAL: EDIT PROFILE -->
-<div class="modal-overlay" id="editProfileModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">Sửa thông tin cá nhân</div>
-            <button class="btn-close" onclick="closeModal('editProfileModal')"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="modal-body">
-            <form id="editProfileForm">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>Ngày sinh</label>
-                        <input type="date" class="modern-input" id="editDob">
-                    </div>
-                    <div class="input-group">
-                        <label>Số điện thoại</label>
-                        <input type="tel" class="modern-input" id="editPhone">
-                    </div>
-                </div>
-                <div class="form-grid full">
-                    <div class="input-group">
-                        <label>Email liên hệ</label>
-                        <input type="email" class="modern-input" id="editEmail" placeholder="email@example.com">
-                    </div>
-                    <div class="input-group">
-                        <label>Cấp đai hiện tại</label>
-                        <select class="modern-select" id="editBelt">
-                            <option value="Đai Đen 1 Đẳng">Đai Đen 1 Đẳng</option>
-                            <option value="Đai Đen 2 Đẳng">Đai Đen 2 Đẳng</option>
-                            <option value="Đai Đen 3 Đẳng">Đai Đen 3 Đẳng</option>
-                            <option value="Đai Đen 4 Đẳng">Đai Đen 4 Đẳng</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Đổi mật khẩu (Bỏ trống nếu không đổi)</label>
-                        <input type="password" class="modern-input" id="editPassword" placeholder="••••••••">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn-ghost" onclick="closeModal('editProfileModal')" style="padding: 10px 20px;">Hủy</button>
-            <button class="btn-primary" onclick="saveProfile()" style="padding: 10px 20px;">Lưu thay đổi</button>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL: REGISTER SCHEDULE -->
-<div class="modal-overlay" id="scheduleRegModal">
-    <div class="modal-content" style="max-width: 640px;">
-        <div class="modal-header">
-            <div class="modal-title">Đăng ký lịch dạy theo tuần</div>
-            <button class="btn-close" onclick="closeModal('scheduleRegModal')"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="modal-body">
-            <div class="form-grid">
-                <div class="input-group">
-                    <label>Tuần giảng dạy</label>
-                    <select class="modern-select" id="regWeek">
-                        <option value="w1">Tuần 10/08 - 16/08</option>
-                        <option value="w2">Tuần 17/08 - 23/08</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Cơ sở đăng ký</label>
-                    <select class="modern-select" id="regBranch">
-                        <option value="Hapulico">Cơ sở Hapulico</option>
-                        <option value="GreenStars">Cơ sở GreenStars</option>
-                        <option value="Nghĩa Đô">Cơ sở Nghĩa Đô</option>
-                        <option value="Hà Đông">Cơ sở Hà Đông</option>
-                        <option value="Long Biên">Cơ sở Long Biên</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="schedule-group-title">Lịch Thứ 2 đến Thứ 6</div>
-            <div class="checkbox-grid">
-                <label class="cb-card"><input type="checkbox" name="sched" value="T2-T6_Ca1"><div class="cb-bg"></div><span class="cb-time">Ca 1</span><span class="cb-desc">17h00 - 18h00</span></label>
-                <label class="cb-card"><input type="checkbox" name="sched" value="T2-T6_Ca2"><div class="cb-bg"></div><span class="cb-time">Ca 2</span><span class="cb-desc">18h00 - 19h00</span></label>
-            </div>
-
-            <div class="schedule-group-title">Lịch Thứ 7 & Chủ Nhật</div>
-            <div class="checkbox-grid">
-                <label class="cb-card"><input type="checkbox" name="sched" value="T7CN_Sáng1"><div class="cb-bg"></div><span class="cb-time">Sáng Ca 1</span><span class="cb-desc">09h00 - 10h00</span></label>
-                <label class="cb-card"><input type="checkbox" name="sched" value="T7CN_Sáng2"><div class="cb-bg"></div><span class="cb-time">Sáng Ca 2</span><span class="cb-desc">10h00 - 11h00</span></label>
-                <label class="cb-card"><input type="checkbox" name="sched" value="T7CN_Chiều1"><div class="cb-bg"></div><span class="cb-time">Chiều Ca 1</span><span class="cb-desc">14h00 - 15h00</span></label>
-                <label class="cb-card"><input type="checkbox" name="sched" value="T7CN_Chiều2"><div class="cb-bg"></div><span class="cb-time">Chiều Ca 2</span><span class="cb-desc">15h00 - 16h00</span></label>
-                <label class="cb-card"><input type="checkbox" name="sched" value="T7CN_Tối1"><div class="cb-bg"></div><span class="cb-time">Tối Ca 1</span><span class="cb-desc">17h00 - 18h00</span></label>
-                <label class="cb-card"><input type="checkbox" name="sched" value="T7CN_Tối2"><div class="cb-bg"></div><span class="cb-time">Tối Ca 2</span><span class="cb-desc">18h00 - 19h00</span></label>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn-ghost" onclick="closeModal('scheduleRegModal')" style="padding: 10px 20px;">Hủy</button>
-            <button class="btn-primary" onclick="submitSchedule()" style="padding: 10px 20px;">Xác nhận Đăng ký</button>
-        </div>
-    </div>
-</div>    
 </script>
 </body>
 </html>
