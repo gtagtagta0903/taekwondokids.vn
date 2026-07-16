@@ -378,6 +378,8 @@
         
         .conflict-warning { padding: 12px 16px; background: rgba(255,214,0,0.1); border-left: 3px solid var(--yellow); font-size: 11px; color: var(--white); margin-bottom: 20px; display: none; }
         .conflict-warning.active { display: block; animation: fadeUp 0.3s ease forwards; }
+        .week-nav-bar { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:24px; padding:14px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; }
+.week-nav-label { font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--yellow); letter-spacing:0.5px; min-width:260px; text-align:center; }
 
         /* CALENDAR DASHBOARD WIDGET */
         .calendar-wrapper { margin-top: 32px; }
@@ -714,8 +716,13 @@
         
         <form id="scheduleForm">
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Chọn Cơ Sở Giảng Dạy</label>
+    <div class="week-nav-bar">
+        <button type="button" class="cal-nav-btn" onclick="changeScheduleWeek(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="week-nav-label" id="weekNavLabel">Tuần: -- </div>
+        <button type="button" class="cal-nav-btn" onclick="changeScheduleWeek(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="form-group">
+        <label>Chọn Cơ Sở Giảng Dạy</label>
                     <select id="schBranchSelect" onchange="renderScheduleSlots()">
                         <option value="Hapulico">Cơ sở Hapulico</option>
                         <option value="GreenStars">Cơ sở GreenStars</option>
@@ -843,7 +850,23 @@ let currentUser = null;   // HLV/Nhân viên đang đăng nhập
 let currentParent = null; // Phụ huynh đang đăng nhập
 let currentDate = new Date();
 let weeklySchedule = {};        // {thu: {ca: maNV_hoặc_coSo}} — dùng bản đồ theo cơ sở của TÔI
-let allSchedules = [];          // toàn bộ lịch từ server (để check trùng)
+let allSchedules = [];          // toàn bộ lịch từ server (mọi tuần)
+let scheduleByWeek = {};        // { 'yyyy-MM-dd(Thứ2)': { thu: {ca: coSo} } } — lịch của TÔI, nhóm theo tuần
+let currentScheduleWeekStart = null; // Date - Thứ 2 của tuần đang xem trong modal
+
+function getMondayStr(d) {
+  const date = new Date(d);
+  const day = date.getDay();
+  const diff = day === 0 ? -6 : 1 - day; // đưa về Thứ 2
+  date.setDate(date.getDate() + diff);
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+function formatWeekLabel(mondayStr) {
+  const start = new Date(mondayStr + 'T00:00:00');
+  const end = new Date(start); end.setDate(end.getDate() + 6);
+  const f = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+  return `Tuần: ${f(start)} - ${f(end)}/${end.getFullYear()}`;
+}
 let customCalendarEvents = {};  // {dateStr: [{id, type, label}]}
 
 /* ---------- GỌI API ---------- */
@@ -1067,10 +1090,11 @@ function refreshScheduleFromServer() {
   return callApi('getSchedule', { maNV: currentUser.maNV }).then(res => {
     if (res.status !== 'success') return;
     allSchedules = res.schedule;
-    weeklySchedule = {};
-    allSchedules.filter(s => s.isMine).forEach(s => {
-      if (!weeklySchedule[s.thu]) weeklySchedule[s.thu] = {};
-      weeklySchedule[s.thu][s.ca] = s.coSo;
+    scheduleByWeek = {};
+    allSchedules.filter(s => s.isMine && s.tuanBatDau).forEach(s => {
+      if (!scheduleByWeek[s.tuanBatDau]) scheduleByWeek[s.tuanBatDau] = {};
+      if (!scheduleByWeek[s.tuanBatDau][s.thu]) scheduleByWeek[s.tuanBatDau][s.thu] = {};
+      scheduleByWeek[s.tuanBatDau][s.thu][s.ca] = s.coSo;
     });
   });
 }
@@ -1079,7 +1103,25 @@ function openScheduleModal() {
   document.getElementById('scheduleModal').classList.add('active');
   document.getElementById('conflictWarning').classList.remove('active');
   document.getElementById('schBranchSelect').value = currentUser.branch || 'Hapulico';
+  currentScheduleWeekStart = getMondayStr(new Date()); // mặc định: tuần hiện tại
+  updateWeekLabel();
   renderScheduleSlots();
+}
+
+function changeScheduleWeek(dir) {
+  const d = new Date(currentScheduleWeekStart + 'T00:00:00');
+  d.setDate(d.getDate() + dir * 7);
+  currentScheduleWeekStart = getMondayStr(d);
+  updateWeekLabel();
+  renderScheduleSlots();
+}
+
+function updateWeekLabel() {
+  document.getElementById('weekNavLabel').textContent = formatWeekLabel(currentScheduleWeekStart);
+}
+
+function getEditingWeekSchedule() {
+  return scheduleByWeek[currentScheduleWeekStart] || {};
 }
 function closeScheduleModal() { document.getElementById('scheduleModal').classList.remove('active'); }
 
@@ -1093,7 +1135,7 @@ function renderScheduleSlots() {
     const shifts = day.isWeekend ? SHIFT_SLOTS.weekend : SHIFT_SLOTS.weekday;
     let html = `<div class="day-group"><div class="day-group-header">${day.label}</div><div class="day-group-body"><div class="slot-grid">`;
     shifts.forEach(slot => {
-      const dayRecord = weeklySchedule[day.id] || {};
+      const dayRecord = getEditingWeekSchedule()[day.id] || {};
       const takenByBranch = dayRecord[slot.id];
       const isChecked = takenByBranch === branch;
       const isDisabled = takenByBranch && takenByBranch !== branch;
@@ -1112,8 +1154,10 @@ function renderScheduleSlots() {
 function handleSlotChange(checkbox, dayId, slotId, branch) {
   const warningEl = document.getElementById('conflictWarning');
   const conflictName = document.getElementById('conflictBranchName');
-  if (!weeklySchedule[dayId]) weeklySchedule[dayId] = {};
-  const taken = weeklySchedule[dayId][slotId];
+  if (!scheduleByWeek[currentScheduleWeekStart]) scheduleByWeek[currentScheduleWeekStart] = {};
+  const weekData = scheduleByWeek[currentScheduleWeekStart];
+  if (!weekData[dayId]) weekData[dayId] = {};
+  const taken = weekData[dayId][slotId];
 
   if (checkbox.checked) {
     if (taken && taken !== branch) {
@@ -1122,10 +1166,10 @@ function handleSlotChange(checkbox, dayId, slotId, branch) {
       warningEl.classList.add('active');
       return;
     }
-    weeklySchedule[dayId][slotId] = branch;
+    weekData[dayId][slotId] = branch;
     warningEl.classList.remove('active');
   } else {
-    if (taken === branch) delete weeklySchedule[dayId][slotId];
+    if (taken === branch) delete weekData[dayId][slotId];
   }
 }
 
@@ -1133,14 +1177,15 @@ function saveSchedule() {
   const btn = document.querySelector('#scheduleModal .btn-save');
   btn.innerHTML = 'ĐANG LƯU...'; btn.disabled = true;
 
+  const weekData = getEditingWeekSchedule();
   const slots = [];
-  Object.keys(weeklySchedule).forEach(thu => {
-    Object.keys(weeklySchedule[thu]).forEach(ca => {
-      slots.push({ thu: Number(thu), ca, coSo: weeklySchedule[thu][ca] });
+  Object.keys(weekData).forEach(thu => {
+    Object.keys(weekData[thu]).forEach(ca => {
+      slots.push({ thu: Number(thu), ca, coSo: weekData[thu][ca] });
     });
   });
 
-  callApi('registerSchedule', { maNV: currentUser.maNV, slots: JSON.stringify(slots) })
+  callApi('registerSchedule', { maNV: currentUser.maNV, tuanBatDau: currentScheduleWeekStart, slots: JSON.stringify(slots) })
     .then(res => {
       if (res.status === 'success') {
         alert('Lịch giảng dạy hàng tuần đã được lưu thành công!');
@@ -1158,7 +1203,8 @@ function saveSchedule() {
 
 function getTeachingEventsForDate(dateObj) {
   const dayOfWeek = dateObj.getDay();
-  const dayRecord = weeklySchedule[dayOfWeek];
+  const weekOfDate = scheduleByWeek[getMondayStr(dateObj)] || {};
+  const dayRecord = weekOfDate[dayOfWeek];
   if (!dayRecord) return [];
   const events = [];
   Object.keys(dayRecord).forEach(slotId => {
