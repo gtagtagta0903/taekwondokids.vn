@@ -377,6 +377,23 @@
         .slot-toggle:disabled + .slot-label { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; border-color: transparent; }
         
         .conflict-warning { padding: 12px 16px; background: rgba(255,214,0,0.1); border-left: 3px solid var(--yellow); font-size: 11px; color: var(--white); margin-bottom: 20px; display: none; }
+        /* LEAVE & APPROVAL EXTRAS */
+.leave-history-item { font-size:12px; color:var(--muted); padding:10px 0; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:10px; }
+.status-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 10px; border-radius:2px; white-space:nowrap; }
+.status-badge.pending { background:rgba(255,214,0,.12); color:var(--yellow); }
+.status-badge.approved { background:rgba(0,176,80,.12); color:#40CC80; }
+.status-badge.rejected { background:rgba(232,35,42,.12); color:#FF7070; }
+
+.approval-row { background:rgba(255,255,255,.02); border:1px solid var(--border); border-left:3px solid var(--yellow); padding:16px 18px; margin-bottom:12px; }
+.approval-row-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:8px; }
+.approval-name { font-weight:700; color:var(--white); font-size:14px; }
+.approval-meta { font-size:11.5px; color:var(--muted); line-height:1.6; margin-top:4px; }
+.approval-actions { display:flex; gap:10px; margin-top:12px; }
+.btn-approve { background:#008040; color:var(--white); border:none; padding:9px 20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
+.btn-approve:hover { background:#006630; }
+.btn-reject { background:none; border:1px solid var(--red-dark); color:var(--red); padding:9px 20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
+.btn-reject:hover { background:rgba(232,35,42,.1); }
+.empty-note { font-size:12px; color:var(--muted2); text-align:center; padding:20px 0; }
         .conflict-warning.active { display: block; animation: fadeUp 0.3s ease forwards; }
         .week-nav-bar { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:24px; padding:14px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; }
 .week-nav-label { font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--yellow); letter-spacing:0.5px; min-width:260px; text-align:center; }
@@ -590,15 +607,18 @@
             </div>
         </div>
 
-        <!-- Operations -->
-        <div class="ops-title">Nghiệp vụ HLV / Nhân viên</div>
-        <div class="ops-grid">
-            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
-            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
-            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⭐</span><span>Nhận xét học viên</span></button>
-            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⏱️</span><span>Xem chấm công</span></button>
-            <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>💵</span><span>Xem bảng lương</span></button>
-        </div>
+       <!-- Operations -->
+<div class="ops-title">Nghiệp vụ HLV / Nhân viên</div>
+<div class="ops-grid">
+    <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
+    <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
+    <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⭐</span><span>Nhận xét học viên</span></button>
+    <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⏱️</span><span>Xem chấm công</span></button>
+    <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>💵</span><span>Xem bảng lương</span></button>
+    <button class="ops-btn" id="btnApproval" style="display:none;" onclick="openApprovalModal()">
+        <span>✅</span><span>Duyệt đơn nghỉ phép</span>
+    </button>
+</div>
 
         <!-- Personal Calendar UI -->
         <div class="calendar-wrapper">
@@ -786,7 +806,57 @@
         </form>
     </div>
 </div>
-  
+  <!-- 4. LEAVE REQUEST MODAL (HLV/Nhân viên) -->
+<div id="leaveModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Đăng ký nghỉ phép</div>
+            <button class="modal-close" type="button" onclick="closeLeaveModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Từ ngày *</label>
+                    <input type="date" id="lvFrom" required>
+                </div>
+                <div class="form-group">
+                    <label>Đến ngày *</label>
+                    <input type="date" id="lvTo" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Lý do *</label>
+                <input type="text" id="lvReason" required placeholder="VD: Việc gia đình">
+            </div>
+            <div id="lvErr" class="validation-msg">Vui lòng điền đầy đủ thông tin và kiểm tra lại ngày.</div>
+
+            <div style="margin-top:28px;">
+                <div class="ops-title" style="margin-bottom:12px;">Lịch sử đơn đã gửi</div>
+                <div id="lvHistory"><div class="empty-note">Đang tải...</div></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeLeaveModal()">Đóng</button>
+            <button type="button" id="lvSubmitBtn" class="btn-save" onclick="submitLeaveRequest()">GỬI ĐƠN</button>
+        </div>
+    </div>
+</div>
+
+<!-- 5. APPROVAL MODAL (Admin / HLV Trưởng) -->
+<div id="approvalModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:640px;">
+        <div class="modal-header">
+            <div class="modal-title">Duyệt đơn nghỉ phép</div>
+            <button class="modal-close" type="button" onclick="closeApprovalModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="approvalListBox">
+            <div class="empty-note">Đang tải...</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeApprovalModal()">Đóng</button>
+        </div>
+    </div>
+</div>
 <section id="register">
     <div class="container">
         <div class="register-grid">
@@ -844,7 +914,7 @@
    ============================================================= */
 
 // 1. DÁN URL WEB APP (kết thúc bằng /exec) SAU KHI DEPLOY Code.gs
-const API_URL = 'https://script.google.com/macros/s/AKfycbzZZn2rh-b1csnlE14ujH5WWjw6iAxn1MSJZbwjWHbTKANoTR5b66IoEOsLBi9BcOR4/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbybT6ggUTaSr8F87b_0Yn_BlSLjxt7uQpImP94kDhyI5Tbc1fIyZf54Pp66VY-c3UQP/exec';
 
 let currentUser = null;   // HLV/Nhân viên đang đăng nhập
 let currentParent = null; // Phụ huynh đang đăng nhập
@@ -926,6 +996,8 @@ function loadStaffDashboard() {
     const age = new Date().getFullYear() - parseInt(parts[0]);
     document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
   }
+
+  document.getElementById('btnApproval').style.display = isApprover(currentUser) ? 'flex' : 'none';
 
   refreshScheduleFromServer().then(() => renderCalendar());
   loadCalendarNotesFromServer();
@@ -1315,49 +1387,120 @@ function deleteCustomEvent() {
   });
 }
 
-/* ---------- ĐĂNG KÝ NGHỈ PHÉP ---------- */
-// Gắn vào nút "Đăng ký nghỉ phép" trong ops-grid: onclick="openLeaveModal()"
-// Yêu cầu thêm modal #leaveModal — xem parent-dashboard.html để lấy mẫu markup tương tự.
+/* ---------- ĐĂNG KÝ NGHỈ PHÉP (hoàn thiện) ---------- */
 function openLeaveModal() {
-  const modal = document.getElementById('leaveModal');
-  if (!modal) { alert('Thiếu modal #leaveModal trong HTML — xem hướng dẫn đính kèm.'); return; }
   document.getElementById('lvFrom').value = '';
   document.getElementById('lvTo').value = '';
   document.getElementById('lvReason').value = '';
-  modal.classList.add('active');
+  document.getElementById('lvErr').classList.remove('visible');
+  document.getElementById('leaveModal').classList.add('active');
   loadLeaveHistory();
 }
 function closeLeaveModal() { document.getElementById('leaveModal').classList.remove('active'); }
 
+function statusBadge(trangThai) {
+  const map = { 'Chờ duyệt': 'pending', 'Đã duyệt': 'approved', 'Từ chối': 'rejected' };
+  const cls = map[trangThai] || 'pending';
+  return `<span class="status-badge ${cls}">${trangThai}</span>`;
+}
+
 function loadLeaveHistory() {
   callApi('listLeaveRequests', { maNV: currentUser.maNV }).then(res => {
-    const list = document.getElementById('lvHistory');
-    if (!list || res.status !== 'success') return;
-    list.innerHTML = res.requests.map(r =>
-      `<div style="font-size:12px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)">
-        ${r.tuNgay} → ${r.denNgay} · ${r.lyDo} · <strong style="color:var(--yellow)">${r.trangThai}</strong>
-      </div>`).join('') || '<div style="font-size:12px;color:var(--muted)">Chưa có đơn nào.</div>';
+    const box = document.getElementById('lvHistory');
+    if (res.status !== 'success') { box.innerHTML = '<div class="empty-note">Không tải được dữ liệu.</div>'; return; }
+    if (!res.requests.length) { box.innerHTML = '<div class="empty-note">Chưa có đơn nào.</div>'; return; }
+    box.innerHTML = res.requests.map(r => `
+      <div class="leave-history-item">
+        <div>${r.tuNgay} → ${r.denNgay} <br><span style="color:var(--muted2)">${r.lyDo}</span></div>
+        ${statusBadge(r.trangThai)}
+      </div>`).join('');
   });
 }
 
 function submitLeaveRequest() {
   const tuNgay = document.getElementById('lvFrom').value;
   const denNgay = document.getElementById('lvTo').value;
-  const lyDo = document.getElementById('lvReason').value;
-  if (!tuNgay || !denNgay || !lyDo) { alert('Vui lòng điền đầy đủ thông tin.'); return; }
-  if (new Date(denNgay) < new Date(tuNgay)) { alert('Ngày kết thúc phải sau ngày bắt đầu.'); return; }
+  const lyDo = document.getElementById('lvReason').value.trim();
+  const errEl = document.getElementById('lvErr');
+  errEl.classList.remove('visible');
 
-  callApi('requestLeave', { maNV: currentUser.maNV, tuNgay, denNgay, lyDo })
-    .then(res => {
-      if (res.status === 'success') {
-        alert('Đã gửi đơn xin nghỉ phép!');
-        closeLeaveModal();
-        loadCalendarNotesFromServer();
-      } else {
-        alert('❌ ' + res.message);
-      }
-    })
-    .catch(() => alert('Lỗi kết nối máy chủ.'));
+  if (!tuNgay || !denNgay || !lyDo || new Date(denNgay) < new Date(tuNgay)) {
+    errEl.classList.add('visible');
+    return;
+  }
+
+  const btn = document.getElementById('lvSubmitBtn');
+  const original = btn.innerHTML;
+  btn.innerHTML = 'ĐANG GỬI...'; btn.disabled = true;
+
+  callApi('requestLeave', {
+    maNV: currentUser.maNV,
+    hoTen: currentUser.full_name,
+    coSo: currentUser.branch,
+    tuNgay, denNgay, lyDo
+  }).then(res => {
+    if (res.status === 'success') {
+      alert('Đã gửi đơn nghỉ phép! Vui lòng chờ duyệt.');
+      document.getElementById('lvFrom').value = '';
+      document.getElementById('lvTo').value = '';
+      document.getElementById('lvReason').value = '';
+      loadLeaveHistory();
+    } else {
+      alert('❌ ' + res.message);
+    }
+  }).catch(() => alert('Lỗi kết nối máy chủ.'))
+    .finally(() => { btn.innerHTML = original; btn.disabled = false; });
+}
+
+/* ---------- DUYỆT NGHỈ PHÉP (Admin / HLV Trưởng) ---------- */
+function isApprover(user) {
+  const role = (user.role || '').toLowerCase();
+  return role.includes('admin') || role.includes('trưởng') || role.includes('truong');
+}
+
+function openApprovalModal() {
+  document.getElementById('approvalModal').classList.add('active');
+  loadApprovalList();
+}
+function closeApprovalModal() { document.getElementById('approvalModal').classList.remove('active'); }
+
+function loadApprovalList() {
+  callApi('listPendingApprovals', { maNV: currentUser.maNV }).then(res => {
+    const box = document.getElementById('approvalListBox');
+    if (res.status !== 'success') { box.innerHTML = '<div class="empty-note">Không tải được dữ liệu.</div>'; return; }
+    if (!res.requests.length) { box.innerHTML = '<div class="empty-note">Không có đơn nào đang chờ duyệt.</div>'; return; }
+    box.innerHTML = res.requests.map(r => `
+      <div class="approval-row">
+        <div class="approval-row-top">
+          <div>
+            <div class="approval-name">${r.hoTen} <span style="color:var(--muted2);font-weight:400;">(${r.coSo})</span></div>
+            <div class="approval-meta">Từ ${r.tuNgay} đến ${r.denNgay}<br>Lý do: ${r.lyDo}</div>
+          </div>
+          ${statusBadge(r.trangThai)}
+        </div>
+        <div class="approval-actions">
+          <button class="btn-approve" onclick="processLeaveDecision('${r.id}', 'Đã duyệt')">DUYỆT</button>
+          <button class="btn-reject" onclick="processLeaveDecision('${r.id}', 'Từ chối')">TỪ CHỐI</button>
+        </div>
+      </div>`).join('');
+  });
+}
+
+function processLeaveDecision(id, quyetDinh) {
+  let lyDoTuChoi = '';
+  if (quyetDinh === 'Từ chối') {
+    lyDoTuChoi = prompt('Nhập lý do từ chối (không bắt buộc):') || '';
+  }
+  callApi('decideLeaveRequest', {
+    id, quyetDinh, lyDoTuChoi,
+    maNV: currentUser.maNV
+  }).then(res => {
+    if (res.status === 'success') {
+      loadApprovalList();
+    } else {
+      alert('❌ ' + res.message);
+    }
+  }).catch(() => alert('Lỗi kết nối máy chủ.'));
 }
 
 /* ---------- ĐĂNG KÝ HỌC THỬ (form công khai) ---------- */
