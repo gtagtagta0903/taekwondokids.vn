@@ -618,6 +618,9 @@
     <button class="ops-btn" id="btnApproval" style="display:none;" onclick="openApprovalModal()">
         <span>✅</span><span>Duyệt đơn nghỉ phép</span>
     </button>
+    <button class="ops-btn" id="btnCommonEvent" style="display:none;" onclick="openCommonEventModal()">
+        <span>📢</span><span>Thêm lịch chung</span>
+    </button>
 </div>
 
         <!-- Personal Calendar UI -->
@@ -744,6 +747,7 @@
     <div class="form-group">
         <label>Chọn Cơ Sở Giảng Dạy</label>
                     <select id="schBranchSelect" onchange="renderScheduleSlots()">
+                        <option value="" disabled selected>-- Chọn cơ sở giảng dạy --</option>
                         <option value="Hapulico">Cơ sở Hapulico</option>
                         <option value="GreenStars">Cơ sở GreenStars</option>
                         <option value="NghiaDo">Cơ sở Nghĩa Đô</option>
@@ -857,6 +861,42 @@
         </div>
     </div>
 </div>
+    <!-- 6. COMMON EVENT MODAL (Admin / HLV Trưởng) -->
+<div id="commonEventModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Thêm lịch chung</div>
+            <button class="modal-close" type="button" onclick="closeCommonEventModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="commonEventForm">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Ngày *</label>
+                    <input type="date" id="ceDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Loại hiển thị</label>
+                    <select id="ceType">
+                        <option value="working">Sự kiện chung (Xanh)</option>
+                        <option value="leave">Thông báo (Vàng)</option>
+                        <option value="teaching">Quan trọng (Đỏ)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung *</label>
+                    <input type="text" id="ceTitle" required placeholder="VD: Giải đấu toàn quốc">
+                </div>
+                <div id="ceScopeNote" style="font-size:12px;color:var(--muted);margin:4px 0 20px;"></div>
+                <div class="ops-title" style="margin-bottom:12px;">Danh sách lịch chung đã tạo</div>
+                <div id="ceList"><div class="empty-note">Đang tải...</div></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeCommonEventModal()">Đóng</button>
+                <button type="submit" class="btn-save">THÊM LỊCH</button>
+            </div>
+        </form>
+    </div>
+</div>
 <section id="register">
     <div class="container">
         <div class="register-grid">
@@ -914,7 +954,7 @@
    ============================================================= */
 
 // 1. DÁN URL WEB APP (kết thúc bằng /exec) SAU KHI DEPLOY Code.gs
-const API_URL = 'https://script.google.com/macros/s/AKfycbzsY0rtO-_6IGMuzTyyZJ0DGH3WkzUXu7Iasqy1I7NYPoTsJJeYYDimzAofIyPz1Tfq/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw-uvEwmaYtfPPUWNzKh4Inv2jNjfq3jdE253OeIWvTCmWH3CeAj9NnuTqoQU7ahvYo/exec';
 
 let currentUser = null;   // HLV/Nhân viên đang đăng nhập
 let currentParent = null; // Phụ huynh đang đăng nhập
@@ -938,6 +978,7 @@ function formatWeekLabel(mondayStr) {
   return `Tuần: ${f(start)} - ${f(end)}/${end.getFullYear()}`;
 }
 let customCalendarEvents = {};  // {dateStr: [{id, type, label}]}
+let commonEvents = [];
 
 /* ---------- GỌI API ---------- */
 function callApi(action, params = {}) {
@@ -998,9 +1039,11 @@ function loadStaffDashboard() {
   }
 
   document.getElementById('btnApproval').style.display = isApprover(currentUser) ? 'flex' : 'none';
+  document.getElementById('btnCommonEvent').style.display = isApprover(currentUser) ? 'flex' : 'none';
 
   refreshScheduleFromServer().then(() => renderCalendar());
   loadCalendarNotesFromServer();
+  loadCommonEventsFromServer();
 }
 
 function logoutInternal() {
@@ -1174,7 +1217,7 @@ function refreshScheduleFromServer() {
 function openScheduleModal() {
   document.getElementById('scheduleModal').classList.add('active');
   document.getElementById('conflictWarning').classList.remove('active');
-  document.getElementById('schBranchSelect').value = currentUser.branch || 'Hapulico';
+  document.getElementById('schBranchSelect').value = '';
   currentScheduleWeekStart = getMondayStr(new Date()); // mặc định: tuần hiện tại
   updateWeekLabel();
   renderScheduleSlots();
@@ -1201,7 +1244,11 @@ function renderScheduleSlots() {
   const branch = document.getElementById('schBranchSelect').value;
   document.getElementById('conflictWarning').classList.remove('active');
   const container = document.getElementById('scheduleGridContainer');
-  container.innerHTML = '';
+
+  if (!branch) {
+    container.innerHTML = '<div class="empty-note">⚠️ Vui lòng chọn cơ sở trước khi chọn khung giờ dạy.</div>';
+    return;
+  }
 
   WEEK_DAYS.forEach(day => {
     const shifts = day.isWeekend ? SHIFT_SLOTS.weekend : SHIFT_SLOTS.weekday;
@@ -1323,6 +1370,10 @@ function renderCalendar() {
     let dayClass = 'cal-day' + (dateStr === todayStr ? ' today' : '');
     let dayEvents = getTeachingEventsForDate(cellDate);
     if (customCalendarEvents[dateStr]) dayEvents = dayEvents.concat(customCalendarEvents[dateStr]);
+      const commonForDate = commonEvents
+      .filter(ev => ev.ngay === dateStr)
+      .map(ev => ({ id: ev.id, type: ev.loai, label: (ev.coSo === 'ALL' ? '[Chung] ' : '[CS] ') + ev.noiDung }));
+    dayEvents = dayEvents.concat(commonForDate);
     const eventsHTML = dayEvents.map(ev => `<div class="event-pill ${ev.type}" title="${ev.label}">${ev.label}</div>`).join('');
     grid.innerHTML += `<div class="${dayClass}" onclick="openEventModal('${dateStr}')">
         <div class="cal-day-num">${d}</div><div class="cal-day-events">${eventsHTML}</div></div>`;
@@ -1502,7 +1553,65 @@ function processLeaveDecision(id, quyetDinh) {
     }
   }).catch(() => alert('Lỗi kết nối máy chủ.'));
 }
+/* ---------- LỊCH CHUNG (HLV Trưởng / Admin) ---------- */
+function loadCommonEventsFromServer() {
+  return callApi('listCommonEvents', { maNV: currentUser.maNV }).then(res => {
+    if (res.status !== 'success') return;
+    commonEvents = res.events;
+    renderCalendar();
+  });
+}
 
+function openCommonEventModal() {
+  document.getElementById('ceDate').value = '';
+  document.getElementById('ceType').value = 'working';
+  document.getElementById('ceTitle').value = '';
+  const isAdmin = (currentUser.role || '').toUpperCase().includes('ADMIN');
+  document.getElementById('ceScopeNote').textContent = isAdmin
+    ? 'Lịch này sẽ hiển thị cho TẤT CẢ nhân viên toàn hệ thống.'
+    : `Lịch này sẽ hiển thị cho các HLV thuộc cơ sở ${currentUser.branch}.`;
+  renderCommonEventList();
+  document.getElementById('commonEventModal').classList.add('active');
+}
+function closeCommonEventModal() { document.getElementById('commonEventModal').classList.remove('active'); }
+
+function renderCommonEventList() {
+  const box = document.getElementById('ceList');
+  const isAdmin = (currentUser.role || '').toUpperCase().includes('ADMIN');
+  const mine = commonEvents.filter(ev => isAdmin ? true : (ev.coSo === currentUser.branch));
+  if (!mine.length) { box.innerHTML = '<div class="empty-note">Chưa có lịch chung nào.</div>'; return; }
+  box.innerHTML = mine.map(ev => `
+    <div class="leave-history-item">
+      <div>${ev.ngay} — ${ev.noiDung}<br><span style="color:var(--muted2)">${ev.coSo === 'ALL' ? 'Toàn hệ thống' : ev.coSo}</span></div>
+      <button class="btn-reject" style="padding:4px 10px;" onclick="deleteCommonEventItem('${ev.id}')">Xóa</button>
+    </div>`).join('');
+}
+
+function deleteCommonEventItem(id) {
+  callApi('deleteCommonEvent', { maNV: currentUser.maNV, id }).then(res => {
+    if (res.status === 'success') loadCommonEventsFromServer().then(renderCommonEventList);
+    else alert('❌ ' + res.message);
+  });
+}
+
+document.getElementById('commonEventForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const date = document.getElementById('ceDate').value;
+  const type = document.getElementById('ceType').value;
+  const title = document.getElementById('ceTitle').value.trim();
+  if (!date || !title) return;
+  callApi('addCommonEvent', { maNV: currentUser.maNV, ngay: date, loai: type, noiDung: title })
+    .then(res => {
+      if (res.status === 'success') {
+        document.getElementById('ceDate').value = '';
+        document.getElementById('ceTitle').value = '';
+        loadCommonEventsFromServer().then(renderCommonEventList);
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ.'));
+});
 /* ---------- ĐĂNG KÝ HỌC THỬ (form công khai) ---------- */
 const registerForm = document.getElementById('registerForm');
 const submitBtn = document.getElementById('submitBtn');
