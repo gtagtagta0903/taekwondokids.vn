@@ -746,13 +746,15 @@
     <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
     <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
     <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span>Nhận xét học viên</span></button>
-    <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⏱️</span><span>Xem chấm công</span></button>
-    <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>💵</span><span>Xem bảng lương</span></button>
+    <button class="ops-btn" onclick="openMyAttendancePayrollModal()"><span>🧾</span><span>Chấm công &amp; Lương</span></button>
     <button class="ops-btn" id="btnApproval" style="display:none;" onclick="openApprovalModal()">
         <span>✅</span><span>Duyệt đơn nghỉ phép</span>
     </button>
     <button class="ops-btn" id="btnCommonEvent" style="display:none;" onclick="openCommonEventModal()">
         <span>📢</span><span>Thêm lịch chung</span>
+    </button>
+    <button class="ops-btn" id="btnApproveAttendance" style="display:none;" onclick="openApproveAttendancePayrollModal()">
+        <span>📊</span><span>Duyệt chấm công &amp; lương</span>
     </button>
 </div>
 
@@ -1101,8 +1103,68 @@
         </div>
     </div>
 </div>
-</section>
 
+<!-- 7. MY ATTENDANCE & PAYROLL MODAL (HLV/Nhân viên) -->
+<div id="myAttendancePayrollModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:640px;">
+        <div class="modal-header">
+            <div class="modal-title">Chấm công &amp; Lương của tôi</div>
+            <button class="modal-close" type="button" onclick="closeMyAttendancePayrollModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-tabs">
+            <button class="m-tab-btn active" id="apTabBtn-att" type="button" onclick="switchAPTab('att')">Điểm danh</button>
+            <button class="m-tab-btn" id="apTabBtn-pay" type="button" onclick="switchAPTab('pay')">Bảng lương</button>
+        </div>
+        <div class="modal-body">
+            <div class="ap-month-nav">
+                <button type="button" class="cal-nav-btn" onclick="changeAPMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="ap-month-label" id="apMonthLabel">--</div>
+                <button type="button" class="cal-nav-btn" onclick="changeAPMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="m-tab-panel active" id="apTab-att">
+                <div id="atmList"><div class="empty-note">Đang tải...</div></div>
+            </div>
+            <div class="m-tab-panel" id="apTab-pay">
+                <div id="apPayrollBox"><div class="empty-note">Đang tải...</div></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeMyAttendancePayrollModal()">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<!-- 8. APPROVE ATTENDANCE & PAYROLL MODAL (HLV Trưởng / Admin) -->
+<div id="approveAttendancePayrollModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:680px;">
+        <div class="modal-header">
+            <div class="modal-title">Duyệt chấm công &amp; lương</div>
+            <button class="modal-close" type="button" onclick="closeApproveAttendancePayrollModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-tabs">
+            <button class="m-tab-btn active" id="apaTabBtn-att" type="button" onclick="switchApprovalAPTab('att')">Duyệt điểm danh</button>
+            <button class="m-tab-btn" id="apaTabBtn-pay" type="button" onclick="switchApprovalAPTab('pay')">Duyệt lương</button>
+        </div>
+        <div class="modal-body">
+            <div class="m-tab-panel active" id="apaTab-att">
+                <div id="apaAttendanceList"><div class="empty-note">Đang tải...</div></div>
+            </div>
+            <div class="m-tab-panel" id="apaTab-pay">
+                <div class="ap-month-nav">
+                    <button type="button" class="cal-nav-btn" onclick="changeApprovalMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="ap-month-label" id="approvalMonthLabel">--</div>
+                    <button type="button" class="cal-nav-btn" onclick="changeApprovalMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div id="apaPayrollList"><div class="empty-note">Đang tải...</div></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeApproveAttendancePayrollModal()">Đóng</button>
+        </div>
+    </div>
+</div>
+</section>
 
 
 <!-- FOOTER -->
@@ -1140,7 +1202,7 @@
    ============================================================= */
 
 // 1. DÁN URL WEB APP (kết thúc bằng /exec) SAU KHI DEPLOY Code.gs
-const API_URL = 'https://script.google.com/macros/s/AKfycby9qI9S0Xn4wbrW9ahzYKcBr3pPn8Mgb-1ozd_8Yi74JmHAcPaFLqF9hmjBFDs5C_bt/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbz_CXMadthebM9sdG1wzihMraDnmfPp9pvALCkqRg95HPWGSBkn8J5ZnePTUlv7Nr_G/exec';
 
 let currentUser = null;   // HLV/Nhân viên đang đăng nhập
 let currentParent = null; // Phụ huynh đang đăng nhập
@@ -1226,6 +1288,7 @@ function loadStaffDashboard() {
 
   document.getElementById('btnApproval').style.display = isApprover(currentUser) ? 'flex' : 'none';
   document.getElementById('btnCommonEvent').style.display = isApprover(currentUser) ? 'flex' : 'none';
+    document.getElementById('btnApproveAttendance').style.display = isApprover(currentUser) ? 'flex' : 'none';
 
   refreshScheduleFromServer().then(() => renderCalendar());
   loadCalendarNotesFromServer();
@@ -1935,6 +1998,232 @@ if (registerForm) {
     }).catch(() => alert('Có lỗi xảy ra, vui lòng thử lại sau.'))
       .finally(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; });
   });
+}
+/* CHẤM CÔNG & LƯƠNG */
+.payroll-summary-box { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+@media(max-width:480px){ .payroll-summary-box{ grid-template-columns:1fr; } }
+.payroll-stat { background:rgba(255,255,255,.02); border:1px solid var(--border); padding:16px 18px; border-radius:4px; }
+.ap-month-nav { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:20px; padding:12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; }
+.ap-month-label { font-family:var(--font-display); font-size:16px; font-weight:700; color:var(--yellow); letter-spacing:0.5px; min-width:160px; text-align:center; }
+/* =========================================================
+   CHẤM CÔNG & LƯƠNG
+   ========================================================= */
+let currentAPYear, currentAPMonth;                 // modal "của tôi"
+let currentApprovalYear, currentApprovalMonth;      // modal "duyệt"
+let myAttendanceRecords = [];
+
+// Gọi thêm dòng này bên trong loadStaffDashboard() (ngay dưới dòng gán btnCommonEvent):
+//   document.getElementById('btnApproveAttendance').style.display = isApprover(currentUser) ? 'flex' : 'none';
+
+/* ---- Sinh danh sách buổi dạy trong tháng từ lịch đã đăng ký ---- */
+function generateSessionsForMonth(year, month) {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const sessions = [];
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateObj = new Date(year, month, d);
+    if (dateObj > today) continue; // chỉ tính buổi đã/đang diễn ra
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const dow = dateObj.getDay();
+    const weekData = scheduleByWeek[getMondayStr(dateObj)] || {};
+    const dayRecord = weekData[dow];
+    if (!dayRecord) continue;
+    Object.keys(dayRecord).forEach(ca => {
+      const coSo = dayRecord[ca];
+      let label = ca + ':00';
+      [...SHIFT_SLOTS.weekday, ...SHIFT_SLOTS.weekend].forEach(s => { if (s.id === ca) label = s.label; });
+      sessions.push({ date: dateStr, thu: dow, ca, coSo, label });
+    });
+  }
+  return sessions;
+}
+
+/* ---- MODAL "CHẤM CÔNG & LƯƠNG CỦA TÔI" ---- */
+function openMyAttendancePayrollModal() {
+  const now = new Date();
+  currentAPYear = now.getFullYear(); currentAPMonth = now.getMonth();
+  updateAPMonthLabel();
+  switchAPTab('att');
+  document.getElementById('myAttendancePayrollModal').classList.add('active');
+}
+function closeMyAttendancePayrollModal() { document.getElementById('myAttendancePayrollModal').classList.remove('active'); }
+
+function changeAPMonth(dir) {
+  currentAPMonth += dir;
+  if (currentAPMonth < 0) { currentAPMonth = 11; currentAPYear--; }
+  if (currentAPMonth > 11) { currentAPMonth = 0; currentAPYear++; }
+  updateAPMonthLabel();
+  const activeIsAtt = document.getElementById('apTabBtn-att').classList.contains('active');
+  activeIsAtt ? loadMyAttendance(currentAPYear, currentAPMonth) : loadMyPayroll(currentAPYear, currentAPMonth);
+}
+function updateAPMonthLabel() {
+  document.getElementById('apMonthLabel').textContent = `Tháng ${currentAPMonth + 1}/${currentAPYear}`;
+}
+function switchAPTab(tab) {
+  document.querySelectorAll('#myAttendancePayrollModal .m-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#myAttendancePayrollModal .m-tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('apTabBtn-' + tab).classList.add('active');
+  document.getElementById('apTab-' + tab).classList.add('active');
+  if (tab === 'att') loadMyAttendance(currentAPYear, currentAPMonth);
+  else loadMyPayroll(currentAPYear, currentAPMonth);
+}
+
+function loadMyAttendance(year, month) {
+  const box = document.getElementById('atmList');
+  box.innerHTML = '<div class="empty-note">Đang tải...</div>';
+  callApi('listAttendance', { maNV: currentUser.maNV, thang: month + 1, nam: year }).then(res => {
+    myAttendanceRecords = (res.status === 'success') ? res.records : [];
+    renderMyAttendanceList(year, month);
+  }).catch(() => { box.innerHTML = '<div class="empty-note">Lỗi kết nối máy chủ.</div>'; });
+}
+
+function renderMyAttendanceList(year, month) {
+  const box = document.getElementById('atmList');
+  const sessions = generateSessionsForMonth(year, month);
+  if (!sessions.length) {
+    box.innerHTML = '<div class="empty-note">Không có buổi dạy nào trong tháng theo lịch đã đăng ký.</div>';
+    return;
+  }
+  box.innerHTML = sessions.map(s => {
+    const rec = myAttendanceRecords.find(r => r.ngay === s.date && r.ca === s.ca && r.coSo === s.coSo);
+    const dateLabel = s.date.split('-').reverse().join('/');
+    const right = rec
+      ? statusBadge(rec.trangThai)
+      : `<button class="btn-approve" style="padding:8px 16px;" onclick="submitAttendance('${s.date}',${s.thu},'${s.ca}','${s.coSo}')">ĐIỂM DANH</button>`;
+    return `<div class="approval-row" style="border-left-color:${rec ? 'var(--yellow)' : 'var(--red)'};">
+      <div class="approval-row-top">
+        <div>
+          <div class="approval-name">${dateLabel} — ${s.coSo}</div>
+          <div class="approval-meta">${s.label}${rec && rec.soHocVien ? ' · Sĩ số: ' + rec.soHocVien : ''}</div>
+        </div>
+        ${right}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function submitAttendance(date, thu, ca, coSo) {
+  const soHocVien = prompt('Sĩ số buổi học (có thể bỏ trống):', '');
+  if (soHocVien === null) return; // người dùng bấm Hủy
+  callApi('submitAttendance', {
+    maNV: currentUser.maNV, hoTen: currentUser.full_name, coSo,
+    ngay: date, thu, ca, soHocVien: soHocVien || ''
+  }).then(res => {
+    if (res.status === 'success') loadMyAttendance(currentAPYear, currentAPMonth);
+    else alert('❌ ' + res.message);
+  }).catch(() => alert('Lỗi kết nối máy chủ.'));
+}
+
+function loadMyPayroll(year, month) {
+  const box = document.getElementById('apPayrollBox');
+  box.innerHTML = '<div class="empty-note">Đang tải...</div>';
+  callApi('getPayrollSummary', { maNV: currentUser.maNV, thang: month + 1, nam: year }).then(res => {
+    if (res.status !== 'success') { box.innerHTML = '<div class="empty-note">Không tải được dữ liệu lương.</div>'; return; }
+    const p = res.summary;
+    box.innerHTML = `
+      <div class="payroll-summary-box">
+        <div class="payroll-stat"><div class="db-info-label">Số buổi đã duyệt</div><div class="db-info-value" style="color:var(--yellow);font-size:22px;">${p.soBuoiDaDuyet || 0}</div></div>
+        <div class="payroll-stat"><div class="db-info-label">Đơn giá / buổi</div><div class="db-info-value">${Number(p.donGia || 0).toLocaleString('vi-VN')} đ</div></div>
+        <div class="payroll-stat"><div class="db-info-label">Tổng lương tạm tính</div><div class="db-info-value" style="color:var(--yellow);font-size:22px;">${Number(p.tongLuong || 0).toLocaleString('vi-VN')} đ</div></div>
+        <div class="payroll-stat"><div class="db-info-label">Trạng thái</div><div style="margin-top:4px;">${statusBadge(p.trangThai || 'Đang tính')}</div></div>
+      </div>
+      <div style="margin-top:20px;font-size:12px;color:var(--muted2);line-height:1.6;">
+        Lương được tính dựa trên số buổi dạy đã được HLV Trưởng/Admin duyệt điểm danh trong tháng.
+        Số liệu tạm tính có thể thay đổi cho tới khi bảng lương được duyệt chính thức.
+      </div>`;
+  }).catch(() => { box.innerHTML = '<div class="empty-note">Lỗi kết nối máy chủ.</div>'; });
+}
+
+/* ---- MODAL "DUYỆT CHẤM CÔNG & LƯƠNG" (HLV Trưởng / Admin) ---- */
+function openApproveAttendancePayrollModal() {
+  const now = new Date();
+  currentApprovalYear = now.getFullYear(); currentApprovalMonth = now.getMonth();
+  updateApprovalMonthLabel();
+  switchApprovalAPTab('att');
+  document.getElementById('approveAttendancePayrollModal').classList.add('active');
+}
+function closeApproveAttendancePayrollModal() { document.getElementById('approveAttendancePayrollModal').classList.remove('active'); }
+
+function changeApprovalMonth(dir) {
+  currentApprovalMonth += dir;
+  if (currentApprovalMonth < 0) { currentApprovalMonth = 11; currentApprovalYear--; }
+  if (currentApprovalMonth > 11) { currentApprovalMonth = 0; currentApprovalYear++; }
+  updateApprovalMonthLabel();
+  loadPendingPayrollBatch();
+}
+function updateApprovalMonthLabel() {
+  document.getElementById('approvalMonthLabel').textContent = `Tháng ${currentApprovalMonth + 1}/${currentApprovalYear}`;
+}
+function switchApprovalAPTab(tab) {
+  document.querySelectorAll('#approveAttendancePayrollModal .m-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#approveAttendancePayrollModal .m-tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('apaTabBtn-' + tab).classList.add('active');
+  document.getElementById('apaTab-' + tab).classList.add('active');
+  if (tab === 'att') loadPendingAttendance();
+  else loadPendingPayrollBatch();
+}
+
+function loadPendingAttendance() {
+  const box = document.getElementById('apaAttendanceList');
+  box.innerHTML = '<div class="empty-note">Đang tải...</div>';
+  callApi('listPendingAttendance', { maNV: currentUser.maNV }).then(res => {
+    if (res.status !== 'success' || !res.records.length) {
+      box.innerHTML = '<div class="empty-note">Không có buổi điểm danh nào đang chờ duyệt.</div>';
+      return;
+    }
+    box.innerHTML = res.records.map(r => `
+      <div class="approval-row">
+        <div class="approval-row-top">
+          <div>
+            <div class="approval-name">${r.hoTen} <span style="color:var(--muted2);font-weight:400;">(${r.coSo})</span></div>
+            <div class="approval-meta">${r.ngay.split('-').reverse().join('/')} · ${r.ca}${r.soHocVien ? ' · Sĩ số: ' + r.soHocVien : ''}</div>
+          </div>
+          ${statusBadge(r.trangThai)}
+        </div>
+        <div class="approval-actions">
+          <button class="btn-approve" onclick="decideAttendance('${r.id}','Đã duyệt')">DUYỆT</button>
+          <button class="btn-reject" onclick="decideAttendance('${r.id}','Từ chối')">TỪ CHỐI</button>
+        </div>
+      </div>`).join('');
+  }).catch(() => { box.innerHTML = '<div class="empty-note">Lỗi kết nối máy chủ.</div>'; });
+}
+
+function decideAttendance(id, quyetDinh) {
+  callApi('decideAttendance', { id, quyetDinh, maNV: currentUser.maNV }).then(res => {
+    if (res.status === 'success') loadPendingAttendance();
+    else alert('❌ ' + res.message);
+  }).catch(() => alert('Lỗi kết nối máy chủ.'));
+}
+
+function loadPendingPayrollBatch() {
+  const box = document.getElementById('apaPayrollList');
+  box.innerHTML = '<div class="empty-note">Đang tải...</div>';
+  callApi('listPayrollBatch', { maNV: currentUser.maNV, thang: currentApprovalMonth + 1, nam: currentApprovalYear }).then(res => {
+    if (res.status !== 'success' || !res.batch.length) {
+      box.innerHTML = '<div class="empty-note">Không có dữ liệu lương cho tháng này.</div>';
+      return;
+    }
+    box.innerHTML = res.batch.map(b => `
+      <div class="approval-row">
+        <div class="approval-row-top">
+          <div>
+            <div class="approval-name">${b.hoTen} <span style="color:var(--muted2);font-weight:400;">(${b.coSo})</span></div>
+            <div class="approval-meta">${b.soBuoiDaDuyet} buổi × ${Number(b.donGia).toLocaleString('vi-VN')}đ = <strong style="color:var(--yellow)">${Number(b.tongLuong).toLocaleString('vi-VN')}đ</strong></div>
+          </div>
+          ${statusBadge(b.trangThai)}
+        </div>
+        ${b.trangThai === 'Chờ duyệt' ? `<div class="approval-actions">
+          <button class="btn-approve" onclick="decidePayroll('${b.maNV}', ${currentApprovalMonth + 1}, ${currentApprovalYear})">DUYỆT LƯƠNG</button>
+        </div>` : ''}
+      </div>`).join('');
+  }).catch(() => { box.innerHTML = '<div class="empty-note">Lỗi kết nối máy chủ.</div>'; });
+}
+
+function decidePayroll(maNV, thang, nam) {
+  callApi('decidePayroll', { maNV, thang, nam, nguoiDuyet: currentUser.maNV }).then(res => {
+    if (res.status === 'success') loadPendingPayrollBatch();
+    else alert('❌ ' + res.message);
+  }).catch(() => alert('Lỗi kết nối máy chủ.'));
 }
 </script>
 </body>
