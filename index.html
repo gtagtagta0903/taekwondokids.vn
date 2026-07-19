@@ -745,7 +745,7 @@
 <div class="ops-grid">
     <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
     <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
-    <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⭐</span><span>Nhận xét học viên</span></button>
+    <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span>Nhận xét học viên</span></button>
     <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>⏱️</span><span>Xem chấm công</span></button>
     <button class="ops-btn" onclick="alert('Tính năng đang phát triển')"><span>💵</span><span>Xem bảng lương</span></button>
     <button class="ops-btn" id="btnApproval" style="display:none;" onclick="openApprovalModal()">
@@ -1052,7 +1052,58 @@
             </div>
         </div>
     </div>
+    
+<!-- 7. STUDENT REVIEW MODAL (HLV) -->
+<div id="reviewModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:600px;">
+        <div class="modal-header">
+            <div class="modal-title">Nhận xét học viên</div>
+            <button class="modal-close" type="button" onclick="closeReviewModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Mã học viên *</label>
+                <input type="text" id="rvMaHV" placeholder="VD: HV0012" oninput="handleLookupStudent()" autocomplete="off">
+            </div>
+            <div id="rvStudentInfo" style="display:none; background:rgba(255,255,255,.03); border:1px solid var(--border); padding:14px 16px; margin-bottom:20px;">
+                <div class="db-info-grid" style="margin-bottom:0;">
+                    <div><div class="db-info-label">Họ tên</div><div class="db-info-value" id="rvStName">-</div></div>
+                    <div><div class="db-info-label">Cơ sở</div><div class="db-info-value" id="rvStBranch">-</div></div>
+                    <div><div class="db-info-label">Cấp đai</div><div class="db-info-value" id="rvStBelt">-</div></div>
+                </div>
+            </div>
+            <div id="rvNotFound" style="display:none; color:var(--red); font-size:12px; margin-bottom:16px;">Không tìm thấy học viên với mã này.</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tháng *</label>
+                    <select id="rvThang"></select>
+                </div>
+                <div class="form-group">
+                    <label>Năm *</label>
+                    <select id="rvNam"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Nội dung nhận xét *</label>
+                <textarea id="rvNoiDung" rows="5" style="width:100%; background:rgba(0,0,0,0.2); border:1px solid var(--border); padding:14px 16px; color:var(--white); font-family:var(--font-body); font-size:14px; outline:none; resize:vertical;" placeholder="Nhận xét về tinh thần, kỹ thuật, tiến bộ của học viên..."></textarea>
+            </div>
+            <div id="rvErr" class="validation-msg">Vui lòng nhập đúng mã học viên và điền đầy đủ nhận xét.</div>
+
+            <div style="margin-top:24px;">
+                <div class="ops-title" style="margin-bottom:12px;">Lịch sử nhận xét của học viên này</div>
+                <div id="rvHistory"><div class="empty-note">Nhập mã học viên để xem lịch sử.</div></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeReviewModal()">Đóng</button>
+            <button type="button" id="rvSaveBtn" class="btn-save" onclick="submitStudentReview()">LƯU NHẬN XÉT</button>
+        </div>
+    </div>
+</div>
 </section>
+
+
 
 <!-- FOOTER -->
 <footer>
@@ -1234,9 +1285,29 @@ function renderParentDashboard() {
           <div><div class="db-info-label">Cơ sở học</div><div class="db-info-value">${s.branch || 'Chưa phân công'}</div></div>
           <div><div class="db-info-label">Người giám hộ</div><div class="db-info-value">${s.guardian_name} (${s.relationship || ''})</div></div>
         </div>
+        <div class="db-info-title" style="margin-top:8px;">Nhận xét từ Huấn luyện viên</div>
+        <div id="reviews-${s.maHV}"><div class="empty-note">Đang tải...</div></div>
       </div>
     </div>
   `).join('');
+
+  currentParent.students.forEach(s => loadStudentReviewsForParent(s.maHV));
+}
+
+function loadStudentReviewsForParent(maHV) {
+  callApi('listStudentReviews', { maHV }).then(res => {
+    const box = document.getElementById(`reviews-${maHV}`);
+    if (!box) return;
+    if (res.status !== 'success' || !res.reviews.length) { box.innerHTML = '<div class="empty-note">Chưa có nhận xét nào.</div>'; return; }
+    box.innerHTML = res.reviews.map(r => `
+      <div class="leave-history-item" style="display:block;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <strong style="color:var(--yellow); font-size:12px;">Tháng ${r.thang}/${r.nam}</strong>
+          <span style="color:var(--muted2); font-size:11px;">HLV: ${r.hoTenNV}</span>
+        </div>
+        <div style="color:var(--off-white);">${r.noiDung}</div>
+      </div>`).join('');
+  });
 }
 
 function logoutParent() {
@@ -1747,6 +1818,106 @@ document.getElementById('commonEventForm').addEventListener('submit', function (
     })
     .catch(() => alert('Lỗi kết nối máy chủ.'));
 });
+/* ---------- NHẬN XÉT HỌC VIÊN (HLV) ---------- */
+let reviewLookupTimer = null;
+let currentReviewStudent = null;
+
+function openReviewModal() {
+  document.getElementById('rvMaHV').value = '';
+  document.getElementById('rvStudentInfo').style.display = 'none';
+  document.getElementById('rvNotFound').style.display = 'none';
+  document.getElementById('rvNoiDung').value = '';
+  document.getElementById('rvErr').classList.remove('visible');
+  document.getElementById('rvHistory').innerHTML = '<div class="empty-note">Nhập mã học viên để xem lịch sử.</div>';
+  currentReviewStudent = null;
+
+  const thangSel = document.getElementById('rvThang');
+  thangSel.innerHTML = '';
+  for (let m = 1; m <= 12; m++) thangSel.innerHTML += `<option value="${m}">Tháng ${m}</option>`;
+  const now = new Date();
+  thangSel.value = now.getMonth() + 1;
+
+  const namSel = document.getElementById('rvNam');
+  namSel.innerHTML = '';
+  const curYear = now.getFullYear();
+  for (let y = curYear - 1; y <= curYear + 1; y++) namSel.innerHTML += `<option value="${y}">${y}</option>`;
+  namSel.value = curYear;
+
+  document.getElementById('reviewModal').classList.add('active');
+}
+function closeReviewModal() { document.getElementById('reviewModal').classList.remove('active'); }
+
+function handleLookupStudent() {
+  clearTimeout(reviewLookupTimer);
+  const maHV = document.getElementById('rvMaHV').value.trim();
+  document.getElementById('rvStudentInfo').style.display = 'none';
+  document.getElementById('rvNotFound').style.display = 'none';
+  currentReviewStudent = null;
+  if (!maHV) { document.getElementById('rvHistory').innerHTML = '<div class="empty-note">Nhập mã học viên để xem lịch sử.</div>'; return; }
+
+  reviewLookupTimer = setTimeout(() => {
+    callApi('lookupStudent', { maHV }).then(res => {
+      if (res.status === 'success') {
+        currentReviewStudent = res.student;
+        document.getElementById('rvStName').textContent = res.student.hoTen || '-';
+        document.getElementById('rvStBranch').textContent = res.student.coSo || '-';
+        document.getElementById('rvStBelt').textContent = res.student.capDai || '-';
+        document.getElementById('rvStudentInfo').style.display = 'block';
+        loadReviewHistory(maHV);
+      } else {
+        document.getElementById('rvNotFound').style.display = 'block';
+        document.getElementById('rvHistory').innerHTML = '<div class="empty-note">Nhập mã học viên để xem lịch sử.</div>';
+      }
+    });
+  }, 500);
+}
+
+function loadReviewHistory(maHV) {
+  const box = document.getElementById('rvHistory');
+  box.innerHTML = '<div class="empty-note">Đang tải...</div>';
+  callApi('listStudentReviews', { maHV }).then(res => {
+    if (res.status !== 'success' || !res.reviews.length) { box.innerHTML = '<div class="empty-note">Chưa có nhận xét nào.</div>'; return; }
+    box.innerHTML = res.reviews.map(r => `
+      <div class="leave-history-item" style="display:block;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+          <strong style="color:var(--yellow); font-size:12px;">Tháng ${r.thang}/${r.nam}</strong>
+          <span style="color:var(--muted2); font-size:11px;">HLV: ${r.hoTenNV}</span>
+        </div>
+        <div style="color:var(--off-white);">${r.noiDung}</div>
+      </div>`).join('');
+  });
+}
+
+function submitStudentReview() {
+  const errEl = document.getElementById('rvErr');
+  errEl.classList.remove('visible');
+  const maHV = document.getElementById('rvMaHV').value.trim();
+  const noiDung = document.getElementById('rvNoiDung').value.trim();
+  const thang = document.getElementById('rvThang').value;
+  const nam = document.getElementById('rvNam').value;
+
+  if (!currentReviewStudent || !maHV || !noiDung) {
+    errEl.classList.add('visible');
+    return;
+  }
+
+  const btn = document.getElementById('rvSaveBtn');
+  const original = btn.innerHTML;
+  btn.innerHTML = 'ĐANG LƯU...'; btn.disabled = true;
+
+  callApi('saveStudentReview', { maNV: currentUser.maNV, maHV, thang, nam, noiDung })
+    .then(res => {
+      if (res.status === 'success') {
+        alert('Đã lưu nhận xét học viên!');
+        document.getElementById('rvNoiDung').value = '';
+        loadReviewHistory(maHV);
+      } else {
+        alert('❌ ' + res.message);
+      }
+    })
+    .catch(() => alert('Lỗi kết nối máy chủ.'))
+    .finally(() => { btn.innerHTML = original; btn.disabled = false; });
+}
 /* ---------- ĐĂNG KÝ HỌC THỬ (form công khai) ---------- */
 const registerForm = document.getElementById('registerForm');
 const submitBtn = document.getElementById('submitBtn');
