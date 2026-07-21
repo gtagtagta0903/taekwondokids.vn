@@ -11,445 +11,399 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ─────────────────────────────────────────────
-           DESIGN SYSTEM & BASE
+           PREMIUM LIGHT THEME & GLASSMORPHISM DESIGN
         ───────────────────────────────────────────── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --black:     #07070F;
-            --deep:      #0C0C18;
-            --dark:      #0F0F1C;
-            --card:      #141424;
-            --card2:     #191930;
-            --red:       #E8232A;
-            --red-dark:  #B01B21;
-            --red-glow:  rgba(232,35,42,.22);
-            --yellow:    #FFD600;
-            --white:     #FFFFFF;
-            --off-white: #E8E8F0;
-            --muted:     rgba(232,232,240,0.50);
-            --muted2:    rgba(232,232,240,0.30);
-            --border:    rgba(255,255,255,0.07);
-            --border2:   rgba(255,255,255,0.12);
-            --font-display: 'Barlow Condensed', sans-serif;
-            --font-body:    'Be Vietnam Pro', sans-serif;
-        }
-        html { scroll-behavior: smooth; }
-        body { background:var(--black); color:var(--white); font-family:var(--font-body); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
-        .lang-en { display:none; }
-        img { max-width:100%; height:auto; }
-        .container { max-width:1200px; margin:0 auto; padding:0 40px; }
-        @media(max-width:600px){ .container{ padding:0 20px; } }
+            --primary-blue: #0047AB; 
+            --light-blue: #00AEEF;
+            --red: #E8232A;
+            --red-dark: #B01B21;
+            --yellow: #FFD600;
+            
+            --bg-body: #F4F7F9;
+            --bg-section: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-light: rgba(15, 23, 42, 0.08);
+            --card-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+            --glass-bg: rgba(255, 255, 255, 0.85);
 
-        /* TYPOGRAPHY & TAGS */
-        .sec-tag { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--red); margin-bottom:14px; }
-        .sec-tag::before,.sec-tag::after { content:''; display:block; width:20px; height:1.5px; background:var(--red); }
-        .sec-title { font-family:var(--font-display); font-weight:800; font-size:clamp(34px,4.5vw,64px); line-height:1.25; letter-spacing:0.5px; text-transform:uppercase; }
-        .sec-title .accent { color:var(--red); }
-        .sec-title .accent-y { color:var(--yellow); }
+            --font-display: 'Barlow Condensed', sans-serif;
+            --font-body: 'Be Vietnam Pro', sans-serif;
+        }
+        
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { background: var(--bg-body); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        .lang-en { display: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* TYPOGRAPHY */
+        .sec-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-blue); margin-bottom: 12px; background: rgba(0, 71, 171, 0.05); padding: 6px 16px; border-radius: 100px; }
+        .sec-title { font-family: var(--font-display); font-weight: 900; font-size: clamp(36px, 5vw, 64px); line-height: 1.1; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-main); margin-bottom: 16px;}
+        .sec-title .accent { color: var(--red); }
+        .sec-desc { font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 600px; margin: 0 auto 40px; }
 
         /* NAV */
-        nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 36px; height:68px; background:rgba(7,7,15,0.92); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-bottom:1px solid var(--border); }
-        .nav-logo { display:flex; align-items:center; gap:12px; }
-        .nav-logo img { height:40px; width:auto; object-fit:contain; }
-        .nav-logo-text { font-weight:700; font-size:12px; letter-spacing:0.5px; color:var(--white); line-height:1.4; display:none; }
-        @media(min-width:900px){ .nav-logo-text{ display:block; } }
-        .nav-links { display:none; gap:32px; list-style:none; }
-        @media(min-width:900px){ .nav-links{ display:flex; } }
-        .nav-links a { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; position:relative; }
-        .nav-links a::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--red); transition:width .25s; }
-        .nav-links a:hover { color:var(--white); }
-        .nav-links a:hover::after { width:100%; }
-        .nav-right { display:flex; align-items:center; gap:14px; }
-        .nav-phone { font-weight:700; font-size:14px; color:var(--yellow); display:none; letter-spacing:0.5px; }
-        @media(min-width:900px){ .nav-phone{ display:block; } }
-        .btn-nav { background:var(--red); color:var(--white); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:10px 20px; text-decoration:none; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s,transform .2s; white-space:nowrap; }
-        .btn-nav:hover { background:var(--red-dark); transform:translateY(-1px); }
-        .lang-flags { display:flex; gap:6px; align-items:center; }
-        .lang-flags button { background:none; border:none; cursor:pointer; opacity:.4; transition:opacity .2s,transform .2s; filter:grayscale(1); }
-        .lang-flags button.active { opacity:1; filter:none; transform:scale(1.1); }
-        .lang-flags img { width:26px; height:18px; object-fit:cover; border-radius:2px; display:block; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 72px; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-light); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        .nav-logo { display: flex; align-items: center; gap: 12px; }
+        .nav-logo img { height: 44px; width: auto; object-fit: contain; }
+        .nav-logo-text { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: 0.5px; color: var(--primary-blue); line-height: 1; display: none; text-transform: uppercase; }
+        @media(min-width:900px){ .nav-logo-text{ display: block; } }
+        .nav-links { display: none; gap: 32px; list-style: none; }
+        @media(min-width:900px){ .nav-links{ display: flex; } }
+        .nav-links a { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--red); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-phone { font-weight: 700; font-size: 15px; color: var(--primary-blue); display: none; }
+        @media(min-width:900px){ .nav-phone{ display: block; } }
+        .btn-nav { background: var(--red); color: var(--white); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 12px 24px; text-decoration: none; border-radius: 100px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(232, 35, 42, 0.3); }
+        .btn-nav:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232, 35, 42, 0.4); }
 
-        /* ─────────────────────────────────────────────
-           LANDING PAGE SECTIONS
-        ───────────────────────────────────────────── */
         /* HERO */
-        #hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; padding-top:68px; background:var(--black); }
-        .hero-grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:64px 64px; z-index:0; }
-        .hero-slash { position:absolute; top:0; right:0; width:52%; height:100%; background:linear-gradient(155deg,#950F15 0%,#C51A20 35%,#E8232A 70%,#FF3B10 100%); clip-path:polygon(16% 0%,100% 0%,100% 100%,0% 100%); z-index:0; }
-        .hero-slash::after { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px); }
-        .hero-watermark { position:absolute; bottom:-20px; left:-8px; font-family:var(--font-display); font-weight:900; font-size:clamp(100px,16vw,220px); color:rgba(255,255,255,.028); line-height:1; z-index:0; user-select:none; white-space:nowrap; letter-spacing:-2px; }
-        .hero-glow-left { position:absolute; top:20%; left:-100px; width:500px; height:500px; background:radial-gradient(circle,rgba(232,35,42,.12) 0%,transparent 65%); z-index:0; pointer-events:none; }
-        .hero-content { position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:80px 40px; display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; width:100%; }
-        @media(max-width:768px){ .hero-content{ grid-template-columns:1fr; padding:60px 20px; } .hero-slash{ width:100%; clip-path:polygon(0 62%,100% 48%,100% 100%,0% 100%); height:45%; top:auto; bottom:0; } }
-        .hero-eyebrow { display:inline-flex; align-items:center; gap:10px; font-size:10px; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--yellow); margin-bottom:22px; }
-        .hero-eyebrow::before { content:''; display:block; width:28px; height:2px; background:var(--yellow); }
-        .hero-title { font-family:var(--font-display); font-weight:900; font-size:clamp(54px,7.5vw,112px); line-height:1.2; color:var(--white); margin-bottom:22px; text-transform:uppercase; }
-        .hero-title .hl { color:var(--yellow); }
-        .hero-title .slant { font-style:italic; color:var(--red); }
-        .hero-sub { font-size:15px; font-weight:400; color:var(--muted); line-height:1.75; max-width:420px; margin-bottom:36px; }
-        .hero-cta-row { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-        .btn-primary { background:var(--red); color:var(--white); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:15px 34px; text-decoration:none; display:inline-flex; align-items:center; gap:10px; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:background .2s,transform .2s,box-shadow .2s; border:none; cursor:pointer;}
-        .btn-primary:hover { background:var(--red-dark); transform:translateY(-2px); box-shadow:0 8px 32px rgba(232,35,42,.35); }
-        .btn-ghost { background:transparent; color:var(--white); font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; padding:14px 28px; border:1.5px solid rgba(255,255,255,.25); text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:border-color .2s,color .2s; }
-        .btn-ghost:hover { border-color:var(--yellow); color:var(--yellow); }
-        .hero-stats { display:flex; gap:0; margin-top:48px; padding-top:28px; border-top:1px solid var(--border2); }
-        .stat-item { flex:1; padding-right:24px; border-right:1px solid var(--border); }
-        .stat-item:last-child { border-right:none; padding-right:0; padding-left:24px; }
-        .stat-item:first-child { padding-left:0; }
-        .stat-item:not(:first-child) { padding-left:24px; }
-        .stat-num { font-family:var(--font-display); font-weight:900; font-size:52px; line-height:1; color:var(--yellow); letter-spacing:-1px; }
-        .stat-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:4px; }
-        .hero-right { display:flex; align-items:flex-end; justify-content:center; position:relative; min-height:500px; }
-        .hero-right img { height:580px; max-height:80vh; width:auto; object-fit:contain; filter:drop-shadow(0 0 80px rgba(232,35,42,.45)); position:relative; z-index:2; }
-        .hero-right::before { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:360px; height:360px; background:radial-gradient(circle,rgba(232,35,42,.30) 0%,transparent 68%); border-radius:50%; z-index:1; }
-        @media(max-width:768px){ .hero-right{ min-height:300px; } .hero-right img{ height:320px; } }
+        #hero { position: relative; min-height: 90vh; display: flex; align-items: center; overflow: hidden; padding-top: 72px; background: linear-gradient(135deg, #0047AB 0%, #00AEEF 100%); color: white; }
+        .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5; }
+        .hero-watermark { position: absolute; top: 10%; left: -2%; font-family: var(--font-display); font-weight: 900; font-size: clamp(120px, 20vw, 300px); color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 60px 24px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; width: 100%; }
+        @media(max-width:900px){ .hero-content{ grid-template-columns: 1fr; text-align: center; } }
+        
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); margin-bottom: 24px; background: rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 100px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);}
+        .hero-title { font-family: var(--font-display); font-weight: 900; font-size: clamp(48px, 6vw, 96px); line-height: 1.05; color: var(--white); margin-bottom: 24px; text-transform: uppercase; text-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .hero-title .hl { color: var(--yellow); }
+        .hero-sub { font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.9); line-height: 1.6; max-width: 500px; margin-bottom: 40px; }
+        @media(max-width:900px){ .hero-sub { margin: 0 auto 40px; } }
+        
+        .hero-cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+        @media(max-width:900px){ .hero-cta-row { justify-content: center; } }
+        .btn-primary { background: var(--yellow); color: var(--primary-blue); font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 16px 36px; text-decoration: none; border-radius: 100px; transition: all 0.3s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(255, 214, 0, 0.3); }
+        .btn-primary:hover { background: #FFF; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4); }
+        .btn-ghost { background: rgba(255,255,255,0.1); color: var(--white); font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 16px 36px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.3); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); transition: all 0.3s; }
+        .btn-ghost:hover { background: var(--white); color: var(--primary-blue); border-color: var(--white); }
+        
+        .hero-right { position: relative; display: flex; justify-content: center; align-items: center; }
+        .hero-right img { max-height: 600px; object-fit: contain; position: relative; z-index: 2; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2)); }
+        
+        .hero-glass-card { position: absolute; bottom: 40px; left: -20px; background: rgba(255,255,255,0.15); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.3); padding: 20px; border-radius: 20px; z-index: 3; display: flex; gap: 16px; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); animation: float 6s ease-in-out infinite; }
+        @media(max-width: 900px) { .hero-glass-card { display: none; } }
+        .hero-glass-card .icon { width: 48px; height: 48px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--red); font-size: 20px; }
+        .hero-glass-card .text strong { display: block; font-size: 16px; color: var(--white); font-family: var(--font-display); letter-spacing: 1px;}
+        .hero-glass-card .text span { font-size: 12px; color: rgba(255,255,255,0.8); }
+
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
 
         /* FEATURES */
-        #features { background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-        .features-strip { display:grid; grid-template-columns:repeat(4,1fr); }
-        @media(max-width:768px){ .features-strip{ grid-template-columns:repeat(2,1fr); } }
-        .feat-item { padding:36px 28px; border-right:1px solid var(--border); display:flex; align-items:flex-start; gap:16px; transition:background .25s; }
-        .feat-item:last-child { border-right:none; }
-        .feat-item:hover { background:rgba(232,35,42,.06); }
-        .feat-icon { width:44px; height:44px; background:rgba(232,35,42,.12); border:1px solid rgba(232,35,42,.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px; color:var(--red); }
-        .feat-title { font-weight:700; font-size:13px; color:var(--white); margin-bottom:4px; }
-        .feat-desc { font-size:12px; color:var(--muted); line-height:1.6; }
+        #features { position: relative; z-index: 10; margin-top: -60px; padding: 0 24px; }
+        .features-strip { max-width: 1200px; margin: 0 auto; background: var(--bg-section); border-radius: 24px; box-shadow: var(--card-shadow); display: grid; grid-template-columns: repeat(4, 1fr); padding: 20px 0; border: 1px solid var(--border-light); }
+        @media(max-width:900px){ .features-strip{ grid-template-columns: repeat(2, 1fr); margin-top: 0; } #features { margin-top: 40px; } }
+        @media(max-width:480px){ .features-strip{ grid-template-columns: 1fr; padding: 10px 0;} }
+        .feat-item { padding: 24px 32px; border-right: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 16px; transition: transform 0.3s; }
+        @media(max-width:900px){ .feat-item:nth-child(2) { border-right: none; } .feat-item:nth-child(1), .feat-item:nth-child(2) { border-bottom: 1px solid var(--border-light); } }
+        @media(max-width:480px){ .feat-item { border-right: none !important; border-bottom: 1px solid var(--border-light); } .feat-item:last-child { border-bottom: none; } }
+        .feat-item:last-child { border-right: none; }
+        .feat-item:hover { transform: translateY(-5px); }
+        .feat-icon { width: 50px; height: 50px; background: rgba(0, 71, 171, 0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-blue); }
+        .feat-title { font-weight: 700; font-size: 15px; color: var(--text-main); }
+        .feat-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
         /* ABOUT */
-        #about { padding:110px 0; background:var(--deep); position:relative; overflow:hidden; }
-        #about::before { content:'LỊCH SỬ'; position:absolute; top:-10px; right:-20px; font-family:var(--font-display); font-weight:900; font-size:clamp(80px,14vw,180px); color:rgba(255,255,255,.025); line-height:1; user-select:none; text-transform:uppercase; letter-spacing:-2px; white-space:nowrap; }
-        .about-header { text-align:center; margin-bottom:80px; }
-        .about-intro { font-size:15px; color:var(--muted); max-width:580px; margin:16px auto 0; line-height:1.75; }
-        .timeline { position:relative; }
-        .timeline::before { content:''; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--red) 0%,rgba(232,35,42,.2) 100%); transform:translateX(-50%); }
-        @media(max-width:768px){ .timeline::before{ left:24px; } }
-        .tl-item { display:grid; grid-template-columns:1fr 60px 1fr; gap:0; margin-bottom:52px; align-items:start; }
-        @media(max-width:768px){ .tl-item{ grid-template-columns:60px 1fr; } .tl-item .tl-left{ display:none; } }
-        .tl-left { text-align:right; padding-right:36px; }
-        .tl-right { padding-left:36px; }
-        @media(max-width:768px){ .tl-right{ padding-left:24px; } }
-        .tl-center { display:flex; flex-direction:column; align-items:center; }
-        .tl-dot { width:18px; height:18px; border-radius:50%; background:var(--red); border:3px solid var(--deep); box-shadow:0 0 0 2px var(--red),0 0 16px rgba(232,35,42,.5); flex-shrink:0; margin-top:8px; }
-        .tl-year { font-family:var(--font-display); font-weight:900; font-size:52px; color:var(--yellow); line-height:1; letter-spacing:-1px; }
-        .tl-card { background:var(--card); border:1px solid var(--border); padding:22px 26px; border-left:3px solid var(--red); transition:border-color .2s,transform .2s,box-shadow .2s; }
-        .tl-card:hover { border-left-color:var(--yellow); transform:translateX(5px); box-shadow:0 4px 24px rgba(0,0,0,.3); }
-        .tl-left .tl-card { border-left:none; border-right:3px solid var(--red); }
-        .tl-left .tl-card:hover { border-right-color:var(--yellow); transform:translateX(-5px); }
-        .tl-card-title { font-weight:700; font-size:15px; color:var(--white); margin-bottom:8px; }
-        .tl-card-text { font-size:13px; color:var(--muted); line-height:1.7; }
-        .tl-card-text i { color:var(--red); margin-right:5px; font-size:11px; }
-
-        /* GALLERY */
-        #gallery { padding:90px 0 0; background:var(--black); }
-        .gallery-header { text-align:center; margin-bottom:52px; }
-        .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
-        @media(max-width:600px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
-        .gallery-item { position:relative; overflow:hidden; background:var(--card); }
-        .gallery-item:first-child { grid-row:span 2; }
-        .gallery-item img { width:100%; height:100%; min-height:220px; object-fit:cover; display:block; transition:transform .55s cubic-bezier(.25,.46,.45,.94),filter .4s; filter:grayscale(.3) brightness(.8); }
-        .gallery-item:first-child img { min-height:460px; }
-        .gallery-item:hover img { transform:scale(1.07); filter:grayscale(0) brightness(1); }
-        .gallery-caption { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,.9)); padding:32px 16px 14px; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--white); transform:translateY(4px); opacity:.75; transition:transform .3s,opacity .3s; }
-        .gallery-item:hover .gallery-caption { transform:translateY(0); opacity:1; }
-
-        /* PRICING */
-        #pricing { padding:110px 0; background:var(--dark); position:relative; overflow:hidden; }
-        #pricing::after { content:'ƯU ĐÃI'; position:absolute; bottom:-30px; left:-10px; font-family:var(--font-display); font-weight:900; font-size:clamp(80px,14vw,200px); color:rgba(255,255,255,.02); line-height:1; user-select:none; text-transform:uppercase; letter-spacing:-3px; white-space:nowrap; }
-        .pricing-header { text-align:center; margin-bottom:64px; }
-        .promo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
-        @media(max-width:900px){ .promo-grid{ grid-template-columns:repeat(2,1fr); } }
-        @media(max-width:500px){ .promo-grid{ grid-template-columns:1fr; } }
-        .promo-card { position:relative; padding:40px 30px 36px; overflow:hidden; cursor:default; transition:transform .3s; }
-        .promo-card:hover { transform:translateY(-4px); }
-        .promo-card-purple { background:#130A22; }
-        .promo-card-red    { background:#180808; }
-        .promo-card-blue   { background:#040F22; }
-        .promo-card-green  { background:#04160A; }
-        .promo-accent { position:absolute; top:0; left:0; right:0; height:4px; }
-        .promo-card-purple .promo-accent { background:linear-gradient(90deg,#A040CC,#CC60FF); }
-        .promo-card-red    .promo-accent { background:linear-gradient(90deg,var(--red),#FF6B35); }
-        .promo-card-blue   .promo-accent { background:linear-gradient(90deg,#0080CC,#00CCFF); }
-        .promo-card-green  .promo-accent { background:linear-gradient(90deg,#008040,#00CC66); }
-        .promo-card::after { content:''; position:absolute; bottom:-50px; right:-50px; width:130px; height:130px; border-radius:50%; opacity:.12; pointer-events:none; }
-        .promo-card-purple::after { background:#B651D8; }
-        .promo-card-red::after    { background:var(--red); }
-        .promo-card-blue::after   { background:#00AEEF; }
-        .promo-card-green::after  { background:#00B050; }
-        .promo-tag { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:5px 12px; display:inline-block; margin-bottom:24px; border-radius:2px; }
-        .promo-card-purple .promo-tag { background:rgba(182,81,216,.15); color:#D088FF; }
-        .promo-card-red    .promo-tag { background:rgba(232,35,42,.15); color:#FF7070; }
-        .promo-card-blue   .promo-tag { background:rgba(0,174,239,.15); color:#50CCFF; }
-        .promo-card-green  .promo-tag { background:rgba(0,176,80,.15); color:#40CC80; }
-        .promo-big { font-family:var(--font-display); font-weight:900; font-size:88px; line-height:1; color:var(--white); letter-spacing:-2px; }
-        .promo-unit { font-size:22px; font-weight:700; color:var(--white); display:block; letter-spacing:2px; margin-top:4px; }
-        .promo-desc { margin-top:18px; font-size:13px; color:var(--muted); line-height:1.65; }
+        #about { padding: 120px 0; background: var(--bg-body); position: relative; overflow: hidden; }
+        .about-header { text-align: center; margin-bottom: 60px; }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--border-light); transform: translateX(-50%); }
+        @media(max-width:768px){ .timeline::before{ left: 30px; } }
+        
+        .tl-item { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 40px; align-items: center; }
+        @media(max-width:768px){ .tl-item{ grid-template-columns: 60px 1fr; align-items: flex-start; } .tl-item .tl-left{ display: none; } }
+        .tl-left { text-align: right; padding-right: 40px; }
+        .tl-right { padding-left: 40px; }
+        @media(max-width:768px){ .tl-right{ padding-left: 20px; } }
+        
+        .tl-center { display: flex; justify-content: center; position: relative; z-index: 2; }
+        .tl-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); border: 4px solid var(--bg-body); box-shadow: 0 0 0 4px rgba(232,35,42,0.1); }
+        
+        .tl-year { font-family: var(--font-display); font-weight: 900; font-size: 48px; color: var(--primary-blue); line-height: 1; letter-spacing: -1px; }
+        .tl-card { background: var(--bg-section); border: 1px solid var(--border-light); padding: 24px; border-radius: 16px; box-shadow: var(--card-shadow); transition: all 0.3s; text-align: left; }
+        .tl-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: rgba(0,71,171,0.2); }
+        .tl-card-title { font-weight: 800; font-size: 16px; color: var(--text-main); margin-bottom: 8px; }
+        .tl-card-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+        .tl-card-text i { color: var(--red); margin-right: 6px; }
 
         /* PARTNERS */
-        #partners { padding:90px 0; background:var(--black); }
-        .partners-header { text-align:center; margin-bottom:56px; }
-        .partners-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
-        @media(max-width:768px){ .partners-grid{ grid-template-columns:repeat(2,1fr); } }
-        .partner-card { display:block; background:var(--card); overflow:hidden; text-decoration:none; transition:background .3s; position:relative; }
-        .partner-card:hover { background:var(--card2); }
-        .partner-img-wrap { height:170px; overflow:hidden; position:relative; }
-        .partner-img-wrap img { width:100%; height:100%; object-fit:cover; filter:grayscale(.5) brightness(.75); transition:filter .4s,transform .4s; }
-        .partner-card:hover .partner-img-wrap img { filter:grayscale(0) brightness(1); transform:scale(1.04); }
-        .partner-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(232,35,42,0); transition:background .3s; }
-        .partner-card:hover .partner-overlay { background:rgba(232,35,42,.38); }
-        .partner-overlay i { font-size:32px; color:var(--white); opacity:0; transform:scale(.5); transition:opacity .3s,transform .3s; }
-        .partner-card:hover .partner-overlay i { opacity:1; transform:scale(1); }
-        .partner-info { padding:16px 18px; border-top:2px solid var(--red); }
-        .partner-name { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--white); line-height:1.4; }
+        #partners { padding: 90px 0; background: var(--bg-section); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);}
+        .partners-header { text-align: center; margin-bottom: 56px; }
+        .partners-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width:768px){ .partners-grid{ grid-template-columns: repeat(2, 1fr); } }
+        .partner-card { display: block; background: var(--bg-body); border-radius: 16px; border: 1px solid var(--border-light); overflow: hidden; text-decoration: none; transition: all 0.3s; position: relative; }
+        .partner-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow); border-color: var(--primary-blue); }
+        .partner-img-wrap { height: 170px; overflow: hidden; position: relative; background: #fff;}
+        .partner-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .partner-card:hover .partner-img-wrap img { transform: scale(1.04); }
+        .partner-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,71,171,0); transition: background 0.3s; }
+        .partner-card:hover .partner-overlay { background: rgba(0,71,171,0.2); }
+        .partner-overlay i { font-size: 32px; color: var(--primary-blue); opacity: 0; transform: scale(.5); transition: opacity 0.3s, transform 0.3s; }
+        .partner-card:hover .partner-overlay i { opacity: 1; transform: scale(1); }
+        .partner-info { padding: 16px 18px; text-align: center; border-top: 1px solid var(--border-light); }
+        .partner-name { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-main); line-height: 1.4; }
 
         /* LOCATIONS */
-        #locations { padding:110px 0; background:var(--deep); }
-        .locations-header { text-align:center; margin-bottom:60px; }
-        .locations-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:1px; background:var(--border); border:1px solid var(--border); }
-        .loc-card { flex:1 1 calc(33.333% - 1px); max-width:calc(33.333% - 1px); background:var(--card); overflow:hidden; position:relative; transition:background .25s; }
-        @media(max-width:900px){ .loc-card{ flex:1 1 calc(50% - 1px); max-width:calc(50% - 1px); } }
-        @media(max-width:500px){ .loc-card{ flex:1 1 100%; max-width:100%; } }
-        .loc-card:hover { background:var(--card2); }
-        .loc-img-wrap { height:190px; overflow:hidden; position:relative; }
-        .loc-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .5s,filter .4s; filter:brightness(.65) grayscale(.25); }
-        .loc-card:hover .loc-img-wrap img { transform:scale(1.06); filter:brightness(.85) grayscale(0); }
-        .loc-tag { position:absolute; top:14px; left:0; background:var(--red); color:var(--white); font-size:9px; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; }
-        .loc-info { padding:22px 20px; }
-        .loc-name { font-weight:700; font-size:15px; color:var(--white); margin-bottom:10px; text-transform:uppercase; }
-        .loc-addr { font-size:12.5px; color:var(--muted); line-height:1.65; display:flex; gap:8px; }
-        .loc-addr i { color:var(--red); flex-shrink:0; margin-top:3px; font-size:11px; }
+        #locations { padding: 120px 0; background: var(--bg-body); }
+        .locations-header { text-align: center; margin-bottom: 60px; }
+        .locations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media(max-width:900px){ .locations-grid{ grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width:600px){ .locations-grid{ grid-template-columns: 1fr; } }
+        
+        .loc-card { background: var(--bg-section); border-radius: 20px; overflow: hidden; border: 1px solid var(--border-light); transition: all 0.3s; text-decoration: none; display: block; }
+        .loc-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow); border-color: rgba(0,71,171,0.2); }
+        .loc-img-wrap { height: 200px; overflow: hidden; position: relative; }
+        .loc-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .loc-card:hover .loc-img-wrap img { transform: scale(1.05); }
+        .loc-tag { position: absolute; top: 16px; left: 16px; background: var(--glass-bg); backdrop-filter: blur(4px); color: var(--primary-blue); font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 6px 12px; border-radius: 100px; }
+        .loc-info { padding: 24px; }
+        .loc-name { font-weight: 800; font-size: 16px; color: var(--text-main); margin-bottom: 8px; }
+        .loc-addr { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+        .loc-addr i { color: var(--red); margin-top: 3px; }
 
-        /* REGISTER SECTION */
-        #register { padding:110px 0; background:var(--dark); position:relative; overflow:hidden; }
-        #register::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,#0D0020 0%,var(--dark) 100%); }
-        #register::after { content:''; position:absolute; top:0; right:0; width:50%; height:100%; background:linear-gradient(160deg,rgba(232,35,42,.10) 0%,rgba(180,20,25,.04) 100%); clip-path:polygon(20% 0%,100% 0%,100% 100%,0% 100%); }
-        .register-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; position:relative; z-index:2; }
-        @media(max-width:768px){ .register-grid{ grid-template-columns:1fr; gap:40px; } }
-        .register-left h2 { font-family:var(--font-display); font-weight:900; font-size:clamp(40px,5vw,72px); line-height:1.25; color:var(--white); margin-top:16px; margin-bottom:20px; text-transform:uppercase; }
-        .register-left h2 .hl { color:var(--yellow); }
-        .register-left p { font-size:15px; color:var(--muted); line-height:1.75; max-width:400px; margin-bottom:28px; }
-        .register-image { display:flex; justify-content:center; margin-top:24px; }
-        .register-image img { max-width:360px; width:100%; filter:drop-shadow(0 0 60px rgba(232,35,42,.3)); }
-        .reg-form-box { background:var(--card); border:1px solid var(--border2); border-top:4px solid var(--red); padding:40px 36px; }
-        .reg-form-title { font-family:var(--font-display); font-weight:900; font-size:30px; letter-spacing:1px; color:var(--white); text-align:center; margin-bottom:28px; text-transform:uppercase; }
-        .reg-form-group { margin-bottom:16px; }
-        .reg-form-group label { display:block; font-size:10px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-        .reg-form-group input { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:14px 18px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
-        .reg-form-group input:focus { border-color:var(--red); }
-        .reg-form-group input::placeholder { color:rgba(255,255,255,.22); }
-        .btn-register { width:100%; margin-top:10px; background:var(--red); color:var(--white); border:none; padding:18px; font-family:var(--font-body); font-size:14px; font-weight:800; letter-spacing:3px; text-transform:uppercase; cursor:pointer; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:background .2s,transform .2s,box-shadow .2s; }
-        .btn-register:hover { background:var(--red-dark); transform:translateY(-2px); box-shadow:0 8px 32px rgba(232,35,42,.4); }
-        .btn-register:disabled { opacity:.6; transform:none; box-shadow:none; }
+        /* PRICING */
+        #pricing { padding: 120px 0; background: var(--bg-section); border-top: 1px solid var(--border-light); }
+        .pricing-header { text-align: center; margin-bottom: 60px; }
+        .promo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        @media(max-width:900px){ .promo-grid{ grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width:500px){ .promo-grid{ grid-template-columns: 1fr; } }
+        
+        .promo-card { position: relative; padding: 40px 24px; border-radius: 24px; overflow: hidden; background: var(--bg-body); border: 1px solid var(--border-light); text-align: center; transition: all 0.3s; z-index: 1; }
+        .promo-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        
+        .promo-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; }
+        .promo-card-purple::before { background: linear-gradient(90deg, #A040CC, #CC60FF); }
+        .promo-card-red::before    { background: linear-gradient(90deg, var(--red), #FF6B35); }
+        .promo-card-blue::before   { background: linear-gradient(90deg, var(--primary-blue), var(--light-blue)); }
+        .promo-card-green::before  { background: linear-gradient(90deg, #00B050, #00CC66); }
+        
+        .promo-tag { font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; display: inline-block; margin-bottom: 24px; border-radius: 100px; background: var(--bg-section); border: 1px solid var(--border-light); color: var(--text-main); }
+        .promo-big { font-family: var(--font-display); font-weight: 900; font-size: 80px; line-height: 1; color: var(--text-main); letter-spacing: -2px; margin-bottom: 4px; }
+        .promo-unit { font-size: 16px; font-weight: 800; color: var(--primary-blue); display: block; letter-spacing: 1px; }
+        .promo-desc { margin-top: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 500; }
 
-        /* FOOTER */
-        footer { background:var(--card); border-top:3px solid var(--red); padding:64px 0 28px; }
-        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:48px; margin-bottom:48px; }
-        @media(max-width:640px){ .footer-grid{ grid-template-columns:1fr; gap:32px; } }
-        .footer-brand { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
-        .footer-brand img { height:44px; width:auto; object-fit:contain; }
-        .footer-brand-name { font-size:13px; font-weight:700; letter-spacing:0.5px; color:var(--white); line-height:1.4; }
-        .footer-desc { font-size:13px; color:var(--muted); line-height:1.75; }
-        .footer-col-title { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:18px; }
-        .footer-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
-        .footer-list li { font-size:13px; color:var(--muted); }
-        .footer-list a { color:var(--muted); text-decoration:none; transition:color .2s; }
-        .footer-list a:hover { color:var(--yellow); }
-        .footer-list strong { color:var(--yellow); }
-        .footer-bottom { border-top:1px solid var(--border); padding-top:22px; font-size:11px; color:rgba(255,255,255,.28); text-align:center; }
+        /* REGISTER FORM */
+        #register { padding: 120px 0; background: var(--primary-blue); position: relative; overflow: hidden; color: white; }
+        #register::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at top right, rgba(0,174,239,0.8), transparent 60%); }
+        .register-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+        @media(max-width:900px){ .register-grid{ grid-template-columns: 1fr; gap: 40px; text-align: center; } }
+        
+        .register-left .sec-tag { background: rgba(255,255,255,0.1); color: var(--yellow); }
+        .register-left h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(40px, 5vw, 64px); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .register-left h2 .hl { color: var(--yellow); }
+        .register-left p { font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.6; max-width: 480px; margin-bottom: 32px; }
+        @media(max-width:900px){ .register-left p { margin: 0 auto 32px; } }
+        
+        .reg-form-box { background: var(--bg-section); border-radius: 24px; padding: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
+        .reg-form-title { font-family: var(--font-display); font-weight: 900; font-size: 28px; color: var(--text-main); text-align: center; margin-bottom: 24px; text-transform: uppercase; }
+        .reg-form-group { margin-bottom: 20px; text-align: left; }
+        .reg-form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+        .reg-form-group input { width: 100%; background: var(--bg-body); border: 1px solid var(--border-light); padding: 14px 16px; color: var(--text-main); font-size: 14px; font-family: var(--font-body); border-radius: 12px; outline: none; transition: all 0.3s; }
+        .reg-form-group input:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1); background: #FFF; }
+        .btn-register { width: 100%; margin-top: 10px; background: var(--red); color: var(--white); border: none; padding: 16px; font-family: var(--font-body); font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 12px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(232, 35, 42, 0.2); }
+        .btn-register:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 15px 25px rgba(232, 35, 42, 0.3); }
 
-        /* FLOAT BUTTONS */
-        .float-btns { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column; gap:10px; z-index:50; }
-        .float-btn { width:50px; height:50px; display:flex; align-items:center; justify-content:center; color:var(--white); font-family:var(--font-body); font-size:10px; font-weight:700; letter-spacing:.5px; border:none; cursor:pointer; clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%); transition:background .2s,transform .2s; }
-        .float-btn:hover { transform:scale(1.08); }
-        .float-btn.zalo { background:#006aff; }
-        .float-btn.zalo:hover { background:#0052cc; }
-        .float-btn.mess { background:#0668E1; }
-        .float-btn.mess:hover { background:#0452b3; }
+        /* PORTAL & DASHBOARDS (LIGHT THEME) */
+        #portal { padding: 120px 0; background: var(--bg-body); }
+        .portal-header { text-align: center; margin-bottom: 40px; }
+        .portal-box { max-width: 500px; margin: 0 auto; background: var(--bg-section); border-radius: 24px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); overflow: hidden; }
+        
+        .portal-tabs { display: flex; border-bottom: 1px solid var(--border-light); background: #F8FAFC; }
+        .tab-btn { flex: 1; padding: 20px; background: none; border: none; font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; }
+        .tab-btn.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); background: var(--bg-section); }
+        
+        .tab-panel { display: none; padding: 40px 32px; }
+        .tab-panel.active { display: block; animation: fadeUp 0.3s ease; }
+        .tab-panel h3 { font-size: 16px; font-weight: 700; color: var(--text-main); text-align: center; margin-bottom: 24px; line-height: 1.4; }
+        
+        .login-form { display: flex; flex-direction: column; gap: 16px; }
+        .login-form input { width: 100%; background: var(--bg-body); border: 1px solid var(--border-light); padding: 14px 16px; color: var(--text-main); font-size: 14px; border-radius: 12px; outline: none; transition: all 0.3s; }
+        .login-form input:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1); background: #FFF; }
+        .btn-login-parent { width: 100%; background: var(--primary-blue); color: var(--white); border: none; padding: 16px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+        .btn-login-parent:hover { background: #003380; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 71, 171, 0.2); }
+        .btn-login-staff { width: 100%; background: var(--text-main); color: var(--white); border: none; padding: 16px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+        .btn-login-staff:hover { background: #000; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
 
-        /* ─────────────────────────────────────────────
-           PORTAL & DASHBOARDS
-        ───────────────────────────────────────────── */
-        .portal-header { text-align:center; margin-bottom:52px; padding-top: 90px;}
-        .portal-header p { color:var(--muted); font-size:14px; margin-top:12px; }
-        .portal-tabs { display:flex; border-bottom:1px solid var(--border); }
-        .tab-btn { flex:1; padding:18px 20px; background:none; border:none; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-1px; transition:color .2s,border-color .2s; }
-        .tab-btn.active { color:var(--white); border-bottom-color:var(--red); }
-        .portal-box { background:var(--card); border:1px solid var(--border); border-top:none; padding:48px 40px; margin-bottom: 90px;}
-        .tab-panel { display:none; }
-        .tab-panel.active { display:block; }
-        .portal-box h3 { font-size:17px; font-weight:700; color:var(--white); text-align:center; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--border); }
+        /* DASHBOARD LAYOUT (LIGHT) */
+        #internalDashboard, #parentDashboard { display: none; position: fixed; inset: 0; background: var(--bg-body); z-index: 200; overflow-y: auto; }
+        .db-topbar, .pdb-topbar { background: var(--bg-section); border-bottom: 1px solid var(--border-light); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .db-topbar-title, .pdb-topbar-title { font-size: 14px; font-weight: 800; color: var(--text-main); }
+        .btn-logout { background: rgba(232, 35, 42, 0.1); color: var(--red); border: none; padding: 8px 20px; font-weight: 700; border-radius: 100px; cursor: pointer; transition: all 0.3s; }
+        .btn-logout:hover { background: var(--red); color: white; }
         
-        .login-form { max-width:380px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
-        .login-form input { width:100%; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:14px 18px; color:var(--white); font-size:14px; font-family:var(--font-body); outline:none; transition:border-color .2s; }
-        .login-form input:focus { border-color:var(--red); }
-        .btn-login-parent { width:100%; background:var(--red); color:var(--white); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
-        .btn-login-parent:hover { background:var(--red-dark); }
-        .btn-login-staff { width:100%; background:var(--yellow); color:var(--black); border:none; padding:15px; font-family:var(--font-body); font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background .2s; }
-        .btn-login-staff:hover { background:#E6BF00; }
+        .db-content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        .db-card, .pdb-card { background: var(--bg-section); border-radius: 24px; border: 1px solid var(--border-light); box-shadow: var(--card-shadow); display: flex; flex-direction: column; overflow: hidden; margin-bottom: 32px; }
+        @media(min-width:768px){ .db-card, .pdb-card { flex-direction: row; } }
+        
+        .db-avatar-panel { background: #F8FAFC; padding: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 280px; border-right: 1px solid var(--border-light); }
+        .db-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 16px; }
+        .db-name { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: var(--text-main); margin-bottom: 4px;}
+        .db-position { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+        .db-belt-badge { background: var(--white); border: 1px solid var(--border-light); color: var(--primary-blue); font-size: 11px; font-weight: 700; padding: 6px 16px; border-radius: 100px; }
+        
+        .db-info-panel { padding: 40px; flex: 1; }
+        .db-info-title { font-size: 15px; font-weight: 800; color: var(--text-main); margin-bottom: 24px; }
+        .db-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+        @media(max-width:480px){ .db-info-grid { grid-template-columns: 1fr; } }
+        .db-info-label { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+        .db-info-value { font-size: 15px; font-weight: 600; color: var(--text-main); }
+        .btn-edit { background: var(--bg-body); border: 1px solid var(--border-light); color: var(--text-main); padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-edit:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
 
-        /* DASHBOARD (staff/admin) */
-        #internalDashboard, #parentDashboard { display:none; position:fixed; inset:0; background:var(--black); z-index:200; overflow-y:auto; }
-        .db-topbar { background:var(--card); border-bottom:2px solid var(--red); padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
-        .pdb-topbar { background:var(--card); border-bottom:2px solid #00AEEF; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; }
-        .db-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
-        .pdb-topbar-title { font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#60D0FF; }
-        .btn-logout { background:#c0392b; color:var(--white); border:none; padding:8px 20px; font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
-        .btn-logout:hover { background:#992d22; }
-        .db-content { max-width:960px; margin:0 auto; padding:40px 32px; }
-        
-        .db-card, .pdb-card { background:var(--card); border:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; margin-bottom:32px; }
-        @media(min-width:640px){ .db-card, .pdb-card { flex-direction:row; } }
-        
-        .db-avatar-panel { background:linear-gradient(160deg,#100020,#0E0E1A); padding:40px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; min-width:240px; border-right:1px solid var(--border); }
-        .db-avatar { width:96px; height:130px; object-fit:cover; border:3px solid var(--red); cursor:pointer; background:var(--dark); transition:border-color .2s; }
-        .db-avatar-wrap { position:relative; display:inline-block; }
-        .db-avatar-wrap:hover .db-avatar { border-color:var(--yellow); }
-        .db-name { font-family:var(--font-display); font-weight:900; font-size:28px; color:var(--yellow); margin-top:16px; }
-        .db-position { font-size:12px; color:var(--muted); margin-bottom:12px; }
-        .db-belt-badge { background:rgba(255,214,0,.1); border:1px solid rgba(255,214,0,.3); color:var(--yellow); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; }
-        
-        .db-info-panel { padding:40px 36px; flex:1; }
-        .db-info-title { font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:24px; }
-        .db-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
-        .db-info-label { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
-        .db-info-value { font-size:15px; font-weight:600; color:var(--white); }
-        .btn-edit { background:none; border:1px solid var(--border); color:var(--white); padding:10px 24px; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:border-color .2s,color .2s; }
-        .btn-edit:hover { border-color:var(--yellow); color:var(--yellow); }
-        
-        .ops-title { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-        .ops-grid, .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
-        .ops-btn { background:var(--card); border:1px solid var(--border); padding:24px 16px; display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--white); cursor:pointer; transition:border-color .2s,background .2s; text-align:center; }
-        .ops-btn:hover { border-color:var(--red); background:rgba(232,35,42,.08); }
-        .ops-btn span:first-child { font-size:28px; }
+        .ops-title { font-size: 16px; font-weight: 800; color: var(--text-main); margin-bottom: 20px; }
+        .ops-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+        .ops-btn { background: var(--bg-section); border: 1px solid var(--border-light); border-radius: 16px; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .ops-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.06); border-color: var(--primary-blue); color: var(--primary-blue); }
+        .ops-btn span:first-child { font-size: 28px; }
 
-        /* ─────────────────────────────────────────────
-           MODALS (Glassmorphism & Structure)
-        ───────────────────────────────────────────── */
-        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; z-index:300; opacity:0; pointer-events:none; transition:opacity .3s ease; padding:20px; overflow-y:auto; }
-        .modal-overlay.active { opacity:1; pointer-events:auto; }
-        .modal-content { background:var(--card2); width:100%; max-width:520px; border:1px solid var(--border); border-top:3px solid var(--red); transform:translateY(20px); transition:transform .3s ease; display:flex; flex-direction:column; box-shadow:0 24px 64px rgba(0,0,0,0.5); margin: auto; }
-        .modal-overlay.active .modal-content { transform:translateY(0); }
-        
-        #scheduleModal .modal-content { max-width: 760px; }
-        #eventModal .modal-content { max-width: 400px; }
-
-        .modal-header { padding:24px 32px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-        .modal-title { font-size:16px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--white); }
-        .modal-close { background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer; transition:color .2s; }
-        .modal-close:hover { color:var(--red); }
-        
-        .modal-tabs { display:flex; border-bottom:1px solid var(--border); background:var(--card); }
-        .m-tab-btn { flex:1; background:none; border:none; padding:16px; color:var(--muted); font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; border-bottom:2px solid transparent; transition:color .2s, border-color .2s; }
-        .m-tab-btn.active { color:var(--yellow); border-bottom-color:var(--yellow); }
-        
-        .modal-body { padding:32px; max-height: 65vh; overflow-y:auto; }
-        .m-tab-panel { display:none; animation:fadeUp .3s ease forwards; }
-        .m-tab-panel.active { display:block; }
-        
-        .form-group { margin-bottom:20px; }
-        .form-group label { display:block; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-        .form-group input, .form-group select { width:100%; background:rgba(0,0,0,0.2); border:1px solid var(--border); padding:14px 16px; color:var(--white); font-family:var(--font-body); font-size:14px; outline:none; transition:border-color .2s, box-shadow .2s; border-radius:2px; }
-        .form-group select { appearance: none; cursor:pointer; }
-        .form-group input:focus, .form-group select:focus { border-color:var(--yellow); box-shadow:0 0 0 2px rgba(255,214,0,0.1); }
-        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-        @media(max-width:480px){ .form-row{ grid-template-columns:1fr; gap:0; } }
-        
-        .modal-footer { padding:24px 32px; border-top:1px solid var(--border); background:var(--card); display:flex; justify-content:flex-end; gap:12px; }
-        .btn-cancel { background:none; border:1px solid var(--border); color:var(--white); padding:12px 24px; font-family:var(--font-body); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color .2s, color .2s; }
-        .btn-cancel:hover { border-color:var(--muted); color:var(--muted); }
-        .btn-save { background:var(--red); color:var(--white); border:none; padding:12px 28px; font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:background .2s, transform .2s; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
-        .btn-save:hover { background:var(--red-dark); transform:translateY(-1px); }
-        .btn-danger { background:none; border:1px solid var(--red-dark); color:var(--red); padding:12px 24px; font-family:var(--font-body); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:background .2s, color .2s; margin-right: auto;}
-        .btn-danger:hover { background:rgba(232,35,42,0.1); }
-        
-        .validation-msg { color:var(--red); font-size:11px; margin-top:6px; display:none; }
-        .validation-msg.visible { display:block; }
-
-        /* SCHEDULE MODAL: DAY-BY-DAY GRID */
-        .day-group { margin-bottom: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-        .day-group-header { background: rgba(0,0,0,0.3); padding: 12px 16px; font-size: 13px; font-weight: 700; color: var(--yellow); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-        .day-group-body { padding: 16px; }
-        .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-        
-        .slot-toggle { display: none; }
-        .slot-label { display: block; padding: 10px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; color: var(--muted); }
-        .slot-label:hover { background: rgba(255,255,255,0.08); color: var(--white); }
-        .slot-toggle:checked + .slot-label { background: rgba(232,35,42,0.15); border-color: var(--red); color: var(--white); box-shadow: 0 0 12px rgba(232,35,42,0.2); }
-        .slot-toggle:disabled + .slot-label { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; border-color: transparent; }
-        
-        .conflict-warning { padding: 12px 16px; background: rgba(255,214,0,0.1); border-left: 3px solid var(--yellow); font-size: 11px; color: var(--white); margin-bottom: 20px; display: none; }
-        /* LEAVE & APPROVAL EXTRAS */
-.leave-history-item { font-size:12px; color:var(--muted); padding:10px 0; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:10px; }
-.status-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 10px; border-radius:2px; white-space:nowrap; }
-.status-badge.pending { background:rgba(255,214,0,.12); color:var(--yellow); }
-.status-badge.approved { background:rgba(0,176,80,.12); color:#40CC80; }
-.status-badge.rejected { background:rgba(232,35,42,.12); color:#FF7070; }
-
-.approval-row { background:rgba(255,255,255,.02); border:1px solid var(--border); border-left:3px solid var(--yellow); padding:16px 18px; margin-bottom:12px; }
-.approval-row-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:8px; }
-.approval-name { font-weight:700; color:var(--white); font-size:14px; }
-.approval-meta { font-size:11.5px; color:var(--muted); line-height:1.6; margin-top:4px; }
-.approval-actions { display:flex; gap:10px; margin-top:12px; }
-.btn-approve { background:#008040; color:var(--white); border:none; padding:9px 20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
-.btn-approve:hover { background:#006630; }
-.btn-reject { background:none; border:1px solid var(--red-dark); color:var(--red); padding:9px 20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
-.btn-reject:hover { background:rgba(232,35,42,.1); }
-.empty-note { font-size:12px; color:var(--muted2); text-align:center; padding:20px 0; }
-        .conflict-warning.active { display: block; animation: fadeUp 0.3s ease forwards; }
-        .week-nav-bar { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:24px; padding:14px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; }
-.week-nav-label { font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--yellow); letter-spacing:0.5px; min-width:260px; text-align:center; }
-
-        /* CALENDAR DASHBOARD WIDGET */
-        .calendar-wrapper { margin-top: 32px; }
+        /* CALENDAR DASHBOARD WIDGET (LIGHT) */
+        .calendar-wrapper { background: var(--bg-section); border: 1px solid var(--border-light); border-radius: 24px; padding: 32px; box-shadow: var(--card-shadow); }
         .calendar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
-        .cal-title { font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-        .cal-title i { color: var(--red); }
-        .cal-legend { display: flex; gap: 16px; font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--muted); }
-        .cal-legend-item { display: flex; align-items: center; gap: 6px; }
-        .cal-dot { width: 8px; height: 8px; border-radius: 50%; }
-        .cal-dot.teaching { background: var(--red); box-shadow: 0 0 8px rgba(232,35,42,0.5); }
-        .cal-dot.working { background: #00AEEF; box-shadow: 0 0 8px rgba(0,174,239,0.5); }
-        .cal-dot.leave { background: var(--yellow); box-shadow: 0 0 8px rgba(255,214,0,0.5); }
+        .cal-title { font-size: 16px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
+        .cal-title i { color: var(--primary-blue); }
+        .cal-legend { display: flex; gap: 16px; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .cal-legend-item { display: flex; align-items: center; gap: 8px; }
+        .cal-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .cal-dot.teaching { background: var(--red); }
+        .cal-dot.working { background: var(--primary-blue); }
+        .cal-dot.leave { background: var(--yellow); }
         
-        .cal-container { background: var(--card); border: 1px solid var(--border); padding: 24px; border-radius: 4px; }
-        .cal-month-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .cal-month-label { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--yellow); letter-spacing: 1px; }
-        .cal-nav-btn { background: none; border: 1px solid var(--border); color: var(--white); width: 32px; height: 32px; border-radius: 4px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .cal-nav-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+        .cal-month-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .cal-month-label { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--text-main); }
+        .cal-nav-btn { background: var(--bg-body); border: 1px solid var(--border-light); color: var(--text-main); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center;}
+        .cal-nav-btn:hover { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
         
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-        .cal-head { text-align: right; font-size: 10px; font-weight: 700; color: var(--muted); padding: 8px 10px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-        .cal-day { aspect-ratio: 1; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px solid var(--border); display: flex; flex-direction: column; padding: 6px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
-        .cal-day:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.15); box-shadow: inset 0 0 20px rgba(255,255,255,0.02); }
-        .cal-day.empty { background: transparent; border-color: transparent; cursor: default; box-shadow: none; }
-        .cal-day.today { border-color: var(--red); background: rgba(232,35,42,0.05); }
-        .cal-day-num { font-size: 13px; font-weight: 700; color: var(--muted); align-self: flex-end; margin-bottom: 4px; }
-        .cal-day.today .cal-day-num { color: var(--red); }
-        .cal-day-events { display: flex; flex-direction: column; gap: 4px; margin-top: auto; overflow:hidden; }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+        .cal-head { text-align: right; font-size: 12px; font-weight: 700; color: var(--text-muted); padding: 8px; text-transform: uppercase;}
+        .cal-day { aspect-ratio: 1; min-height: 100px; background: var(--bg-body); border-radius: 12px; display: flex; flex-direction: column; padding: 8px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+        .cal-day:hover { border-color: var(--primary-blue); background: #FFF; box-shadow: 0 4px 12px rgba(0,71,171,0.08); }
+        .cal-day.empty { background: transparent; cursor: default; }
+        .cal-day.today { background: #FFF; border: 2px solid var(--primary-blue); }
+        .cal-day-num { font-size: 14px; font-weight: 700; color: var(--text-muted); align-self: flex-end; margin-bottom: 8px; }
+        .cal-day.today .cal-day-num { color: var(--primary-blue); }
+        .cal-day-events { display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
         
-        .event-pill { width: 100%; font-size: 9px; font-weight: 700; padding: 4px 6px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left;}
-        .event-pill.teaching { background: rgba(232,35,42,0.15); color: #FF7070; border-left: 2px solid var(--red); }
-        .event-pill.working { background: rgba(0,174,239,0.15); color: #50CCFF; border-left: 2px solid #00AEEF; }
-        .event-pill.leave { background: rgba(255,214,0,0.15); color: var(--yellow); border-left: 2px solid var(--yellow); }
+        .event-pill { font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+        .event-pill.teaching { background: rgba(232,35,42,0.1); color: var(--red); }
+        .event-pill.working { background: rgba(0,71,171,0.1); color: var(--primary-blue); }
+        .event-pill.leave { background: rgba(255,214,0,0.2); color: #B29500; }
 
         @media(max-width: 768px) {
-            .cal-day { min-height: 70px; padding: 4px; }
-            .event-pill { font-size: 0; padding: 0; height: 6px; border: none; border-radius: 4px; margin-bottom: 2px; }
+            .cal-day { min-height: 60px; padding: 4px; border-radius: 8px; }
+            .event-pill { font-size: 0; padding: 0; height: 6px; border-radius: 10px; }
             .event-pill.teaching { background: var(--red); }
-            .event-pill.working { background: #00AEEF; }
+            .event-pill.working { background: var(--primary-blue); }
             .event-pill.leave { background: var(--yellow); }
         }
 
-        /* ANIMATIONS */
-        @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-        .reveal { opacity:0; animation:fadeUp .6s ease forwards; }
-        .delay-1{animation-delay:.1s} .delay-2{animation-delay:.2s} .delay-3{animation-delay:.3s} .delay-4{animation-delay:.4s}
+        /* MODALS & FORMS (LIGHT THEME) */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: var(--bg-section); width: 100%; max-width: 500px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transform: translateY(20px); transition: transform 0.3s; display: flex; flex-direction: column; overflow: hidden; margin: auto; }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        #scheduleModal .modal-content { max-width: 800px; }
         
-/* CHẤM CÔNG & LƯƠNG */
-        .payroll-summary-box { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-@media(max-width:480px){ .payroll-summary-box{ grid-template-columns:1fr; } }
-.payroll-stat { background:rgba(255,255,255,.02); border:1px solid var(--border); padding:16px 18px; border-radius:4px; }
-.ap-month-nav { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:20px; padding:12px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; }
-.ap-month-label { font-family:var(--font-display); font-size:16px; font-weight:700; color:var(--yellow); letter-spacing:0.5px; min-width:160px; text-align:center; }
+        .modal-header { padding: 24px 32px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: #F8FAFC; }
+        .modal-title { font-size: 16px; font-weight: 800; color: var(--text-main); text-transform: uppercase;}
+        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; transition: color 0.2s; }
+        .modal-close:hover { color: var(--red); }
+        
+        .modal-tabs { display: flex; border-bottom: 1px solid var(--border-light); background: #F8FAFC; }
+        .m-tab-btn { flex: 1; background: none; border: none; padding: 16px; color: var(--text-muted); font-size: 12px; font-weight: 700; text-transform: uppercase; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+        .m-tab-btn.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); background: var(--bg-section); }
+        
+        .modal-body { padding: 32px; max-height: 60vh; overflow-y: auto; }
+        .m-tab-panel { display: none; animation: fadeUp 0.3s ease forwards; }
+        .m-tab-panel.active { display: block; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+        .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg-body); border: 1px solid var(--border-light); padding: 12px 16px; border-radius: 12px; font-size: 14px; font-family: var(--font-body); color: var(--text-main); outline: none; transition: all 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary-blue); background: #FFF; box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media(max-width:480px){ .form-row{ grid-template-columns: 1fr; gap: 0; } }
+        
+        .modal-footer { padding: 20px 32px; border-top: 1px solid var(--border-light); background: #F8FAFC; display: flex; justify-content: flex-end; gap: 12px; }
+        .btn-cancel { background: var(--bg-section); border: 1px solid var(--border-light); color: var(--text-main); padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;}
+        .btn-cancel:hover { background: var(--bg-body); }
+        .btn-save { background: var(--primary-blue); color: var(--white); border: none; padding: 12px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(0,71,171,0.2); transition: all 0.2s; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;}
+        .btn-save:hover { background: #003380; transform: translateY(-1px); }
+        .btn-danger { background: rgba(232,35,42,0.1); border: none; color: var(--red); padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; margin-right: auto;}
+        .btn-danger:hover { background: var(--red); color: white; }
+        
+        .validation-msg { color: var(--red); font-size: 12px; margin-top: 6px; display: none; }
+        .validation-msg.visible { display: block; }
+
+        /* DAY-BY-DAY GRID (SCHEDULE) */
+        .day-group { margin-bottom: 24px; background: var(--bg-body); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; }
+        .day-group-header { background: #F8FAFC; padding: 12px 16px; font-size: 13px; font-weight: 700; color: var(--text-main); text-transform: uppercase; border-bottom: 1px solid var(--border-light); }
+        .day-group-body { padding: 16px; }
+        .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+        .slot-toggle { display: none; }
+        .slot-label { display: block; padding: 10px 12px; background: var(--bg-section); border: 1px solid var(--border-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; color: var(--text-muted); }
+        .slot-label:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+        .slot-toggle:checked + .slot-label { background: rgba(0,71,171,0.1); border-color: var(--primary-blue); color: var(--primary-blue); box-shadow: 0 4px 12px rgba(0,71,171,0.1); }
+        .slot-toggle:disabled + .slot-label { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; border-color: transparent; background: transparent; }
+        .conflict-warning { padding: 12px 16px; background: rgba(255,214,0,0.1); border-left: 4px solid var(--yellow); font-size: 12px; color: var(--text-main); margin-bottom: 20px; display: none; border-radius: 0 8px 8px 0;}
+        .conflict-warning.active { display: block; animation: fadeUp 0.3s ease forwards; }
+        .week-nav-bar { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; padding: 14px; background: var(--bg-body); border: 1px solid var(--border-light); border-radius: 12px; }
+        .week-nav-label { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--primary-blue); min-width: 260px; text-align: center; }
+
+        /* LEAVE, APPROVAL, PAYROLL LIST ITEMS */
+        .leave-history-item { font-size: 13px; color: var(--text-main); padding: 16px 0; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .status-badge { font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; white-space: nowrap; }
+        .status-badge.pending { background: rgba(255,214,0,0.2); color: #B29500; }
+        .status-badge.approved { background: rgba(0,176,80,0.1); color: #00B050; }
+        .status-badge.rejected { background: rgba(232,35,42,0.1); color: var(--red); }
+        .status-badge.info { background: rgba(0,71,171,0.1); color: var(--primary-blue); }
+
+        .approval-row { background: var(--bg-section); border: 1px solid var(--border-light); border-left: 4px solid var(--primary-blue); padding: 16px 20px; margin-bottom: 12px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);}
+        .approval-row-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .approval-name { font-weight: 800; color: var(--text-main); font-size: 15px; margin-bottom: 4px;}
+        .approval-meta { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .approval-actions { display: flex; gap: 10px; margin-top: 16px; }
+        .btn-approve { background: #00B050; color: white; border: none; padding: 10px 20px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.2s;}
+        .btn-approve:hover { background: #008C40; transform: translateY(-1px); }
+        .btn-reject { background: rgba(232,35,42,0.1); color: var(--red); border: none; padding: 10px 20px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.2s;}
+        .btn-reject:hover { background: var(--red); color: white; }
+        .empty-note { font-size: 13px; color: var(--text-muted); text-align: center; padding: 24px 0; font-weight: 500;}
+
+        /* PAYROLL SPECIFIC */
+        .payroll-summary-box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        @media(max-width:480px){ .payroll-summary-box{ grid-template-columns: 1fr; } }
+        .payroll-stat { background: var(--bg-body); border: 1px solid var(--border-light); padding: 20px; border-radius: 16px; }
+        .ap-month-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; padding: 14px; background: var(--bg-body); border: 1px solid var(--border-light); border-radius: 12px; }
+        .ap-month-label { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--primary-blue); min-width: 160px; text-align: center; }
+
+        /* FOOTER */
+        footer { background: var(--bg-section); border-top: 1px solid var(--border-light); padding: 80px 0 32px; color: var(--text-main); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        @media(max-width:768px){ .footer-grid{ grid-template-columns: 1fr; gap: 32px; } }
+        .footer-brand img { height: 40px; margin-bottom: 16px; }
+        .footer-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+        .footer-col-title { font-size: 14px; font-weight: 800; color: var(--text-main); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;}
+        .footer-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-list li { font-size: 14px; color: var(--text-muted); }
+        .footer-list a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-list a:hover { color: var(--primary-blue); }
+        .footer-bottom { border-top: 1px solid var(--border-light); padding-top: 24px; font-size: 13px; color: var(--text-muted); text-align: center; }
+
+        /* FLOAT BTNS */
+        .float-btns { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 12px; z-index: 50; }
+        .float-btn { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: transform 0.3s; text-decoration: none; }
+        .float-btn:hover { transform: scale(1.1); }
+        .float-btn.zalo { background: #0068FF; }
+        .float-btn.mess { background: #0084FF; }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp { from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:translateY(0)} }
+        .reveal { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -457,228 +411,221 @@
 <!-- NAV -->
 <nav>
     <div class="nav-logo">
-        <img src="LOGO.png" alt="Taekwondo Kids Logo">
-        <div class="nav-logo-text">
-            <span class="lang-vi">Trung tâm Taekwondo Kids Việt Nam</span>
-            <span class="lang-en">Taekwondo Kids Vietnam Center</span>
-        </div>
+        <img src="LOGO.png" alt="Taekwondo Kids Logo" onerror="this.src='https://via.placeholder.com/40x40/0047AB/FFFFFF?text=TKD'">
+        <div class="nav-logo-text">Taekwondo Kids</div>
     </div>
     <ul class="nav-links">
-        <li><a href="#about"><span class="lang-vi">Về chúng tôi</span><span class="lang-en">About</span></a></li>
-        <li><a href="#locations"><span class="lang-vi">Cơ sở</span><span class="lang-en">Branches</span></a></li>
-        <li><a href="#pricing"><span class="lang-vi">Ưu đãi</span><span class="lang-en">Promotions</span></a></li>
-        <li><a href="#portal"><span class="lang-vi">Tra cứu</span><span class="lang-en">Portal</span></a></li>
+        <li><a href="#about">Về chúng tôi</a></li>
+        <li><a href="#locations">Cơ sở</a></li>
+        <li><a href="#pricing">Ưu đãi</a></li>
+        <li><a href="#portal">Tra cứu</a></li>
     </ul>
     <div class="nav-right">
-        <span class="nav-phone">097 893 1747</span>
-        <a href="#register" class="btn-nav"><span class="lang-vi">Học thử</span><span class="lang-en">Trial</span></a>
+        <span class="nav-phone"><i class="fa-solid fa-phone" style="margin-right:6px; font-size:12px;"></i>097 893 1747</span>
+        <a href="#register" class="btn-nav">Đăng ký ngay</a>
     </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-    <div class="hero-grid-bg"></div>
-    <div class="hero-slash"></div>
-    <div class="hero-glow-left"></div>
-    <div class="hero-watermark">TAEKWONDO</div>
+    <div class="hero-pattern"></div>
+    <div class="hero-watermark">TKD KIDS</div>
     <div class="hero-content">
-        <div class="hero-left">
-            <div class="hero-eyebrow"><span class="lang-vi">Thành lập từ 2015 · 7 Cơ sở toàn quốc</span><span class="lang-en">Est. 2015 · 7 Branches Nationwide</span></div>
-            <h1 class="hero-title">
-                <span class="lang-vi">Rèn luyện<br><span class="hl">Thể Lực</span><br>&amp; <span class="slant">Ý Chí</span></span>
-                <span class="lang-en">Train<br><span class="hl">Body</span><br>&amp; <span class="slant">Spirit</span></span>
-            </h1>
-            <p class="hero-sub">
-                <span class="lang-vi">Chuyên đào tạo Taekwondo cho võ sinh từ 3,5 tuổi trở lên — phát triển thể chất, ý chí và kỷ luật ngay từ nhỏ.</span>
-            </p>
+        <div class="hero-left reveal">
+            <div class="hero-eyebrow">Khơi dậy tiềm năng</div>
+            <h1 class="hero-title">Rèn luyện<br><span class="hl">Thể Lực</span><br>Và Ý Chí</h1>
+            <p class="hero-sub">Chuyên đào tạo Taekwondo cho trẻ em từ 3,5 tuổi. Môi trường chuẩn quốc tế giúp trẻ phát triển toàn diện cả về thể chất lẫn tinh thần.</p>
             <div class="hero-cta-row">
-                <a href="#register" class="btn-primary"><i class="fa-solid fa-bolt"></i><span class="lang-vi">Đăng ký học thử</span></a>
-                <a href="#about" class="btn-ghost"><i class="fa-solid fa-play" style="font-size:10px"></i><span class="lang-vi">Tìm hiểu thêm</span></a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Năm kinh nghiệm</div></div>
-                <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Cơ sở toàn quốc</div></div>
-                <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Đối tác quốc tế</div></div>
+                <a href="#register" class="btn-primary">Đăng ký học thử ngay</a>
+                <a href="#about" class="btn-ghost">Khám phá lộ trình</a>
             </div>
         </div>
-        <div class="hero-right"><img src="embe1.png" alt="Võ sinh Taekwondo Kids"></div>
+        <div class="hero-right reveal delay-2">
+            <img src="embe1.png" alt="Võ sinh Taekwondo Kids" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=600&h=700'">
+            <div class="hero-glass-card">
+                <div class="icon"><i class="fa-solid fa-medal"></i></div>
+                <div class="text">
+                    <strong>10+ Năm</strong>
+                    <span>Kinh nghiệm đào tạo</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- FEATURES -->
 <section id="features">
-    <div class="features-strip">
-        <div class="feat-item reveal"><div class="feat-icon"><i class="fa-solid fa-child-reaching"></i></div><div class="feat-text"><div class="feat-title">Học thử miễn phí</div><div class="feat-desc">Đăng ký trải nghiệm không mất phí</div></div></div>
-        <div class="feat-item reveal delay-1"><div class="feat-icon"><i class="fa-solid fa-medal"></i></div><div class="feat-text"><div class="feat-title">HLV đẳng cấp Quốc tế</div><div class="feat-desc">Đội ngũ giàu kinh nghiệm, tận tâm</div></div></div>
-        <div class="feat-item reveal delay-2"><div class="feat-icon"><i class="fa-solid fa-globe"></i></div><div class="feat-text"><div class="feat-title">Chương trình chuyên nghiệp</div><div class="feat-desc">Phù hợp với mọi độ tuổi</div></div></div>
-        <div class="feat-item reveal delay-3"><div class="feat-icon"><i class="fa-solid fa-location-dot"></i></div><div class="feat-text"><div class="feat-title">7 Cơ sở toàn quốc</div><div class="feat-desc">Hà Nội, TP.HCM, Quảng Ninh</div></div></div>
+    <div class="features-strip reveal delay-3">
+        <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-child-reaching"></i></div><div class="feat-text"><div class="feat-title">Học thử miễn phí</div><div class="feat-desc">Đăng ký trải nghiệm không mất phí</div></div></div>
+        <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-medal"></i></div><div class="feat-text"><div class="feat-title">HLV Quốc tế</div><div class="feat-desc">Đội ngũ giàu kinh nghiệm, tận tâm</div></div></div>
+        <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-layer-group"></i></div><div class="feat-text"><div class="feat-title">Lộ trình rõ ràng</div><div class="feat-desc">Giáo án phù hợp mọi độ tuổi</div></div></div>
+        <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-location-dot"></i></div><div class="feat-text"><div class="feat-title">7 Cơ sở hiện đại</div><div class="feat-desc">Hệ thống phòng tập cao cấp</div></div></div>
     </div>
 </section>
 
-<!-- ABOUT / TIMELINE -->
+<!-- ABOUT / TIMELINE (EXACT ORIGINAL CONTENT RESTORED) -->
 <section id="about">
     <div class="container">
         <div class="about-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Hành trình phát triển</span><span class="lang-en">Our Journey</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Lịch sử hình thành &amp; <span class="accent">phát triển</span></span><span class="lang-en">History &amp; <span class="accent">Development</span></span></h2>
-            <p class="about-intro"><span class="lang-vi">Từ một cơ sở nhỏ tại Hà Nội năm 2015, Taekwondo Kids đã phát triển thành hệ thống đào tạo võ thuật trẻ em hàng đầu với 7 cơ sở trên toàn quốc.</span><span class="lang-en">From a single location in Hanoi in 2015, Taekwondo Kids has grown into a leading youth martial arts training network with 7 branches nationwide.</span></p>
+            <div class="sec-tag">Hành trình phát triển</div>
+            <h2 class="sec-title">Lịch sử <span class="accent">hình thành</span></h2>
+            <p class="sec-desc">Từ một cơ sở nhỏ tại Hà Nội năm 2015, Taekwondo Kids đã vươn mình trở thành hệ thống đào tạo võ thuật trẻ em hàng đầu với 7 cơ sở hiện đại trên toàn quốc.</p>
         </div>
         <div class="timeline">
-            <div class="tl-item"><div class="tl-left"><div class="tl-year">2015</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở đầu tiên</span><span class="lang-en">Established Headquarters</span></div><div class="tl-card-text"><span class="lang-vi">Trụ sở chính Hapulico và cơ sở Taekwondo Kids đầu tiên được thành lập.</span><span class="lang-en">Hapulico HQ and the first Taekwondo Kids branch were established.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng B1, Toà 21T1, Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân, Hà Nội</span><span class="lang-en">B1 Floor, 21T1 Bldg, Hapulico Apt, 83 Vu Trong Phung, Thanh Xuan, Hanoi</span></div></div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 2</span><span class="lang-en">2nd Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Green Stars được thành lập.</span><span class="lang-en">Green Stars branch was founded.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1, Toà 21B5, GreenStar, 234 Phạm Văn Đồng, Phú Diễn, Hà Nội</span><span class="lang-en">1st Floor, 21B5, GreenStar, 234 Pham Van Dong, Phu Dien, Hanoi</span></div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2018</div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-year">2019</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 3</span><span class="lang-en">3rd Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Gia Hòa — cơ sở đầu tiên tại TP. HCM.</span><span class="lang-en">Gia Hoa branch — first in Ho Chi Minh City.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Phòng B3.01.09, Chung cư Gia Hoà, 523A Đỗ Xuân Hợp, Quận 9, TP.HCM</span><span class="lang-en">Room B3.01.09, Gia Hoa Apt, 523A Do Xuan Hop, Dist. 9, HCMC</span></div></div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 4</span><span class="lang-en">4th Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Nghĩa Đô được thành lập.</span><span class="lang-en">Nghia Do branch was founded.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tầng 1, Toà CT3, KĐT Nghĩa Đô, Nghĩa Đô, Hà Nội</span><span class="lang-en">1st Floor, CT3 Bldg, Nghia Do Urban Area, Hanoi</span></div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2020</div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-year">2021</div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 5</span><span class="lang-en">5th Branch Opened</span></div><div class="tl-card-text"><span class="lang-vi">Chi nhánh Hạ Long được thành lập.</span><span class="lang-en">Ha Long branch was founded.</span><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tổ 3, Khu 3, Trần Hưng Đạo, TP. Hạ Long, Quảng Ninh</span><span class="lang-en">Group 3, Quarter 3, Tran Hung Dao, Ha Long City</span></div></div></div></div>
-            <div class="tl-item"><div class="tl-left"><div class="tl-card"><div class="tl-card-title"><span class="lang-vi">Thành lập Cơ sở 6 &amp; 7</span><span class="lang-en">8th &amp; 9th Branches Opened</span></div><div class="tl-card-text"><strong style="color:var(--white)"><span class="lang-vi">Cơ sở Hà Đông:</span><span class="lang-en">Ha Dong Branch:</span></strong><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">T2A, TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Nội</span><span class="lang-en">T2A, TSQ EuroLand, 25 Nguyen Van Loc, Ha Dong, Hanoi</span><br><br><strong style="color:var(--white)"><span class="lang-vi">Cơ sở Long Biên:</span><span class="lang-en">Long Bien Branch:</span></strong><br><i class="fa-solid fa-location-dot"></i><span class="lang-vi">Tòa L4, LeGrand Jardin, Sài Đồng, Long Biên, Hà Nội</span><span class="lang-en">L4 Bldg, LeGrand Jardin, Sai Dong, Long Bien, Hanoi</span></div></div></div><div class="tl-center"><div class="tl-dot"></div></div><div class="tl-right"><div class="tl-year">2025</div></div></div>
+            <!-- 1. 2015 -->
+            <div class="tl-item reveal">
+                <div class="tl-left"><div class="tl-year">2015</div></div>
+                <div class="tl-center"><div class="tl-dot"></div></div>
+                <div class="tl-right">
+                    <div class="tl-card">
+                        <div class="tl-card-title">Thành lập Cơ sở đầu tiên</div>
+                        <div class="tl-card-text">Trụ sở chính Hapulico và cơ sở Taekwondo Kids đầu tiên được thành lập.<br><i class="fa-solid fa-location-dot"></i>Tầng B1, Toà 21T1, Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân, Hà Nội</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 2. 2018 -->
+            <div class="tl-item reveal">
+                <div class="tl-left">
+                    <div class="tl-card">
+                        <div class="tl-card-title">Thành lập Cơ sở 2</div>
+                        <div class="tl-card-text">Chi nhánh Green Stars được thành lập.<br><i class="fa-solid fa-location-dot"></i>Tầng 1, Toà 21B5, GreenStar, 234 Phạm Văn Đồng, Phú Diễn, Hà Nội</div>
+                    </div>
+                </div>
+                <div class="tl-center"><div class="tl-dot"></div></div>
+                <div class="tl-right"><div class="tl-year">2018</div></div>
+            </div>
+            <!-- 3. 2019 -->
+            <div class="tl-item reveal">
+                <div class="tl-left"><div class="tl-year">2019</div></div>
+                <div class="tl-center"><div class="tl-dot"></div></div>
+                <div class="tl-right">
+                    <div class="tl-card">
+                        <div class="tl-card-title">Thành lập Cơ sở 3</div>
+                        <div class="tl-card-text">Chi nhánh Gia Hòa — cơ sở đầu tiên tại TP. HCM.<br><i class="fa-solid fa-location-dot"></i>Phòng B3.01.09, Chung cư Gia Hoà, 523A Đỗ Xuân Hợp, Quận 9, TP.HCM</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 4. 2020 -->
+            <div class="tl-item reveal">
+                <div class="tl-left">
+                    <div class="tl-card">
+                        <div class="tl-card-title">Thành lập Cơ sở 4</div>
+                        <div class="tl-card-text">Chi nhánh Nghĩa Đô được thành lập.<br><i class="fa-solid fa-location-dot"></i>Tầng 1, Toà CT3, KĐT Nghĩa Đô, Nghĩa Đô, Hà Nội</div>
+                    </div>
+                </div>
+                <div class="tl-center"><div class="tl-dot"></div></div>
+                <div class="tl-right"><div class="tl-year">2020</div></div>
+            </div>
+            <!-- 5. 2021 -->
+            <div class="tl-item reveal">
+                <div class="tl-left"><div class="tl-year">2021</div></div>
+                <div class="tl-center"><div class="tl-dot"></div></div>
+                <div class="tl-right">
+                    <div class="tl-card">
+                        <div class="tl-card-title">Thành lập Cơ sở 5</div>
+                        <div class="tl-card-text">Chi nhánh Hạ Long được thành lập.<br><i class="fa-solid fa-location-dot"></i>Tổ 3, Khu 3, Trần Hưng Đạo, TP. Hạ Long, Quảng Ninh</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 6. 2025 -->
+            <div class="tl-item reveal">
+                <div class="tl-left">
+                    <div class="tl-card">
+                        <div class="tl-card-title">Thành lập Cơ sở 6 & 7</div>
+                        <div class="tl-card-text">
+                            <strong style="color:var(--text-main)">Cơ sở Hà Đông:</strong><br>
+                            <i class="fa-solid fa-location-dot"></i>T2A, TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Nội<br><br>
+                            <strong style="color:var(--text-main)">Cơ sở Long Biên:</strong><br>
+                            <i class="fa-solid fa-location-dot"></i>Tòa L4, LeGrand Jardin, Sài Đồng, Long Biên, Hà Nội
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-center"><div class="tl-dot"></div></div>
+                <div class="tl-right"><div class="tl-year">2025</div></div>
+            </div>
         </div>
     </div>
 </section>
-    
+
 <!-- PARTNERS -->
 <section id="partners">
     <div class="container">
-        <div class="partners-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Tự hào hợp tác</span><span class="lang-en">Proud Partners</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Đối tác đồng hành và <span class="accent">phát triển</span></span><span class="lang-en">Partners in <span class="accent">Growth</span></span></h2>
+        <div class="about-header reveal" style="margin-bottom: 56px;">
+            <div class="sec-tag">Tự hào hợp tác</div>
+            <h2 class="sec-title">Đối tác <span class="accent">đồng hành</span></h2>
         </div>
         <div class="partners-grid">
-            <a href="https://www.facebook.com/share/p/1DX4qCHEpv/" target="_blank" rel="noopener" class="partner-card">
-                <div class="partner-img-wrap">
-                    <img src="tirak.png" alt="Tirak Taekwondo Thái Lan">
-                    <div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div>
-                </div>
-                <div class="partner-info">
-                    <div class="partner-name">TIRAK TAEKWONDO - THÁI LAN</div>
-                </div>
+            <a href="https://www.facebook.com/share/p/1DX4qCHEpv/" target="_blank" rel="noopener" class="partner-card reveal">
+                <div class="partner-img-wrap"><img src="tirak.png" alt="Tirak" onerror="this.src='https://via.placeholder.com/400x300/F4F7F9/0047AB?text=TIRAK'"></div>
+                <div class="partner-info"><div class="partner-name">TIRAK TAEKWONDO - THÁI LAN</div></div>
             </a>
-            <a href="https://www.facebook.com/share/p/1DwRiJRaY1/" target="_blank" rel="noopener" class="partner-card">
-                <div class="partner-img-wrap">
-                    <img src="blackbelt.png" alt="Korea Black Belt Center Hàn Quốc">
-                    <div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div>
-                </div>
-                <div class="partner-info">
-                    <div class="partner-name">KOREA BLACK BELT CENTER - HÀN QUỐC</div>
-                </div>
+            <a href="https://www.facebook.com/share/p/1DwRiJRaY1/" target="_blank" rel="noopener" class="partner-card reveal delay-1">
+                <div class="partner-img-wrap"><img src="blackbelt.png" alt="Korea" onerror="this.src='https://via.placeholder.com/400x300/F4F7F9/0047AB?text=KOREA'"></div>
+                <div class="partner-info"><div class="partner-name">KOREA BLACK BELT - HÀN QUỐC</div></div>
             </a>
-            <a href="https://www.facebook.com/share/p/1BSx3VEQX7/" target="_blank" rel="noopener" class="partner-card">
-                <div class="partner-img-wrap">
-                    <img src="canada.png" alt="Whitecourt Martial Arts Center Canada">
-                    <div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div>
-                </div>
-                <div class="partner-info">
-                    <div class="partner-name">WHITECOURT MARTIAL ARTS CENTER - CANADA</div>
-                </div>
+            <a href="https://www.facebook.com/share/p/1BSx3VEQX7/" target="_blank" rel="noopener" class="partner-card reveal delay-2">
+                <div class="partner-img-wrap"><img src="canada.png" alt="Canada" onerror="this.src='https://via.placeholder.com/400x300/F4F7F9/0047AB?text=CANADA'"></div>
+                <div class="partner-info"><div class="partner-name">WHITECOURT - CANADA</div></div>
             </a>
-            <a href="https://www.facebook.com/share/p/1BejzXfdFL/" target="_blank" rel="noopener" class="partner-card">
-                <div class="partner-img-wrap">
-                    <img src="jaeil.png" alt="Jaeil Sport Center Hàn Quốc">
-                    <div class="partner-overlay"><i class="fa-brands fa-facebook"></i></div>
-                </div>
-                <div class="partner-info">
-                    <div class="partner-name">JAEIL SPORT CENTER - HÀN QUỐC</div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section> 
-<!-- HỆ THỐNG CÁC CƠ SỞ -->
-<section id="locations">
-    <div class="container">
-        <div class="locations-header reveal">
-            <div class="sec-tag"><span class="lang-vi">Hệ thống phòng tập</span><span class="lang-en">Training Centers</span></div>
-            <h2 class="sec-title"><span class="lang-vi">Hệ thống các cơ sở tại <span class="accent">Hà Nội</span></span><span class="lang-en">Branches in <span class="accent">Hanoi</span></span></h2>
-        </div>
-        <div class="locations-grid">
-            <!-- CƠ SỞ 1: HAPULICO -->
-            <a href="https://maps.app.goo.gl/BiuQSZXiAWorEFRg8" target="_blank" rel="noopener" style="text-decoration: none;" class="loc-card reveal">
-                <div class="loc-img-wrap">
-                    <img src="hapu.jpg" alt="Cơ sở Hapulico" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=800'">
-                    <div class="loc-tag">CƠ SỞ 1</div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">CƠ SỞ HAPULICO</div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Tầng B1 - Toà 21T1 - Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- CƠ SỞ 2: GREENSTARS -->
-            <a href="https://maps.app.goo.gl/TWiB4funW3Tcwyxu7" target="_blank" rel="noopener" style="text-decoration: none;" class="loc-card reveal delay-1">
-                <div class="loc-img-wrap">
-                    <img src="green.JPG" alt="Cơ sở GreenStars" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=800'">
-                    <div class="loc-tag">CƠ SỞ 2</div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">CƠ SỞ GREENSTARS</div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Tầng 1 - Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- CƠ SỞ 3: NGHĨA ĐÔ -->
-            <a href="https://maps.app.goo.gl/yzNeyMJ2HAW5HbcU7" target="_blank" rel="noopener" style="text-decoration: none;" class="loc-card reveal delay-2">
-                <div class="loc-img-wrap">
-                    <img src="nghiado.jpg" alt="Cơ sở Nghĩa Đô" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=800'">
-                    <div class="loc-tag">CƠ SỞ 3</div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">CƠ SỞ NGHĨA ĐÔ</div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Tầng 1 - Toà CT3 - Khu đô thị mới Nghĩa Đô, Nghĩa Đô</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- CƠ SỞ 4: HÀ ĐÔNG -->
-            <a href="https://maps.google.com/?q=TSQ+EuroLand+25+Nguyễn+Văn+Lộc+Mộ+Lao+Hà+Đông" target="_blank" rel="noopener" style="text-decoration: none;" class="loc-card reveal">
-                <div class="loc-img-wrap">
-                    <img src="hadong.jpg" alt="Cơ sở Hà Đông" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=800'">
-                    <div class="loc-tag">CƠ SỞ 4</div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">CƠ SỞ HÀ ĐÔNG</div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Tầng 1 - Toà T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- CƠ SỞ 5: LONG BIÊN -->
-            <a href="https://maps.google.com/?q=Chung+cư+LeGrand+Jardin+Sài+Đồng+Long+Biên" target="_blank" rel="noopener" style="text-decoration: none;" class="loc-card reveal delay-1">
-                <div class="loc-img-wrap">
-                    <img src="longbien.jpg" alt="Cơ sở Long Biên" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=800'">
-                    <div class="loc-tag">CƠ SỞ 5</div>
-                </div>
-                <div class="loc-info">
-                    <div class="loc-name">CƠ SỞ LONG BIÊN</div>
-                    <div class="loc-addr">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Tầng 1 - Toà L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</span>
-                    </div>
-                </div>
+            <a href="https://www.facebook.com/share/p/1BejzXfdFL/" target="_blank" rel="noopener" class="partner-card reveal delay-3">
+                <div class="partner-img-wrap"><img src="jaeil.png" alt="Jaeil" onerror="this.src='https://via.placeholder.com/400x300/F4F7F9/0047AB?text=JAEIL'"></div>
+                <div class="partner-info"><div class="partner-name">JAEIL SPORT CENTER - HÀN QUỐC</div></div>
             </a>
         </div>
     </div>
 </section>
-    
-<!-- PRICING / PROMOS -->
+
+<!-- LOCATIONS -->
+<section id="locations">
+    <div class="container">
+        <div class="locations-header reveal">
+            <div class="sec-tag">Tìm cơ sở gần bạn</div>
+            <h2 class="sec-title">Hệ thống <span class="accent">cơ sở</span></h2>
+        </div>
+        <div class="locations-grid">
+            <a href="https://maps.app.goo.gl/BiuQSZXiAWorEFRg8" target="_blank" rel="noopener" class="loc-card reveal"><div class="loc-img-wrap"><div class="loc-tag">CƠ SỞ 1</div><img src="hapu.jpg" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600'"></div><div class="loc-info"><div class="loc-name">CƠ SỞ HAPULICO</div><div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span>Tầng B1 - Toà 21T1 - Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</span></div></div></a>
+            <a href="https://maps.app.goo.gl/TWiB4funW3Tcwyxu7" target="_blank" rel="noopener" class="loc-card reveal delay-1"><div class="loc-img-wrap"><div class="loc-tag">CƠ SỞ 2</div><img src="green.JPG" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600'"></div><div class="loc-info"><div class="loc-name">CƠ SỞ GREENSTARS</div><div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span>Tầng 1 - Toà 21B5 - Chung cư GreenStar, 234 Phạm Văn Đồng, Phú Diễn</span></div></div></a>
+            <a href="https://maps.app.goo.gl/yzNeyMJ2HAW5HbcU7" target="_blank" rel="noopener" class="loc-card reveal delay-2"><div class="loc-img-wrap"><div class="loc-tag">CƠ SỞ 3</div><img src="nghiado.jpg" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600'"></div><div class="loc-info"><div class="loc-name">CƠ SỞ NGHĨA ĐÔ</div><div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span>Tầng 1 - Toà CT3 - Khu đô thị mới Nghĩa Đô, Nghĩa Đô</span></div></div></a>
+            <a href="https://maps.google.com/?q=TSQ+EuroLand+25+Nguyễn+Văn+Lộc+Mộ+Lao+Hà+Đông" target="_blank" rel="noopener" class="loc-card reveal"><div class="loc-img-wrap"><div class="loc-tag">CƠ SỞ 4</div><img src="hadong.jpg" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600'"></div><div class="loc-info"><div class="loc-name">CƠ SỞ HÀ ĐÔNG</div><div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span>Tầng 1 - Toà T2A - TSQ EuroLand, 25 Nguyễn Văn Lộc, Mộ Lao, Hà Đông</span></div></div></a>
+            <a href="https://maps.google.com/?q=Chung+cư+LeGrand+Jardin+Sài+Đồng+Long+Biên" target="_blank" rel="noopener" class="loc-card reveal delay-1"><div class="loc-img-wrap"><div class="loc-tag">CƠ SỞ 5</div><img src="longbien.jpg" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600'"></div><div class="loc-info"><div class="loc-name">CƠ SỞ LONG BIÊN</div><div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span>Tầng 1 - Toà L4 - Chung cư LeGrand Jardin, Sài Đồng, Long Biên</span></div></div></a>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
 <section id="pricing">
     <div class="container">
         <div class="pricing-header reveal">
-            <div class="sec-tag">Dành riêng cho bạn</div>
-            <h2 class="sec-title">Chương trình <span class="accent">ưu đãi</span> đặc biệt</h2>
+            <div class="sec-tag">Ưu đãi mùa tựu trường</div>
+            <h2 class="sec-title">Chương trình <span class="accent">đặc biệt</span></h2>
         </div>
         <div class="promo-grid">
-            <div class="promo-card promo-card-purple reveal"><div class="promo-accent"></div><div class="promo-tag">Giảm ngay học phí</div><div class="promo-big">10%</div><span class="promo-unit">HỌC PHÍ</span><div class="promo-desc">Khi đăng ký nhóm từ 3 người</div></div>
-            <div class="promo-card promo-card-red reveal delay-1"><div class="promo-accent"></div><div class="promo-tag">Tặng võ phục</div><div class="promo-big">500K</div><span class="promo-unit">VNĐ</span><div class="promo-desc">Khi đăng ký nhóm từ 2 người</div></div>
-            <div class="promo-card promo-card-blue reveal delay-2"><div class="promo-accent"></div><div class="promo-tag">Tặng miễn phí</div><div class="promo-big">1</div><span class="promo-unit">THÁNG</span><div class="promo-desc">Khi đóng học phí 06 tháng</div></div>
-            <div class="promo-card promo-card-green reveal delay-3"><div class="promo-accent"></div><div class="promo-tag">Tặng miễn phí</div><div class="promo-big">3</div><span class="promo-unit">THÁNG</span><div class="promo-desc">Khi đóng học phí 12 tháng</div></div>
+            <div class="promo-card promo-card-blue reveal"><div class="promo-tag">Đăng ký nhóm</div><div class="promo-big">10%</div><span class="promo-unit">HỌC PHÍ</span><div class="promo-desc">Giảm ngay khi đăng ký nhóm từ 3 người</div></div>
+            <div class="promo-card promo-card-red reveal delay-1"><div class="promo-tag">Quà tặng</div><div class="promo-big">500K</div><span class="promo-unit">VNĐ</span><div class="promo-desc">Tặng võ phục khi đăng ký nhóm từ 2 người</div></div>
+            <div class="promo-card promo-card-purple reveal delay-2"><div class="promo-tag">Gói 6 tháng</div><div class="promo-big">1</div><span class="promo-unit">THÁNG</span><div class="promo-desc">Tặng miễn phí 1 tháng học khi đóng học phí 06 tháng</div></div>
+            <div class="promo-card promo-card-green reveal delay-3"><div class="promo-tag">Gói 1 năm</div><div class="promo-big">3</div><span class="promo-unit">THÁNG</span><div class="promo-desc">Tặng miễn phí 3 tháng học khi đóng học phí 12 tháng</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- REGISTER FORM -->
+<section id="register">
+    <div class="container">
+        <div class="register-grid">
+            <div class="register-left reveal">
+                <div class="sec-tag">Khởi đầu ngay</div>
+                <h2>Đăng ký <span class="hl">học thử</span></h2>
+                <p>Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí. Chúng tôi sẵn sàng đồng hành cùng bạn và con trên hành trình phát triển thể chất và ý chí.</p>
+            </div>
+            <div class="reg-form-box reveal delay-1">
+                <div class="reg-form-title">ĐĂNG KÝ HỌC THỬ</div>
+                <form id="registerForm">
+                    <div class="reg-form-group"><label>Họ và tên Phụ huynh *</label><input type="text" name="parentName" required placeholder="Nguyễn Văn A"></div>
+                    <div class="reg-form-group"><label>Họ và tên Võ sinh *</label><input type="text" name="childName" required placeholder="Nguyễn Văn B"></div>
+                    <div class="reg-form-group"><label>Số điện thoại *</label><input type="tel" name="phone" required placeholder="0xxxxxxxxx"></div>
+                    <button type="submit" id="submitBtn" class="btn-register">ĐĂNG KÝ NGAY</button>
+                </form>
+            </div>
         </div>
     </div>
 </section>
@@ -688,14 +635,14 @@
     <div class="container">
         <div class="portal-header reveal">
             <div class="sec-tag">Dành riêng cho thành viên</div>
-            <h2 class="sec-title">Hệ thống quản lý thông tin <span class="accent">thông minh</span></h2>
+            <h2 class="sec-title">Hệ thống <span class="accent">tra cứu</span></h2>
             <p>Hệ thống tra cứu thông tin tiện lợi của Taekwondo Kids Việt Nam</p>
         </div>
-        <div class="portal-tabs">
-            <button class="tab-btn active" id="btn-phuhuynh" onclick="switchTab('phuhuynh')">Phụ huynh &amp; Võ sinh</button>
-            <button class="tab-btn" id="btn-hlv" onclick="switchTab('hlv')">Huấn luyện viên &amp; Nhân viên</button>
-        </div>
-        <div class="portal-box">
+        <div class="portal-box reveal">
+            <div class="portal-tabs">
+                <button class="tab-btn active" id="btn-phuhuynh" onclick="switchTab('phuhuynh')">Phụ huynh &amp; Võ sinh</button>
+                <button class="tab-btn" id="btn-hlv" onclick="switchTab('hlv')">Nhân viên</button>
+            </div>
             <div class="tab-panel active" id="tab-phuhuynh">
                 <h3>Dành cho Phụ huynh &amp; Võ sinh của Trung tâm</h3>
                 <form id="parentLoginForm" class="login-form">
@@ -719,17 +666,14 @@
 <!-- INTERNAL DASHBOARD (STAFF/HLV) -->
 <div id="internalDashboard">
     <div class="db-topbar">
-        <div class="db-topbar-title"><i class="fa-solid fa-user-shield" style="color:var(--red);margin-right:8px"></i>Hệ thống Quản lý Nội bộ</div>
+        <div class="db-topbar-title"><i class="fa-solid fa-user-shield" style="color:var(--primary-blue);margin-right:8px"></i>Hệ thống Quản lý Nội bộ</div>
         <button onclick="logoutInternal()" class="btn-logout">Đăng xuất</button>
     </div>
     <div class="db-content" id="staffViewContent">
-        
         <!-- Profile Card -->
         <div class="db-card">
             <div class="db-avatar-panel">
-                <div class="db-avatar-wrap">
-                    <img id="avatarImg" src="https://via.placeholder.com/150" alt="Avatar" class="db-avatar">
-                </div>
+                <img id="avatarImg" src="https://via.placeholder.com/150" alt="Avatar" class="db-avatar">
                 <div class="db-name" id="dbName">Huấn Luyện Viên</div>
                 <div class="db-position" id="dbPosition">HLV Chính</div>
                 <div class="db-belt-badge">Cấp đai: <span id="dbBelt">Đen 3 Đẳng</span></div>
@@ -737,32 +681,32 @@
             <div class="db-info-panel">
                 <div class="db-info-title">Thông tin cá nhân</div>
                 <div class="db-info-grid">
-                    <div><div class="db-info-label">Số điện thoại</div><div class="db-info-value" id="dbPhone">0987654321</div></div>
-                    <div><div class="db-info-label">Ngày sinh</div><div class="db-info-value" id="dbDob">03/09/2004</div></div>
-                    <div><div class="db-info-label">Email</div><div class="db-info-value" id="dbEmail">hlv@taekwondokids.vn</div></div>
-                    <div><div class="db-info-label">Cơ sở phụ trách</div><div class="db-info-value" id="dbBranch" style="color:var(--yellow)">Hapulico</div></div>
+                    <div><div class="db-info-label">Số điện thoại</div><div class="db-info-value" id="dbPhone">-</div></div>
+                    <div><div class="db-info-label">Ngày sinh</div><div class="db-info-value" id="dbDob">-</div></div>
+                    <div><div class="db-info-label">Email</div><div class="db-info-value" id="dbEmail">-</div></div>
+                    <div><div class="db-info-label">Cơ sở phụ trách</div><div class="db-info-value" id="dbBranch" style="color:var(--primary-blue)">-</div></div>
                 </div>
                 <button onclick="openEditProfileModal()" class="btn-edit"><i class="fa-solid fa-pen-to-square" style="margin-right:8px"></i>Sửa thông tin &amp; Mật khẩu</button>
             </div>
         </div>
 
-       <!-- Operations -->
-<div class="ops-title">Nghiệp vụ HLV / Nhân viên</div>
-<div class="ops-grid">
-    <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
-    <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
-    <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span>Nhận xét học viên</span></button>
-    <button class="ops-btn" onclick="openMyAttendancePayrollModal()"><span>🧾</span><span>Chấm công &amp; Lương</span></button>
-    <button class="ops-btn" id="btnApproval" style="display:none;" onclick="openApprovalModal()">
-        <span>✅</span><span>Duyệt đơn nghỉ phép</span>
-    </button>
-    <button class="ops-btn" id="btnCommonEvent" style="display:none;" onclick="openCommonEventModal()">
-        <span>📢</span><span>Thêm lịch chung</span>
-    </button>
-    <button class="ops-btn" id="btnApproveAttendance" style="display:none;" onclick="openApproveAttendancePayrollModal()">
-        <span>📊</span><span>Duyệt chấm công &amp; lương</span>
-    </button>
-</div>
+        <div class="ops-title">Nghiệp vụ HLV / Nhân viên</div>
+        <div class="ops-grid">
+            <button class="ops-btn" onclick="openScheduleModal()"><span>📅</span><span>Đăng ký lịch dạy</span></button>
+            <button class="ops-btn" onclick="openLeaveModal()"><span>📝</span><span>Đăng ký nghỉ phép</span></button>
+            <button class="ops-btn" onclick="openReviewModal()"><span>⭐</span><span>Nhận xét học viên</span></button>
+            <button class="ops-btn" onclick="openMyAttendancePayrollModal()"><span>🧾</span><span>Chấm công &amp; Lương</span></button>
+            
+            <button class="ops-btn" id="btnApproval" style="display:none;" onclick="openApprovalModal()">
+                <span>✅</span><span>Duyệt đơn nghỉ phép</span>
+            </button>
+            <button class="ops-btn" id="btnCommonEvent" style="display:none;" onclick="openCommonEventModal()">
+                <span>📢</span><span>Thêm lịch chung</span>
+            </button>
+            <button class="ops-btn" id="btnApproveAttendance" style="display:none;" onclick="openApproveAttendancePayrollModal()">
+                <span>📊</span><span>Duyệt chấm công &amp; lương</span>
+            </button>
+        </div>
 
         <!-- Personal Calendar UI -->
         <div class="calendar-wrapper">
@@ -774,37 +718,33 @@
                     <div class="cal-legend-item"><div class="cal-dot leave"></div> Nghỉ phép</div>
                 </div>
             </div>
-            <div class="cal-container">
-                <div class="cal-month-nav">
-                    <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                    <div class="cal-month-label" id="calMonthLabel">THÁNG 7, 2026</div>
-                    <button class="cal-nav-btn" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-                <div class="cal-grid">
-                    <!-- Weekdays -->
-                    <div class="cal-head">T2</div><div class="cal-head">T3</div><div class="cal-head">T4</div>
-                    <div class="cal-head">T5</div><div class="cal-head">T6</div><div class="cal-head">T7</div><div class="cal-head" style="color:var(--red)">CN</div>
-                </div>
-                <div class="cal-grid" id="calendarGridBody"></div>
+            <div class="cal-month-nav">
+                <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="cal-month-label" id="calMonthLabel">THÁNG 7, 2026</div>
+                <button class="cal-nav-btn" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
+            <div class="cal-grid">
+                <div class="cal-head">T2</div><div class="cal-head">T3</div><div class="cal-head">T4</div>
+                <div class="cal-head">T5</div><div class="cal-head">T6</div><div class="cal-head">T7</div><div class="cal-head" style="color:var(--red)">CN</div>
+            </div>
+            <div class="cal-grid" id="calendarGridBody"></div>
         </div>
-
     </div>
 </div>
-<!-- PARENT DASHBOARD (Dành cho Phụ huynh) -->
+
+<!-- PARENT DASHBOARD -->
 <div id="parentDashboard">
     <div class="pdb-topbar">
-        <div class="pdb-topbar-title">
-            <i class="fa-solid fa-users" style="color:#00AEEF;margin-right:8px"></i>Bảng điều khiển Phụ huynh
-        </div>
+        <div class="pdb-topbar-title"><i class="fa-solid fa-users" style="color:var(--primary-blue);margin-right:8px"></i>Bảng điều khiển Phụ huynh</div>
         <button onclick="logoutParent()" class="btn-logout">Đăng xuất</button>
     </div>
     <div class="db-content" id="parentDashboardContent">
-        <!-- Dữ liệu học viên sẽ được JavaScript tự động đổ vào đây -->
+        <!-- JS fills here -->
     </div>
 </div>
+
 <!-- ==========================================
-     MODALS
+     MODALS (PREMIUM LIGHT THEME)
 =========================================== -->
 
 <!-- 1. EDIT PROFILE MODAL -->
@@ -818,50 +758,24 @@
             <button class="m-tab-btn active" id="mTabInfoBtn" type="button" onclick="switchModalTab('info')">Thông tin</button>
             <button class="m-tab-btn" id="mTabPassBtn" type="button" onclick="switchModalTab('pass')">Mật khẩu</button>
         </div>
-        
         <form id="editProfileForm">
-            <!-- Tab Info -->
             <div class="modal-body m-tab-panel active" id="mTabInfo">
-                <div class="form-group">
-                    <label>Họ và tên *</label>
-                    <input type="text" id="epFullName" required>
+                <div class="form-group"><label>Họ và tên *</label><input type="text" id="epFullName" required></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Số điện thoại *</label><input type="tel" id="epPhone" required></div>
+                    <div class="form-group"><label>Email *</label><input type="email" id="epEmail" required></div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label>Số điện thoại *</label>
-                        <input type="tel" id="epPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" id="epEmail" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Ngày sinh *</label>
-                        <input type="date" id="epDob" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Vị trí công tác</label>
-                        <input type="text" id="epRole" required>
-                    </div>
+                    <div class="form-group"><label>Ngày sinh *</label><input type="date" id="epDob" required></div>
+                    <div class="form-group"><label>Vị trí công tác</label><input type="text" id="epRole" required></div>
                 </div>
             </div>
-
-            <!-- Tab Password -->
             <div class="modal-body m-tab-panel" id="mTabPass">
-                <div class="form-group">
-                    <label>Mật khẩu mới</label>
-                    <input type="password" id="epNewPass" placeholder="Bỏ trống nếu không muốn đổi">
-                    <div id="passErr" class="validation-msg">Mật khẩu phải có tối thiểu 6 ký tự (chữ và số), có ít nhất 1 chữ viết hoa, không ký tự đặc biệt.</div>
-                </div>
-                <div class="form-group">
-                    <label>Xác nhận mật khẩu mới</label>
-                    <input type="password" id="epConfirmPass" placeholder="Nhập lại mật khẩu mới">
-                    <div id="passMatchErr" class="validation-msg">Mật khẩu xác nhận không khớp.</div>
-                </div>
+                <div class="form-group"><label>Mật khẩu mới</label><input type="password" id="epNewPass" placeholder="Bỏ trống nếu không muốn đổi">
+                    <div id="passErr" class="validation-msg">Mật khẩu phải có tối thiểu 6 ký tự (chữ và số), có ít nhất 1 chữ viết hoa, không ký tự đặc biệt.</div></div>
+                <div class="form-group"><label>Xác nhận mật khẩu mới</label><input type="password" id="epConfirmPass" placeholder="Nhập lại mật khẩu mới">
+                    <div id="passMatchErr" class="validation-msg">Mật khẩu xác nhận không khớp.</div></div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn-cancel" onclick="closeEditProfileModal()">Hủy bỏ</button>
                 <button type="submit" id="epSaveBtn" class="btn-save">LƯU THAY ĐỔI</button>
@@ -870,23 +784,22 @@
     </div>
 </div>
 
-<!-- 2. SCHEDULE REGISTRATION MODAL (DAY BY DAY) -->
+<!-- 2. SCHEDULE REGISTRATION MODAL -->
 <div id="scheduleModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
             <div class="modal-title">Đăng ký lịch dạy (Hàng tuần)</div>
             <button class="modal-close" type="button" onclick="closeScheduleModal()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        
         <form id="scheduleForm">
             <div class="modal-body">
-    <div class="week-nav-bar">
-        <button type="button" class="cal-nav-btn" onclick="changeScheduleWeek(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="week-nav-label" id="weekNavLabel">Tuần: -- </div>
-        <button type="button" class="cal-nav-btn" onclick="changeScheduleWeek(1)"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
-    <div class="form-group">
-        <label>Chọn Cơ Sở Giảng Dạy</label>
+                <div class="week-nav-bar">
+                    <button type="button" class="cal-nav-btn" onclick="changeScheduleWeek(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="week-nav-label" id="weekNavLabel">Tuần: -- </div>
+                    <button type="button" class="cal-nav-btn" onclick="changeScheduleWeek(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="form-group">
+                    <label>Chọn Cơ Sở Giảng Dạy</label>
                     <select id="schBranchSelect" onchange="renderScheduleSlots()">
                         <option value="" disabled selected>-- Chọn cơ sở giảng dạy --</option>
                         <option value="Hapulico">Cơ sở Hapulico</option>
@@ -896,18 +809,11 @@
                         <option value="LongBien">Cơ sở Long Biên</option>
                     </select>
                 </div>
-
                 <div id="conflictWarning" class="conflict-warning">
-                    <i class="fa-solid fa-triangle-exclamation" style="margin-right:6px"></i>
-                    <strong>Cảnh báo:</strong> Ca này bạn đã chọn dạy tại <span id="conflictBranchName"></span>. Hãy bỏ chọn bên kia trước.
+                    <i class="fa-solid fa-triangle-exclamation" style="margin-right:6px"></i> <strong>Cảnh báo:</strong> Ca này bạn đã chọn dạy tại <span id="conflictBranchName"></span>. Hãy bỏ chọn bên kia trước.
                 </div>
-
-                <div id="scheduleGridContainer">
-                    <!-- JS will generate day rows here -->
-                </div>
-
+                <div id="scheduleGridContainer"></div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn-cancel" onclick="closeScheduleModal()">Hủy bỏ</button>
                 <button type="button" class="btn-save" onclick="saveSchedule()">LƯU LỊCH DẠY</button>
@@ -918,16 +824,14 @@
 
 <!-- 3. ADD/EDIT CALENDAR EVENT MODAL -->
 <div id="eventModal" class="modal-overlay">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 400px;">
         <div class="modal-header">
             <div class="modal-title">Sự kiện ngày <span id="evModalDateLabel"></span></div>
             <button class="modal-close" type="button" onclick="closeEventModal()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <form id="eventForm">
-            <input type="hidden" id="evDateHidden">
-            <input type="hidden" id="evIdHidden">
-            
-            <div class="modal-body" style="overflow: visible;">
+            <input type="hidden" id="evDateHidden"><input type="hidden" id="evIdHidden">
+            <div class="modal-body">
                 <div class="form-group">
                     <label>Loại sự kiện</label>
                     <select id="evType" required>
@@ -951,7 +855,8 @@
         </form>
     </div>
 </div>
-  <!-- 4. LEAVE REQUEST MODAL (HLV/Nhân viên) -->
+
+<!-- 4. LEAVE REQUEST MODAL -->
 <div id="leaveModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
@@ -960,23 +865,13 @@
         </div>
         <div class="modal-body">
             <div class="form-row">
-                <div class="form-group">
-                    <label>Từ ngày *</label>
-                    <input type="date" id="lvFrom" required>
-                </div>
-                <div class="form-group">
-                    <label>Đến ngày *</label>
-                    <input type="date" id="lvTo" required>
-                </div>
+                <div class="form-group"><label>Từ ngày *</label><input type="date" id="lvFrom" required></div>
+                <div class="form-group"><label>Đến ngày *</label><input type="date" id="lvTo" required></div>
             </div>
-            <div class="form-group">
-                <label>Lý do *</label>
-                <input type="text" id="lvReason" required placeholder="VD: Việc gia đình">
-            </div>
+            <div class="form-group"><label>Lý do *</label><input type="text" id="lvReason" required placeholder="VD: Việc gia đình"></div>
             <div id="lvErr" class="validation-msg">Vui lòng điền đầy đủ thông tin và kiểm tra lại ngày.</div>
-
             <div style="margin-top:28px;">
-                <div class="ops-title" style="margin-bottom:12px;">Lịch sử đơn đã gửi</div>
+                <div class="ops-title" style="margin-bottom:12px; font-size: 14px;">Lịch sử đơn đã gửi</div>
                 <div id="lvHistory"><div class="empty-note">Đang tải...</div></div>
             </div>
         </div>
@@ -987,22 +882,19 @@
     </div>
 </div>
 
-<!-- 5. APPROVAL MODAL (Admin / HLV Trưởng) -->
+<!-- 5. APPROVAL MODAL -->
 <div id="approvalModal" class="modal-overlay">
     <div class="modal-content" style="max-width:640px;">
         <div class="modal-header">
             <div class="modal-title">Duyệt đơn nghỉ phép</div>
             <button class="modal-close" type="button" onclick="closeApprovalModal()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="modal-body" id="approvalListBox">
-            <div class="empty-note">Đang tải...</div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn-cancel" onclick="closeApprovalModal()">Đóng</button>
-        </div>
+        <div class="modal-body" id="approvalListBox"><div class="empty-note">Đang tải...</div></div>
+        <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeApprovalModal()">Đóng</button></div>
     </div>
 </div>
-    <!-- 6. COMMON EVENT MODAL (Admin / HLV Trưởng) -->
+
+<!-- 6. COMMON EVENT MODAL -->
 <div id="commonEventModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
@@ -1011,24 +903,12 @@
         </div>
         <form id="commonEventForm">
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Ngày *</label>
-                    <input type="date" id="ceDate" required>
-                </div>
-                <div class="form-group">
-                    <label>Loại hiển thị</label>
-                    <select id="ceType">
-                        <option value="working">Sự kiện chung (Xanh)</option>
-                        <option value="leave">Thông báo (Vàng)</option>
-                        <option value="teaching">Quan trọng (Đỏ)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nội dung *</label>
-                    <input type="text" id="ceTitle" required placeholder="VD: Giải đấu toàn quốc">
-                </div>
-                <div id="ceScopeNote" style="font-size:12px;color:var(--muted);margin:4px 0 20px;"></div>
-                <div class="ops-title" style="margin-bottom:12px;">Danh sách lịch chung đã tạo</div>
+                <div class="form-group"><label>Ngày *</label><input type="date" id="ceDate" required></div>
+                <div class="form-group"><label>Loại hiển thị</label>
+                    <select id="ceType"><option value="working">Sự kiện chung (Xanh)</option><option value="leave">Thông báo (Vàng)</option><option value="teaching">Quan trọng (Đỏ)</option></select></div>
+                <div class="form-group"><label>Nội dung *</label><input type="text" id="ceTitle" required placeholder="VD: Giải đấu toàn quốc"></div>
+                <div id="ceScopeNote" style="font-size:12px;color:var(--text-muted);margin-bottom:20px;"></div>
+                <div class="ops-title" style="font-size: 14px;">Danh sách lịch chung đã tạo</div>
                 <div id="ceList"><div class="empty-note">Đang tải...</div></div>
             </div>
             <div class="modal-footer">
@@ -1038,30 +918,8 @@
         </form>
     </div>
 </div>
-<section id="register">
-    <div class="container">
-        <div class="register-grid">
-            <div class="register-left reveal">
-                <div class="sec-tag"><span class="lang-vi">Bắt đầu hành trình</span><span class="lang-en">Start the Journey</span></div>
-                <h2><span class="lang-vi">Đăng ký<br><span class="hl">học thử</span><br>miễn phí</span><span class="lang-en">Register for<br><span class="hl">Free</span><br>Trial Class</span></h2>
-                <p><span class="lang-vi">Đăng ký ngay hôm nay để nhận tư vấn và trải nghiệm lớp học thử miễn phí. Chúng tôi sẵn sàng đồng hành cùng bạn và con trên hành trình phát triển thể chất và ý chí.</span><span class="lang-en">Register today for free consultation and a complimentary trial class. We are ready to accompany you and your child on their journey of physical and mental development.</span></p>
-                <div class="register-image"><img src="embe1.png" alt="Taekwondo Kid"></div>
-            </div>
-            <div class="reveal delay-2">
-                <div class="reg-form-box">
-                    <div class="reg-form-title"><span class="lang-vi">ĐĂNG KÝ HỌC THỬ</span><span class="lang-en">TRIAL REGISTRATION</span></div>
-                    <form id="registerForm">
-                        <div class="reg-form-group"><label><span class="lang-vi">Họ và tên Phụ huynh *</span><span class="lang-en">Parent's Full Name *</span></label><input type="text" name="parentName" required placeholder="Nguyễn Văn A"></div>
-                        <div class="reg-form-group"><label><span class="lang-vi">Họ và tên Võ sinh *</span><span class="lang-en">Student's Full Name *</span></label><input type="text" name="childName" required placeholder="Nguyễn Văn B"></div>
-                        <div class="reg-form-group"><label><span class="lang-vi">Số điện thoại *</span><span class="lang-en">Phone Number *</span></label><input type="tel" name="phone" required placeholder="0xxxxxxxxx"></div>
-                        <button type="submit" id="submitBtn" class="btn-register"><span class="lang-vi">ĐĂNG KÝ NGAY</span><span class="lang-en">REGISTER NOW</span></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-<!-- 7. STUDENT REVIEW MODAL (HLV) -->
+
+<!-- 7. STUDENT REVIEW MODAL -->
 <div id="reviewModal" class="modal-overlay">
     <div class="modal-content" style="max-width:600px;">
         <div class="modal-header">
@@ -1069,11 +927,8 @@
             <button class="modal-close" type="button" onclick="closeReviewModal()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="modal-body">
-            <div class="form-group">
-                <label>Mã học viên *</label>
-                <input type="text" id="rvMaHV" placeholder="VD: HV0012" oninput="handleLookupStudent()" autocomplete="off">
-            </div>
-            <div id="rvStudentInfo" style="display:none; background:rgba(255,255,255,.03); border:1px solid var(--border); padding:14px 16px; margin-bottom:20px;">
+            <div class="form-group"><label>Mã học viên *</label><input type="text" id="rvMaHV" placeholder="VD: HV0012" oninput="handleLookupStudent()" autocomplete="off"></div>
+            <div id="rvStudentInfo" style="display:none; background:var(--bg-body); border:1px solid var(--border-light); padding:16px; margin-bottom:20px; border-radius: 12px;">
                 <div class="db-info-grid" style="margin-bottom:0;">
                     <div><div class="db-info-label">Họ tên</div><div class="db-info-value" id="rvStName">-</div></div>
                     <div><div class="db-info-label">Cơ sở</div><div class="db-info-value" id="rvStBranch">-</div></div>
@@ -1081,25 +936,17 @@
                 </div>
             </div>
             <div id="rvNotFound" style="display:none; color:var(--red); font-size:12px; margin-bottom:16px;">Không tìm thấy học viên với mã này.</div>
-
             <div class="form-row">
-                <div class="form-group">
-                    <label>Tháng *</label>
-                    <select id="rvThang"></select>
-                </div>
-                <div class="form-group">
-                    <label>Năm *</label>
-                    <select id="rvNam"></select>
-                </div>
+                <div class="form-group"><label>Tháng *</label><select id="rvThang"></select></div>
+                <div class="form-group"><label>Năm *</label><select id="rvNam"></select></div>
             </div>
             <div class="form-group">
                 <label>Nội dung nhận xét *</label>
-                <textarea id="rvNoiDung" rows="5" style="width:100%; background:rgba(0,0,0,0.2); border:1px solid var(--border); padding:14px 16px; color:var(--white); font-family:var(--font-body); font-size:14px; outline:none; resize:vertical;" placeholder="Nhận xét về tinh thần, kỹ thuật, tiến bộ của học viên..."></textarea>
+                <textarea id="rvNoiDung" rows="4" placeholder="Nhận xét về tinh thần, kỹ thuật, tiến bộ của học viên..." style="width:100%; border-radius: 12px; padding: 12px; border: 1px solid var(--border-light); resize: vertical; font-family: var(--font-body);"></textarea>
             </div>
             <div id="rvErr" class="validation-msg">Vui lòng nhập đúng mã học viên và điền đầy đủ nhận xét.</div>
-
             <div style="margin-top:24px;">
-                <div class="ops-title" style="margin-bottom:12px;">Lịch sử nhận xét của học viên này</div>
+                <div class="ops-title" style="font-size: 14px;">Lịch sử nhận xét của học viên này</div>
                 <div id="rvHistory"><div class="empty-note">Nhập mã học viên để xem lịch sử.</div></div>
             </div>
         </div>
@@ -1110,7 +957,7 @@
     </div>
 </div>
 
-<!-- 7. MY ATTENDANCE & PAYROLL MODAL (HLV/Nhân viên) -->
+<!-- 8. MY ATTENDANCE & PAYROLL MODAL -->
 <div id="myAttendancePayrollModal" class="modal-overlay">
     <div class="modal-content" style="max-width:640px;">
         <div class="modal-header">
@@ -1127,21 +974,14 @@
                 <div class="ap-month-label" id="apMonthLabel">--</div>
                 <button type="button" class="cal-nav-btn" onclick="changeAPMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
-
-            <div class="m-tab-panel active" id="apTab-att">
-                <div id="atmList"><div class="empty-note">Đang tải...</div></div>
-            </div>
-            <div class="m-tab-panel" id="apTab-pay">
-                <div id="apPayrollBox"><div class="empty-note">Đang tải...</div></div>
-            </div>
+            <div class="m-tab-panel active" id="apTab-att"><div id="atmList"><div class="empty-note">Đang tải...</div></div></div>
+            <div class="m-tab-panel" id="apTab-pay"><div id="apPayrollBox"><div class="empty-note">Đang tải...</div></div></div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn-cancel" onclick="closeMyAttendancePayrollModal()">Đóng</button>
-        </div>
+        <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeMyAttendancePayrollModal()">Đóng</button></div>
     </div>
 </div>
 
-<!-- 8. APPROVE ATTENDANCE & PAYROLL MODAL (HLV Trưởng / Admin) -->
+<!-- 9. APPROVE ATTENDANCE & PAYROLL MODAL -->
 <div id="approveAttendancePayrollModal" class="modal-overlay">
     <div class="modal-content" style="max-width:680px;">
         <div class="modal-header">
@@ -1153,9 +993,7 @@
             <button class="m-tab-btn" id="apaTabBtn-pay" type="button" onclick="switchApprovalAPTab('pay')">Duyệt lương</button>
         </div>
         <div class="modal-body">
-            <div class="m-tab-panel active" id="apaTab-att">
-                <div id="apaAttendanceList"><div class="empty-note">Đang tải...</div></div>
-            </div>
+            <div class="m-tab-panel active" id="apaTab-att"><div id="apaAttendanceList"><div class="empty-note">Đang tải...</div></div></div>
             <div class="m-tab-panel" id="apaTab-pay">
                 <div class="ap-month-nav">
                     <button type="button" class="cal-nav-btn" onclick="changeApprovalMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1165,29 +1003,32 @@
                 <div id="apaPayrollList"><div class="empty-note">Đang tải...</div></div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn-cancel" onclick="closeApproveAttendancePayrollModal()">Đóng</button>
-        </div>
+        <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeApproveAttendancePayrollModal()">Đóng</button></div>
     </div>
 </div>
-</section>
-
 
 <!-- FOOTER -->
 <footer>
     <div class="container">
         <div class="footer-grid">
             <div>
-                <div class="footer-brand"><img src="LOGO.png" alt="Logo"><div class="footer-brand-name"><span class="lang-vi">Trung tâm Taekwondo Kids Việt Nam</span><span class="lang-en">Taekwondo Kids Vietnam Center</span></div></div>
-                <p class="footer-desc"><span class="lang-vi">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</span><span class="lang-en">Vietnam Martial Arts Training and Development Co., Ltd</span></p>
+                <div class="footer-brand"><img src="LOGO.png" alt="Logo" onerror="this.style.display='none'"></div>
+                <div class="footer-col-title" style="margin-bottom:8px">Trung tâm Taekwondo Kids Việt Nam</div>
+                <p class="footer-desc">Công ty TNHH Huấn luyện Phát triển Võ thuật Việt Nam</p>
             </div>
             <div>
-                <div class="footer-col-title"><span class="lang-vi">Liên hệ</span><span class="lang-en">Contact</span></div>
-                <ul class="footer-list"><li>Hotline: <strong>097 893 1747</strong></li><li>taekwondokids.vn@gmail.com</li></ul>
+                <div class="footer-col-title">Liên hệ</div>
+                <ul class="footer-list">
+                    <li>Hotline: <strong>097 893 1747</strong></li>
+                    <li>taekwondokids.vn@gmail.com</li>
+                </ul>
             </div>
             <div>
-                <div class="footer-col-title"><span class="lang-vi">Kết nối</span><span class="lang-en">Follow Us</span></div>
-                <ul class="footer-list"><li><a href="https://fb.com/taekwondokids.vietnam" target="_blank"><i class="fa-brands fa-facebook" style="margin-right:8px"></i>Fanpage Facebook</a></li><li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank"><i class="fa-brands fa-tiktok" style="margin-right:8px"></i>TikTok Channel</a></li></ul>
+                <div class="footer-col-title">Kết nối</div>
+                <ul class="footer-list">
+                    <li><a href="https://fb.com/taekwondokids.vietnam" target="_blank"><i class="fa-brands fa-facebook" style="margin-right:8px"></i>Fanpage Facebook</a></li>
+                    <li><a href="https://tiktok.com/@taekwondokidsvn" target="_blank"><i class="fa-brands fa-tiktok" style="margin-right:8px"></i>TikTok Channel</a></li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">© 2026 Taekwondo Kids Việt Nam. All rights reserved.</div>
@@ -1202,26 +1043,41 @@
 </div>
 
 <script>
+    // Reveal Animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.reveal').forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+    });
+
 /* =============================================================
-   TAEKWONDO KIDS – CLIENT SCRIPT (thay thế toàn bộ thẻ <script>
-   cũ trong file HTML bằng nội dung file này)
+   TAEKWONDO KIDS – CLIENT SCRIPT 
    ============================================================= */
 
-// 1. DÁN URL WEB APP (kết thúc bằng /exec) SAU KHI DEPLOY Code.gs
 const API_URL = 'https://script.google.com/macros/s/AKfycbz_CXMadthebM9sdG1wzihMraDnmfPp9pvALCkqRg95HPWGSBkn8J5ZnePTUlv7Nr_G/exec';
 
-let currentUser = null;   // HLV/Nhân viên đang đăng nhập
-let currentParent = null; // Phụ huynh đang đăng nhập
+let currentUser = null;   
+let currentParent = null; 
 let currentDate = new Date();
-let weeklySchedule = {};        // {thu: {ca: maNV_hoặc_coSo}} — dùng bản đồ theo cơ sở của TÔI
-let allSchedules = [];          // toàn bộ lịch từ server (mọi tuần)
-let scheduleByWeek = {};        // { 'yyyy-MM-dd(Thứ2)': { thu: {ca: coSo} } } — lịch của TÔI, nhóm theo tuần
-let currentScheduleWeekStart = null; // Date - Thứ 2 của tuần đang xem trong modal
+let weeklySchedule = {};        
+let allSchedules = [];          
+let scheduleByWeek = {};        
+let currentScheduleWeekStart = null; 
+let customCalendarEvents = {};  
+let commonEvents = [];
 
 function getMondayStr(d) {
   const date = new Date(d);
   const day = date.getDay();
-  const diff = day === 0 ? -6 : 1 - day; // đưa về Thứ 2
+  const diff = day === 0 ? -6 : 1 - day; 
   date.setDate(date.getDate() + diff);
   return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
 }
@@ -1231,10 +1087,7 @@ function formatWeekLabel(mondayStr) {
   const f = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
   return `Tuần: ${f(start)} - ${f(end)}/${end.getFullYear()}`;
 }
-let customCalendarEvents = {};  // {dateStr: [{id, type, label}]}
-let commonEvents = [];
 
-/* ---------- GỌI API ---------- */
 function callApi(action, params = {}) {
   const data = new URLSearchParams();
   data.append('action', action);
@@ -1242,7 +1095,6 @@ function callApi(action, params = {}) {
   return fetch(API_URL, { method: 'POST', body: data }).then(res => res.json());
 }
 
-/* ---------- TABS ĐĂNG NHẬP ---------- */
 function switchTab(id) {
   ['phuhuynh', 'hlv'].forEach(t => {
     document.getElementById('tab-' + t)?.classList.remove('active');
@@ -1257,7 +1109,7 @@ document.getElementById('internalLoginForm').addEventListener('submit', function
   e.preventDefault();
   const btn = document.getElementById('internalLoginBtn');
   const original = btn.innerHTML;
-  btn.innerHTML = 'ĐANG KẾT NỐI...'; btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG KẾT NỐI...'; btn.disabled = true;
 
   const phone = document.getElementById('loginPhone').value.trim();
   const pass = document.getElementById('loginPass').value.trim();
@@ -1287,14 +1139,14 @@ function loadStaffDashboard() {
   document.getElementById('dbBranch').textContent = currentUser.branch || 'Chưa phân công';
 
   if (currentUser.dob) {
-    const parts = currentUser.dob.split('-'); // yyyy-mm-dd
+    const parts = currentUser.dob.split('-'); 
     const age = new Date().getFullYear() - parseInt(parts[0]);
     document.getElementById('dbDob').textContent = `${age} tuổi (${parts[2]}/${parts[1]}/${parts[0]})`;
   }
 
   document.getElementById('btnApproval').style.display = isApprover(currentUser) ? 'flex' : 'none';
   document.getElementById('btnCommonEvent').style.display = isApprover(currentUser) ? 'flex' : 'none';
-    document.getElementById('btnApproveAttendance').style.display = isApprover(currentUser) ? 'flex' : 'none';
+  document.getElementById('btnApproveAttendance').style.display = isApprover(currentUser) ? 'flex' : 'none';
 
   refreshScheduleFromServer().then(() => renderCalendar());
   loadCalendarNotesFromServer();
@@ -1313,7 +1165,7 @@ document.getElementById('parentLoginForm').addEventListener('submit', function (
   e.preventDefault();
   const btn = document.getElementById('parentLoginBtn');
   const original = btn.innerHTML;
-  btn.innerHTML = 'ĐANG KẾT NỐI...'; btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG KẾT NỐI...'; btn.disabled = true;
 
   const phone = document.getElementById('parentLoginPhone').value.trim();
   const pass = document.getElementById('parentLoginPass').value.trim();
@@ -1332,17 +1184,16 @@ document.getElementById('parentLoginForm').addEventListener('submit', function (
     .finally(() => { btn.innerHTML = original; btn.disabled = false; });
 });
 
-// Cần thêm khối HTML #parentDashboard đơn giản (xem file parent-dashboard.html đính kèm)
 function renderParentDashboard() {
   const box = document.getElementById('parentDashboardContent');
-  if (!box) { alert('Thiếu khối #parentDashboardContent trong HTML.'); return; }
+  if (!box) return;
   document.getElementById('portal').style.display = 'none';
   document.getElementById('parentDashboard').style.display = 'block';
 
   box.innerHTML = currentParent.students.map(s => `
     <div class="pdb-card">
       <div class="db-avatar-panel">
-        <div class="db-name" style="color:#60D0FF">${s.student_name}</div>
+        <div class="db-name" style="color:var(--primary-blue)">${s.student_name}</div>
         <div class="db-position">Mã học viên: ${s.maHV}</div>
         <div class="db-belt-badge">Cấp đai: ${s.belt_level || 'Chưa cập nhật'}</div>
       </div>
@@ -1369,12 +1220,12 @@ function loadStudentReviewsForParent(maHV) {
     if (!box) return;
     if (res.status !== 'success' || !res.reviews.length) { box.innerHTML = '<div class="empty-note">Chưa có nhận xét nào.</div>'; return; }
     box.innerHTML = res.reviews.map(r => `
-      <div class="leave-history-item" style="display:block;">
+      <div class="leave-history-item" style="display:block; border-bottom: none; padding-bottom: 0;">
         <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-          <strong style="color:var(--yellow); font-size:12px;">Tháng ${r.thang}/${r.nam}</strong>
-          <span style="color:var(--muted2); font-size:11px;">HLV: ${r.hoTenNV}</span>
+          <strong style="color:var(--primary-blue); font-size:12px;">Tháng ${r.thang}/${r.nam}</strong>
+          <span style="color:var(--text-muted); font-size:11px;">HLV: ${r.hoTenNV}</span>
         </div>
-        <div style="color:var(--off-white);">${r.noiDung}</div>
+        <div style="color:var(--text-main); font-size:14px;">${r.noiDung}</div>
       </div>`).join('');
   });
 }
@@ -1493,7 +1344,7 @@ function openScheduleModal() {
   document.getElementById('scheduleModal').classList.add('active');
   document.getElementById('conflictWarning').classList.remove('active');
   document.getElementById('schBranchSelect').value = '';
-  currentScheduleWeekStart = getMondayStr(new Date()); // mặc định: tuần hiện tại
+  currentScheduleWeekStart = getMondayStr(new Date()); 
   updateWeekLabel();
   renderScheduleSlots();
 }
@@ -1525,6 +1376,7 @@ function renderScheduleSlots() {
     return;
   }
 
+  container.innerHTML = '';
   WEEK_DAYS.forEach(day => {
     const shifts = day.isWeekend ? SHIFT_SLOTS.weekend : SHIFT_SLOTS.weekday;
     let html = `<div class="day-group"><div class="day-group-header">${day.label}</div><div class="day-group-body"><div class="slot-grid">`;
@@ -1594,7 +1446,6 @@ function saveSchedule() {
 }
 
 /* ---------- LỊCH CÁ NHÂN (calendar widget) ---------- */
-
 function getTeachingEventsForDate(dateObj) {
   const dayOfWeek = dateObj.getDay();
   const weekOfDate = scheduleByWeek[getMondayStr(dateObj)] || {};
@@ -1713,7 +1564,7 @@ function deleteCustomEvent() {
   });
 }
 
-/* ---------- ĐĂNG KÝ NGHỈ PHÉP (hoàn thiện) ---------- */
+/* ---------- ĐĂNG KÝ NGHỈ PHÉP ---------- */
 function openLeaveModal() {
   document.getElementById('lvFrom').value = '';
   document.getElementById('lvTo').value = '';
@@ -1737,7 +1588,7 @@ function loadLeaveHistory() {
     if (!res.requests.length) { box.innerHTML = '<div class="empty-note">Chưa có đơn nào.</div>'; return; }
     box.innerHTML = res.requests.map(r => `
       <div class="leave-history-item">
-        <div>${r.tuNgay} → ${r.denNgay} <br><span style="color:var(--muted2)">${r.lyDo}</span></div>
+        <div><strong style="color:var(--text-main)">${r.tuNgay.split('-').reverse().join('/')} → ${r.denNgay.split('-').reverse().join('/')}</strong><br><span style="color:var(--text-muted)">${r.lyDo}</span></div>
         ${statusBadge(r.trangThai)}
       </div>`).join('');
   });
@@ -1799,8 +1650,8 @@ function loadApprovalList() {
       <div class="approval-row">
         <div class="approval-row-top">
           <div>
-            <div class="approval-name">${r.hoTen} <span style="color:var(--muted2);font-weight:400;">(${r.coSo})</span></div>
-            <div class="approval-meta">Từ ${r.tuNgay} đến ${r.denNgay}<br>Lý do: ${r.lyDo}</div>
+            <div class="approval-name">${r.hoTen} <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(${r.coSo})</span></div>
+            <div class="approval-meta">Từ ${r.tuNgay.split('-').reverse().join('/')} đến ${r.denNgay.split('-').reverse().join('/')}<br>Lý do: <span style="color:var(--text-main)">${r.lyDo}</span></div>
           </div>
           ${statusBadge(r.trangThai)}
         </div>
@@ -1821,13 +1672,11 @@ function processLeaveDecision(id, quyetDinh) {
     id, quyetDinh, lyDoTuChoi,
     maNV: currentUser.maNV
   }).then(res => {
-    if (res.status === 'success') {
-      loadApprovalList();
-    } else {
-      alert('❌ ' + res.message);
-    }
+    if (res.status === 'success') loadApprovalList();
+    else alert('❌ ' + res.message);
   }).catch(() => alert('Lỗi kết nối máy chủ.'));
 }
+
 /* ---------- LỊCH CHUNG (HLV Trưởng / Admin) ---------- */
 function loadCommonEventsFromServer() {
   return callApi('listCommonEvents', { maNV: currentUser.maNV }).then(res => {
@@ -1857,8 +1706,8 @@ function renderCommonEventList() {
   if (!mine.length) { box.innerHTML = '<div class="empty-note">Chưa có lịch chung nào.</div>'; return; }
   box.innerHTML = mine.map(ev => `
     <div class="leave-history-item">
-      <div>${ev.ngay} — ${ev.noiDung}<br><span style="color:var(--muted2)">${ev.coSo === 'ALL' ? 'Toàn hệ thống' : ev.coSo}</span></div>
-      <button class="btn-reject" style="padding:4px 10px;" onclick="deleteCommonEventItem('${ev.id}')">Xóa</button>
+      <div><strong>${ev.ngay.split('-').reverse().join('/')}</strong> — ${ev.noiDung}<br><span style="color:var(--text-muted)">${ev.coSo === 'ALL' ? 'Toàn hệ thống' : ev.coSo}</span></div>
+      <button class="btn-reject" style="padding:6px 12px;" onclick="deleteCommonEventItem('${ev.id}')">Xóa</button>
     </div>`).join('');
 }
 
@@ -1887,6 +1736,7 @@ document.getElementById('commonEventForm').addEventListener('submit', function (
     })
     .catch(() => alert('Lỗi kết nối máy chủ.'));
 });
+
 /* ---------- NHẬN XÉT HỌC VIÊN (HLV) ---------- */
 let reviewLookupTimer = null;
 let currentReviewStudent = null;
@@ -1947,12 +1797,12 @@ function loadReviewHistory(maHV) {
   callApi('listStudentReviews', { maHV }).then(res => {
     if (res.status !== 'success' || !res.reviews.length) { box.innerHTML = '<div class="empty-note">Chưa có nhận xét nào.</div>'; return; }
     box.innerHTML = res.reviews.map(r => `
-      <div class="leave-history-item" style="display:block;">
+      <div class="leave-history-item" style="display:block; border-bottom: 1px solid var(--border-light);">
         <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-          <strong style="color:var(--yellow); font-size:12px;">Tháng ${r.thang}/${r.nam}</strong>
-          <span style="color:var(--muted2); font-size:11px;">HLV: ${r.hoTenNV}</span>
+          <strong style="color:var(--primary-blue); font-size:12px;">Tháng ${r.thang}/${r.nam}</strong>
+          <span style="color:var(--text-muted); font-size:11px;">HLV: ${r.hoTenNV}</span>
         </div>
-        <div style="color:var(--off-white);">${r.noiDung}</div>
+        <div style="color:var(--text-main); line-height: 1.5;">${r.noiDung}</div>
       </div>`).join('');
   });
 }
@@ -1987,43 +1837,19 @@ function submitStudentReview() {
     .catch(() => alert('Lỗi kết nối máy chủ.'))
     .finally(() => { btn.innerHTML = original; btn.disabled = false; });
 }
-/* ---------- ĐĂNG KÝ HỌC THỬ (form công khai) ---------- */
-const registerForm = document.getElementById('registerForm');
-const submitBtn = document.getElementById('submitBtn');
-if (registerForm) {
-  registerForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const original = submitBtn.innerHTML;
-    submitBtn.innerHTML = 'ĐANG XỬ LÝ...'; submitBtn.disabled = true;
-    const fd = new FormData(registerForm);
-    callApi('register_trial', {
-      parentName: fd.get('parentName'), childName: fd.get('childName'), phone: fd.get('phone')
-    }).then(res => {
-      alert(res.status === 'success' ? 'Đăng ký thành công! Trung tâm sẽ liên hệ sớm nhất.' : '❌ ' + res.message);
-      if (res.status === 'success') registerForm.reset();
-    }).catch(() => alert('Có lỗi xảy ra, vui lòng thử lại sau.'))
-      .finally(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; });
-  });
-}
 
-/* =========================================================
-   CHẤM CÔNG & LƯƠNG
-   ========================================================= */
-let currentAPYear, currentAPMonth;                 // modal "của tôi"
-let currentApprovalYear, currentApprovalMonth;      // modal "duyệt"
+/* ---------- CHẤM CÔNG & LƯƠNG ---------- */
+let currentAPYear, currentAPMonth;                 
+let currentApprovalYear, currentApprovalMonth;      
 let myAttendanceRecords = [];
 
-// Gọi thêm dòng này bên trong loadStaffDashboard() (ngay dưới dòng gán btnCommonEvent):
-//   document.getElementById('btnApproveAttendance').style.display = isApprover(currentUser) ? 'flex' : 'none';
-
-/* ---- Sinh danh sách buổi dạy trong tháng từ lịch đã đăng ký ---- */
 function generateSessionsForMonth(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const sessions = [];
   for (let d = 1; d <= daysInMonth; d++) {
     const dateObj = new Date(year, month, d);
-    if (dateObj > today) continue; // chỉ tính buổi đã/đang diễn ra
+    if (dateObj > today) continue; 
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     const dow = dateObj.getDay();
     const weekData = scheduleByWeek[getMondayStr(dateObj)] || {};
@@ -2039,7 +1865,6 @@ function generateSessionsForMonth(year, month) {
   return sessions;
 }
 
-/* ---- MODAL "CHẤM CÔNG & LƯƠNG CỦA TÔI" ---- */
 function openMyAttendancePayrollModal() {
   const now = new Date();
   currentAPYear = now.getFullYear(); currentAPMonth = now.getMonth();
@@ -2091,11 +1916,11 @@ function renderMyAttendanceList(year, month) {
     const right = rec
       ? statusBadge(rec.trangThai)
       : `<button class="btn-approve" style="padding:8px 16px;" onclick="submitAttendance('${s.date}',${s.thu},'${s.ca}','${s.coSo}')">ĐIỂM DANH</button>`;
-    return `<div class="approval-row" style="border-left-color:${rec ? 'var(--yellow)' : 'var(--red)'};">
+    return `<div class="approval-row" style="border-left-color:${rec ? 'var(--primary-blue)' : 'var(--red)'};">
       <div class="approval-row-top">
         <div>
           <div class="approval-name">${dateLabel} — ${s.coSo}</div>
-          <div class="approval-meta">${s.label}${rec && rec.soHocVien ? ' · Sĩ số: ' + rec.soHocVien : ''}</div>
+          <div class="approval-meta">${s.label}${rec && rec.soHocVien ? ' · Sĩ số: <strong style="color:var(--text-main)">' + rec.soHocVien + '</strong>': ''}</div>
         </div>
         ${right}
       </div>
@@ -2105,7 +1930,7 @@ function renderMyAttendanceList(year, month) {
 
 function submitAttendance(date, thu, ca, coSo) {
   const soHocVien = prompt('Sĩ số buổi học (có thể bỏ trống):', '');
-  if (soHocVien === null) return; // người dùng bấm Hủy
+  if (soHocVien === null) return; 
   callApi('submitAttendance', {
     maNV: currentUser.maNV, hoTen: currentUser.full_name, coSo,
     ngay: date, thu, ca, soHocVien: soHocVien || ''
@@ -2123,19 +1948,18 @@ function loadMyPayroll(year, month) {
     const p = res.summary;
     box.innerHTML = `
       <div class="payroll-summary-box">
-        <div class="payroll-stat"><div class="db-info-label">Số buổi đã duyệt</div><div class="db-info-value" style="color:var(--yellow);font-size:22px;">${p.soBuoiDaDuyet || 0}</div></div>
+        <div class="payroll-stat"><div class="db-info-label">Số buổi đã duyệt</div><div class="db-info-value" style="color:var(--primary-blue);font-size:24px;">${p.soBuoiDaDuyet || 0}</div></div>
         <div class="payroll-stat"><div class="db-info-label">Đơn giá / buổi</div><div class="db-info-value">${Number(p.donGia || 0).toLocaleString('vi-VN')} đ</div></div>
-        <div class="payroll-stat"><div class="db-info-label">Tổng lương tạm tính</div><div class="db-info-value" style="color:var(--yellow);font-size:22px;">${Number(p.tongLuong || 0).toLocaleString('vi-VN')} đ</div></div>
-        <div class="payroll-stat"><div class="db-info-label">Trạng thái</div><div style="margin-top:4px;">${statusBadge(p.trangThai || 'Đang tính')}</div></div>
+        <div class="payroll-stat" style="grid-column: span 2; background: rgba(0,71,171,0.05); border-color: rgba(0,71,171,0.2);"><div class="db-info-label">Tổng lương tạm tính</div><div class="db-info-value" style="color:var(--primary-blue);font-size:28px;">${Number(p.tongLuong || 0).toLocaleString('vi-VN')} đ</div></div>
+        <div class="payroll-stat" style="grid-column: span 2;"><div class="db-info-label">Trạng thái</div><div style="margin-top:8px;">${statusBadge(p.trangThai || 'Đang tính')}</div></div>
       </div>
-      <div style="margin-top:20px;font-size:12px;color:var(--muted2);line-height:1.6;">
-        Lương được tính dựa trên số buổi dạy đã được HLV Trưởng/Admin duyệt điểm danh trong tháng.
-        Số liệu tạm tính có thể thay đổi cho tới khi bảng lương được duyệt chính thức.
+      <div style="margin-top:20px;font-size:12px;color:var(--text-muted);line-height:1.6; text-align:center;">
+        Lương được tính dựa trên số buổi dạy đã được HLV Trưởng/Admin duyệt điểm danh trong tháng. Số liệu tạm tính có thể thay đổi cho tới khi bảng lương được duyệt chính thức.
       </div>`;
   }).catch(() => { box.innerHTML = '<div class="empty-note">Lỗi kết nối máy chủ.</div>'; });
 }
 
-/* ---- MODAL "DUYỆT CHẤM CÔNG & LƯƠNG" (HLV Trưởng / Admin) ---- */
+/* ---- DUYỆT CHẤM CÔNG & LƯƠNG (HLV Trưởng / Admin) ---- */
 function openApproveAttendancePayrollModal() {
   const now = new Date();
   currentApprovalYear = now.getFullYear(); currentApprovalMonth = now.getMonth();
@@ -2176,8 +2000,8 @@ function loadPendingAttendance() {
       <div class="approval-row">
         <div class="approval-row-top">
           <div>
-            <div class="approval-name">${r.hoTen} <span style="color:var(--muted2);font-weight:400;">(${r.coSo})</span></div>
-            <div class="approval-meta">${r.ngay.split('-').reverse().join('/')} · ${r.ca}${r.soHocVien ? ' · Sĩ số: ' + r.soHocVien : ''}</div>
+            <div class="approval-name">${r.hoTen} <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(${r.coSo})</span></div>
+            <div class="approval-meta">${r.ngay.split('-').reverse().join('/')} · ${r.ca}${r.soHocVien ? ' · Sĩ số: <strong style="color:var(--text-main)">' + r.soHocVien + '</strong>' : ''}</div>
           </div>
           ${statusBadge(r.trangThai)}
         </div>
@@ -2208,8 +2032,8 @@ function loadPendingPayrollBatch() {
       <div class="approval-row">
         <div class="approval-row-top">
           <div>
-            <div class="approval-name">${b.hoTen} <span style="color:var(--muted2);font-weight:400;">(${b.coSo})</span></div>
-            <div class="approval-meta">${b.soBuoiDaDuyet} buổi × ${Number(b.donGia).toLocaleString('vi-VN')}đ = <strong style="color:var(--yellow)">${Number(b.tongLuong).toLocaleString('vi-VN')}đ</strong></div>
+            <div class="approval-name">${b.hoTen} <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(${b.coSo})</span></div>
+            <div class="approval-meta">${b.soBuoiDaDuyet} buổi × ${Number(b.donGia).toLocaleString('vi-VN')}đ = <strong style="color:var(--primary-blue); font-size:15px;">${Number(b.tongLuong).toLocaleString('vi-VN')}đ</strong></div>
           </div>
           ${statusBadge(b.trangThai)}
         </div>
@@ -2225,6 +2049,25 @@ function decidePayroll(maNV, thang, nam) {
     if (res.status === 'success') loadPendingPayrollBatch();
     else alert('❌ ' + res.message);
   }).catch(() => alert('Lỗi kết nối máy chủ.'));
+}
+
+/* ---------- ĐĂNG KÝ HỌC THỬ ---------- */
+const registerForm = document.getElementById('registerForm');
+const submitBtn = document.getElementById('submitBtn');
+if (registerForm) {
+  registerForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const original = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...'; submitBtn.disabled = true;
+    const fd = new FormData(registerForm);
+    callApi('register_trial', {
+      parentName: fd.get('parentName'), childName: fd.get('childName'), phone: fd.get('phone')
+    }).then(res => {
+      alert(res.status === 'success' ? 'Đăng ký thành công! Trung tâm sẽ liên hệ sớm nhất.' : '❌ ' + res.message);
+      if (res.status === 'success') registerForm.reset();
+    }).catch(() => alert('Có lỗi xảy ra, vui lòng thử lại sau.'))
+      .finally(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; });
+  });
 }
 </script>
 </body>
