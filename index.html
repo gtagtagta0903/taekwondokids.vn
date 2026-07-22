@@ -28,6 +28,7 @@
             --border-light: rgba(15, 23, 42, 0.08);
             --card-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
             --glass-bg: rgba(255, 255, 255, 0.85);
+            --white: #FFFFFF;
 
             --font-display: 'Barlow Condensed', sans-serif;
             --font-body: 'Be Vietnam Pro', sans-serif;
@@ -412,7 +413,7 @@
 <nav>
     <div class="nav-logo">
         <img src="LOGO.png" alt="Taekwondo Kids Logo" onerror="this.src='https://via.placeholder.com/40x40/0047AB/FFFFFF?text=TKD'">
-        <div class="nav-logo-text">Taekwondo Kids</div>
+        <div class="nav-logo-text">Taekwondo Kids Việt Nam</div>
     </div>
     <ul class="nav-links">
         <li><a href="#about">Về chúng tôi</a></li>
@@ -429,7 +430,7 @@
 <!-- HERO -->
 <section id="hero">
     <div class="hero-pattern"></div>
-    <div class="hero-watermark">TAEKWONDO KIDS VIỆT NAM</div>
+    <div class="hero-watermark">TAEKWONDO KIDS</div>
     <div class="hero-content">
         <div class="hero-left reveal">
             <div class="hero-eyebrow">Khơi dậy tiềm năng</div>
@@ -439,6 +440,9 @@
                 <a href="#register" class="btn-primary">Đăng ký học thử ngay</a>
                 <a href="#about" class="btn-ghost">Khám phá lộ trình</a>
             </div>
+        </div>
+        <div class="hero-right reveal delay-2">
+            <img src="embe1.png" alt="Võ sinh Taekwondo Kids" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=600&h=700'">
         </div>
     </div>
 </section>
@@ -569,8 +573,8 @@
 <section id="locations">
     <div class="container">
         <div class="locations-header reveal">
-            <div class="sec-tag">Tìm cơ sở gần bạn</div>
-            <h2 class="sec-title">Hệ thống <span class="accent">cơ sở</span></h2>
+            <div class="sec-tag">Tìm cơ sở gần vị trí của bạn</div>
+            <h2 class="sec-title"><span class="lang-vi">Hệ thống các cơ sở tại <span class="accent">Hà Nội</span></span></h2>
         </div>
         <div class="locations-grid">
             <a href="https://maps.app.goo.gl/BiuQSZXiAWorEFRg8" target="_blank" rel="noopener" class="loc-card reveal"><div class="loc-img-wrap"><div class="loc-tag">CƠ SỞ 1</div><img src="hapu.jpg" onerror="this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600'"></div><div class="loc-info"><div class="loc-name">CƠ SỞ HAPULICO</div><div class="loc-addr"><i class="fa-solid fa-location-dot"></i><span>Tầng B1 - Toà 21T1 - Chung cư Hapulico, 83 Vũ Trọng Phụng, Thanh Xuân</span></div></div></a>
@@ -586,7 +590,7 @@
 <section id="pricing">
     <div class="container">
         <div class="pricing-header reveal">
-            <div class="sec-tag">Ưu đãi mùa tựu trường</div>
+            <div class="sec-tag">Ưu đãi dành riêng cho bạn</div>
             <h2 class="sec-title">Chương trình <span class="accent">đặc biệt</span></h2>
         </div>
         <div class="promo-grid">
@@ -610,8 +614,8 @@
             <div class="reg-form-box reveal delay-1">
                 <div class="reg-form-title">ĐĂNG KÝ HỌC THỬ</div>
                 <form id="registerForm">
-                    <div class="reg-form-group"><label>Họ và tên Phụ huynh *</label><input type="text" name="parentName" required placeholder="Nguyễn Văn A"></div>
-                    <div class="reg-form-group"><label>Họ và tên Võ sinh *</label><input type="text" name="childName" required placeholder="Nguyễn Văn B"></div>
+                    <div class="reg-form-group"><label>Họ và tên Phụ huynh *</label><input type="text" name="parentName" required placeholder="Vui lòng điền họ và tên Phụ huynh"></div>
+                    <div class="reg-form-group"><label>Họ và tên Võ sinh *</label><input type="text" name="childName" required placeholder="Vui lòng điền họ và tên Võ sinh"></div>
                     <div class="reg-form-group"><label>Số điện thoại *</label><input type="tel" name="phone" required placeholder="0xxxxxxxxx"></div>
                     <button type="submit" id="submitBtn" class="btn-register">ĐĂNG KÝ NGAY</button>
                 </form>
@@ -638,15 +642,15 @@
                 <form id="parentLoginForm" class="login-form">
                     <input type="text" id="parentLoginPhone" required placeholder="Số điện thoại / Mã học viên">
                     <input type="password" id="parentLoginPass" required placeholder="Mật khẩu">
-                    <button type="submit" id="parentLoginBtn" class="btn-login-parent">PHỤ HUYNH ĐĂNG NHẬP</button>
+                    <button type="submit" id="parentLoginBtn" class="btn-login-parent">ĐĂNG NHẬP</button>
                 </form>
             </div>
             <div class="tab-panel" id="tab-hlv">
-                <h3>Chỉ dành cho Huấn luyện viên &amp; Nhân viên</h3>
+                <h3>Dành cho Huấn luyện viên &amp; Nhân viên</h3>
                 <form id="internalLoginForm" class="login-form">
                     <input type="text" id="loginPhone" required placeholder="Số điện thoại">
                     <input type="password" id="loginPass" required placeholder="Mật khẩu">
-                    <button type="submit" id="internalLoginBtn" class="btn-login-staff">ĐĂNG NHẬP HỆ THỐNG</button>
+                    <button type="submit" id="internalLoginBtn" class="btn-login-staff">ĐĂNG NHẬP</button>
                 </form>
             </div>
         </div>
